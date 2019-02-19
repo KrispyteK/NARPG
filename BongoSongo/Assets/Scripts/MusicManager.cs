@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,16 +8,21 @@ public class MusicManager : MonoBehaviour {
 
 
     public Song Song;
-    public float Bass;
-    public float spectrumBass;
-    public float spectrumBassMin = 0;
-    public float spectrumBassMax = 10;
+    public float Smoothing;
+    public float CombinedBass;
+    public float MeasuredBass;
+    public float TimedBass;
+
+    public float beatOffset;
+    public int spectrumBassMin = 0;
+    public int spectrumBassMax = 10;
+    public float spectrumBassThreshold = 0.01f;
 
     public static MusicManager Instance;
 
     private AudioSource audioSource;
     private float[] samples = new float[1024];
-
+    private Action action;
 
     void Awake () {
         if (Instance == null) {
@@ -31,32 +37,61 @@ public class MusicManager : MonoBehaviour {
 
         audioSource.clip = Song.Clip;
         audioSource.Play();
-        audioSource.time = 72;
+        audioSource.time = 0;
+
+        StartCoroutine(BPMCycle());
     }
 
-    void Update() {
+    public void OnBeat (Action a) {
+        action += a;
+    }
+
+    void FixedUpdate() {
         audioSource.GetSpectrumData(samples, 0, FFTWindow.Blackman);
 
-        spectrumBass = 0;
+        MeasuredBass = 0;
+        int count = 0;
 
-        for (int i = 0; i < samples.Length; i++) {
-            Debug.DrawLine(new Vector3(i * 0.001f, 0), new Vector3(i * 0.001f, samples[i]), Color.cyan);
+        for (int i = spectrumBassMin; i < spectrumBassMax; i++) {
+            var value = Mathf.Max(samples[i] / audioSource.volume - spectrumBassThreshold, 0);
 
-            if (i > spectrumBassMin && i < spectrumBassMax) {
-                spectrumBass += samples[i];
+            if (value > 0) {
+                //Debug.DrawLine(new Vector3(i * 0.001f, 0), new Vector3(i * 0.001f, samples[i]), Color.cyan);
+
+                MeasuredBass += value;
+
+                count++;
             }
         }
 
-        spectrumBass /= (spectrumBassMax - spectrumBassMin);
+        if (count > 0) MeasuredBass /= count;
 
-        float desiredBass = spectrumBass;
+        MeasuredBass = Mathf.Pow(MeasuredBass, 0.25f);
 
-        if (desiredBass > Bass) {
-            Bass = desiredBass;
+        var desiredBass = (MeasuredBass + TimedBass) / 2f;
+
+        if (desiredBass > CombinedBass) {
+            CombinedBass = desiredBass;
         } else {
-            Bass -= Bass * Time.deltaTime * 5f;
+            CombinedBass -= CombinedBass * Time.fixedDeltaTime * Smoothing;
         }
 
-        Debug.DrawLine(new Vector3(-0.005f, 0), new Vector3(-0.005f, Bass), Color.red);
+        TimedBass -= CombinedBass * Time.fixedDeltaTime * Smoothing;
+
+        //Debug.DrawLine(new Vector3(-0.005f, 0), new Vector3(-0.005f, Bass), Color.red);
+    }
+
+    IEnumerator BPMCycle () {
+        var time = 1f / (Song.BPM / 60f);
+
+        yield return new WaitForSeconds(time * beatOffset);
+
+        while (true) {
+            yield return new WaitForSeconds(time);
+
+            TimedBass = 1f;
+
+            action();
+        }
     }
 }
