@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class WebcamMotion : MonoBehaviour
 {
     public int textureScale = 2;
+    public float threshold = 0.5f;
 
+    private int appliedScale => 1 << textureScale;
     private WebCamTexture webcamTexture;
     private RawImage rawImage;
     private AspectRatioFitter aspectRatioFitter;
-    private Color[] previousPixelValues;
+    private float[] previousPixelValues;
     private Texture2D scaledDownTexture;
+    private bool hasWebcam;
 
     private void Start()
     {
@@ -26,24 +29,42 @@ public class WebcamMotion : MonoBehaviour
     }
 
     private void Update() {
-        scaledDownTexture = new Texture2D(webcamTexture.width, webcamTexture.height);
-        scaledDownTexture.SetPixels(webcamTexture.GetPixels());
-        scaledDownTexture.Resize(webcamTexture.width / textureScale, webcamTexture.height / textureScale);
-        scaledDownTexture.Apply();
+        if (!hasWebcam) return;
 
-        var pixels = scaledDownTexture.GetPixels();
+        var pixels = webcamTexture.GetPixels();
+        var targetPixels = new Color[scaledDownTexture.width * scaledDownTexture.height];
 
-        for (int i = 0; i < pixels.Length; i++) {
-            var color = pixels[i];
-            var grayScaleValue = (color.r + color.g + color.b) / 3;
+        if (previousPixelValues == null) previousPixelValues = new float[targetPixels.Length];
 
-            pixels[i] = new Color(grayScaleValue, grayScaleValue, grayScaleValue);
+        var srcWidth = webcamTexture.width;
+        var srcHeight = webcamTexture.height;
+
+        var tgtWidth = srcWidth / appliedScale;
+        var tgtHeight = srcHeight / appliedScale;
+
+        for (var y = 0; y < tgtHeight; y++) {
+            var yScaled = appliedScale * y;
+
+            for (var x = 0; x < tgtWidth; x++) {
+                var xScaled = appliedScale * x;
+
+                var color = pixels[yScaled * srcWidth + xScaled];
+                var oldValue = previousPixelValues[y * tgtWidth + x];
+                var grayScale = (color.r + color.g + color.b) / 3;
+
+                var difference = Mathf.Abs(grayScale - oldValue);
+                var hasMotion = difference > threshold;
+                var displayColor = hasMotion ? Color.green : Color.black;
+
+                targetPixels[y * tgtWidth + x] = displayColor;
+                previousPixelValues[y * tgtWidth + x] = grayScale;
+            }
         }
 
-        scaledDownTexture.SetPixels(pixels);
-        rawImage.texture = scaledDownTexture;
+        scaledDownTexture.SetPixels(targetPixels);
+        scaledDownTexture.Apply();
 
-        previousPixelValues = pixels;
+        rawImage.texture = scaledDownTexture;
     }
 
     private IEnumerator WebCamStartCoroutine() {
@@ -52,7 +73,6 @@ public class WebcamMotion : MonoBehaviour
         yield return new WaitWhile (() => webcamTexture.width < 100);
 
         // change as user rotates iPhone or Android:
-
         int cwNeeded = webcamTexture.videoRotationAngle;
         // Unity helpfully returns the _clockwise_ twist needed
         // guess nobody at Unity noticed their product works in counterclockwise:
@@ -79,5 +99,8 @@ public class WebcamMotion : MonoBehaviour
 
         // devText.text =
         //  videoRotationAngle+"/"+ratio+"/"+wct.videoVerticallyMirrored;
+
+        scaledDownTexture = new Texture2D(webcamTexture.width / appliedScale, webcamTexture.height / appliedScale);
+        hasWebcam = true;
     }
 }
