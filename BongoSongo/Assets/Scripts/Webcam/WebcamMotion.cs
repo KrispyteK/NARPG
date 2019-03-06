@@ -48,13 +48,18 @@ public class WebcamMotion : MonoBehaviour
             for (var x = 0; x < tgtWidth; x++) {
                 var xScaled = appliedScale * x;
 
-                var color = pixels[yScaled * srcWidth + xScaled];
+                var p = Color.Lerp(pixels[yScaled * srcWidth + xScaled], pixels[yScaled * srcWidth + xScaled + 1],0.5f);
+                var q = Color.Lerp(pixels[(yScaled+1) * srcWidth + xScaled], pixels[(yScaled+1) * srcWidth + xScaled + 1], 0.5f);
+
+                var color = Color.Lerp(p,q,0.5f);
+
+                //var color = pixels[yScaled * srcWidth + xScaled];
                 var oldValue = previousPixelValues[y * tgtWidth + x];
                 var grayScale = (color.r + color.g + color.b) / 3;
 
                 var difference = Mathf.Abs(grayScale - oldValue);
                 var hasMotion = difference > threshold;
-                var displayColor = hasMotion ? Color.green : Color.black;
+                var displayColor = hasMotion ? Color.red : color;
 
                 targetPixels[y * tgtWidth + x] = displayColor;
                 previousPixelValues[y * tgtWidth + x] = grayScale;
@@ -101,6 +106,7 @@ public class WebcamMotion : MonoBehaviour
         //  videoRotationAngle+"/"+ratio+"/"+wct.videoVerticallyMirrored;
 
         scaledDownTexture = new Texture2D(webcamTexture.width / appliedScale, webcamTexture.height / appliedScale);
+        scaledDownTexture.filterMode = FilterMode.Point;
         hasWebcam = true;
     }
 }
