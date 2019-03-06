@@ -5,27 +5,48 @@ using UnityEngine.UI;
 
 public class WebcamMotion : MonoBehaviour
 {
-    WebCamTexture webcamTexture;
-    RawImage rawImage;
-    AspectRatioFitter aspectRatioFitter;
+    public int textureScale = 2;
 
-    void Start()
+    private WebCamTexture webcamTexture;
+    private RawImage rawImage;
+    private AspectRatioFitter aspectRatioFitter;
+    private Color[] previousPixelValues;
+    private Texture2D scaledDownTexture;
+
+    private void Start()
     {
         webcamTexture = new WebCamTexture();
         aspectRatioFitter = GetComponent<AspectRatioFitter>();
+
         rawImage = GetComponent<RawImage>();
         rawImage.texture = webcamTexture;
-        rawImage.rectTransform.sizeDelta = new Vector2(webcamTexture.width, webcamTexture.height);
         webcamTexture.Play();
 
         StartCoroutine(WebCamStartCoroutine());
     }
 
-    void Update() {
+    private void Update() {
+        scaledDownTexture = new Texture2D(webcamTexture.width, webcamTexture.height);
+        scaledDownTexture.SetPixels(webcamTexture.GetPixels());
+        scaledDownTexture.Resize(webcamTexture.width / textureScale, webcamTexture.height / textureScale);
+        scaledDownTexture.Apply();
 
+        var pixels = scaledDownTexture.GetPixels();
+
+        for (int i = 0; i < pixels.Length; i++) {
+            var color = pixels[i];
+            var grayScaleValue = (color.r + color.g + color.b) / 3;
+
+            pixels[i] = new Color(grayScaleValue, grayScaleValue, grayScaleValue);
+        }
+
+        scaledDownTexture.SetPixels(pixels);
+        rawImage.texture = scaledDownTexture;
+
+        previousPixelValues = pixels;
     }
 
-    IEnumerator WebCamStartCoroutine() {
+    private IEnumerator WebCamStartCoroutine() {
         Debug.Log("Waiting for correct webcam info...");
 
         yield return new WaitWhile (() => webcamTexture.width < 100);
