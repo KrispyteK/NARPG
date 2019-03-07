@@ -54,6 +54,7 @@ public class WebcamMotion : MonoBehaviour
     private RawImage rawImage;
     private AspectRatioFitter aspectRatioFitter;
     private Color[] previousPixelValues;
+    private float[] previousPixelValuesFloat;
     private Texture2D scaledDownTexture;
     private bool hasWebcam;
 
@@ -72,7 +73,9 @@ public class WebcamMotion : MonoBehaviour
     private void Update() {
         if (!hasWebcam) return;
 
-        SetTextureJobs();
+        //SetTextureJobs();
+
+        SetTexture();
     }
 
     private void SetTextureJobs ()
@@ -114,50 +117,50 @@ public class WebcamMotion : MonoBehaviour
         oldValues.Dispose();
     }
 
-    //private void SetTexture ()
-    //{
-    //    var pixels = webcamTexture.GetPixels();
-    //    var targetPixels = new Color[scaledDownTexture.width * scaledDownTexture.height];
+    private void SetTexture()
+    {
+        var pixels = webcamTexture.GetPixels();
+        var targetPixels = new Color[scaledDownTexture.width * scaledDownTexture.height];
 
-    //    if (previousPixelValues == null) previousPixelValues = new Color[targetPixels.Length];
+        if (previousPixelValuesFloat == null) previousPixelValuesFloat = new float[targetPixels.Length];
 
-    //    var srcWidth = webcamTexture.width;
-    //    var srcHeight = webcamTexture.height;
+        var srcWidth = webcamTexture.width;
+        var srcHeight = webcamTexture.height;
 
-    //    var tgtWidth = srcWidth / appliedScale;
-    //    var tgtHeight = srcHeight / appliedScale;
+        var tgtWidth = srcWidth / appliedScale;
+        var tgtHeight = srcHeight / appliedScale;
 
-    //    for (var y = 0; y < tgtHeight; y++)
-    //    {
-    //        var yScaled = appliedScale * y;
+        for (var y = 0; y < tgtHeight; y++)
+        {
+            var yScaled = appliedScale * y;
 
-    //        for (var x = 0; x < tgtWidth; x++)
-    //        {
-    //            var xScaled = appliedScale * x;
+            for (var x = 0; x < tgtWidth; x++)
+            {
+                var xScaled = appliedScale * x;
 
-    //            var p = Color.Lerp(pixels[yScaled * srcWidth + xScaled], pixels[yScaled * srcWidth + xScaled + 1], 0.5f);
-    //            var q = Color.Lerp(pixels[(yScaled + 1) * srcWidth + xScaled], pixels[(yScaled + 1) * srcWidth + xScaled + 1], 0.5f);
+                var p = Color.Lerp(pixels[yScaled * srcWidth + xScaled], pixels[yScaled * srcWidth + xScaled + 1], 0.5f);
+                var q = Color.Lerp(pixels[(yScaled + 1) * srcWidth + xScaled], pixels[(yScaled + 1) * srcWidth + xScaled + 1], 0.5f);
 
-    //            var color = Color.Lerp(p, q, 0.5f);
+                var color = Color.Lerp(p, q, 0.5f);
 
-    //            //var color = pixels[yScaled * srcWidth + xScaled];
-    //            var oldValue = previousPixelValues[y * tgtWidth + x];
-    //            var grayScale = (color.r + color.g + color.b) / 3;
+                //var color = pixels[yScaled * srcWidth + xScaled];
+                var oldValue = previousPixelValuesFloat[y * tgtWidth + x];
+                var grayScale = (color.r + color.g + color.b) / 3;
 
-    //            var difference = Mathf.Abs(grayScale - oldValue);
-    //            var hasMotion = difference > threshold;
-    //            var displayColor = hasMotion ? Color.red : Color.black;
+                var difference = Mathf.Abs(grayScale - oldValue);
+                var hasMotion = difference > threshold;
+                var displayColor = hasMotion ? Color.red : Color.black;
 
-    //            targetPixels[y * tgtWidth + x] = displayColor;
-    //            previousPixelValues[y * tgtWidth + x] = grayScale;
-    //        }
-    //    }
+                targetPixels[y * tgtWidth + x] = displayColor;
+                previousPixelValuesFloat[y * tgtWidth + x] = grayScale;
+            }
+        }
 
-    //    scaledDownTexture.SetPixels(targetPixels);
-    //    scaledDownTexture.Apply();
+        scaledDownTexture.SetPixels(targetPixels);
+        scaledDownTexture.Apply();
 
-    //    rawImage.texture = scaledDownTexture;
-    //}
+        rawImage.texture = scaledDownTexture;
+    }
 
     private IEnumerator WebCamStartCoroutine() {
         Debug.Log("Waiting for correct webcam info...");
