@@ -8,9 +8,9 @@ using Unity.Collections;
 
 public struct PixelJob : IJobParallelFor
 {
-    public NativeArray<Color> pixels;
-    public NativeArray<float> oldValues;
-    public NativeArray<Color> newPixels;
+    [NativeDisableParallelForRestriction]  public NativeArray<Color> pixels;
+    [NativeDisableParallelForRestriction]  public NativeArray<Color> oldValues;
+    [NativeDisableParallelForRestriction]  public NativeArray<Color> newPixels;
     public int srcWidth;
     public int srcHeight;
     public int tgtWidth;
@@ -30,16 +30,17 @@ public struct PixelJob : IJobParallelFor
         var q = Color.Lerp(pixels[(yScaled + 1) * srcWidth + xScaled], pixels[(yScaled + 1) * srcWidth + xScaled + 1], 0.5f);
 
         var color = Color.Lerp(p, q, 0.5f);
+        var oldColor = oldValues[y * tgtWidth + x];
 
-        var oldValue = oldValues[y * tgtWidth + x];
+        var oldGrayScale = (oldColor.r + oldColor.g + oldColor.b) / 3;
         var grayScale = (color.r + color.g + color.b) / 3;
 
-        var difference = Mathf.Abs(grayScale - oldValue);
+        var difference = Mathf.Abs(grayScale - oldGrayScale);
         var hasMotion = difference > threshold;
         var displayColor = hasMotion ? Color.red : Color.black;
 
         newPixels[y * tgtWidth + x] = displayColor;
-        oldValues[y * tgtWidth + x] = grayScale;
+        oldValues[y * tgtWidth + x] = color;
     }
 }
 
@@ -52,10 +53,9 @@ public class WebcamMotion : MonoBehaviour
     private WebCamTexture webcamTexture;
     private RawImage rawImage;
     private AspectRatioFitter aspectRatioFitter;
-    private float[] previousPixelValues;
+    private Color[] previousPixelValues;
     private Texture2D scaledDownTexture;
     private bool hasWebcam;
-    private NativeArray<float> oldValues;
 
     private void Start()
     {
@@ -80,8 +80,10 @@ public class WebcamMotion : MonoBehaviour
         var pixels = webcamTexture.GetPixels();
         var pixelArray = new NativeArray<Color>(pixels.Length, Allocator.Persistent);
         var newPixelArray = new NativeArray<Color>(scaledDownTexture.width * scaledDownTexture.height, Allocator.Persistent);
+        var oldValues = new NativeArray<Color>(previousPixelValues.Length,Allocator.Persistent);
 
         for (int i = 0; i < pixelArray.Length; i++) pixelArray[i] = pixels[i];
+        for (int i = 0; i < oldValues.Length; i++) oldValues[i] = previousPixelValues[i];
 
         var job = new PixelJob
         {
@@ -100,55 +102,62 @@ public class WebcamMotion : MonoBehaviour
 
         jobHandle.Complete();
 
+
+        previousPixelValues = oldValues.ToArray();
+
         scaledDownTexture.SetPixels(newPixelArray.ToArray());
         scaledDownTexture.Apply();
         rawImage.texture = scaledDownTexture;
+
+        pixelArray.Dispose();
+        newPixelArray.Dispose();
+        oldValues.Dispose();
     }
 
-    private void SetTexture ()
-    {
-        var pixels = webcamTexture.GetPixels();
-        var targetPixels = new Color[scaledDownTexture.width * scaledDownTexture.height];
+    //private void SetTexture ()
+    //{
+    //    var pixels = webcamTexture.GetPixels();
+    //    var targetPixels = new Color[scaledDownTexture.width * scaledDownTexture.height];
 
-        if (previousPixelValues == null) previousPixelValues = new float[targetPixels.Length];
+    //    if (previousPixelValues == null) previousPixelValues = new Color[targetPixels.Length];
 
-        var srcWidth = webcamTexture.width;
-        var srcHeight = webcamTexture.height;
+    //    var srcWidth = webcamTexture.width;
+    //    var srcHeight = webcamTexture.height;
 
-        var tgtWidth = srcWidth / appliedScale;
-        var tgtHeight = srcHeight / appliedScale;
+    //    var tgtWidth = srcWidth / appliedScale;
+    //    var tgtHeight = srcHeight / appliedScale;
 
-        for (var y = 0; y < tgtHeight; y++)
-        {
-            var yScaled = appliedScale * y;
+    //    for (var y = 0; y < tgtHeight; y++)
+    //    {
+    //        var yScaled = appliedScale * y;
 
-            for (var x = 0; x < tgtWidth; x++)
-            {
-                var xScaled = appliedScale * x;
+    //        for (var x = 0; x < tgtWidth; x++)
+    //        {
+    //            var xScaled = appliedScale * x;
 
-                var p = Color.Lerp(pixels[yScaled * srcWidth + xScaled], pixels[yScaled * srcWidth + xScaled + 1], 0.5f);
-                var q = Color.Lerp(pixels[(yScaled + 1) * srcWidth + xScaled], pixels[(yScaled + 1) * srcWidth + xScaled + 1], 0.5f);
+    //            var p = Color.Lerp(pixels[yScaled * srcWidth + xScaled], pixels[yScaled * srcWidth + xScaled + 1], 0.5f);
+    //            var q = Color.Lerp(pixels[(yScaled + 1) * srcWidth + xScaled], pixels[(yScaled + 1) * srcWidth + xScaled + 1], 0.5f);
 
-                var color = Color.Lerp(p, q, 0.5f);
+    //            var color = Color.Lerp(p, q, 0.5f);
 
-                //var color = pixels[yScaled * srcWidth + xScaled];
-                var oldValue = previousPixelValues[y * tgtWidth + x];
-                var grayScale = (color.r + color.g + color.b) / 3;
+    //            //var color = pixels[yScaled * srcWidth + xScaled];
+    //            var oldValue = previousPixelValues[y * tgtWidth + x];
+    //            var grayScale = (color.r + color.g + color.b) / 3;
 
-                var difference = Mathf.Abs(grayScale - oldValue);
-                var hasMotion = difference > threshold;
-                var displayColor = hasMotion ? Color.red : Color.black;
+    //            var difference = Mathf.Abs(grayScale - oldValue);
+    //            var hasMotion = difference > threshold;
+    //            var displayColor = hasMotion ? Color.red : Color.black;
 
-                targetPixels[y * tgtWidth + x] = displayColor;
-                previousPixelValues[y * tgtWidth + x] = grayScale;
-            }
-        }
+    //            targetPixels[y * tgtWidth + x] = displayColor;
+    //            previousPixelValues[y * tgtWidth + x] = grayScale;
+    //        }
+    //    }
 
-        scaledDownTexture.SetPixels(targetPixels);
-        scaledDownTexture.Apply();
+    //    scaledDownTexture.SetPixels(targetPixels);
+    //    scaledDownTexture.Apply();
 
-        rawImage.texture = scaledDownTexture;
-    }
+    //    rawImage.texture = scaledDownTexture;
+    //}
 
     private IEnumerator WebCamStartCoroutine() {
         Debug.Log("Waiting for correct webcam info...");
@@ -186,7 +195,7 @@ public class WebcamMotion : MonoBehaviour
         scaledDownTexture = new Texture2D(webcamTexture.width / appliedScale, webcamTexture.height / appliedScale);
         scaledDownTexture.filterMode = FilterMode.Point;
 
-        oldValues = new NativeArray<float>(scaledDownTexture.width * scaledDownTexture.height, Allocator.Persistent);
+        previousPixelValues = new Color[scaledDownTexture.width * scaledDownTexture.height];
 
         hasWebcam = true;
     }
