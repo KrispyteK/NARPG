@@ -5,16 +5,30 @@ using UnityEngine;
 
 public class WebcamMotionCapture : MonoBehaviour
 {
+    public static WebcamMotionCapture instance;
+
     public int textureScale = 2;
     public float threshold = 0.1f;
     public float motionDelay = 0.1f;
+    public float mipMapBias = 0f;
+    public RenderTexture renderTexture;
 
-    private int appliedScale => 1 << textureScale;
     private WebCamTexture webcamTexture;
     private Texture2D texCurr;
     private Texture2D texPrev;
     private Renderer renderComponent;
     private bool hasWebcam;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        } else
+        {
+            Debug.LogError("Please only place one WebcamMotionCapture object in the scene.");
+        }
+    }
 
     private void Start()
     {
@@ -35,6 +49,8 @@ public class WebcamMotionCapture : MonoBehaviour
 
         if (webcamTexture.didUpdateThisFrame)
         {
+            webcamTexture.mipMapBias = mipMapBias;
+
             var pixels = webcamTexture.GetPixels32();
 
             texCurr.SetPixels32(pixels);
@@ -60,7 +76,7 @@ public class WebcamMotionCapture : MonoBehaviour
     {
         Debug.Log("Waiting for correct webcam info...");
 
-        yield return new WaitWhile(() => webcamTexture.width < 100);     
+        yield return new WaitWhile(() => webcamTexture.width < 100);
 
         texCurr = new Texture2D(webcamTexture.width, webcamTexture.height);
         texPrev = new Texture2D(webcamTexture.width, webcamTexture.height);
