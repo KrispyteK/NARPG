@@ -81,6 +81,13 @@ public class WebcamMotionCapture : MonoBehaviour
         texCurr = new Texture2D(webcamTexture.width, webcamTexture.height);
         texPrev = new Texture2D(webcamTexture.width, webcamTexture.height);
 
+        renderTexture.width = Camera.main.pixelWidth / 4;
+        renderTexture.height = Camera.main.pixelHeight / 4;
+
+        print(renderTexture.width / renderTexture.height);
+
+        transform.localScale = new Vector3(Camera.main.aspect, 1,1);
+
         hasWebcam = true;
     }
 }
