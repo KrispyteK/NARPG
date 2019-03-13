@@ -6,47 +6,54 @@ using UnityEngine;
 public class WebcamMotionCapture : MonoBehaviour
 {
     public int textureScale = 2;
-    public float threshold = 0.5f;
+    public float threshold = 0.1f;
+    public float motionDelay = 0.1f;
 
     private int appliedScale => 1 << textureScale;
     private WebCamTexture webcamTexture;
     private Texture2D texCurr;
     private Texture2D texPrev;
-    private Renderer renderer;
+    private Renderer renderComponent;
     private bool hasWebcam;
 
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
+        renderComponent = GetComponent<Renderer>();
 
         webcamTexture = new WebCamTexture();
         webcamTexture.Play();
 
         StartCoroutine(WebCamStartCoroutine());
+
+        renderComponent.material.SetFloat("_Threshold", threshold);
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (!hasWebcam) return;
 
-        var pixels = webcamTexture.GetPixels32();
+        if (webcamTexture.didUpdateThisFrame)
+        {
+            var pixels = webcamTexture.GetPixels32();
 
-        texCurr.SetPixels32(pixels);
-        texCurr.Apply();
+            texCurr.SetPixels32(pixels);
+            texCurr.Apply();
 
-        renderer.material.SetTexture("_MainTex", texCurr);
-        renderer.material.SetTexture("_PrevTex", texPrev);
+            StartCoroutine(DelayedWebCamCapture(pixels));
 
-        StartCoroutine(DelayedWebCamCapture());
+            renderComponent.material.SetTexture("_MainTex", texCurr);
+        }
     }
 
-    private IEnumerator DelayedWebCamCapture ()
+    private IEnumerator DelayedWebCamCapture (Color32[] pixels)
     {
-        yield return new WaitForSeconds(Time.fixedDeltaTime);
+        yield return new WaitForSeconds(motionDelay);
 
-        texPrev.SetPixels32(webcamTexture.GetPixels32());
+        texPrev.SetPixels32(pixels);
         texPrev.Apply();
+
+        renderComponent.material.SetTexture("_PrevTex", texPrev);
     }
 
     private IEnumerator WebCamStartCoroutine()

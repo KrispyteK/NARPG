@@ -73,17 +73,21 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 colMain = blur(_MainTex, i);
-				fixed4 colPrev = blur(_PrevTex, i);
+                fixed4 colMain = tex2D(_MainTex, i.uv);
+				fixed4 colPrev = tex2D(_PrevTex, i.uv);
 
 				float grayMain = (colMain.r + colMain.g + colMain.b) / 3;
 				float grayPrev = (colPrev.r + colPrev.g + colPrev.b) / 3;
 
 				float difference = abs(grayMain - grayPrev);
 
+				float dr = abs(colMain.r - colPrev.r);
+				float dg = abs(colMain.g - colPrev.g);
+				float db = abs(colMain.b - colPrev.b);
+
 				fixed4 col = fixed4(0, 0, 0, 1);
 
-				if (difference > _Threshold) {
+				if (dr > _Threshold || dg > _Threshold || db > _Threshold) {
 					col = fixed4(1, 1, 1, 1);
 				}
 
