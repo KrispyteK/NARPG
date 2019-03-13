@@ -12,12 +12,13 @@ public class WebcamMotionCapture : MonoBehaviour
     public float motionDelay = 0.1f;
     public float mipMapBias = 0f;
     public RenderTexture renderTexture;
+    public WebCamTexture webcamTexture;
+    public bool hasWebcam;
+    public Action callback;
 
-    private WebCamTexture webcamTexture;
     private Texture2D texCurr;
     private Texture2D texPrev;
     private Renderer renderComponent;
-    private bool hasWebcam;
 
     private void Awake()
     {
@@ -34,7 +35,18 @@ public class WebcamMotionCapture : MonoBehaviour
     {
         renderComponent = GetComponent<Renderer>();
 
-        webcamTexture = new WebCamTexture();
+        string cameraName = null;
+
+        foreach (var camera in WebCamTexture.devices)
+        {
+            if (camera.isFrontFacing)
+            {
+                cameraName = camera.name;
+                break;
+            }
+        }
+
+        webcamTexture = new WebCamTexture(cameraName);
         webcamTexture.Play();
 
         StartCoroutine(WebCamStartCoroutine());
@@ -78,16 +90,23 @@ public class WebcamMotionCapture : MonoBehaviour
 
         yield return new WaitWhile(() => webcamTexture.width < 100);
 
+        var ccwNeeded = -webcamTexture.videoRotationAngle;
+
+        if (webcamTexture.videoVerticallyMirrored) ccwNeeded += 180;
+
         texCurr = new Texture2D(webcamTexture.width, webcamTexture.height);
         texPrev = new Texture2D(webcamTexture.width, webcamTexture.height);
 
-        renderTexture.width = Camera.main.pixelWidth / 4;
-        renderTexture.height = Camera.main.pixelHeight / 4;
+        //renderTexture.width = Camera.main.pixelWidth / 4;
+        //renderTexture.height = Camera.main.pixelHeight / 4;
 
-        print(renderTexture.width / renderTexture.height);
-
-        transform.localScale = new Vector3(Camera.main.aspect, 1,1);
+        //transform.localEulerAngles = new Vector3(0,ccwNeeded,0);
+        //transform.localScale = new Vector3(-Camera.main.aspect, 1,1);
 
         hasWebcam = true;
+
+        Debug.Log("Got webcam info!");
+
+        callback?.Invoke();
     }
 }
