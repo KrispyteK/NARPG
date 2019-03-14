@@ -85,13 +85,16 @@
 				float dg = abs(colMain.g - colPrev.g);
 				float db = abs(colMain.b - colPrev.b);
 
+				//float meanDifference = (dr + dg + db) / 3;
+				float meanDifference = max(dr, max(dg, db));
+
 				fixed4 col = fixed4(0, 0, 0, 1);
 
 				if (dr > _Threshold || dg > _Threshold || db > _Threshold) {
 					col = fixed4(1, 1, 1, 1);
 				}
 
-                return col;
+                return fixed4(meanDifference,meanDifference,meanDifference,1);
             }
             ENDCG
         }
