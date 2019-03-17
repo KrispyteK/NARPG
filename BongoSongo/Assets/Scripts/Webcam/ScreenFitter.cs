@@ -43,7 +43,7 @@ public class ScreenFitter : MonoBehaviour
         if (webcamTexture.videoVerticallyMirrored)
             rawimage.uvRect = new Rect(1, 0, -1, 1);  // means flip on vertical axis
         else
-            rawimage.uvRect = new Rect(0, 0, 1, 1);  // means no flip
+            rawimage.uvRect = new Rect(1, 0, -1, 1);  // means no flip
 
         //Debug.Log("videoRatio: " + videoRatio.ToString());
 

@@ -49,7 +49,7 @@ public class Interactable : MonoBehaviour {
 
         for (float y = normalizedY - size / 2 + stepSize / 2; y <= normalizedY + size / 2; y += stepSize) {
             for (float x = normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
-                interactionAmount += texture.GetPixelBilinear(x, y * aspect).grayscale;
+                interactionAmount += texture.GetPixelBilinear(1-x, y * aspect).grayscale;
 
                 if (measureAverage) interactionAmount /= points;
 

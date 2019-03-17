@@ -257,8 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b202f64d5cb67784a9da8a671473b4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 0.07
-  threshold: 0.8
+  size: 0.18
+  threshold: 2
   isActive: 1
   isInteractedWith: 0
   isCircular: 0
@@ -1021,7 +1021,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 175.8, y: 175.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1551801097
 MonoBehaviour:
@@ -1057,7 +1057,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
+  m_Texture: {fileID: 10910, guid: 0000000000000000f000000000000000, type: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
