@@ -46,13 +46,16 @@ let capture, img
 let oldGrayScale = []
 let theshold = 25
 let setColor = [255,0,0]
-let stepSize = 400
+let stepSize = 100
 let processedResult
+let workers = []
 
 function setup() { 
     createCanvas(400, 400);
 
     img = createImage(400,300)
+
+    createWorkers()
 
     startWorkers()
 }
@@ -63,17 +66,28 @@ function draw() {
     image(img,0,0,400,300)
 }
 
-function startWorkers () {
-    img.loadPixels()
+function createWorkers () {
+    for (let x = 0; x < img.width; x += stepSize) {
+        for (let y = 0; y < img.height; y += stepSize) {
+            let worker = new Worker("js/worker.js");
+            worker.onmessage = workerDone;
 
+            workers.push(worker)
+        }
+    }
+}
+
+function startWorkers () {
     running = 0
     processedResults = []
 
+    let i = 0
+
     for (let x = 0; x < img.width; x += stepSize) {
-        for (let y = 0; y < img.height; y += stepSize) {
-            workers = new Worker("js/worker.js");
-            workers.onmessage = workerDone;
-            workers.postMessage({
+        for (let y = 0; y < img.height; y += stepSize) {        
+            let worker = workers[i]
+
+            worker.postMessage({
                 id: running, 
                 width: img.width,
                 startX: x,
@@ -81,8 +95,10 @@ function startWorkers () {
                 stepSize: stepSize,
                 color: setColor,
                 pixels: img.pixels
-            });
-            ++running;
+            })
+
+            running++
+            i++
         }
     }
 }
@@ -91,7 +107,7 @@ function workerDone(e) {
     --running;
 
     processedResults[e.data.id] = e.data.pixels
-    e.target.terminate()
+    //e.target.terminate()
 
     if (running === 0) {
         img.loadPixels()
