@@ -23,7 +23,7 @@ public class Interactable : MonoBehaviour {
 
     void Update()
     {
-        if (!WebcamMotionCapture.instance.hasWebcam) return;
+        if (!WebcamMotionCapture.instance.hasWebcam || !isActive) return;
 
         isInteractedWith = CheckInteraction();
     }
@@ -51,7 +51,7 @@ public class Interactable : MonoBehaviour {
 
         for (float y = normalizedY - size / 2 + stepSize / 2; y <= normalizedY + size / 2; y += stepSize) {
             for (float x = normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
-                // Add gray scale value at the point on the motion texture thats behind the interactable.
+                // Add gray scale value at the point on the motion texture thats behind the interactable.   
                 interactionAmount += WebcamMotionCapture.instance.texture.GetPixelBilinear(1-x, y * aspect).grayscale;
 
                 if (measureAverage) interactionAmount /= points;
