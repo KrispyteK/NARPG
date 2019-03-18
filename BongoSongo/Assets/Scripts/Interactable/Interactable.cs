@@ -68,7 +68,7 @@ public class Interactable : MonoBehaviour {
             }
         } else
         {
-            interactionAmount = Mathf.Max(0, interactionAmount - randomizeCooldown / Time.deltaTime);
+            interactionAmount = Mathf.Max(0, interactionAmount - randomizeCooldown * Time.deltaTime);
 
             for (var i = 0; i < randomizePoints; i++)
             {
