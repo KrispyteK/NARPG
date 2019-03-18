@@ -40,7 +40,7 @@ public class Interactable : MonoBehaviour {
         var stepSize = 1f / density * size;
         var points = Mathf.Pow((size / stepSize), 2f);
 
-        // Get normalized X and Y coordinates of object on the screen where the left of the screen is 0 and the right is 1.
+        // Get normalized X and Y coordinates of object on the screen where the X axis goes between 0 and 1 and the Y axis between 0 and the screen's aspect ratio.
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
 
         var normalizedX = screenPoint.x / Camera.main.pixelWidth;
