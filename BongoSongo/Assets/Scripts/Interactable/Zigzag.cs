@@ -19,25 +19,22 @@ public class Zigzag : MonoBehaviour
 
         var lerp = Vector2.Lerp(start, end, i);
 
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(
-                lerp.x * Camera.main.pixelWidth,
-                lerp.y * Camera.main.aspect * Camera.main.pixelHeight,
-                -Camera.main.transform.position.z
+        transform.position = CameraTransform.ScreenPointToWorld(new Vector2(
+                lerp.x,
+                lerp.y
             ));
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(Camera.main.ScreenToWorldPoint(new Vector3(
-                start.x * Camera.main.pixelWidth,
-                start.y * Camera.main.aspect * Camera.main.pixelHeight,
-                -Camera.main.transform.position.z
+        Gizmos.DrawSphere(CameraTransform.ScreenPointToWorld(new Vector2(
+                start.x,
+                start.y
             )), 0.1f);
 
-        Gizmos.DrawSphere(Camera.main.ScreenToWorldPoint(new Vector3(
-                end.x * Camera.main.pixelWidth,
-                end.y * Camera.main.aspect * Camera.main.pixelHeight,
-                -Camera.main.transform.position.z
+        Gizmos.DrawSphere(CameraTransform.ScreenPointToWorld(new Vector2(
+                end.x,
+                end.y
             )), 0.1f);
     }
 }

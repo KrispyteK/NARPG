@@ -79,56 +79,47 @@ public class Interactable : MonoBehaviour {
                 if (isCircular) x = Mathf.Round(x / stepSize) * stepSize;
 
                 Gizmos.DrawSphere(
-                    Camera.main.ScreenToWorldPoint(new Vector3(
-                        x * Camera.main.pixelWidth, 
-                        y * aspect * Camera.main.pixelHeight,
-                        deltaZ
+                    CameraTransform.ScreenPointToWorld(new Vector2(
+                        x, 
+                        y
                         )), 0.05f);
             }
         }
 
         // Top line
-        Gizmos.DrawLine(Camera.main.ScreenToWorldPoint(new Vector3 (
-                (normalizedX - size / 2) * Camera.main.pixelWidth,
-                (normalizedY + size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
-            )), Camera.main.ScreenToWorldPoint(new Vector3(
-                (normalizedX + size / 2) * Camera.main.pixelWidth,
-                (normalizedY + size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
+        Gizmos.DrawLine(CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX - size / 2,
+                normalizedY + size / 2
+            )), CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX + size / 2,
+                normalizedY + size / 2
             )));
 
         // Right line
-        Gizmos.DrawLine(Camera.main.ScreenToWorldPoint(new Vector3(
-                (normalizedX + size / 2) * Camera.main.pixelWidth,
-                (normalizedY + size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
-            )), Camera.main.ScreenToWorldPoint(new Vector3(
-                (normalizedX + size / 2) * Camera.main.pixelWidth,
-                (normalizedY - size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
+        Gizmos.DrawLine(CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX + size / 2,
+                normalizedY + size / 2
+            )), CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX + size / 2,
+                normalizedY - size / 2
             )));
 
         // Bottom line
-        Gizmos.DrawLine(Camera.main.ScreenToWorldPoint(new Vector3(
-                (normalizedX + size / 2) * Camera.main.pixelWidth,
-                (normalizedY - size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
-            )), Camera.main.ScreenToWorldPoint(new Vector3(
-                (normalizedX - size / 2) * Camera.main.pixelWidth,
-                (normalizedY - size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
+        Gizmos.DrawLine(CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX + size / 2,
+                normalizedY - size / 2
+            )), CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX - size / 2,
+                normalizedY - size / 2
             )));
 
         // Right line
-        Gizmos.DrawLine(Camera.main.ScreenToWorldPoint(new Vector3(
-                (normalizedX - size / 2) * Camera.main.pixelWidth,
-                (normalizedY - size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
-            )), Camera.main.ScreenToWorldPoint(new Vector3(
-                (normalizedX - size / 2) * Camera.main.pixelWidth,
-                (normalizedY + size / 2) * aspect * Camera.main.pixelHeight,
-                deltaZ
+        Gizmos.DrawLine(CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX - size / 2,
+                normalizedY - size / 2
+            )), CameraTransform.ScreenPointToWorld(new Vector2(
+                normalizedX - size / 2,
+                normalizedY + size / 2
             )));
     }
 }
