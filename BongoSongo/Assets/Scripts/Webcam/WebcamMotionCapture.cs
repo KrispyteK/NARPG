@@ -10,7 +10,6 @@ public class WebcamMotionCapture : MonoBehaviour
     public int textureScale = 2;
     public float threshold = 0.1f;
     public float motionDelay = 0.1f;
-    public float mipMapBias = 0f;
     public RenderTexture renderTexture;
     public WebCamTexture webcamTexture;
     public Texture2D texture;
@@ -62,17 +61,17 @@ public class WebcamMotionCapture : MonoBehaviour
 
         if (webcamTexture.didUpdateThisFrame)
         {
-            webcamTexture.mipMapBias = mipMapBias;
-
             var pixels = webcamTexture.GetPixels32();
 
             texCurr.SetPixels32(pixels);
             texCurr.Apply();
 
+            // Capture old pixels.
             StartCoroutine(DelayedWebCamCapture(pixels));
 
             renderComponent.material.SetTexture("_MainTex", texCurr);
 
+            // Render renderTexture to Texture2D.
             RenderTexture.active = renderTexture;
 
             texture.ReadPixels(new Rect(0,0,renderTexture.width, renderTexture.height), 0, 0);
@@ -105,16 +104,9 @@ public class WebcamMotionCapture : MonoBehaviour
         texPrev = new Texture2D(webcamTexture.width, webcamTexture.height);
         texture = new Texture2D(renderTexture.width, renderTexture.height);
 
-        //renderTexture.width = Camera.main.pixelWidth / 4;
-        //renderTexture.height = Camera.main.pixelHeight / 4;
-
-        //transform.localEulerAngles = new Vector3(0,ccwNeeded,0);
-        //transform.localScale = new Vector3(-Camera.main.aspect, 1,1);
-
         hasWebcam = true;
 
-        Debug.Log("Got webcam info!");
-
+        // Call callback function if there is any.
         callback?.Invoke();
     }
 }

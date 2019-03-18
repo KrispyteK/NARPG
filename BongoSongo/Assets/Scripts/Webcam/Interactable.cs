@@ -39,8 +39,10 @@ public class Interactable : MonoBehaviour {
         interactionAmount = 0f;
         var stepSize = 1f / density * size;
         var points = Mathf.Pow((size / stepSize), 2f);
-        var texture = WebcamMotionCapture.instance.texture;
+
+        // Get normalized X and Y coordinates of object on the screen where the left of the screen is 0 and the right is 1.
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+
         var normalizedX = screenPoint.x / Camera.main.pixelWidth;
         var normalizedY = screenPoint.y / Camera.main.pixelHeight;
         var aspect = Camera.main.aspect;
@@ -49,13 +51,12 @@ public class Interactable : MonoBehaviour {
 
         for (float y = normalizedY - size / 2 + stepSize / 2; y <= normalizedY + size / 2; y += stepSize) {
             for (float x = normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
-                interactionAmount += texture.GetPixelBilinear(1-x, y * aspect).grayscale;
+                // Add gray scale value at the point on the motion texture thats behind the interactable.
+                interactionAmount += WebcamMotionCapture.instance.texture.GetPixelBilinear(1-x, y * aspect).grayscale;
 
                 if (measureAverage) interactionAmount /= points;
 
-                if (interactionAmount > (isCircular ? circularThreshold : threshold)) {
-                    return true;
-                }
+                if (interactionAmount > (isCircular ? circularThreshold : threshold)) return true;
             }
         }
 
