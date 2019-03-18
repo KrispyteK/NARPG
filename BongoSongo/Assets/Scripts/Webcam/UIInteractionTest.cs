@@ -23,5 +23,7 @@ public class UIInteractionTest : MonoBehaviour {
         } else {
             rawImage.color = Color.red;
         }
+
+        rectTransform.sizeDelta = new Vector2(interactable.size * Camera.main.pixelWidth, interactable.size * Camera.main.pixelWidth) * 1.75f;
     }
 }
