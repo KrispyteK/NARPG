@@ -13,7 +13,7 @@ public class Interactable : MonoBehaviour {
     [Range(1, 25)] public int density = 10;
     public bool randomize = false;
     public int randomizePoints = 50;
-    public float randomizeCooldown = 0.01f;
+    public float randomizeCooldown = 40f;
 
     public Vector3 ScreenPosition => Camera.main.WorldToScreenPoint(transform.position);
 
