@@ -11,6 +11,9 @@ public class Interactable : MonoBehaviour {
     public bool isCircular;
     public bool measureAverage = false;
     [Range(1, 25)] public int density = 10;
+    public bool randomize = false;
+    public int randomizePoints = 50;
+    public float randomizeCooldown = 0.01f;
 
     public Vector3 ScreenPosition => Camera.main.WorldToScreenPoint(transform.position);
 
@@ -36,7 +39,7 @@ public class Interactable : MonoBehaviour {
 
     private bool CheckInteraction ()
     {
-        interactionAmount = 0f;
+        if (!randomize) interactionAmount = 0f;
         var stepSize = 1f / density * size;
         var points = Mathf.Pow((size / stepSize), 2f);
 
@@ -49,12 +52,31 @@ public class Interactable : MonoBehaviour {
 
         normalizedY /= aspect;
 
-        for (float y = normalizedY - size / 2 + stepSize / 2; y <= normalizedY + size / 2; y += stepSize) {
-            for (float x = normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
-                // Add gray scale value at the point on the motion texture thats behind the interactable.   
-                interactionAmount += WebcamMotionCapture.instance.texture.GetPixelBilinear(1-x, y * aspect).grayscale;
+        if (!randomize)
+        {
+            for (float y = normalizedY - size / 2 + stepSize / 2; y <= normalizedY + size / 2; y += stepSize)
+            {
+                for (float x = normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize)
+                {
+                    // Add gray scale value at the point on the motion texture thats behind the interactable.   
+                    interactionAmount += WebcamMotionCapture.instance.texture.GetPixelBilinear(1 - x, y * aspect).grayscale;
 
-                if (measureAverage) interactionAmount /= points;
+                    if (measureAverage) interactionAmount /= points;
+
+                    if (interactionAmount > (isCircular ? circularThreshold : threshold)) return true;
+                }
+            }
+        } else
+        {
+            interactionAmount = Mathf.Max(0, interactionAmount - randomizeCooldown / Time.deltaTime);
+
+            for (var i = 0; i < randomizePoints; i++)
+            {
+                var y = Random.Range(normalizedY - size / 2 + stepSize / 2, normalizedY + size / 2);
+                var x = Random.Range(normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y), normalizedX + size / 2 - GetCircularOffset(normalizedY, y));
+
+                // Add gray scale value at the point on the motion texture thats behind the interactable.   
+                interactionAmount += WebcamMotionCapture.instance.texture.GetPixelBilinear(1 - x, y * aspect).grayscale;
 
                 if (interactionAmount > (isCircular ? circularThreshold : threshold)) return true;
             }
