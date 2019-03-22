@@ -7,7 +7,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour {
 
 
-    public Song Song;
+    //public Song Song;
     public float Smoothing;
     public float CombinedBass;
     public float MeasuredBass;
@@ -35,7 +35,7 @@ public class MusicManager : MonoBehaviour {
     void Start() {
         audioSource = GetComponent<AudioSource>();
 
-        audioSource.clip = Song.Clip;
+        audioSource.clip = null;
         audioSource.Play();
         audioSource.time = 0;
 
@@ -82,7 +82,7 @@ public class MusicManager : MonoBehaviour {
     }
 
     IEnumerator BPMCycle () {
-        var time = 1f / (Song.BPM / 60f);
+        var time = 1f;// / (Song.BPM / 60f);
 
         yield return new WaitForSeconds(time * beatOffset);
 
