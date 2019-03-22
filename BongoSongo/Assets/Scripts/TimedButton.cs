@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TimedButton : MonoBehaviour {
-    public RawImage rawImage;
+    public Transform mesh;
 
     private float interactTime;
     private Interactable interactable;
@@ -14,15 +14,17 @@ public class TimedButton : MonoBehaviour {
 
         interactable.onInteract += Action;
 
-        interactTime = Time.realtimeSinceStartup + 4f * BeatManager.beatLength;
+        interactTime = Time.realtimeSinceStartup + BeatManager.beatLength;
     }
 
     void Update () {
-        if (Time.realtimeSinceStartup - interactTime > 1f) {
+        var time = Time.realtimeSinceStartup;
+
+        if (time - interactTime > 1f) {
             Destroy(gameObject);
         }
 
-        rawImage.rectTransform.sizeDelta = new Vector2(interactable.size * Camera.main.pixelWidth, interactable.size * Camera.main.pixelWidth) * Mathf.Min(Mathf.Abs(interactTime - Time.realtimeSinceStartup), 0);
+        mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0,2)));
     }
 
     void Action () {

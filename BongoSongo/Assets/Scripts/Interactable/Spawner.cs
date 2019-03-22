@@ -24,9 +24,9 @@ public class Spawner : MonoBehaviour
         var button = Instantiate (hitThis, CameraTransform.ScreenPointToWorld(spawn.position), Quaternion.identity);
         var interactable = button.GetComponent<Interactable>();
 
-        var visObj = Instantiate(visibleObject, buttonCanvasParent);
+        //var visObj = Instantiate(visibleObject, buttonCanvasParent);
 
-        var visible = visObj.GetComponent<UIInteractionTest>();
-        visible.interactable = interactable;
+        //var visible = visObj.GetComponent<UIInteractionTest>();
+        //visible.interactable = interactable;
     }
 }

@@ -9,4 +9,10 @@ public class CameraTransform {
             -Camera.main.transform.position.z
         ));
     }
+
+    public static Vector3 Scale(Vector3 scale) {
+        var amount = Camera.main.orthographicSize / Camera.main.aspect;
+
+        return scale * amount;
+    }
 }
