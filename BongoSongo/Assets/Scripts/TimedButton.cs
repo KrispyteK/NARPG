@@ -35,9 +35,6 @@ public class TimedButton : MonoBehaviour {
         var color = Color.Lerp(Color.white, Color.red, redLerp);
 
         indicator.GetComponent<Renderer>().material.color = color;
-
-
-        print((time - interactTime) / BeatManager.beatLength);
     }
 
     void Action () {
