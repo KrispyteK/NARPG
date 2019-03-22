@@ -32,7 +32,7 @@ public class Interactable : MonoBehaviour {
 
         isInteractedWith = CheckInteraction();
 
-        if (isInteractedWith) onInteract();
+        if (isInteractedWith) onInteract?.Invoke();
     }
 
     private float GetCircularOffset (float height, float y) {
@@ -104,17 +104,19 @@ public class Interactable : MonoBehaviour {
 
         normalizedY /= aspect;
 
-        //for (float y = normalizedY - size / 2; y <= normalizedY + size / 2; y += stepSize) {
-        //    for (float x = normalizedX - size / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
-        //        if (isCircular) x = Mathf.Round(x / stepSize) * stepSize;
+        for (float y = normalizedY - size / 2; y <= normalizedY + size / 2; y += stepSize)
+        {
+            for (float x = normalizedX - size / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize)
+            {
+                if (isCircular) x = Mathf.Round(x / stepSize) * stepSize;
 
-        //        Gizmos.DrawSphere(
-        //            CameraTransform.ScreenPointToWorld(new Vector2(
-        //                x,
-        //                y
-        //                )), 0.05f);
-        //    }
-        //}
+                Gizmos.DrawSphere(
+                    CameraTransform.ScreenPointToWorld(new Vector2(
+                        x,
+                        y
+                        )), 0.05f);
+            }
+        }
 
         // Top line
         Gizmos.DrawLine(CameraTransform.ScreenPointToWorld(new Vector2(

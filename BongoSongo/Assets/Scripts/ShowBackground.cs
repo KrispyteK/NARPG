@@ -6,6 +6,17 @@ public class ShowBackground : MonoBehaviour
 {  
     void Start()
     {
-        GetComponent<Renderer>().material.mainTexture = WebcamMotionCapture.instance.webcamTexture;
+        WebcamMotionCapture.instance.callback += SetTexture;
+    }
+
+    void SetTexture ()
+    {
+        var webcamTexture = WebcamMotionCapture.instance.renderTexture;
+
+        GetComponent<Renderer>().material.mainTexture = webcamTexture;
+
+        var aspect = (float)webcamTexture.width / (float)webcamTexture.height;
+
+        transform.localScale = new Vector3(-1 / aspect, 1, 1);
     }
 }

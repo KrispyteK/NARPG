@@ -6,7 +6,6 @@ public class InteractableMeshRender : MonoBehaviour
 {
 
     public Transform mesh;
-
     private Interactable interactable;
 
     void Start()
@@ -18,6 +17,8 @@ public class InteractableMeshRender : MonoBehaviour
     void Update()
     {
         SetScale();
+
+        GetComponent<Renderer>().material.color = interactable.isInteractedWith ? Color.green : Color.red;
     }
 
     void SetScale () {

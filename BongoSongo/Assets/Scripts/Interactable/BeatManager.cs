@@ -81,7 +81,7 @@ public class BeatManager : MonoBehaviour {
                 i++;
 
                 if (i == theSpawner.whenToSpawn.Length) {
-                    print("end of array");
+                    //print("end of array");
 
                     i = 0;
                     bar = 1;

@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
 
 	public void Spawn(beatSpawn spawn)
 	{
-        var button = Instantiate (hitThis, CameraTransform.ScreenPointToWorld(spawn.position), Quaternion.identity);
+        var button = Instantiate (hitThis, CameraTransform.ScreenPointToWorldScaled(spawn.position), Quaternion.identity);
         var interactable = button.GetComponent<Interactable>();
 
         //var visObj = Instantiate(visibleObject, buttonCanvasParent);
