@@ -16,6 +16,11 @@ public class UIInteractionTest : MonoBehaviour {
 
     void Update()
     {
+        if (interactable == null) {
+            Destroy(gameObject);
+            return;
+        }
+
         rectTransform.position = interactable.ScreenPosition;
 
         if (interactable.isInteractedWith) {
@@ -24,6 +29,6 @@ public class UIInteractionTest : MonoBehaviour {
             rawImage.color = Color.red;
         }
 
-        rectTransform.sizeDelta = new Vector2(interactable.size * Camera.main.pixelWidth, interactable.size * Camera.main.pixelWidth) * 1.75f;
+        rectTransform.sizeDelta = new Vector2(interactable.size * Camera.main.pixelWidth, interactable.size * Camera.main.pixelWidth) * 1;
     }
 }

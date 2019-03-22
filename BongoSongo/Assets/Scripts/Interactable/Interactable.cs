@@ -17,6 +17,8 @@ public class Interactable : MonoBehaviour {
 
     public Vector3 ScreenPosition => Camera.main.WorldToScreenPoint(transform.position);
 
+    public System.Action onInteract;
+
     private float circularThreshold;
     private float interactionAmount;
 
@@ -29,6 +31,8 @@ public class Interactable : MonoBehaviour {
         if (!WebcamMotionCapture.instance.hasWebcam || !isActive) return;
 
         isInteractedWith = CheckInteraction();
+
+        if (isInteractedWith) onInteract();
     }
 
     private float GetCircularOffset (float height, float y) {

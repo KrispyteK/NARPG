@@ -5,16 +5,18 @@ using UnityEngine.EventSystems;
 
 public class BeatManager : MonoBehaviour {
 
-	private Rigidbody2D Body;
+    public static BeatManager instance;
+    public static float beatLength;
+
+    private Rigidbody2D Body;
 	private Vector2 Direction;
 	public SoundManager theSoundManager;
 	public Spawner theSpawner;
 	private bool audioStarted = false;
-	public int bar, beat;
+	public int bar, beat = 1;
 	private int i; // To count through the whenToSpawn array
 
 	public float bpm;
-	private float beatLength;
 	public bool spawnSoundOn;
 
 
@@ -25,7 +27,14 @@ public class BeatManager : MonoBehaviour {
 		Body = GetComponent<Rigidbody2D> ();
 		theSoundManager = FindObjectOfType<SoundManager> ();
 		theSpawner = FindObjectOfType<Spawner> ();
-	}
+
+        if (instance == null) {
+            instance = this;
+        }
+        else {
+            Debug.LogError("Too many beat managers in the scene!");
+        }
+    }
 
 	void Start () 
 	{
@@ -41,10 +50,10 @@ public class BeatManager : MonoBehaviour {
 			theSoundManager.beatTest.Play ();
 			audioStarted = true;
 		}
-		beatCount ();
-		checkSpawners ();
 
-	}
+		checkSpawners();
+        beatCount();
+    }
 
 	// Keep track of current bar and beat (in 4/4 time)
 	public void beatCount()
@@ -60,23 +69,25 @@ public class BeatManager : MonoBehaviour {
 
 	public void checkSpawners()
 	{
-		if (bar == theSpawner.whenToSpawn[i].beat)
-		{
-			if (beat == theSpawner.whenToSpawn[i].bar)
-			{
-				if (spawnSoundOn) // Use test sound to ensure spawning matches music track
-				{
-					theSoundManager.hitBall.Play ();
-				}
+        if (beat == theSpawner.whenToSpawn[i].beat) {
+            if (bar == theSpawner.whenToSpawn[i].bar) {
+                if (spawnSoundOn) // Use test sound to ensure spawning matches music track
+                {
+                    theSoundManager.hitBall.Play();
+                }
 
-				theSpawner.Spawn ();
-				i++;
-			/*	if (i == theSpawner.whenToSpawn.Length)
-				{
-					print("end of array");
-				}*/
-			}
-		}
+                theSpawner.Spawn(theSpawner.whenToSpawn[i]);
 
-	}
+                i++;
+
+                if (i == theSpawner.whenToSpawn.Length) {
+                    print("end of array");
+
+                    i = 0;
+                    bar = 1;
+                    beat = 1;
+                }
+            }
+        }
+    }
 }

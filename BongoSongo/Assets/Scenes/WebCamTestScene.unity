@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 446879318}
   - component: {fileID: 446879323}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +446,6 @@ GameObject:
   m_Component:
   - component: {fileID: 512466393}
   - component: {fileID: 512466395}
-  - component: {fileID: 512466394}
   m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
@@ -468,14 +467,6 @@ Transform:
   m_Father: {fileID: 1321872110}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
---- !u!81 &512466394
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512466392}
-  m_Enabled: 1
 --- !u!20 &512466395
 Camera:
   m_ObjectHideFlags: 0
@@ -1392,7 +1383,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThis: {fileID: 0}
-  whenToSpawn: []
+  whenToSpawn:
+  - beat: 0
+    bar: 0
+  - beat: 0
+    bar: 0
+  - beat: 0
+    bar: 0
+  - beat: 0
+    bar: 0
+  useRandomPositions: 0
 --- !u!4 &1603469701
 Transform:
   m_ObjectHideFlags: 0
