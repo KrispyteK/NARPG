@@ -25,12 +25,15 @@ public class TimedButton : MonoBehaviour {
 
         var time = Time.realtimeSinceStartup;
 
+        // Destroy object if its too late.
         if (time - interactTime > 1f) {
             Destroy(gameObject);
         }
 
+        // Set timing object scale
         mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0,2)));
 
+        // Show indicator as red when they're late.
         var redLerp = Mathf.Max((time - interactTime) / BeatManager.beatLength - 1,0);
         var color = Color.Lerp(Color.white, Color.red, redLerp);
 
