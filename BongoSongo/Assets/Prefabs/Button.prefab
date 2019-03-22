@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 0.13
-  threshold: 3
+  threshold: 4
   isActive: 1
   isInteractedWith: 0
   isCircular: 0
