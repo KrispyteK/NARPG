@@ -28,7 +28,7 @@ public class BeatMapWindow : EditorWindow {
     }
 
     void Update() {
-        if (isModifying) this.Repaint();
+        if (isModifying) Repaint();
     }
 
     public void OnGUI() {

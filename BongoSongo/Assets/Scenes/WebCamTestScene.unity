@@ -1003,6 +1003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  buttonSize: 0.1
 --- !u!4 &1144937683
 Transform:
   m_ObjectHideFlags: 0
@@ -1422,7 +1423,7 @@ GameObject:
   - component: {fileID: 1603469701}
   - component: {fileID: 1603469700}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: SpawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1440,23 +1441,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf06b1e69f29af549a0b3873fea69dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitThis: {fileID: 509272240567816216, guid: b90f4b414f6738d43a9eecb75be123da, type: 3}
-  whenToSpawn:
-  - beat: 2
-    bar: 1
-    position: {x: 0.15, y: 0.67}
-  - beat: 4
-    bar: 1
-    position: {x: 0.85, y: 0.52}
-  - beat: 2
-    bar: 2
-    position: {x: 0.15, y: 0.7}
-  - beat: 4
-    bar: 2
-    position: {x: 0.85, y: 0.89}
-  buttonCanvasParent: {fileID: 549646953}
-  visibleObject: {fileID: 7723292595390923958, guid: 5b35a3b3aef2cb247a96b66b3e5d5701,
-    type: 3}
+  hitThis: {fileID: 0}
+  spawnInfo:
+  - beat: 0
+    bar: 0
+    position: {x: 0.30474398, y: 0.62490964}
+  - beat: 0
+    bar: 0
+    position: {x: 0.53521097, y: 0.34754917}
+  - beat: 0
+    bar: 0
+    position: {x: 0.20477265, y: 0.6274136}
 --- !u!4 &1603469701
 Transform:
   m_ObjectHideFlags: 0
