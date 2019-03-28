@@ -23,18 +23,100 @@ public class Spawner : MonoBehaviour {
 
 [CustomEditor(typeof(Spawner))]
 public class ObjectBuilderEditor : Editor {
+
+    private Spawner spawner;
+    private Tool currentTool;
+
+    private enum Tool {
+        None,
+        Insert,
+        Remove
+    }
+
+    void OnEnable() {
+        spawner = (Spawner)target;
+
+        currentTool = Tool.None;
+    }
+
     public override void OnInspectorGUI() {
-        var spawner = (Spawner)target;
+        ToolBar();
 
-        // Insert tool
-
-        var insertButton = GUILayout.Button("Insert", GUILayout.MaxWidth(10));
-
-        if (GUILayout.Button("Build Object")) {
-            //myScript.BuildObject();
-        }
+        GUILayout.FlexibleSpace();
 
         DrawDefaultInspector();
+    }
 
+    private void ToolBar () {
+        GUILayout.Label("Tools");
+
+        GUILayout.BeginHorizontal();
+
+        bool insertButton, removeButton;
+
+        switch (currentTool) {
+            case Tool.None:
+                insertButton = GUILayout.Button("Insert", GUILayout.MaxWidth(Screen.width / 2));
+                removeButton = GUILayout.Button("Remove", GUILayout.MaxWidth(Screen.width / 2));
+
+                if (insertButton) currentTool = Tool.Insert;
+                if (removeButton) currentTool = Tool.Remove;
+
+                break;
+            case Tool.Insert:
+            case Tool.Remove:
+                GUILayout.Label(currentTool.ToString());
+
+                break;
+            default:
+                break;
+        }
+
+        GUILayout.EndHorizontal();
+
+        switch (currentTool) {
+            case Tool.None:
+                break;
+            case Tool.Insert:
+                InsertTool();
+                break;
+            case Tool.Remove:
+                RemoveTool();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void InsertTool () {
+        GUILayout.Space(10);
+
+        EditorGUILayout.IntField("At", 0);
+
+        GUILayout.Space(10);
+
+        GUILayout.BeginHorizontal();
+
+        var insertButton = GUILayout.Button("Insert", GUILayout.MaxWidth(Screen.width / 2));
+
+        if (GUILayout.Button("Cancel", GUILayout.MaxWidth(Screen.width / 2))) currentTool = Tool.None;
+
+        GUILayout.EndHorizontal();
+    }
+
+    private void RemoveTool() {
+        GUILayout.Space(10);
+
+        EditorGUILayout.IntField("At", 0);
+
+        GUILayout.Space(10);
+
+        GUILayout.BeginHorizontal();
+
+        var insertButton = GUILayout.Button("Remove", GUILayout.MaxWidth(Screen.width / 2));
+
+        if (GUILayout.Button("Cancel", GUILayout.MaxWidth(Screen.width / 2))) currentTool = Tool.None;
+
+        GUILayout.EndHorizontal();
     }
 }
