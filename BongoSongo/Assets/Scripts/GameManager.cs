@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
     public int score;
+    public float buttonSize;
 
     void Awake() {
         if (instance == null) {

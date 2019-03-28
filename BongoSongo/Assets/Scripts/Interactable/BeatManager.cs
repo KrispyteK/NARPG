@@ -9,7 +9,7 @@ public class BeatManager : MonoBehaviour {
     public static float beatLength;
 
     public SoundManager theSoundManager;
-    public Spawner theSpawner;
+    public SpawnManager theSpawner;
     private bool audioStarted = false;
     public int bar, beat = 1;
     private int i; // To count through the whenToSpawn array
@@ -21,7 +21,7 @@ public class BeatManager : MonoBehaviour {
         beatLength = (60 / bpm);
 
         theSoundManager = FindObjectOfType<SoundManager>();
-        theSpawner = FindObjectOfType<Spawner>();
+        theSpawner = FindObjectOfType<SpawnManager>();
 
         if (instance == null) {
             instance = this;
