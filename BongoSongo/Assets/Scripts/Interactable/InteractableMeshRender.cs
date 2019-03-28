@@ -18,7 +18,7 @@ public class InteractableMeshRender : MonoBehaviour
     {
         SetScale();
 
-        GetComponent<Renderer>().material.color = interactable.isInteractedWith ? Color.green : Color.red;
+        mesh.GetComponent<Renderer>().material.color = interactable.isInteractedWith ? Color.green : Color.white;
     }
 
     void SetScale () {

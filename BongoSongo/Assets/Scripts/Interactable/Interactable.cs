@@ -32,7 +32,7 @@ public class Interactable : MonoBehaviour {
 
         isInteractedWith = CheckInteraction() || IsMouseInteracted();
 
-        if (isInteractedWith) OnInteract(this, EventArgs.Empty);
+        if (isInteractedWith && OnInteract != null) OnInteract(this, EventArgs.Empty);
     }
 
     private bool IsMouseInteracted() {
