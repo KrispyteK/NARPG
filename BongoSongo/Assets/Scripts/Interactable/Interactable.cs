@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public class Interactable : MonoBehaviour {
 
     public Vector3 ScreenPosition => Camera.main.WorldToScreenPoint(transform.position);
 
-    public System.Action onInteract;
+    public event EventHandler OnInteract;
 
     private float circularThreshold;
     private float interactionAmount;
@@ -31,10 +32,10 @@ public class Interactable : MonoBehaviour {
 
         isInteractedWith = CheckInteraction() || IsMouseInteracted();
 
-        if (isInteractedWith) onInteract?.Invoke();
+        if (isInteractedWith) OnInteract(this, EventArgs.Empty);
     }
 
-    private bool IsMouseInteracted () {
+    private bool IsMouseInteracted() {
         var pos = Input.mousePosition;
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         var pixelSize = Camera.main.pixelWidth * size;
@@ -91,8 +92,8 @@ public class Interactable : MonoBehaviour {
             interactionAmount = Mathf.Max(0, interactionAmount - randomizeCooldown * Time.deltaTime);
 
             for (var i = 0; i < randomizePoints; i++) {
-                var y = Random.Range(normalizedY - size / 2 + stepSize / 2, normalizedY + size / 2);
-                var x = Random.Range(normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y), normalizedX + size / 2 - GetCircularOffset(normalizedY, y));
+                var y = UnityEngine.Random.Range(normalizedY - size / 2 + stepSize / 2, normalizedY + size / 2);
+                var x = UnityEngine.Random.Range(normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y), normalizedX + size / 2 - GetCircularOffset(normalizedY, y));
 
                 // Add gray scale value at the point on the motion texture thats behind the interactable.   
                 var color = WebcamMotionCapture.instance.texture.GetPixelBilinear(1 - x, y * aspect);

@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowBackground : MonoBehaviour
-{  
-    void Start()
-    {
+public class ShowBackground : MonoBehaviour {
+    void Start() {
         WebcamMotionCapture.instance.callback += SetTexture;
     }
 
-    void SetTexture ()
-    {
+    void SetTexture() {
         var webcamTexture = WebcamMotionCapture.instance.renderTexture;
 
         GetComponent<Renderer>().material.mainTexture = webcamTexture;

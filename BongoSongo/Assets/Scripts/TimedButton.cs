@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +13,15 @@ public class TimedButton : MonoBehaviour {
     private Interactable interactable;
     private bool isKilled;
 
-    void Start () {
+    void Start() {
         interactable = GetComponent<Interactable>();
 
-        interactable.onInteract += Action;
+        interactable.OnInteract += Action;
 
         interactTime = Time.realtimeSinceStartup + BeatManager.beatLength;
     }
 
-    void Update () {
+    void Update() {
         if (isKilled) return;
 
         var time = Time.realtimeSinceStartup;
@@ -31,19 +32,19 @@ public class TimedButton : MonoBehaviour {
         }
 
         // Set timing object scale
-        mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0,2)));
+        mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0, 2)));
 
         // Show indicator as red when they're late.
-        var redLerp = Mathf.Max((time - interactTime) / BeatManager.beatLength - 1,0);
+        var redLerp = Mathf.Max((time - interactTime) / BeatManager.beatLength - 1, 0);
         var color = Color.Lerp(Color.white, Color.red, redLerp);
 
         indicator.GetComponent<Renderer>().material.color = color;
     }
 
-    void Action () {
+    void Action(object sender, EventArgs eventArgs) {
         var time = Time.realtimeSinceStartup;
 
-        var difference = Mathf.Min(Mathf.Abs(interactTime - time),1);
+        var difference = Mathf.Min(Mathf.Abs(interactTime - time), 1);
 
         GameManager.instance.AddScore((int)((1 - difference) * 10));
 
@@ -53,8 +54,7 @@ public class TimedButton : MonoBehaviour {
         StartCoroutine(Kill());
     }
 
-    IEnumerator Kill ()
-    {
+    IEnumerator Kill() {
         source.Play();
 
         var i = 0f;
@@ -64,8 +64,7 @@ public class TimedButton : MonoBehaviour {
 
         indicator.GetComponent<Renderer>().material.color = color;
 
-        while (i < 1f)
-        {
+        while (i < 1f) {
             i += Time.deltaTime * 5f;
 
             indicator.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (1 - i));
