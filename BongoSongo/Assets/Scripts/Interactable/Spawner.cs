@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour {
 }
 
 [CustomEditor(typeof(Spawner))]
-public class ObjectBuilderEditor : Editor {
+public class SpawnerEditor : Editor {
 
     private Spawner spawner;
     private Tool currentTool;
