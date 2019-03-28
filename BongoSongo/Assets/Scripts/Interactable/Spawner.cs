@@ -1,32 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [System.Serializable]
-
-public struct beatSpawn
-{
-	public int beat;
-	public int bar;
+public struct SpawnInfo {
+    public int beat;
+    public int bar;
 
     public Vector2 position;
 }
 
-public class Spawner : MonoBehaviour
-{
-	public GameObject hitThis;
-	public beatSpawn[] whenToSpawn;
-    public RectTransform buttonCanvasParent;
-    public GameObject visibleObject;
+public class Spawner : MonoBehaviour {
+    public GameObject hitThis;
+    public List<SpawnInfo> spawnInfo;
 
-	public void Spawn(beatSpawn spawn)
-	{
-        var button = Instantiate (hitThis, CameraTransform.ScreenPointToWorldScaled(spawn.position), Quaternion.identity);
+    public void Spawn(SpawnInfo spawn) {
+        var button = Instantiate(hitThis, CameraTransform.ScreenPointToWorldScaled(spawn.position), Quaternion.identity);
         var interactable = button.GetComponent<Interactable>();
+    }
+}
 
-        //var visObj = Instantiate(visibleObject, buttonCanvasParent);
+[CustomEditor(typeof(Spawner))]
+public class ObjectBuilderEditor : Editor {
+    public override void OnInspectorGUI() {
+        var spawner = (Spawner)target;
 
-        //var visible = visObj.GetComponent<UIInteractionTest>();
-        //visible.interactable = interactable;
+        // Insert tool
+
+        var insertButton = GUILayout.Button("Insert", GUILayout.MaxWidth(10));
+
+        if (GUILayout.Button("Build Object")) {
+            //myScript.BuildObject();
+        }
+
+        DrawDefaultInspector();
+
     }
 }

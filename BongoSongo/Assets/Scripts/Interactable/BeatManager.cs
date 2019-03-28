@@ -43,11 +43,11 @@ public class BeatManager : MonoBehaviour {
         }
 
         checkSpawners();
-        beatCount();
+        BeatCount();
     }
 
     // Keep track of current bar and beat (in 4/4 time)
-    public void beatCount() {
+    public void BeatCount() {
         beat++;
 
         if (beat == 5) {
@@ -57,18 +57,18 @@ public class BeatManager : MonoBehaviour {
     }
 
     public void checkSpawners() {
-        if (beat == theSpawner.whenToSpawn[i].beat) {
-            if (bar == theSpawner.whenToSpawn[i].bar) {
-                if (spawnSoundOn) // Use test sound to ensure spawning matches music track
-                {
+        if (beat == theSpawner.spawnInfo[i].beat) {
+            if (bar == theSpawner.spawnInfo[i].bar) {
+                // Use test sound to ensure spawning matches music track
+                if (spawnSoundOn) {
                     theSoundManager.hitBall.Play();
                 }
 
-                theSpawner.Spawn(theSpawner.whenToSpawn[i]);
+                theSpawner.Spawn(theSpawner.spawnInfo[i]);
 
                 i++;
 
-                if (i == theSpawner.whenToSpawn.Length) {
+                if (i == theSpawner.spawnInfo.Count) {
                     //print("end of array");
 
                     i = 0;
