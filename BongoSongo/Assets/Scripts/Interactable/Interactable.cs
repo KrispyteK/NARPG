@@ -26,23 +26,40 @@ public class Interactable : MonoBehaviour {
         circularThreshold = threshold / Mathf.PI;
     }
 
-    void Update()
-    {
+    void Update() {
         if (!WebcamMotionCapture.instance.hasWebcam || !isActive) return;
 
-        isInteractedWith = CheckInteraction();
+        isInteractedWith = CheckInteraction() || IsMouseInteracted();
 
         if (isInteractedWith) onInteract?.Invoke();
     }
 
-    private float GetCircularOffset (float height, float y) {
-        if (!isCircular) return 0;
+    private bool IsMouseInteracted () {
+        var pos = Input.mousePosition;
+        var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        var pixelSize = Camera.main.pixelWidth * size;
 
-        return (1 - Mathf.Pow(Mathf.Sin((y - height) / size * Mathf.PI + Mathf.PI/2),0.5f)) * size / 2;
+        var minX = screenPoint.x - pixelSize / 2;
+        var minY = screenPoint.y - pixelSize / 2;
+        var maxX = screenPoint.x + pixelSize / 2;
+        var maxY = screenPoint.y + pixelSize / 2;
+
+        var isInButton = (pos.x > minX && pos.x < maxX) && (pos.y > minY && pos.y < maxY);
+
+        if (Input.GetButton("Fire1") && isInButton) {
+            return true;
+        }
+
+        return false;
     }
 
-    private bool CheckInteraction ()
-    {
+    private float GetCircularOffset(float height, float y) {
+        if (!isCircular) return 0;
+
+        return (1 - Mathf.Pow(Mathf.Sin((y - height) / size * Mathf.PI + Mathf.PI / 2), 0.5f)) * size / 2;
+    }
+
+    private bool CheckInteraction() {
         if (!randomize) interactionAmount = 0f;
         var stepSize = 1f / density * size;
         var points = Mathf.Pow((size / stepSize), 2f);
@@ -56,12 +73,9 @@ public class Interactable : MonoBehaviour {
 
         normalizedY /= aspect;
 
-        if (!randomize)
-        {
-            for (float y = normalizedY - size / 2 + stepSize / 2; y <= normalizedY + size / 2; y += stepSize)
-            {
-                for (float x = normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize)
-                {
+        if (!randomize) {
+            for (float y = normalizedY - size / 2 + stepSize / 2; y <= normalizedY + size / 2; y += stepSize) {
+                for (float x = normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
                     // Add gray scale value at the point on the motion texture thats behind the interactable.  
                     var color = WebcamMotionCapture.instance.texture.GetPixelBilinear(1 - x, y * aspect);
                     var gray = (color.r + color.g + color.b) / 3;
@@ -72,12 +86,11 @@ public class Interactable : MonoBehaviour {
                     if (interactionAmount > (isCircular ? circularThreshold : threshold)) return true;
                 }
             }
-        } else
-        {
+        }
+        else {
             interactionAmount = Mathf.Max(0, interactionAmount - randomizeCooldown * Time.deltaTime);
 
-            for (var i = 0; i < randomizePoints; i++)
-            {
+            for (var i = 0; i < randomizePoints; i++) {
                 var y = Random.Range(normalizedY - size / 2 + stepSize / 2, normalizedY + size / 2);
                 var x = Random.Range(normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y), normalizedX + size / 2 - GetCircularOffset(normalizedY, y));
 
@@ -93,8 +106,7 @@ public class Interactable : MonoBehaviour {
         return false;
     }
 
-    private void OnDrawGizmos()
-    {
+    private void OnDrawGizmos() {
         var stepSize = 1f / density * size;
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         var normalizedX = screenPoint.x / Camera.main.pixelWidth;
@@ -104,10 +116,8 @@ public class Interactable : MonoBehaviour {
 
         normalizedY /= aspect;
 
-        for (float y = normalizedY - size / 2; y <= normalizedY + size / 2; y += stepSize)
-        {
-            for (float x = normalizedX - size / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize)
-            {
+        for (float y = normalizedY - size / 2; y <= normalizedY + size / 2; y += stepSize) {
+            for (float x = normalizedX - size / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
                 if (isCircular) x = Mathf.Round(x / stepSize) * stepSize;
 
                 Gizmos.DrawSphere(
