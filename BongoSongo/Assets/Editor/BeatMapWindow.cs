@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,9 +22,9 @@ public class BeatMapWindow : EditorWindowInput {
     private float beatSecond;
     private float songLength;
     private float beatSongLength;
+    private int selected = -1;
 
     private float Size => Screen.width * gameManager.buttonSize;
-
 
     [MenuItem("Mapping/Window")]
     public static void CreateMenu() {
@@ -90,6 +91,19 @@ public class BeatMapWindow : EditorWindowInput {
 
                         if (currentBeat < 0) currentBeat = beats - 1;
                         break;
+
+                    case KeyCode.Delete:                      
+                        if (selected > -1) {
+                            spawnManager.spawnInfo.RemoveAt(selected);
+
+                            selected = -1;
+
+                            SortList();
+
+                            Undo.RecordObject(spawnManager, "Removed indicator.");
+                        }
+
+                        break;
                 }
 
                 break;
@@ -100,9 +114,11 @@ public class BeatMapWindow : EditorWindowInput {
 
         GUI.DrawTexture(new Rect(0, Screen.height - timeLineHeight, Screen.width, timeLineHeight), texture);
 
-        var actualLength = beats * beatSecond;
+        DrawQuad(new Rect(((currentBeat * beatSecond) / beatSongLength) * Screen.width, Screen.height - timeLineHeight, 1, timeLineHeight), Color.red);
+    }
 
-        DrawQuad(new Rect(((currentBeat * beatSecond) / actualLength) * Screen.width, Screen.height - timeLineHeight, 1, timeLineHeight), Color.red);
+    private void SortList () {
+        spawnManager.spawnInfo.OrderBy(o => o.bar * 4 + o.beat);
     }
 
     private void ModifyButton() {
@@ -128,22 +144,33 @@ public class BeatMapWindow : EditorWindowInput {
             if (rect.Contains(mousePos)) {
                 isModifying = true;
                 modifyingIndex = i;
+                selected = i;
                 offset = position - mousePos;
 
                 return;
             }
         }
+
+        selected = -1;
     }
 
     private void DisplayBeats() {
         var beat = currentBeat;
 
-        var start = Mathf.Max(0, beat - 3);
-        var end = Mathf.Min(beats, beat + 3);
+        var start = Mathf.Max(0, beat - 2);
+        var end = Mathf.Min(beats, beat + 2);
 
-        for (int i = start; i < spawnManager.spawnInfo.Count; i++) {
+        var beatDictionary = new Dictionary<int, int>();
+
+        for (int i = 0; i < spawnManager.spawnInfo.Count; i++) {
             var spawnInfo = spawnManager.spawnInfo[i];
             var spawnInfoBeat = spawnInfo.bar * 4 + spawnInfo.beat;
+
+            if (beatDictionary.ContainsKey(spawnInfoBeat)) {
+                beatDictionary[spawnInfoBeat]++;
+            } else {
+                beatDictionary[spawnInfoBeat] = 1;
+            }
 
             if (spawnInfoBeat < start || spawnInfoBeat > end) continue; 
 
@@ -152,9 +179,18 @@ public class BeatMapWindow : EditorWindowInput {
                     spawnInfo.position.y * Screen.height - Size / 2
                 );
 
-            DrawQuad(new Rect(position, new Vector2(Size, Size)), new Color(255,255,255, 1f - ((beat - spawnInfoBeat) / 4f)));
+            DrawQuad(new Rect(position, new Vector2(Size, Size)), new Color((i == selected ? 0 : 255),255,255, 1f - ((beat - spawnInfoBeat) / 3f)));
 
             GUI.Label(new Rect(position, new Vector2(Size, Size)), "" + spawnInfoBeat);
+        }
+
+        foreach (var kv in beatDictionary) {
+            var beatPos = kv.Key;
+            var amount = kv.Value;
+
+            for (int i = 0; i < amount; i++) {
+                DrawQuad(new Rect(((beatPos * beatSecond) / beatSongLength) * Screen.width, Screen.height - timeLineHeight - 10 - i * 8, 5, 5), Color.white);
+            }
         }
     }
 
