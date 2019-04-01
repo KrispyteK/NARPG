@@ -39,8 +39,6 @@ public class BeatMapWindow : EditorWindowInput {
         soundManager = FindObjectOfType<SoundManager>();
         beatManager = FindObjectOfType<BeatManager>();
 
-        texture = PaintWaveformSpectrum(soundManager.beatTest.clip, 4096, 512, Color.white);
-
         var floatBeats = soundManager.beatTest.clip.length / (beatManager.bpm / 60);
 
         beats = (int)floatBeats;
@@ -51,7 +49,7 @@ public class BeatMapWindow : EditorWindowInput {
 
         beatSongLength = beats * beatSecond;
 
-        Debug.Log($"{songLength} {beatSongLength}");
+        texture = PaintWaveformSpectrum(soundManager.beatTest.clip, 4096, 512, Color.white);
     }
 
     void Update() {
@@ -99,9 +97,25 @@ public class BeatMapWindow : EditorWindowInput {
                             selected = -1;
 
                             SortList();
-
-                            Undo.RecordObject(spawnManager, "Removed indicator.");
                         }
+
+                        break;
+
+                    case KeyCode.Space:
+
+                        int bar = (int)Mathf.Floor(currentBeat / 4);
+                        int beat = currentBeat - bar * 4;
+                        var position = (Event.current.mousePosition) / new Vector2(Screen.width, Screen.height);
+
+                        spawnManager.spawnInfo.Insert(0, new SpawnInfo {
+                            bar = bar,
+                            beat = beat,
+                            position = position
+                        });
+
+                        selected = -1;
+
+                        SortList();
 
                         break;
                 }
@@ -209,7 +223,7 @@ public class BeatMapWindow : EditorWindowInput {
     }
 
 
-    public static Texture2D PaintWaveformSpectrum(AudioClip audio, int width, int height, Color col) {
+    public Texture2D PaintWaveformSpectrum(AudioClip audio, int width, int height, Color col) {
 
         audio = CloneAudioClip(audio);
 
@@ -237,6 +251,7 @@ public class BeatMapWindow : EditorWindowInput {
                 tex.SetPixel(x, (height / 2) - y, col);
             }
         }
+
         tex.Apply();
 
         return tex;

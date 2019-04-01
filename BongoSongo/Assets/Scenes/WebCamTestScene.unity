@@ -1443,15 +1443,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThis: {fileID: 0}
   spawnInfo:
-  - beat: 1
-    bar: 0
-    position: {x: 0.4283935, y: 0.4273504}
-  - beat: 1
+  - beat: 0
+    bar: 2
+    position: {x: 0.31008714, y: 0.4311491}
+  - beat: 0
     bar: 1
     position: {x: 0.20610212, y: 0.5175688}
-  - beat: 3
-    bar: 1
-    position: {x: 0.6214197, y: 0.51187086}
 --- !u!4 &1603469701
 Transform:
   m_ObjectHideFlags: 0
