@@ -4,9 +4,16 @@ using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class BeatMapTimelineWindow : EditorWindow {
+public class BeatMapTimelineWindow : EditorWindowInput {
     private static SoundManager soundManager;
+    private static BeatManager beatManager;
     private static Texture2D texture;
+
+    public static int currentBeat;
+    public static int zoom;
+    public static float offset;
+
+    public static int beats;
 
     [MenuItem("Mapping/Timeline Window")]
     public static void CreateMenu() {
@@ -17,13 +24,53 @@ public class BeatMapTimelineWindow : EditorWindow {
 
     private static void GetManagers() {
         soundManager = FindObjectOfType<SoundManager>();
+        beatManager = FindObjectOfType<BeatManager>();
 
-        texture = PaintWaveformSpectrum(soundManager.beatTest.clip, 10f, 4096, 4096, Color.white);
+        texture = PaintWaveformSpectrum(soundManager.beatTest.clip, 10f, 16000, 512, Color.white);
+
+        var floatBeats = soundManager.beatTest.clip.length / (beatManager.bpm/60);
+
+        beats = (int)floatBeats;
     }
 
-    private void OnGUI () {
+    private void OnGUI() {
         if (soundManager == null) GetManagers();
-        GUI.DrawTexture(new Rect(0,0, Screen.width, Screen.height), texture);
+
+        GUI.DrawTexture(new Rect(0, 25, Screen.width * (zoom + 1), Screen.height - 25), texture);
+
+        CheckInput();
+
+        CheckSideScroll();
+
+        DrawQuad(new Rect(Screen.width * currentBeat / beats, 25, 2, Screen.height-25), Color.red);
+
+        GUI.Label(new Rect(5, 5, 50, 50),"Beat: " + currentBeat);
+    }
+
+    public void CheckSideScroll () {
+        if (OnPressed(KeyCode.RightArrow)) {
+            currentBeat += 1;
+
+            if (currentBeat > beats - 1) currentBeat = 0;
+        }
+        else if (OnPressed(KeyCode.LeftArrow)) {
+            currentBeat -= 1;
+
+            if (currentBeat < 0) currentBeat = beats - 1;
+        }
+    }
+
+    protected override void OnScroll(int delta) {
+        //if (isHoldingCtrl) {
+        //    if (zoom > 0) {
+        //        offset += delta / zoom;
+        //    }
+        //}
+        //else {
+        //    zoom += delta;
+
+        //    if (zoom < 0) zoom = 0;
+        //}
     }
 
     public static Texture2D PaintWaveformSpectrum(AudioClip audio, float saturation, int width, int height, Color col) {
