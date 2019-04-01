@@ -11,11 +11,14 @@ public class BeatManager : MonoBehaviour {
     public SoundManager theSoundManager;
     public SpawnManager theSpawner;
     private bool audioStarted = false;
-    public int bar, beat = 1;
-    private int i; // To count through the whenToSpawn array
+    public int bar = 0;
+    public int beat = 1;
+    public int i; // To count through the whenToSpawn array
 
     public float bpm;
     public bool spawnSoundOn;
+
+    private int CurrentBeat => bar * 4 + beat;
 
     void Awake() {
         beatLength = (60 / bpm);
@@ -35,14 +38,13 @@ public class BeatManager : MonoBehaviour {
         InvokeRepeating("BeatEvent", beatLength, beatLength);
     }
 
-
     void BeatEvent() {
         if (!audioStarted) {
             theSoundManager.beatTest.Play();
             audioStarted = true;
         }
 
-        checkSpawners();
+        CheckSpawners();
         BeatCount();
     }
 
@@ -56,26 +58,26 @@ public class BeatManager : MonoBehaviour {
         }
     }
 
-    public void checkSpawners() {
-        if (beat == theSpawner.spawnInfo[i].beat) {
-            if (bar == theSpawner.spawnInfo[i].bar) {
-                // Use test sound to ensure spawning matches music track
-                if (spawnSoundOn) {
-                    theSoundManager.hitBall.Play();
-                }
-
-                theSpawner.Spawn(theSpawner.spawnInfo[i]);
-
-                i++;
-
-                if (i == theSpawner.spawnInfo.Count) {
-                    //print("end of array");
-
-                    i = 0;
-                    bar = 1;
-                    beat = 1;
-                }
+    public void CheckSpawners() {
+        while (beat == theSpawner.spawnInfo[i].beat && bar == theSpawner.spawnInfo[i].bar) {
+            // Use test sound to ensure spawning matches music track
+            if (spawnSoundOn) {
+                theSoundManager.hitBall.Play();
             }
+
+            theSpawner.Spawn(theSpawner.spawnInfo[i]);
+
+            i++;
+
+            if (i == theSpawner.spawnInfo.Count) break;
+        }
+
+        if (i == theSpawner.spawnInfo.Count) {
+            print("end of array");
+
+            i = 0;
+            bar = 0;
+            beat = 1;
         }
     }
 }

@@ -50,6 +50,8 @@ public class BeatMapWindow : EditorWindowInput {
         beatSongLength = beats * beatSecond;
 
         texture = PaintWaveformSpectrum(soundManager.beatTest.clip, 4096, 512, Color.white);
+
+        SortList();
     }
 
     void Update() {
@@ -132,7 +134,9 @@ public class BeatMapWindow : EditorWindowInput {
     }
 
     private void SortList () {
-        spawnManager.spawnInfo.OrderBy(o => o.bar * 4 + o.beat);
+        spawnManager.spawnInfo.Sort((x,y) => {
+            return (x.bar * 4 + x.beat) - (y.bar * 4 + y.beat);
+            });
     }
 
     private void ModifyButton() {
