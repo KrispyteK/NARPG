@@ -11,14 +11,13 @@ public class BeatManager : MonoBehaviour {
     public SoundManager theSoundManager;
     public SpawnManager theSpawner;
     private bool audioStarted = false;
-    public int bar = 0;
-    public int beat = 1;
+    public int beat = 0;
     public int i; // To count through the whenToSpawn array
 
     public float bpm;
     public bool spawnSoundOn;
 
-    private int CurrentBeat => bar * 4 + beat;
+    private int CurrentBeat => beat;
 
     void Awake() {
         beatLength = (60 / bpm);
@@ -51,15 +50,10 @@ public class BeatManager : MonoBehaviour {
     // Keep track of current bar and beat (in 4/4 time)
     public void BeatCount() {
         beat++;
-
-        if (beat == 5) {
-            bar++;
-            beat = 1;
-        }
     }
 
     public void CheckSpawners() {
-        while (beat == theSpawner.spawnInfo[i].beat && bar == theSpawner.spawnInfo[i].bar) {
+        while (beat == theSpawner.spawnInfo[i].beat) {
             // Use test sound to ensure spawning matches music track
             if (spawnSoundOn) {
                 theSoundManager.hitBall.Play();
@@ -76,8 +70,7 @@ public class BeatManager : MonoBehaviour {
             print("end of array");
 
             i = 0;
-            bar = 0;
-            beat = 1;
+            beat = 0;
         }
     }
 }

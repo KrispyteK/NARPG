@@ -6,7 +6,6 @@ using UnityEditor;
 [System.Serializable]
 public class SpawnInfo {
     public int beat;
-    public int bar;
 
     public Vector2 position;
 }
@@ -16,7 +15,7 @@ public class SpawnManager : MonoBehaviour {
     public List<SpawnInfo> spawnInfo;
 
     public void Spawn(SpawnInfo spawn) {
-        var button = Instantiate(hitThis, CameraTransform.ScreenPointToWorldScaled(spawn.position), Quaternion.identity);
+        var button = Instantiate(hitThis, CameraTransform.ScreenPointToWorldScaled(new Vector2(spawn.position.x, 1- spawn.position.y)), Quaternion.identity);
         var interactable = button.GetComponent<Interactable>();
     }
 }

@@ -107,12 +107,10 @@ public class BeatMapWindow : EditorWindowInput {
 
                     case KeyCode.Space:
 
-                        int bar = (int)Mathf.Floor(currentBeat / 4);
-                        int beat = currentBeat - bar * 4;
+                        int beat = currentBeat;
                         var position = (Event.current.mousePosition) / new Vector2(Screen.width, Screen.height);
 
                         spawnManager.spawnInfo.Insert(0, new SpawnInfo {
-                            bar = bar,
                             beat = beat,
                             position = position
                         });
@@ -145,7 +143,7 @@ public class BeatMapWindow : EditorWindowInput {
 
     private void SortList() {
         spawnManager.spawnInfo.Sort((x, y) => {
-            return (x.bar * 4 + x.beat) - (y.bar * 4 + y.beat);
+            return x.beat - y.beat;
         });
     }
 
@@ -198,7 +196,7 @@ public class BeatMapWindow : EditorWindowInput {
 
         for (int i = 0; i < spawnManager.spawnInfo.Count; i++) {
             var spawnInfo = spawnManager.spawnInfo[i];
-            var spawnInfoBeat = spawnInfo.bar * 4 + spawnInfo.beat;
+            var spawnInfoBeat = spawnInfo.beat;
 
             if (beatDictionary.ContainsKey(spawnInfoBeat)) {
                 beatDictionary[spawnInfoBeat]++;
