@@ -46,7 +46,18 @@ public class TimedButton : MonoBehaviour {
 
         var difference = Mathf.Min(Mathf.Abs(interactTime - time), 1);
 
-        GameManager.instance.AddScore((int)((1 - difference) * 10));
+        var addScore = Mathf.Abs((interactTime - time) / BeatManager.beatLength);
+        var finalScore = 0;
+
+        if (addScore == 0) {
+            finalScore = 300;
+        } else if (addScore > 0 && addScore < 0.25f) {
+            finalScore = 100;
+        } else {
+            finalScore = 50;
+        }
+
+        GameManager.instance.AddScore(finalScore);
 
         interactable.isActive = false;
         isKilled = true;
