@@ -936,6 +936,36 @@ Transform:
   m_Father: {fileID: 280360073}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1060423762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1060423763}
+  m_Layer: 0
+  m_Name: PowerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1060423763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060423762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.904053, y: 1.4120007, z: 32.96875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1141679492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,29 +1474,15 @@ MonoBehaviour:
   hitThis: {fileID: 509272240567816216, guid: b90f4b414f6738d43a9eecb75be123da, type: 3}
   spawnInfo:
   - beat: 1
-    bar: 0
-    position: {x: 0.6631382, y: 0.26106593}
-  - beat: 1
-    bar: 0
-    position: {x: 0.37953082, y: 0.6005982}
+    position: {x: 0.19581471, y: 0.7633366}
   - beat: 2
-    bar: 0
-    position: {x: 0.58281446, y: 0.5004516}
-  - beat: 2
-    bar: 0
-    position: {x: 0.19164053, y: 0.48458022}
-  - beat: 1
-    bar: 1
-    position: {x: 0.12017435, y: 0.73170733}
-  - beat: 1
-    bar: 1
-    position: {x: 0.8916563, y: 0.13279133}
+    position: {x: 0.33267826, y: 0.77012634}
   - beat: 3
-    bar: 1
-    position: {x: 0.101494394, y: 0.093044266}
-  - beat: 3
-    bar: 1
-    position: {x: 0.84993774, y: 0.6802168}
+    position: {x: 0.45762983, y: 0.77109617}
+  - beat: 4
+    position: {x: 0.587254, y: 0.77206594}
+  - beat: 5
+    position: {x: 0.7169822, y: 0.77400595}
 --- !u!4 &1603469701
 Transform:
   m_ObjectHideFlags: 0
@@ -1636,7 +1652,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theSoundManager: {fileID: 0}
   theSpawner: {fileID: 0}
-  bar: 0
   beat: 0
   i: 0
   bpm: 120
