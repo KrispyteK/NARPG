@@ -189,8 +189,8 @@ public class BeatMapWindow : EditorWindowInput {
     private void DisplayBeats() {
         var beat = currentBeat;
 
-        var start = Mathf.Max(0, beat - 2);
-        var end = Mathf.Min(beats, beat + 2);
+        var start = Mathf.Max(0, beat - 5);
+        var end = Mathf.Min(beats, beat + 5);
 
         var beatDictionary = new Dictionary<int, int>();
 
@@ -212,7 +212,7 @@ public class BeatMapWindow : EditorWindowInput {
                     spawnInfo.position.y * Screen.height - Size / 2
                 );
 
-            DrawQuad(new Rect(position, new Vector2(Size, Size)), new Color((i == selected ? 0 : 255), 255, 255, 1f - ((beat - spawnInfoBeat) / 3f)));
+            DrawQuad(new Rect(position, new Vector2(Size, Size)), new Color((i == selected ? 0 : 255), 255, 255, 1f - (Mathf.Abs(beat - spawnInfoBeat) / 6f)));
 
             GUI.Label(new Rect(position, new Vector2(Size, Size)), "" + spawnInfoBeat);
         }
@@ -250,14 +250,14 @@ public class BeatMapWindow : EditorWindowInput {
 
 
     public Texture2D PaintWaveformSpectrum(AudioClip audio, int width, int height, Color col) {
-
         audio = CloneAudioClip(audio);
 
         Texture2D tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
         float[] samples = new float[audio.samples];
         float[] waveform = new float[width];
-        audio.GetData(samples, 0);
         int packSize = (audio.samples / width) + 1;
+
+        audio.GetData(samples, 0);
 
         int s = 0;
         for (int i = 0; i < audio.samples; i += packSize) {
