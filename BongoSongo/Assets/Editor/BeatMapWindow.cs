@@ -58,11 +58,7 @@ public class BeatMapWindow : EditorWindowInput {
         if (focusedWindow == this) Repaint();
     }
 
-    public void OnGUI() {
-        if (spawnManager == null) GetManagers();
-
-        GUI.Label(new Rect(5, 5, 50, 50), "Beat: " + currentBeat);
-
+    private void Input() {
         var e = Event.current;
         var controlID = GUIUtility.GetControlID(FocusType.Passive);
 
@@ -74,7 +70,13 @@ public class BeatMapWindow : EditorWindowInput {
                 break;
 
             case EventType.MouseDown:
-                CheckClick();
+                var isClickingTimeLine = e.mousePosition.y > Screen.height - timeLineHeight;
+
+                if (isClickingTimeLine) {
+                    ClickTimeLine();
+                } else {
+                    CheckClick();
+                }
 
                 e.Use();
                 break;
@@ -92,7 +94,7 @@ public class BeatMapWindow : EditorWindowInput {
                         if (currentBeat < 0) currentBeat = beats - 1;
                         break;
 
-                    case KeyCode.Delete:                      
+                    case KeyCode.Delete:
                         if (selected > -1) {
                             spawnManager.spawnInfo.RemoveAt(selected);
 
@@ -124,6 +126,14 @@ public class BeatMapWindow : EditorWindowInput {
 
                 break;
         }
+    }
+
+    public void OnGUI() {
+        if (spawnManager == null) GetManagers();
+
+        GUI.Label(new Rect(5, 5, 50, 50), "Beat: " + currentBeat);
+
+        Input();
 
         DisplayBeats();
         ModifyButton();
@@ -133,10 +143,10 @@ public class BeatMapWindow : EditorWindowInput {
         DrawQuad(new Rect(((currentBeat * beatSecond) / beatSongLength) * Screen.width, Screen.height - timeLineHeight, 1, timeLineHeight), Color.red);
     }
 
-    private void SortList () {
-        spawnManager.spawnInfo.Sort((x,y) => {
+    private void SortList() {
+        spawnManager.spawnInfo.Sort((x, y) => {
             return (x.bar * 4 + x.beat) - (y.bar * 4 + y.beat);
-            });
+        });
     }
 
     private void ModifyButton() {
@@ -145,6 +155,12 @@ public class BeatMapWindow : EditorWindowInput {
         var position = (Event.current.mousePosition + new Vector2(Size, Size) / 2 + offset) / new Vector2(Screen.width, Screen.height);
 
         spawnManager.spawnInfo[modifyingIndex].position = new Vector2(Mathf.Clamp01(position.x), Mathf.Clamp01(position.y));
+    }
+
+    private void ClickTimeLine() {
+        var beat = (int)(Event.current.mousePosition.x / Screen.width * beats + 0.5f);
+
+        currentBeat = beat;
     }
 
     private void CheckClick() {
@@ -186,28 +202,36 @@ public class BeatMapWindow : EditorWindowInput {
 
             if (beatDictionary.ContainsKey(spawnInfoBeat)) {
                 beatDictionary[spawnInfoBeat]++;
-            } else {
+            }
+            else {
                 beatDictionary[spawnInfoBeat] = 1;
             }
 
-            if (spawnInfoBeat < start || spawnInfoBeat > end) continue; 
+            if (spawnInfoBeat < start || spawnInfoBeat > end) continue;
 
             var position = new Vector2(
                     spawnInfo.position.x * Screen.width - Size / 2,
                     spawnInfo.position.y * Screen.height - Size / 2
                 );
 
-            DrawQuad(new Rect(position, new Vector2(Size, Size)), new Color((i == selected ? 0 : 255),255,255, 1f - ((beat - spawnInfoBeat) / 3f)));
+            DrawQuad(new Rect(position, new Vector2(Size, Size)), new Color((i == selected ? 0 : 255), 255, 255, 1f - ((beat - spawnInfoBeat) / 3f)));
 
             GUI.Label(new Rect(position, new Vector2(Size, Size)), "" + spawnInfoBeat);
         }
+
+        var displayedBeat = 0; 
 
         foreach (var kv in beatDictionary) {
             var beatPos = kv.Key;
             var amount = kv.Value;
 
             for (int i = 0; i < amount; i++) {
-                DrawQuad(new Rect(((beatPos * beatSecond) / beatSongLength) * Screen.width, Screen.height - timeLineHeight - 10 - i * 8, 5, 5), Color.white);
+                DrawQuad(
+                    new Rect(((beatPos * beatSecond) / beatSongLength) * Screen.width, Screen.height - timeLineHeight - 10 - i * 8, 5, 5),
+                    new Color((displayedBeat == selected ? 0 : 255), 255, 255)
+                    );
+
+                displayedBeat++;
             }
         }
     }
