@@ -822,7 +822,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a249f48d7417e1d438dd9a81377f0422, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d59a800df76856b46a7f42df7aff9b61, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -935,55 +935,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 280360073}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &957075811
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 957075813}
-  - component: {fileID: 957075812}
-  m_Layer: 0
-  m_Name: main-ui
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &957075812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957075811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf392ec64524774197c70abaed147f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HtmlFile: {fileID: 4900000, guid: 61f4053b2d194df4f892fdb7970d0ec5, type: 3}
-  Url: 
-  WatchForChanges: 0
-  LengthScale: 1
-  AutomaticallyHandleDpi: 1
-  HtmlFilePath: Assets/Scripts/menu html/mainmenu.html
---- !u!4 &957075813
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957075811}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1141679492
 GameObject:
@@ -1493,19 +1444,19 @@ MonoBehaviour:
   hitThis: {fileID: 509272240567816216, guid: b90f4b414f6738d43a9eecb75be123da, type: 3}
   spawnInfo:
   - beat: 1
-    position: {x: 0.8979975, y: 0.38548833}
+    position: {x: 0.89677894, y: 0.5254787}
   - beat: 2
-    position: {x: 0.9016152, y: 0.21752866}
+    position: {x: 0.74143404, y: 0.27538994}
   - beat: 3
-    position: {x: 0.7599283, y: 0.08287801}
+    position: {x: 0.59250146, y: 0.12367763}
   - beat: 4
-    position: {x: 0.51677525, y: 0.055511598}
+    position: {x: 0.45464534, y: 0.091908544}
   - beat: 5
-    position: {x: 0.25303972, y: 0.08096996}
+    position: {x: 0.37608704, y: 0.14614344}
   - beat: 6
-    position: {x: 0.12957726, y: 0.21036603}
+    position: {x: 0.3548495, y: 0.3260114}
   - beat: 7
-    position: {x: 0.114237785, y: 0.38241056}
+    position: {x: 0.40505388, y: 0.49669743}
 --- !u!4 &1603469701
 Transform:
   m_ObjectHideFlags: 0
@@ -1677,7 +1628,7 @@ MonoBehaviour:
   theSpawner: {fileID: 0}
   beat: 0
   i: 0
-  bpm: 120
+  bpm: 148
   spawnSoundOn: 0
 --- !u!4 &2137682488
 Transform:
