@@ -49,9 +49,6 @@ public class BeatMapWindow : EditorWindowInput {
 
         beatSongLength = beats * beatSecond;
 
-        Debug.Log($"Beat {beatSongLength} actual {songLength}");
-        Debug.Log($"Beats {beats}");
-
         texture = PaintWaveformSpectrum(soundManager.beatTest.clip, 4096, 512, Color.white);
 
         SortList();
