@@ -129,7 +129,7 @@ public class BeatMapWindow : EditorWindowInput {
     public void OnGUI() {
         if (spawnManager == null) GetManagers();
 
-        GUI.Label(new Rect(5, 5, 50, 50), "Beat: " + currentBeat);
+        GUI.Label(new Rect(5, 5, 250, 50), "Beat: " + currentBeat);
 
         Input();
 
