@@ -39,15 +39,18 @@ public class BeatMapWindow : EditorWindowInput {
         soundManager = FindObjectOfType<SoundManager>();
         beatManager = FindObjectOfType<BeatManager>();
 
-        var floatBeats = soundManager.beatTest.clip.length / (beatManager.bpm / 60);
+        beatSecond = 60 / beatManager.bpm;
+
+        var floatBeats = soundManager.beatTest.clip.length / beatSecond;
 
         beats = (int)floatBeats;
-
-        beatSecond = (beatManager.bpm / 60);
 
         songLength = soundManager.beatTest.clip.length;
 
         beatSongLength = beats * beatSecond;
+
+        Debug.Log($"Beat {beatSongLength} actual {songLength}");
+        Debug.Log($"Beats {beats}");
 
         texture = PaintWaveformSpectrum(soundManager.beatTest.clip, 4096, 512, Color.white);
 
@@ -225,7 +228,7 @@ public class BeatMapWindow : EditorWindowInput {
 
             for (int i = 0; i < amount; i++) {
                 DrawQuad(
-                    new Rect(((beatPos * beatSecond) / beatSongLength) * Screen.width, Screen.height - timeLineHeight - 10 - i * 8, 5, 5),
+                    new Rect(((beatPos * beatSecond) / beatSongLength) * Screen.width, Screen.height - timeLineHeight - 10 - i * 8, 3, 3),
                     new Color((displayedBeat == selected ? 0 : 255), 255, 255)
                     );
 
