@@ -20,8 +20,9 @@ public class CameraTransform {
     }
 
     public static Vector3 Scale(Vector3 scale) {
-        var amount = Camera.main.orthographicSize / Camera.main.aspect;
+        float screenHeightInUnits = Camera.main.orthographicSize * 0.5f;
+        float screenWidthInUnits = screenHeightInUnits * Screen.width / Screen.height;
 
-        return scale * amount;
+        return scale * screenWidthInUnits;
     }
 }
