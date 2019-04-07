@@ -116,8 +116,6 @@ public class Interactable : MonoBehaviour {
                     interactionAmount += gray;
 
                     if (interactionAmount > threshold) {
-                        print($"{interactionAmount} { threshold }");
-
                         return true;
                     }
                 }
