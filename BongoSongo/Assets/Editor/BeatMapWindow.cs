@@ -164,8 +164,15 @@ public class BeatMapWindow : EditorWindowInput {
     private void CheckClick() {
         var mousePos = Event.current.mousePosition;
 
+        var start = Mathf.Max(0, currentBeat - 5);
+        var end = Mathf.Min(beats, currentBeat + 5);
+
         for (int i = 0; i < spawnManager.spawnInfo.Count; i++) {
             var spawnInfo = spawnManager.spawnInfo[i];
+            var spawnInfoBeat = spawnInfo.beat;
+
+            if (spawnInfoBeat < start || spawnInfoBeat > end) continue;
+
             var position = new Vector2(
                     spawnInfo.position.x * Screen.width - Size / 2,
                     spawnInfo.position.y * Screen.height - Size / 2
