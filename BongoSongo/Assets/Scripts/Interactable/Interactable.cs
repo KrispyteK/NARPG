@@ -101,9 +101,10 @@ public class Interactable : MonoBehaviour {
                     var gray = (color.r + color.g + color.b) / 3;
                     interactionAmount += gray;
 
-                    if (interactionAmount > (isCircular ? circularThreshold : threshold)) return true;
+                    if (interactionAmount > threshold) return true;
                 }
-            } else {
+            }
+            else {
                 for (var i = 0; i < randomizePoints; i++) {
                     var a = UnityEngine.Random.Range(0, Mathf.PI * 2);
                     var y = normalizedY + (Mathf.Sin(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f), 0.5f));
@@ -114,7 +115,11 @@ public class Interactable : MonoBehaviour {
                     var gray = (color.r + color.g + color.b) / 3;
                     interactionAmount += gray;
 
-                    if (interactionAmount > (isCircular ? circularThreshold : threshold)) return true;
+                    if (interactionAmount > threshold) {
+                        print($"{interactionAmount} { threshold }");
+
+                        return true;
+                    }
                 }
             }
         }
@@ -144,10 +149,11 @@ public class Interactable : MonoBehaviour {
                             )), 0.05f);
                 }
             }
-        } else {
+        }
+        else {
             for (var i = 0; i < randomizePoints; i++) {
                 var a = UnityEngine.Random.Range(0, Mathf.PI * 2);
-                var y = normalizedY + (Mathf.Sin(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f),0.5f));
+                var y = normalizedY + (Mathf.Sin(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f), 0.5f));
                 var x = normalizedX + (Mathf.Cos(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f), 0.5f));
 
                 Gizmos.DrawSphere(
