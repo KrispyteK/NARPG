@@ -40,7 +40,7 @@ public class TimedButton : MonoBehaviour {
         var redLerp = Mathf.Max((time - interactTime) / BeatManager.beatLength - 1, 0);
         var color = Color.Lerp(Color.white, Color.red, redLerp);
 
-        indicator.GetComponent<Renderer>().material.color = color;
+        indicator.GetComponent<Renderer>().material.color = color * new Color(1,1,1,0.8f);
     }
 
     void Action(object sender, EventArgs eventArgs) {
@@ -75,7 +75,7 @@ public class TimedButton : MonoBehaviour {
         var lerp = ((Time.realtimeSinceStartup - interactTime) / BeatManager.beatLength + 1) / 2;
         var color = Color.Lerp(new Color(1, 0.5f, 0), Color.green, lerp);
 
-        indicator.GetComponent<Renderer>().material.color = color;
+        indicator.GetComponent<Renderer>().material.color = color * new Color(1, 1, 1, 0.8f);
 
         while (i < 1f) {
             i += Time.deltaTime * 5f;
