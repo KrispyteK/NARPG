@@ -53,6 +53,8 @@ public class BeatManager : MonoBehaviour {
     }
 
     public void CheckSpawners() {
+        if (i == theSpawner.spawnInfo.Count) return;
+
         while (beat == theSpawner.spawnInfo[i].beat) {
             // Use test sound to ensure spawning matches music track
             if (spawnSoundOn) {
