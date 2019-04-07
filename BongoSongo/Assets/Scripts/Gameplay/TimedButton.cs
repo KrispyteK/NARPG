@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TimedButton : MonoBehaviour {
     public Transform indicator;
     public Transform ring;
+    public GameObject beatScore;
     public AudioSource source;
 
     private float interactTime;
@@ -58,6 +59,9 @@ public class TimedButton : MonoBehaviour {
         } else {
             finalScore = 50;
         }
+
+        var beatScoreInstance = Instantiate(beatScore, transform.position, Quaternion.identity);
+        beatScoreInstance.GetComponent<BeatScore>().Init(finalScore);
 
         GameManager.instance.AddScore(finalScore);
 

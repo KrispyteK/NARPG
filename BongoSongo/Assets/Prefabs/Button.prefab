@@ -88,6 +88,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 4738982433119519631}
   ring: {fileID: 945690250604764505}
+  beatScore: {fileID: 6431739556869953409, guid: d5fe229414e847f4ab06a09c6f99bead,
+    type: 3}
   source: {fileID: 1342482096}
 --- !u!114 &6162885483021611442
 MonoBehaviour:
