@@ -34,7 +34,9 @@ public class BeatManager : MonoBehaviour {
     }
 
     void Start() {
-        InvokeRepeating("BeatEvent", beatLength, beatLength);
+        //InvokeRepeating("BeatEvent", beatLength, beatLength);
+
+        StartCoroutine(Countdown());
     }
 
     void BeatEvent() {
@@ -47,7 +49,20 @@ public class BeatManager : MonoBehaviour {
         BeatCount();
     }
 
-    // Keep track of current bar and beat (in 4/4 time)
+    private IEnumerator Countdown () {
+        var count = 3;
+
+        while (count > 0) {
+            FloatingText.Create(Vector2.zero, "" + count, 1);
+
+            yield return new WaitForSeconds(1f);
+
+            count--;
+        }
+
+        InvokeRepeating("BeatEvent", beatLength, beatLength);
+    }
+
     public void BeatCount() {
         beat++;
     }
