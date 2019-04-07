@@ -10,6 +10,8 @@ public class BeatManager : MonoBehaviour {
 
     public SoundManager soundManager;
     public SpawnManager spawner;
+    public int startBeat;
+    public bool doCountdown = true;
     private bool audioStarted = false;
     public int beat = 0;
     public int i; // To count through the whenToSpawn array
@@ -34,9 +36,28 @@ public class BeatManager : MonoBehaviour {
     }
 
     void Start() {
-        //InvokeRepeating("BeatEvent", beatLength, beatLength);
+        StartAt(startBeat);
+    }
 
-        StartCoroutine(Countdown());
+    public void StartAt(int startBeat) {
+        var newIndex = 0;
+
+        for (int j = 0; j < spawner.spawnInfo.Count; j++) {
+            if (spawner.spawnInfo[j].beat <= startBeat) {
+                newIndex = j;
+            }
+        }
+
+        i = newIndex;
+
+        beat = startBeat;
+
+        if (doCountdown) {
+            StartCoroutine(Countdown());
+        }
+        else {
+            InvokeRepeating("BeatEvent", beatLength, beatLength);
+        }
     }
 
     void Update () {
@@ -47,7 +68,11 @@ public class BeatManager : MonoBehaviour {
 
     void BeatEvent() {
         if (!audioStarted) {
+            var startTime = beatLength * beat;
+
             soundManager.beatTest.Play();
+            soundManager.beatTest.time = startTime;
+
             audioStarted = true;
         }
 

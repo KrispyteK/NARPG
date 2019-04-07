@@ -1035,19 +1035,29 @@ MonoBehaviour:
   hitThis: {fileID: 509272240567816216, guid: b90f4b414f6738d43a9eecb75be123da, type: 3}
   spawnInfo:
   - beat: 1
-    position: {x: 0.89677894, y: 0.5254787}
+    position: {x: 0.8490958, y: 0.4331409}
   - beat: 2
     position: {x: 0.74143404, y: 0.27538994}
   - beat: 3
-    position: {x: 0.59250146, y: 0.12367763}
+    position: {x: 0.58645713, y: 0.11385446}
   - beat: 4
-    position: {x: 0.45464534, y: 0.091908544}
+    position: {x: 0.4754647, y: 0.078156106}
   - beat: 5
-    position: {x: 0.37608704, y: 0.14614344}
+    position: {x: 0.37071434, y: 0.13533795}
   - beat: 6
     position: {x: 0.3548495, y: 0.3260114}
   - beat: 7
     position: {x: 0.40505388, y: 0.49669743}
+  - beat: 8
+    position: {x: 0.32042724, y: 0.7371484}
+  - beat: 9
+    position: {x: 0.17556742, y: 0.67216295}
+  - beat: 10
+    position: {x: 0.6595461, y: 0.7643065}
+  - beat: 11
+    position: {x: 0.78638184, y: 0.31522793}
+  - beat: 12
+    position: {x: 0.045393858, y: 0.8166828}
 --- !u!4 &1603469701
 Transform:
   m_ObjectHideFlags: 0
@@ -1185,6 +1195,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   spawner: {fileID: 0}
+  startBeat: 0
+  doCountdown: 1
   beat: 0
   i: 0
   bpm: 148

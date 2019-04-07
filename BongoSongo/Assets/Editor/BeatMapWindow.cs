@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+[InitializeOnLoad]
 [ExecuteInEditMode]
 public class BeatMapWindow : EditorWindowInput {
     private int timeLineHeight = 100;
@@ -23,8 +24,21 @@ public class BeatMapWindow : EditorWindowInput {
     private float songLength;
     private float beatSongLength;
     private int selected = -1;
+    private static int defaultStartBeat;
+    private bool setDefaultStartBeat;
 
     private float Size => Screen.width * gameManager.buttonSize;
+
+    // register an event handler when the class is initialized
+    static BeatMapWindow() {
+        EditorApplication.playModeStateChanged += LogPlayModeState;
+    }
+
+    private static void LogPlayModeState(PlayModeStateChange state) {
+        if (state == PlayModeStateChange.EnteredEditMode) {
+            FindObjectOfType<BeatManager>().startBeat = defaultStartBeat;
+        }
+    }
 
     [MenuItem("Mapping/Window")]
     public static void CreateMenu() {
@@ -118,6 +132,17 @@ public class BeatMapWindow : EditorWindowInput {
                         selected = -1;
 
                         SortList();
+
+                        break;
+
+                    case KeyCode.Z:
+                        defaultStartBeat = beatManager.startBeat;
+
+                        beatManager.startBeat = currentBeat;
+
+                        EditorApplication.isPlaying = true;
+
+                        setDefaultStartBeat = true;
 
                         break;
                 }
