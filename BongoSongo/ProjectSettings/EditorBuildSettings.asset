@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/HomeScreen.unity
+    guid: 06aa2986b4724464aaa035ca093bb7e9
+  - enabled: 1
+    path: Assets/Scenes/SongSelect.unity
+    guid: 33eef406d8a311f4387475b55b494974
+  - enabled: 1
     path: Assets/Scenes/WebCamTestScene.unity
     guid: 66efb453c9cf84241b3ce38db8e964ba
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: a485df04d60e430438f9e6eb2e182b02
   m_configObjects: {}
