@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class TimedButton : MonoBehaviour {
     public Transform indicator;
-    public Transform mesh;
+    public Transform ring;
+    public GameObject beatScore;
     public AudioSource source;
 
     private float interactTime;
@@ -24,6 +25,8 @@ public class TimedButton : MonoBehaviour {
     void Update() {
         if (isKilled) return;
 
+        indicator.localScale = CameraTransform.Scale(Vector3.one * interactable.size);
+
         var time = Time.realtimeSinceStartup;
 
         // Destroy object if its too late.
@@ -32,13 +35,13 @@ public class TimedButton : MonoBehaviour {
         }
 
         // Set timing object scale
-        mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0, 2)));
+        ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0, 1)));
 
         // Show indicator as red when they're late.
         var redLerp = Mathf.Max((time - interactTime) / BeatManager.beatLength - 1, 0);
         var color = Color.Lerp(Color.white, Color.red, redLerp);
 
-        indicator.GetComponent<Renderer>().material.color = color;
+        indicator.GetComponent<Renderer>().material.color = color * new Color(1,1,1,0.8f);
     }
 
     void Action(object sender, EventArgs eventArgs) {
@@ -57,6 +60,9 @@ public class TimedButton : MonoBehaviour {
             finalScore = 50;
         }
 
+        var beatScoreInstance = Instantiate(beatScore, transform.position, Quaternion.identity);
+        beatScoreInstance.GetComponent<BeatScore>().Init(finalScore);
+
         GameManager.instance.AddScore(finalScore);
 
         interactable.isActive = false;
@@ -73,14 +79,14 @@ public class TimedButton : MonoBehaviour {
         var lerp = ((Time.realtimeSinceStartup - interactTime) / BeatManager.beatLength + 1) / 2;
         var color = Color.Lerp(new Color(1, 0.5f, 0), Color.green, lerp);
 
-        indicator.GetComponent<Renderer>().material.color = color;
+        indicator.GetComponent<Renderer>().material.color = color * new Color(1, 1, 1, 0.8f);
 
         while (i < 1f) {
             i += Time.deltaTime * 5f;
 
             indicator.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (1 - i));
 
-            mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * i);
+            ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (i + 1));
 
             yield return new WaitForEndOfFrame();
         }

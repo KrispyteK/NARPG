@@ -91,16 +91,34 @@ public class Interactable : MonoBehaviour {
         else {
             interactionAmount = Mathf.Max(0, interactionAmount - randomizeCooldown * Time.deltaTime);
 
-            for (var i = 0; i < randomizePoints; i++) {
-                var y = UnityEngine.Random.Range(normalizedY - size / 2 + stepSize / 2, normalizedY + size / 2);
-                var x = UnityEngine.Random.Range(normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y), normalizedX + size / 2 - GetCircularOffset(normalizedY, y));
+            if (!isCircular) {
+                for (var i = 0; i < randomizePoints; i++) {
+                    var y = UnityEngine.Random.Range(normalizedY - size / 2 + stepSize / 2, normalizedY + size / 2);
+                    var x = UnityEngine.Random.Range(normalizedX - size / 2 + stepSize / 2 + GetCircularOffset(normalizedY, y), normalizedX + size / 2 - GetCircularOffset(normalizedY, y));
 
-                // Add gray scale value at the point on the motion texture thats behind the interactable.   
-                var color = WebcamMotionCapture.instance.texture.GetPixelBilinear(1 - x, y * aspect);
-                var gray = (color.r + color.g + color.b) / 3;
-                interactionAmount += gray;
+                    // Add gray scale value at the point on the motion texture thats behind the interactable.   
+                    var color = WebcamMotionCapture.instance.texture.GetPixelBilinear(1 - x, y * aspect);
+                    var gray = (color.r + color.g + color.b) / 3;
+                    interactionAmount += gray;
 
-                if (interactionAmount > (isCircular ? circularThreshold : threshold)) return true;
+                    if (interactionAmount > threshold) return true;
+                }
+            }
+            else {
+                for (var i = 0; i < randomizePoints; i++) {
+                    var a = UnityEngine.Random.Range(0, Mathf.PI * 2);
+                    var y = normalizedY + (Mathf.Sin(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f), 0.5f));
+                    var x = normalizedX + (Mathf.Cos(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f), 0.5f));
+
+                    // Add gray scale value at the point on the motion texture thats behind the interactable.   
+                    var color = WebcamMotionCapture.instance.texture.GetPixelBilinear(1 - x, y * aspect);
+                    var gray = (color.r + color.g + color.b) / 3;
+                    interactionAmount += gray;
+
+                    if (interactionAmount > threshold) {
+                        return true;
+                    }
+                }
             }
         }
 
@@ -117,9 +135,24 @@ public class Interactable : MonoBehaviour {
 
         normalizedY /= aspect;
 
-        for (float y = normalizedY - size / 2; y <= normalizedY + size / 2; y += stepSize) {
-            for (float x = normalizedX - size / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
-                if (isCircular) x = Mathf.Round(x / stepSize) * stepSize;
+        if (!(randomize && isCircular)) {
+            for (float y = normalizedY - size / 2; y <= normalizedY + size / 2; y += stepSize) {
+                for (float x = normalizedX - size / 2 + GetCircularOffset(normalizedY, y); x <= normalizedX + size / 2 - GetCircularOffset(normalizedY, y); x += stepSize) {
+                    if (isCircular) x = Mathf.Round(x / stepSize) * stepSize;
+
+                    Gizmos.DrawSphere(
+                        CameraTransform.ScreenPointToWorld(new Vector2(
+                            x,
+                            y
+                            )), 0.05f);
+                }
+            }
+        }
+        else {
+            for (var i = 0; i < randomizePoints; i++) {
+                var a = UnityEngine.Random.Range(0, Mathf.PI * 2);
+                var y = normalizedY + (Mathf.Sin(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f), 0.5f));
+                var x = normalizedX + (Mathf.Cos(a) * size / 2 * Mathf.Pow(UnityEngine.Random.Range(0f, 1f), 0.5f));
 
                 Gizmos.DrawSphere(
                     CameraTransform.ScreenPointToWorld(new Vector2(
