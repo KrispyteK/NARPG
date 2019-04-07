@@ -421,31 +421,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1294055191626164307, guid: 1e76631a812dc324bbfb8db057828d58,
-        type: 3}
-      propertyPath: m_PixelPerfect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1294055191626164300, guid: 1e76631a812dc324bbfb8db057828d58,
-        type: 3}
-      propertyPath: m_ReferencePixelsPerUnit
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1294055191626164300, guid: 1e76631a812dc324bbfb8db057828d58,
-        type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1294055191626164300, guid: 1e76631a812dc324bbfb8db057828d58,
-        type: 3}
-      propertyPath: m_ScreenMatchMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1294055191626164300, guid: 1e76631a812dc324bbfb8db057828d58,
-        type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e76631a812dc324bbfb8db057828d58, type: 3}
 --- !u!1 &280360072
@@ -796,7 +771,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1208,8 +1183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6530ab712adf1bf4895f291cf6df8282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theSoundManager: {fileID: 0}
-  theSpawner: {fileID: 0}
+  soundManager: {fileID: 0}
+  spawner: {fileID: 0}
   beat: 0
   i: 0
   bpm: 148

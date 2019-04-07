@@ -39,14 +39,16 @@ public class BeatManager : MonoBehaviour {
         StartCoroutine(Countdown());
     }
 
+    void Update () {
+        if (audioStarted && !soundManager.beatTest.isPlaying) {
+            GameManager.instance.End();
+        }
+    }
+
     void BeatEvent() {
         if (!audioStarted) {
             soundManager.beatTest.Play();
             audioStarted = true;
-        }
-
-        if (!soundManager.beatTest.isPlaying) {
-            GameManager.instance.End();
         }
 
         CheckSpawners();
