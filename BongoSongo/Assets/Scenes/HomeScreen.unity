@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7001c7915ca9a469499f7b805be549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 0.2, y: 0}
+  speed: {x: 0.1, y: 0}
   offset: {x: 0, y: 0}
 --- !u!64 &303689881
 MeshCollider:
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7001c7915ca9a469499f7b805be549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: -0.2, y: 0}
+  speed: {x: -0.1, y: 0}
   offset: {x: 0, y: 0}
 --- !u!64 &849490717
 MeshCollider:
