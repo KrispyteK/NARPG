@@ -8,8 +8,8 @@ public class BeatManager : MonoBehaviour {
     public static BeatManager instance;
     public static float beatLength;
 
-    public SoundManager theSoundManager;
-    public SpawnManager theSpawner;
+    public SoundManager soundManager;
+    public SpawnManager spawner;
     private bool audioStarted = false;
     public int beat = 0;
     public int i; // To count through the whenToSpawn array
@@ -22,8 +22,8 @@ public class BeatManager : MonoBehaviour {
     void Awake() {
         beatLength = (60 / bpm);
 
-        theSoundManager = FindObjectOfType<SoundManager>();
-        theSpawner = FindObjectOfType<SpawnManager>();
+        soundManager = FindObjectOfType<SoundManager>();
+        spawner = FindObjectOfType<SpawnManager>();
 
         if (instance == null) {
             instance = this;
@@ -41,7 +41,7 @@ public class BeatManager : MonoBehaviour {
 
     void BeatEvent() {
         if (!audioStarted) {
-            theSoundManager.beatTest.Play();
+            soundManager.beatTest.Play();
             audioStarted = true;
         }
 
@@ -68,22 +68,22 @@ public class BeatManager : MonoBehaviour {
     }
 
     public void CheckSpawners() {
-        if (i == theSpawner.spawnInfo.Count) return;
+        if (i == spawner.spawnInfo.Count) return;
 
-        while (beat == theSpawner.spawnInfo[i].beat) {
+        while (beat == spawner.spawnInfo[i].beat) {
             // Use test sound to ensure spawning matches music track
             if (spawnSoundOn) {
-                theSoundManager.hitBall.Play();
+                soundManager.hitBall.Play();
             }
 
-            theSpawner.Spawn(theSpawner.spawnInfo[i]);
+            spawner.Spawn(spawner.spawnInfo[i]);
 
             i++;
 
-            if (i == theSpawner.spawnInfo.Count) break;
+            if (i == spawner.spawnInfo.Count) break;
         }
 
-        if (i == theSpawner.spawnInfo.Count) {
+        if (i == spawner.spawnInfo.Count) {
             print("end of array");
 
             //i = 0;
