@@ -45,6 +45,10 @@ public class BeatManager : MonoBehaviour {
             audioStarted = true;
         }
 
+        if (!soundManager.beatTest.isPlaying) {
+            GameManager.instance.End();
+        }
+
         CheckSpawners();
         BeatCount();
     }

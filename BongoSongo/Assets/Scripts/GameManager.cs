@@ -26,7 +26,11 @@ public class GameManager : MonoBehaviour {
 
     void Update() {
         if (Input.GetButtonDown("Cancel")) {
-            SceneManager.LoadScene("EndScreen");
+            End();
         }
+    }
+
+    public void End () {
+        SceneManager.LoadScene("EndScreen");
     }
 }
