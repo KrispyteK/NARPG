@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour {
     public List<SpawnInfo> spawnInfo;
 
     public void Spawn(SpawnInfo spawn) {
-        var button = Instantiate(hitThis, CameraTransform.ScreenPointToWorldScaled(new Vector2(spawn.position.x, 1- spawn.position.y)), Quaternion.identity);
+        var button = Instantiate(hitThis, CameraTransform.ScreenPointToWorldScaled(new Vector2(spawn.position.x, 1- spawn.position.y)) + Vector3.forward * 5f, Quaternion.identity);
         var interactable = button.GetComponent<Interactable>();
     }
 }

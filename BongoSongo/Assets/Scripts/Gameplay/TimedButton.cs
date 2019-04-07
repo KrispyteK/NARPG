@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TimedButton : MonoBehaviour {
     public Transform indicator;
-    public Transform mesh;
+    public Transform ring;
     public AudioSource source;
 
     private float interactTime;
@@ -24,6 +24,8 @@ public class TimedButton : MonoBehaviour {
     void Update() {
         if (isKilled) return;
 
+        indicator.localScale = CameraTransform.Scale(Vector3.one * interactable.size);
+
         var time = Time.realtimeSinceStartup;
 
         // Destroy object if its too late.
@@ -32,7 +34,7 @@ public class TimedButton : MonoBehaviour {
         }
 
         // Set timing object scale
-        mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0, 2)));
+        ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0, 1)));
 
         // Show indicator as red when they're late.
         var redLerp = Mathf.Max((time - interactTime) / BeatManager.beatLength - 1, 0);
@@ -80,7 +82,7 @@ public class TimedButton : MonoBehaviour {
 
             indicator.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (1 - i));
 
-            mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size * i);
+            ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (i + 1));
 
             yield return new WaitForEndOfFrame();
         }

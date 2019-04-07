@@ -22,6 +22,6 @@ public class InteractableMeshRender : MonoBehaviour
     }
 
     void SetScale () {
-        mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size / 2);
+        mesh.localScale = CameraTransform.Scale(Vector3.one * interactable.size);
     }
 }
