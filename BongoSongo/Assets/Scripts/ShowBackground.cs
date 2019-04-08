@@ -13,7 +13,7 @@ public class ShowBackground : MonoBehaviour {
         var webcamTexture = WebcamMotionCapture.instance.webcamTexture;
         var motionTexture = WebcamMotionCapture.instance.renderTexture;
 
-        FloatingText.Create(Vector2.zero, "" + webcamTexture.videoRotationAngle, 10f);
+        //FloatingText.Create(Vector2.zero, "" + webcamTexture.videoRotationAngle, 10f);
 
         var useTexture = showMotionCapture ? motionTexture : (Texture)webcamTexture;
 

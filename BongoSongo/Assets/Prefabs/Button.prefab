@@ -58,7 +58,8 @@ MonoBehaviour:
   density: 10
   randomize: 1
   randomizePoints: 50
-  randomizeCooldown: 150
+  randomizeCooldown: 100
+  interactionAmount: 0
 --- !u!114 &509272240567816214
 MonoBehaviour:
   m_ObjectHideFlags: 0
