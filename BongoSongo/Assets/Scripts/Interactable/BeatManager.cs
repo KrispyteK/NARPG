@@ -46,12 +46,10 @@ public class BeatManager : MonoBehaviour {
         var newIndex = 0;
 
         for (int j = 0; j < spawner.spawnInfo.Count; j++) {
-            if (spawner.spawnInfo[j].beat <= startBeat) {
+            if (spawner.spawnInfo[j].beat <= startBeat + 1) {
                 newIndex = j;
             }
         }
-
-        print(newIndex);
 
         i = newIndex;
 
@@ -117,7 +115,7 @@ public class BeatManager : MonoBehaviour {
     public void CheckSpawners() {
         if (i == spawner.spawnInfo.Count) return;
 
-        while (beat == spawner.spawnInfo[i].beat - 1) {
+        while (beat + 1 == spawner.spawnInfo[i].beat) {
             // Use test sound to ensure spawning matches music track
             if (spawnSoundOn) {
                 soundManager.hitBall.Play();
