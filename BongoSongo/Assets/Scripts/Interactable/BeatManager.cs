@@ -10,7 +10,10 @@ public class BeatManager : MonoBehaviour {
 
     public SoundManager soundManager;
     public SpawnManager spawner;
+    public GameObject outlineObject;
     public int startBeat;
+    public bool doOutline = true;
+    public float outlineTime = 5f;
     public bool doCountdown = true;
     private bool audioStarted = false;
     public int beat = 0;
@@ -48,6 +51,8 @@ public class BeatManager : MonoBehaviour {
             }
         }
 
+        print(newIndex);
+
         i = newIndex;
 
         beat = startBeat;
@@ -81,6 +86,15 @@ public class BeatManager : MonoBehaviour {
     }
 
     private IEnumerator Countdown () {
+        var canvas = GameObject.Find("UI");
+        canvas.SetActive(false);
+
+        if (doOutline) {
+            yield return new WaitForSeconds(outlineTime);
+
+            outlineObject.SetActive(false);
+        }
+
         var count = 3;
 
         while (count > 0) {
@@ -90,6 +104,8 @@ public class BeatManager : MonoBehaviour {
 
             count--;
         }
+
+        canvas.SetActive(true);
 
         InvokeRepeating("BeatEvent", beatLength, beatLength);
     }
@@ -101,7 +117,7 @@ public class BeatManager : MonoBehaviour {
     public void CheckSpawners() {
         if (i == spawner.spawnInfo.Count) return;
 
-        while (beat == spawner.spawnInfo[i].beat) {
+        while (beat == spawner.spawnInfo[i].beat - 1) {
             // Use test sound to ensure spawning matches music track
             if (spawnSoundOn) {
                 soundManager.hitBall.Play();

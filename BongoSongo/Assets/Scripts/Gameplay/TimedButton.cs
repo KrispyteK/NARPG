@@ -55,9 +55,9 @@ public class TimedButton : MonoBehaviour {
         var addScore = Mathf.Abs((interactTime - time) / BeatManager.beatLength);
         var finalScore = 0;
 
-        if (addScore == 0) {
+        if (addScore > 0.0f && addScore < 0.05f) {
             finalScore = 300;
-        } else if (addScore > 0 && addScore < 0.25f) {
+        } else if (addScore > 0.05f && addScore < 0.25f) {
             finalScore = 100;
         } else {
             finalScore = 50;
