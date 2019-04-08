@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 0.13
-  threshold: 2
+  threshold: 1
   isActive: 1
   isInteractedWith: 0
   isCircular: 1

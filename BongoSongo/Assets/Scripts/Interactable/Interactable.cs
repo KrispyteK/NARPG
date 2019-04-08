@@ -125,6 +125,12 @@ public class Interactable : MonoBehaviour {
         return false;
     }
 
+    private void OnGUI() {
+        var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+
+        GUI.Label(new Rect(screenPoint.x, Camera.main.pixelHeight - screenPoint.y + Camera.main.pixelHeight * size/2, 100,50), "" + interactionAmount);
+    }
+
     private void OnDrawGizmos() {
         var stepSize = 1f / density * size;
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
