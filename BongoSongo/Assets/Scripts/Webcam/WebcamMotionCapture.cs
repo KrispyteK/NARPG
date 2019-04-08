@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WebcamMotionCapture : MonoBehaviour
-{
+public class WebcamMotionCapture : MonoBehaviour {
     public static WebcamMotionCapture instance;
 
     public int textureScale = 2;
@@ -20,47 +19,43 @@ public class WebcamMotionCapture : MonoBehaviour
     private Texture2D texPrev;
     private Renderer renderComponent;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
+    private void Awake() {
+        if (instance == null) {
             instance = this;
-        } else
-        {
+        }
+        else {
             Debug.LogError("Please only place one WebcamMotionCapture object in the scene.");
         }
     }
 
-    private void Start()
-    {
+    private void Start() {
         renderComponent = GetComponent<Renderer>();
 
         string cameraName = null;
 
-        foreach (var camera in WebCamTexture.devices)
-        {
-            if (camera.isFrontFacing)
-            {
+        foreach (var camera in WebCamTexture.devices) {
+            print(camera.name);
+
+            if (camera.isFrontFacing) {
                 cameraName = camera.name;
                 break;
             }
         }
 
-        webcamTexture = new WebCamTexture(cameraName);
-        webcamTexture.Play();
+        if (cameraName == null) {
+            Debug.LogError("Could not find suitable camera device!");
+        }
 
-        StartCoroutine(WebCamStartCoroutine());
+        StartCoroutine(WebCamStartCoroutine(cameraName));
 
         renderComponent.material.SetFloat("_Threshold", threshold);
     }
 
 
-    private void Update()
-    {
+    private void Update() {
         if (!hasWebcam) return;
 
-        if (webcamTexture.didUpdateThisFrame)
-        {
+        if (webcamTexture.didUpdateThisFrame) {
             var pixels = webcamTexture.GetPixels32();
 
             texCurr.SetPixels32(pixels);
@@ -74,14 +69,13 @@ public class WebcamMotionCapture : MonoBehaviour
             // Render renderTexture to Texture2D.
             RenderTexture.active = renderTexture;
 
-            texture.ReadPixels(new Rect(0,0,renderTexture.width, renderTexture.height), 0, 0);
+            texture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
 
             RenderTexture.active = null;
         }
     }
 
-    private IEnumerator DelayedWebCamCapture (Color32[] pixels)
-    {
+    private IEnumerator DelayedWebCamCapture(Color32[] pixels) {
         yield return new WaitForSeconds(motionDelay);
 
         texPrev.SetPixels32(pixels);
@@ -90,11 +84,16 @@ public class WebcamMotionCapture : MonoBehaviour
         renderComponent.material.SetTexture("_PrevTex", texPrev);
     }
 
-    private IEnumerator WebCamStartCoroutine()
-    {
+    private IEnumerator WebCamStartCoroutine(string cameraName) {
+
+        webcamTexture = new WebCamTexture(cameraName);
+        webcamTexture.Play();
+
         Debug.Log("Waiting for correct webcam info...");
 
-        yield return new WaitWhile(() => webcamTexture.width < 100);
+        yield return new WaitWhile(() => {
+            return webcamTexture.width == 16;
+        });
 
         var ccwNeeded = -webcamTexture.videoRotationAngle;
 
@@ -108,5 +107,7 @@ public class WebcamMotionCapture : MonoBehaviour
 
         // Call callback function if there is any.
         callback?.Invoke();
+
+        Debug.Log("Got correct webcam info!");
     }
 }
