@@ -32,5 +32,15 @@ public class ShowBackground : MonoBehaviour {
         var rotation = Quaternion.LookRotation(-Vector3.up, -Vector3.forward);// * Quaternion.Euler(Vector3.up * -rotationAngle);
 
         transform.rotation = rotation;
+
+        if (!showMotionCapture) {
+            aspect = (float)webcamTexture.height / (float)webcamTexture.width;
+
+            transform.localScale = new Vector3(-1 / aspect, 1, 1);
+
+            rotation = Quaternion.LookRotation(-Vector3.up, -Vector3.forward) * Quaternion.Euler(Vector3.up * -rotationAngle);
+
+            transform.rotation = rotation;
+        }
     }
 }
