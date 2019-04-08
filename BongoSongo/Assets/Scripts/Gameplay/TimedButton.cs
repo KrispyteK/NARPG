@@ -38,7 +38,7 @@ public class TimedButton : MonoBehaviour {
         }
 
         // Set timing object scale
-        ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (2 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0, 1)));
+        ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (3 - Mathf.Clamp((time - interactTime) / BeatManager.beatLength + 1, 0, 1) * 2));
 
         // Show indicator as red when they're late.
         var redLerp = Mathf.Max((time - interactTime) / BeatManager.beatLength - 1, 0);
@@ -89,7 +89,7 @@ public class TimedButton : MonoBehaviour {
 
             indicator.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (1 - i));
 
-            ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (i + 1));
+            ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * (i * 2 + 1));
 
             yield return new WaitForEndOfFrame();
         }
