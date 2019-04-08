@@ -6,7 +6,6 @@ using UnityEngine;
 public class WebcamMotionCapture : MonoBehaviour {
     public static WebcamMotionCapture instance;
 
-    public int textureScale = 2;
     public float threshold = 0.1f;
     public float motionDelay = 0.1f;
     public RenderTexture renderTexture;
