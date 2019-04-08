@@ -16,12 +16,13 @@ public class Interactable : MonoBehaviour {
     public int randomizePoints = 50;
     public float randomizeCooldown = 40f;
 
+    public float interactionAmount;
+
     public Vector3 ScreenPosition => Camera.main.WorldToScreenPoint(transform.position);
 
     public event EventHandler OnInteract;
 
     private float circularThreshold;
-    private float interactionAmount;
 
     void OnValidate() {
         circularThreshold = threshold / Mathf.PI;
@@ -123,12 +124,6 @@ public class Interactable : MonoBehaviour {
         }
 
         return false;
-    }
-
-    private void OnGUI() {
-        var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-
-        GUI.Label(new Rect(screenPoint.x, Camera.main.pixelHeight - screenPoint.y + Camera.main.pixelHeight * size/2, 100,50), "" + interactionAmount);
     }
 
     private void OnDrawGizmos() {
