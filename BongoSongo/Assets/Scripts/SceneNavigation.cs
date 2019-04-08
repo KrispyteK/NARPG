@@ -7,7 +7,7 @@ public class SceneNavigation : MonoBehaviour
 {
    public void StartDance()
 	{
-        SceneManager.LoadScene("WebCamTestScene");
+        SceneManager.LoadScene("DanceScene1");
 	}
 
 	public void SelectSong()

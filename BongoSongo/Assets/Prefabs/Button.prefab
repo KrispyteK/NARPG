@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 0.13
-  threshold: 0.4
+  threshold: 0.45
   isActive: 1
   isInteractedWith: 0
   isCircular: 1
@@ -58,7 +58,7 @@ MonoBehaviour:
   density: 10
   randomize: 1
   randomizePoints: 50
-  randomizeCooldown: 100
+  randomizeCooldown: 150
 --- !u!114 &509272240567816214
 MonoBehaviour:
   m_ObjectHideFlags: 0
