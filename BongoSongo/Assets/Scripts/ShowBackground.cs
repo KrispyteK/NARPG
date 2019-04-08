@@ -24,11 +24,12 @@ public class ShowBackground : MonoBehaviour {
 
         var isTurned = rotationAngle == 90 || rotationAngle == 270;
 
-        var aspect = isTurned ? (float)webcamTexture.height / (float)webcamTexture.width : (float)webcamTexture.width / (float)webcamTexture.height;
+        //var aspect = isTurned ? (float)webcamTexture.height / (float)webcamTexture.width : (float)webcamTexture.width / (float)webcamTexture.height;
+        var aspect = (float)webcamTexture.width / (float)webcamTexture.height;
 
         transform.localScale = new Vector3(-1 / aspect, 1, 1);
 
-        var rotation = Quaternion.LookRotation(-Vector3.up, -Vector3.forward) * Quaternion.Euler(Vector3.up * -rotationAngle);
+        var rotation = Quaternion.LookRotation(-Vector3.up, -Vector3.forward);// * Quaternion.Euler(Vector3.up * -rotationAngle);
 
         transform.rotation = rotation;
     }

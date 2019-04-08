@@ -94,13 +94,21 @@ public class WebcamMotionCapture : MonoBehaviour {
             return webcamTexture.width == 16;
         });
 
-        var ccwNeeded = -webcamTexture.videoRotationAngle;
+        var ccwNeeded = 0f;
 
-        if (webcamTexture.videoVerticallyMirrored) ccwNeeded += 180;
+        switch (webcamTexture.videoRotationAngle) {
+            case 270:
+                ccwNeeded = -90f;
+                break;
+        }
+
+        //if (webcamTexture.videoVerticallyMirrored) ccwNeeded += 180;
 
         texCurr = new Texture2D(webcamTexture.width, webcamTexture.height);
         texPrev = new Texture2D(webcamTexture.width, webcamTexture.height);
         texture = new Texture2D(renderTexture.width, renderTexture.height);
+
+        transform.rotation = Quaternion.Euler(0,ccwNeeded,0);
 
         hasWebcam = true;
 
