@@ -30,9 +30,9 @@ public class BeatMapWindow : EditorWindowInput {
     private float Size => Screen.width * gameManager.buttonSize;
 
     // register an event handler when the class is initialized
-    static BeatMapWindow() {
-        EditorApplication.playModeStateChanged += LogPlayModeState;
-    }
+    //static BeatMapWindow() {
+    //    EditorApplication.playModeStateChanged += LogPlayModeState;
+    //}
 
     //private static void LogPlayModeState(PlayModeStateChange state) {
     //    if (state == PlayModeStateChange.EnteredEditMode) {
@@ -115,7 +115,10 @@ public class BeatMapWindow : EditorWindowInput {
                             selected = -1;
 
                             SortList();
+
+                            Undo.RecordObject(spawnManager, "Delete Beat");
                         }
+
 
                         break;
 
@@ -132,6 +135,8 @@ public class BeatMapWindow : EditorWindowInput {
                         selected = -1;
 
                         SortList();
+
+                        Undo.RecordObject(spawnManager, "Add Beat");
 
                         break;
 
@@ -178,6 +183,8 @@ public class BeatMapWindow : EditorWindowInput {
         var position = (Event.current.mousePosition + new Vector2(Size, Size) / 2 + offset) / new Vector2(Screen.width, Screen.height);
 
         spawnManager.spawnInfo[modifyingIndex].position = new Vector2(Mathf.Clamp01(position.x), Mathf.Clamp01(position.y));
+
+        Undo.RecordObject(spawnManager, "Move Beat");
     }
 
     private void ClickTimeLine() {
