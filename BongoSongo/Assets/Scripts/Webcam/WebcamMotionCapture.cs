@@ -108,6 +108,15 @@ public class WebcamMotionCapture : MonoBehaviour {
         texPrev = new Texture2D(webcamTexture.width, webcamTexture.height);
         texture = new Texture2D(renderTexture.width, renderTexture.height);
 
+        var aspectRatioTexture = (float)webcamTexture.width / (float)webcamTexture.height;
+
+        var motionCaptureCamera = GameObject.FindGameObjectWithTag("MotionCaptureCamera").GetComponent<Camera>();
+        motionCaptureCamera.rect = new Rect(0, 0, aspectRatioTexture, 1);
+
+        renderTexture.height = (int)(256 * aspectRatioTexture);
+
+        transform.localScale = new Vector3(aspectRatioTexture, 1, 1);
+
         transform.rotation = Quaternion.Euler(0,ccwNeeded,0);
 
         hasWebcam = true;

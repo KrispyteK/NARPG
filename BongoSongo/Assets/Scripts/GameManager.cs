@@ -32,5 +32,7 @@ public class GameManager : MonoBehaviour {
 
     public void End () {
         SceneManager.LoadScene("EndScreen");
+
+        WebcamMotionCapture.instance.webcamTexture.Stop();
     }
 }

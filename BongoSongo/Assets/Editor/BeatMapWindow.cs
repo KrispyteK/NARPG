@@ -34,11 +34,11 @@ public class BeatMapWindow : EditorWindowInput {
         EditorApplication.playModeStateChanged += LogPlayModeState;
     }
 
-    private static void LogPlayModeState(PlayModeStateChange state) {
-        if (state == PlayModeStateChange.EnteredEditMode) {
-            FindObjectOfType<BeatManager>().startBeat = defaultStartBeat;
-        }
-    }
+    //private static void LogPlayModeState(PlayModeStateChange state) {
+    //    if (state == PlayModeStateChange.EnteredEditMode) {
+    //        FindObjectOfType<BeatManager>().startBeat = defaultStartBeat;
+    //    }
+    //}
 
     [MenuItem("Mapping/Window")]
     public static void CreateMenu() {
@@ -136,13 +136,13 @@ public class BeatMapWindow : EditorWindowInput {
                         break;
 
                     case KeyCode.Z:
-                        defaultStartBeat = beatManager.startBeat;
+                        //defaultStartBeat = beatManager.startBeat;
 
                         beatManager.startBeat = currentBeat;
 
                         EditorApplication.isPlaying = true;
 
-                        setDefaultStartBeat = true;
+                        //setDefaultStartBeat = true;
 
                         break;
                 }
