@@ -8,6 +8,10 @@ public class SceneNavigation : MonoBehaviour {
         SceneManager.LoadScene("DanceScene1");
     }
 
+    public void StartTechno() {
+        SceneManager.LoadScene("TechnoScene");
+    }
+
     public void SelectSong() {
         SceneManager.LoadScene("SongSelect");
     }
