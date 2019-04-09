@@ -53,6 +53,8 @@ public class BeatMapWindow : EditorWindowInput {
         soundManager = FindObjectOfType<SoundManager>();
         beatManager = FindObjectOfType<BeatManager>();
 
+        if (beatManager == null) return;
+
         beatSecond = 60 / beatManager.bpm;
 
         var floatBeats = soundManager.beatTest.clip.length / beatSecond;
