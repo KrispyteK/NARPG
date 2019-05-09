@@ -46,8 +46,6 @@ public class WebcamMotionCapture : MonoBehaviour {
         }
 
         StartCoroutine(WebCamStartCoroutine(cameraName));
-
-        renderComponent.material.SetFloat("_Threshold", threshold);
     }
 
 
@@ -64,6 +62,7 @@ public class WebcamMotionCapture : MonoBehaviour {
             StartCoroutine(DelayedWebCamCapture(pixels));
 
             renderComponent.material.SetTexture("_MainTex", texCurr);
+            renderComponent.material.SetFloat("_Threshold", threshold);
 
             // Render renderTexture to Texture2D.
             RenderTexture.active = renderTexture;
@@ -90,9 +89,7 @@ public class WebcamMotionCapture : MonoBehaviour {
 
         Debug.Log("Waiting for correct webcam info...");
 
-        yield return new WaitWhile(() => {
-            return webcamTexture.width == 16;
-        });
+        yield return new WaitWhile(() => webcamTexture.width == 16);
 
         var ccwNeeded = 0f;
 
@@ -101,8 +98,6 @@ public class WebcamMotionCapture : MonoBehaviour {
                 ccwNeeded = -90f;
                 break;
         }
-
-        //if (webcamTexture.videoVerticallyMirrored) ccwNeeded += 180;
 
         texCurr = new Texture2D(webcamTexture.width, webcamTexture.height);
         texPrev = new Texture2D(webcamTexture.width, webcamTexture.height);

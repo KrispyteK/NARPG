@@ -61,7 +61,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BlurAmount: 0.04
-    - _BlurSamples: 3
+    - _BlurSamples: 10
+    - _BlurSize: 0.35
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1

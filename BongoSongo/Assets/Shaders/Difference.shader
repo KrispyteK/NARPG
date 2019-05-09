@@ -5,8 +5,9 @@
         _MainTex ("Current", 2D) = "white" {}
 		_PrevTex ("Previous", 2D) = "white" {}
 		_Threshold("Threshold", float) = 0.2
-		_BlurAmount("BlurAmount", Range(0,0.2)) = 0.0005
-		_BlurSamples ("BlurSamples", Range(3,7)) = 3
+		_BlurSize("BlurSize", Range(0,1)) = 0.5
+		_BlurAmount("BlurAmount", Range(0,100)) = 0.0005
+		_BlurSamples ("BlurSamples", int) = 3
     }
     SubShader
     {
@@ -39,7 +40,7 @@
 
             float4 _MainTex_ST;
 			float _Threshold;
-			float _BlurAmount;
+			float _BlurSize;
 			int _BlurSamples;
 
             v2f vert (appdata v)
@@ -51,30 +52,28 @@
                 return o;
             }
 
-			fixed4 blur(sampler2D tex, v2f i) {
-				half4 texcol = half4(0,0,0,0);
-				float remaining = 1.0f;
-				float coef = 1;
-				float fI = 0;
-				for (int j = 0; j < _BlurSamples; j++) {
-					fI++;
-					coef *= 0.32;
-					texcol += tex2D(tex, float2(i.uv.x, i.uv.y - fI * _BlurAmount)) * coef;
-					texcol += tex2D(tex, float2(i.uv.x - fI * _BlurAmount, i.uv.y)) * coef;
-					texcol += tex2D(tex, float2(i.uv.x + fI * _BlurAmount, i.uv.y)) * coef;
-					texcol += tex2D(tex, float2(i.uv.x, i.uv.y + fI * _BlurAmount)) * coef;
+			//this is the blur function... pass in standard col derived from tex2d(_MainTex,i.uv)
+			half4 blur(sampler2D tex, v2f i) {
 
-					remaining -= 4 * coef;
+				float2 uv = i.uv;
+
+				half4 col = tex2D(tex, uv);
+
+				for (int i = -_BlurSamples; i <= _BlurSamples; ++i) {
+					for (int j = -_BlurSamples; j <= _BlurSamples; ++j) {
+						float mul = _BlurSize / _BlurSamples;
+
+						col += tex2D(tex, float2(uv.x + i * pow(mul,2), uv.y + j * pow(mul, 2)));
+					}
 				}
-				texcol += tex2D(tex, float2(i.uv.x, i.uv.y)) * remaining;
 
-				return texcol;
+				return col / ((_BlurSamples * _BlurSamples) * 2);
 			}
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 colMain = tex2D(_MainTex, i.uv);
-				fixed4 colPrev = tex2D(_PrevTex, i.uv);
+                fixed4 colMain = blur(_MainTex, i);
+				fixed4 colPrev = blur(_PrevTex, i);
 
 				float grayMain = (colMain.r + colMain.g + colMain.b) / 3;
 				float grayPrev = (colPrev.r + colPrev.g + colPrev.b) / 3;
@@ -85,7 +84,6 @@
 				float dg = abs(colMain.g - colPrev.g);
 				float db = abs(colMain.b - colPrev.b);
 
-				//float meanDifference = (dr + dg + db) / 3;
 				float meanDifference = max(dr, max(dg, db));
 
 				fixed4 col = fixed4(0, 0, 0, 1);
@@ -94,7 +92,7 @@
 					col = fixed4(1, 1, 1, 1);
 				}
 
-                return fixed4(meanDifference,meanDifference,meanDifference,1);
+                return col;
             }
             ENDCG
         }
