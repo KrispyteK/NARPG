@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 0.1
-  motionDelay: 0.1
+  motionDelay: 0.05
   renderTexture: {fileID: 8400000, guid: 970f65eb013ea4f4dbefb4d816429f1c, type: 2}
   webcamTexture: {fileID: 0}
   texture: {fileID: 0}
