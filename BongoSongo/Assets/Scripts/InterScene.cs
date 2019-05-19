@@ -3,18 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InterScene : MonoBehaviour {
-    public static InterScene instance;
+    private static InterScene _instance;
 
-    public int score;
+    public static InterScene Instance {
+        get {
+            if (_instance != null) {
+                return _instance;
+            } else {
+                _instance = initiate();
 
-    void Awake () {
-        if (instance == null) {
-            instance = this;
+                return _instance;
+            }
         }
-        else {
-            Debug.LogError("Too many game managers in the scene!");
-        }
+    }
+
+    private static InterScene initiate () {
+        var gameObject = new GameObject("InterScene");
+        var interScene = gameObject.AddComponent<InterScene>();
+
+        interScene.gamePlaySettings = Resources.Load<GamePlaySettings>("Settings/GamePlaySetting");
 
         DontDestroyOnLoad(gameObject);
+
+        return interScene;
     }
+
+    public int score;
+    public GamePlaySettings gamePlaySettings;
+
+    //void Awake () {
+    //    if (instance == null) {
+    //        instance = this;
+    //    }
+    //    else {
+    //        Debug.LogError("Too many game managers in the scene!");
+    //    }
+
+    //    DontDestroyOnLoad(gameObject);
+    //}
 }
