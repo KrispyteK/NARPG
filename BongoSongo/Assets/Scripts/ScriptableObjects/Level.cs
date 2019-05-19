@@ -11,6 +11,10 @@ public class Level {
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
 
+    public Level () {
+        name = "unnamed";
+        bpm = 128;
+    }
     public override string ToString() {
         return $"Level \nname:{name}\ndescription:{description}\nbpm:{bpm}";
     }
