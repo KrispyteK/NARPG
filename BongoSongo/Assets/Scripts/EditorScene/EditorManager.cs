@@ -7,6 +7,7 @@ public class EditorManager : MonoBehaviour {
 
     public GameObject selected;
     public Level level;
+    public LevelInfo levelInfo;
 
     void Awake() {
         instance = this;
@@ -26,7 +27,23 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
-    public static void Save () {
-        Level.Save(instance.level);
+    public void SetName(TMPro.TMP_InputField inputField) {
+        level.name = inputField.text;
+    }
+
+    public void SetBPM(TMPro.TMP_InputField inputField) {
+        level.bpm = int.Parse(inputField.text);
+    }
+
+    public void Save () {
+        Level.Save(level);
+    }
+
+    public void New() {
+        Level.Save(level);
+
+        level = new Level();
+
+        levelInfo.SetInfo();
     }
 }

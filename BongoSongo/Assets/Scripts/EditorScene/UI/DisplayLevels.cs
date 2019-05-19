@@ -19,7 +19,11 @@ public class DisplayLevels : MonoBehaviour {
         GenerateButtons();
     }
 
-    void GenerateButtons () {
+    public void GenerateButtons () {
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
+        }
+
         var files = new List<string>();
 
         files.AddRange(Directory.GetFiles(Application.persistentDataPath, "*.level", SearchOption.AllDirectories));
