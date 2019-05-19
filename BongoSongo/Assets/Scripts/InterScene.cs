@@ -21,7 +21,7 @@ public class InterScene : MonoBehaviour {
         var gameObject = new GameObject("InterScene");
         var interScene = gameObject.AddComponent<InterScene>();
 
-        interScene.gamePlaySettings = Resources.Load<GamePlaySettings>("Settings/GamePlaySetting");
+        interScene.gamePlaySettings = Resources.Load<GamePlaySettings>("Settings/GamePlaySettings");
 
         DontDestroyOnLoad(gameObject);
 
