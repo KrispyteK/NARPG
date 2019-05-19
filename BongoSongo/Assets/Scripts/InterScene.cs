@@ -10,14 +10,16 @@ public class InterScene : MonoBehaviour {
             if (_instance != null) {
                 return _instance;
             } else {
-                _instance = initiate();
+                _instance = Initiate();
 
                 return _instance;
             }
         }
     }
 
-    private static InterScene initiate () {
+    public static InterScene Initiate () {
+        if (_instance != null) return _instance;
+
         var gameObject = new GameObject("InterScene");
         var interScene = gameObject.AddComponent<InterScene>();
 
@@ -30,15 +32,4 @@ public class InterScene : MonoBehaviour {
 
     public int score;
     public GamePlaySettings gamePlaySettings;
-
-    //void Awake () {
-    //    if (instance == null) {
-    //        instance = this;
-    //    }
-    //    else {
-    //        Debug.LogError("Too many game managers in the scene!");
-    //    }
-
-    //    DontDestroyOnLoad(gameObject);
-    //}
 }
