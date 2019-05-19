@@ -52,22 +52,24 @@
                 return o;
             }
 
-			//this is the blur function... pass in standard col derived from tex2d(_MainTex,i.uv)
 			half4 blur(sampler2D tex, v2f i) {
 
 				float2 uv = i.uv;
 
 				half4 col = tex2D(tex, uv);
+				int iteration = 0;
 
 				for (int i = -_BlurSamples; i <= _BlurSamples; ++i) {
 					for (int j = -_BlurSamples; j <= _BlurSamples; ++j) {
 						float mul = _BlurSize / _BlurSamples;
 
 						col += tex2D(tex, float2(uv.x + i * pow(mul,2), uv.y + j * pow(mul, 2)));
+
+						iteration++;
 					}
 				}
 
-				return col / ((_BlurSamples * _BlurSamples) * 2);
+				return col / iteration;
 			}
 
             fixed4 frag (v2f i) : SV_Target
