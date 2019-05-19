@@ -11,6 +11,7 @@ public class IndicatorEditor : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             if (EventSystem.current.IsPointerOverGameObject()) {
                 EditorManager.instance.selected = null;
+
                 return;
             }
 

@@ -17,6 +17,8 @@ public class EditorManager : MonoBehaviour {
         level = new Level {
             name = "test"
         };
+
+        levelInfo.SetInfo();
     }
 
     void Update() {
