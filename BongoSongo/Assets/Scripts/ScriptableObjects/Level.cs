@@ -26,15 +26,21 @@ public class Level {
 
             bf.Serialize(stream, level);
         }
+    }
 
-        using (var stream = File.Open(fileName, FileMode.Open)) {
-            Debug.Log(stream);
+    public static Level Load (string path) {
+        Level deserialized;
+
+        using (var stream = File.Open(path, FileMode.Open)) {
+            Debug.Log("Loading level from: " + path);
 
             var bf = new BinaryFormatter();
 
-            var deserialized = (Level)bf.Deserialize(stream);
+            deserialized = (Level)bf.Deserialize(stream);
 
             Debug.Log(deserialized.name);
         }
+
+        return deserialized;
     }
 }
