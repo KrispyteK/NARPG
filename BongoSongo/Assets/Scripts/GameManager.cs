@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
     public void AddScore(int add) {
         score += add;
 
-        InterScene.instance.score = score;
+        InterScene.Instance.score = score;
     }
 
     void Update() {
