@@ -5,6 +5,7 @@ using UnityEngine;
 public class EditorManager : MonoBehaviour {
     public static EditorManager instance;
 
+    public GameObject selected;
     public Level level;
 
     void Awake() {
