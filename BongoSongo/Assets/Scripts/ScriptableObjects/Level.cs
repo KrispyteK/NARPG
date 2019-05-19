@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -8,18 +7,19 @@ using UnityEngine;
 public class Level {
     public string name;
     public string description;
+    public float bpm;
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
 
-    public override string ToString() {      
-        return $"Level \n{name}\n{description}\n{string.Join(",",spawnInfo)}";
+    public override string ToString() {
+        return $"Level \nname:{name}\ndescription:{description}\nbpm:{bpm}";
     }
 
-    public static void Save (Level level) {
+    public static void Save(Level level) {
         var fileName = Application.persistentDataPath;
         fileName = Path.Combine(fileName, $"{level.name}.level");
 
-        using (var stream = File.Open(fileName, FileMode.Create)) { 
+        using (var stream = File.Open(fileName, FileMode.Create)) {
             Debug.Log("Level saved to: " + fileName);
 
             var bf = new BinaryFormatter();
@@ -28,7 +28,7 @@ public class Level {
         }
     }
 
-    public static Level Load (string path) {
+    public static Level Load(string path) {
         Level deserialized;
 
         using (var stream = File.Open(path, FileMode.Open)) {
@@ -38,7 +38,7 @@ public class Level {
 
             deserialized = (Level)bf.Deserialize(stream);
 
-            Debug.Log(deserialized.name);
+            Debug.Log(deserialized);
         }
 
         return deserialized;

@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EditorManager : MonoBehaviour {
+    public static EditorManager instance;
 
     public Level level;
+
+    void Awake() {
+        instance = this;
+    }
 
     void Start() {
         level = new Level {
@@ -15,8 +20,12 @@ public class EditorManager : MonoBehaviour {
     void Update() {
         if (Input.GetKey(KeyCode.LeftControl)) {
             if (Input.GetKeyDown(KeyCode.S)) {
-                Level.Save(level);
+                Save();
             }
         }
+    }
+
+    public static void Save () {
+        Level.Save(instance.level);
     }
 }
