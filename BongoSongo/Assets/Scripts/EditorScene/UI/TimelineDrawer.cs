@@ -21,8 +21,6 @@ public class TimelineDrawer : MonoBehaviour {
         defaultScrollSensitivity = scrollRect.scrollSensitivity;
 
         defaultSize = (transform.parent as RectTransform).sizeDelta;
-
-        print((transform as RectTransform).sizeDelta);
     }
 
 
@@ -43,8 +41,6 @@ public class TimelineDrawer : MonoBehaviour {
         texture = PaintWaveformSpectrum(audioClip, 10f, 2048, 2048, Color.white);
 
         image.GetComponent<RawImage>().texture = texture;
-
-
     }
 
     public static Texture2D PaintWaveformSpectrum(AudioClip audio, float saturation, int width, int height, Color col) {
@@ -64,13 +60,6 @@ public class TimelineDrawer : MonoBehaviour {
                 tex.SetPixel(x, y, Color.black);
             }
         }
-
-        //for (int x = 0; x < waveform.Length; x++) {
-        //    for (int y = 0; y <= waveform[x] * ((float)height * .75f); y++) {
-        //        tex.SetPixel(x, (height / 2) + y, col);
-        //        tex.SetPixel(x, (height / 2) - y, col);
-        //    }
-        //}
 
         for (int y = 0; y < waveform.Length; y++) {
             for (int x = 0; x <= waveform[y] * ((float)width * .75f); x++) {

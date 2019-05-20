@@ -8,9 +8,9 @@ public class Level {
     public string name;
     public string description;
     public float bpm;
+    public ISong song;
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
-
     public Level () {
         name = "unnamed";
         bpm = 128;
