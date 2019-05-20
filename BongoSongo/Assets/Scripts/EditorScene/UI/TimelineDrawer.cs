@@ -42,7 +42,7 @@ public class TimelineDrawer : MonoBehaviour {
     public void RedrawTimeline() {
         var clip = EditorManager.instance.level.song.GenerateClip();
 
-        texture = PaintWaveformSpectrum(clip, 10f, 2048, 2048, Color.white);
+        texture = PaintWaveformSpectrum(clip, 10f, 512, 4096, Color.white);
 
         image.GetComponent<RawImage>().texture = texture;
     }
