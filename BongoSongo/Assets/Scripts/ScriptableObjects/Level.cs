@@ -20,7 +20,7 @@ public class Level {
     }
 
     public static void Save(Level level) {
-        var fileName = Application.persistentDataPath;
+        var fileName = Application.streamingAssetsPath;
         fileName = Path.Combine(fileName, $"{level.name}.level");
 
         using (var stream = File.Open(fileName, FileMode.Create)) {
