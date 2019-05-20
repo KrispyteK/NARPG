@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TimelineDrawer : MonoBehaviour {
+    public static TimelineDrawer instance;
 
-    public AudioClip audioClip;
     public RectTransform image;
     public ScrollRect scrollRect;
     public int maxZoom = 50;
@@ -16,6 +16,8 @@ public class TimelineDrawer : MonoBehaviour {
     private Vector2 defaultSize;
 
     void Start() {
+        instance = this;
+
         RedrawTimeline();
 
         defaultScrollSensitivity = scrollRect.scrollSensitivity;
@@ -38,7 +40,9 @@ public class TimelineDrawer : MonoBehaviour {
     }
 
     public void RedrawTimeline() {
-        texture = PaintWaveformSpectrum(audioClip, 10f, 2048, 2048, Color.white);
+        var clip = EditorManager.instance.level.song.GenerateClip();
+
+        texture = PaintWaveformSpectrum(clip, 10f, 2048, 2048, Color.white);
 
         image.GetComponent<RawImage>().texture = texture;
     }

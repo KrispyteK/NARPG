@@ -5,9 +5,9 @@ using UnityEngine;
 
 [System.Serializable]
 public class SongStandard : ISong {
-    public string file;
+    public AudioClip clip;
 
     public AudioClip GenerateClip() {
-        throw new System.NotImplementedException();
+        return clip;
     }
 }
