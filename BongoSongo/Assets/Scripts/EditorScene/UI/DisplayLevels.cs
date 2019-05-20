@@ -8,7 +8,7 @@ using System.Linq;
 public class DisplayLevels : MonoBehaviour {
 
     public GameObject levelButton;
-    public GameObject content;
+    public Transform contentPanel;
 
     void Start() {
         Level.Save(new Level { name = "test" });
@@ -29,10 +29,9 @@ public class DisplayLevels : MonoBehaviour {
         files.AddRange(Directory.GetFiles(Application.persistentDataPath, "*.level", SearchOption.AllDirectories));
  
         foreach (var file in files) {
-            var button = Instantiate(levelButton);
+            var button = Instantiate(levelButton, contentPanel);
 
             button.GetComponentInChildren<Text>().text = Path.GetFileName(file).Replace(".level","");
-            button.transform.SetParent(content.transform);
         }
     }
 }
