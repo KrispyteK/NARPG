@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TimelineDrawer : MonoBehaviour {
-    public static TimelineDrawer instance;
-
     public RectTransform image;
     public ScrollRect scrollRect;
     public int maxZoom = 50;
@@ -16,8 +14,6 @@ public class TimelineDrawer : MonoBehaviour {
     private Vector2 defaultSize;
 
     void Start() {
-        instance = this;
-
         RedrawTimeline();
 
         defaultScrollSensitivity = scrollRect.scrollSensitivity;

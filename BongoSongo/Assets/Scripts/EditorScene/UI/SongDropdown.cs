@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SongDropdown : MonoBehaviour {
-
     public AudioClip selectedSong;
     public AudioClip[] songs;
-
     public Dropdown dropdown;
+
+    private TimelineDrawer timelineDrawer;
+
 
     void Start () {
         dropdown.ClearOptions();
@@ -22,6 +23,8 @@ public class SongDropdown : MonoBehaviour {
         dropdown.AddOptions(options);
 
         dropdown.onValueChanged.AddListener(OnChanged);
+
+        timelineDrawer = FindObjectOfType<TimelineDrawer>();
 
         OnChanged(0);
     }
@@ -37,6 +40,6 @@ public class SongDropdown : MonoBehaviour {
             };
         }
 
-        TimelineDrawer.instance.RedrawTimeline();
+        timelineDrawer.RedrawTimeline();
     }
 }
