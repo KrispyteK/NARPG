@@ -1662,7 +1662,7 @@ MonoBehaviour:
   m_Content: {fileID: 1232667868}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -4033,6 +4033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0b28b3ff1233146b859a78dd5c6b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedSong: {fileID: 0}
   songs:
   - {fileID: 8300000, guid: d59a800df76856b46a7f42df7aff9b61, type: 3}
   - {fileID: 8300000, guid: 48f6ba993bf8ac94b863337fee4eaea7, type: 3}
@@ -5598,7 +5599,7 @@ MonoBehaviour:
   m_Content: {fileID: 1615541241}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -6829,7 +6830,7 @@ MonoBehaviour:
   m_Content: {fileID: 375022937}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
