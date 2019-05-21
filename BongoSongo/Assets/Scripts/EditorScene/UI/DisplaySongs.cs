@@ -45,9 +45,10 @@ public class DisplaySongs : MonoBehaviour {
 
         foreach (var songButton in songButtons) {
             if (songButton.button.IsSelected) {
-                EditorManager.instance.level = new Level();
-                EditorManager.instance.level.song = new SongStandard {
-                    audioClipFile = songPaths[i]
+                EditorManager.instance.level = new Level {
+                    song = new SongStandard {
+                        audioClipFile = songPaths[i]
+                    }
                 };
 
                 EditorManager.instance.LoadSong();

@@ -102,6 +102,12 @@ public class EditorManager : MonoBehaviour {
         Level.Save(level);
     }
 
+    public void Load (string file) {
+        level = Level.Load(file);
+
+        levelInfo.SetInfo();
+    }
+
     public void New() {
         Level.Save(level);
 
