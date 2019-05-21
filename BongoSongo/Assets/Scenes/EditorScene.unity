@@ -3857,7 +3857,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2042024562}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4046,8 +4046,8 @@ MonoBehaviour:
   levelButton: {fileID: 1290802114164534595, guid: a48c5dfcae49d204b9291c57ffd1f003,
     type: 3}
   contentPanel: {fileID: 1232667868}
-  okButton: {fileID: 0}
-  panel: {fileID: 0}
+  okButton: {fileID: 85465586}
+  panel: {fileID: 746956689}
 --- !u!1 &772367184
 GameObject:
   m_ObjectHideFlags: 0
