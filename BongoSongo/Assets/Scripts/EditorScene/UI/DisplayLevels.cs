@@ -11,11 +11,6 @@ public class DisplayLevels : MonoBehaviour {
     public Transform contentPanel;
 
     void Start() {
-        Level.Save(new Level { name = "test" });
-        Level.Save(new Level { name = "dance" });
-        Level.Save(new Level { name = "electro" });
-        Level.Save(new Level { name = "boogaloo"});
-
         GenerateButtons();
     }
 

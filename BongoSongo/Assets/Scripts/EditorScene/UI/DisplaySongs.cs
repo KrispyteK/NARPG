@@ -8,14 +8,16 @@ public class DisplaySongs : MonoBehaviour {
     public Transform contentPanel;
     public AudioClip[] songs;
     public List<string> songPaths = new List<string>();
-
+    public GameObject panel;
+    public GameObject levelPanel;
     public Button okButton;
 
     private List<SongButton> songButtons = new List<SongButton>();
+    private SelectableButton.SelectableButtonPool selectableButtonPool = new SelectableButton.SelectableButtonPool();
 
     private struct SongButton {
         public AudioClip song;
-        public Button button;
+        public SelectableButton button;
     }
 
 #if UNITY_EDITOR
@@ -39,13 +41,30 @@ public class DisplaySongs : MonoBehaviour {
     }
 
     void Ok () {
-        //foreach (var songButton in songButtons) {
-        //    print(songButton.button.IsHighlighted());
-        //}
+        var i = 0;
+
+        foreach (var songButton in songButtons) {
+            if (songButton.button.IsSelected) {
+                EditorManager.instance.level = new Level();
+                EditorManager.instance.level.song = new SongStandard {
+                    audioClipFile = songPaths[i]
+                };
+
+                EditorManager.instance.LoadSong();
+                EditorManager.instance.levelInfo.SetInfo();
+
+                panel.SetActive(false);
+                levelPanel.SetActive(false);
+
+                break;
+            }
+
+            i++;
+        }
     }
 
     public void GenerateButtons() {
-        foreach (Transform child in transform) {
+        foreach (Transform child in contentPanel) {
             Destroy(child.gameObject);
         }
 
@@ -56,7 +75,9 @@ public class DisplaySongs : MonoBehaviour {
 
             button.GetComponentInChildren<Text>().text = song.name;
 
-            var buttonComponent = button.GetComponent<Button>();
+            var buttonComponent = button.GetComponent<SelectableButton>();
+
+            buttonComponent.AddToPool(selectableButtonPool);
 
             songButtons.Add(new SongButton {
                 button = buttonComponent,

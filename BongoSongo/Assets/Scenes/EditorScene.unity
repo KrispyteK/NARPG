@@ -1944,7 +1944,6 @@ GameObject:
   m_Component:
   - component: {fileID: 379335300}
   - component: {fileID: 379335301}
-  - component: {fileID: 379335302}
   m_Layer: 5
   m_Name: Vertical
   m_TagString: Untagged
@@ -2001,21 +2000,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
---- !u!114 &379335302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379335299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d5b5e122d64f5540ba434e9b7309e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputName: {fileID: 1540184654}
-  inputBPM: {fileID: 1133228595}
-  inputDescription: {fileID: 296304247}
 --- !u!1 &384079280
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,6 +4342,7 @@ GameObject:
   - component: {fileID: 837033296}
   - component: {fileID: 837033295}
   - component: {fileID: 837033297}
+  - component: {fileID: 837033298}
   m_Layer: 5
   m_Name: Info
   m_TagString: Untagged
@@ -4443,6 +4428,21 @@ MonoBehaviour:
   openedMax: {x: 1, y: 1}
   time: 0.07
   button: {fileID: 2106370155}
+--- !u!114 &837033298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837033293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5b5e122d64f5540ba434e9b7309e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputName: {fileID: 1540184654}
+  inputBPM: {fileID: 1133228595}
+  songText: {fileID: 1169286171}
 --- !u!1 &919991532
 GameObject:
   m_ObjectHideFlags: 0
@@ -6967,7 +6967,6 @@ GameObject:
   - component: {fileID: 1252182709}
   - component: {fileID: 1252182708}
   - component: {fileID: 1252182707}
-  - component: {fileID: 1252182710}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -7046,29 +7045,6 @@ MonoBehaviour:
   levelButton: {fileID: 1290802114164534595, guid: a48c5dfcae49d204b9291c57ffd1f003,
     type: 3}
   contentPanel: {fileID: 1252182706}
---- !u!114 &1252182710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1252182705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 205ab0855a4b5464cb3c70483aa79b4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelButton: {fileID: 1290802114164534595, guid: a48c5dfcae49d204b9291c57ffd1f003,
-    type: 3}
-  contentPanel: {fileID: 1252182706}
-  songs:
-  - {fileID: 8300000, guid: d59a800df76856b46a7f42df7aff9b61, type: 3}
-  - {fileID: 8300000, guid: 48f6ba993bf8ac94b863337fee4eaea7, type: 3}
-  - {fileID: 8300000, guid: 3b3fbdb889593d2418b73cc33c870fb6, type: 3}
-  songPaths:
-  - Audio/Music/Prototype-Dance(bpm148)
-  - Audio/Music/Prototype-Rock(bpm106)
-  - Audio/Music/Prototype-Techno(bpm140)
 --- !u!1 &1258119464
 GameObject:
   m_ObjectHideFlags: 0
@@ -7305,29 +7281,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1270468916}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1339030192}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1342900683}
-        m_MethodName: SetInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1270468916
@@ -7739,10 +7693,10 @@ MonoBehaviour:
     description: 
     bpm: 0
     spawnInfo: []
-  levelInfo: {fileID: 379335302}
   indicatorParent: {fileID: 0}
   beat: 0
   beatText: {fileID: 531618859}
+  levelInfo: {fileID: 0}
   editorPrefabs:
   - indicator: 0
     prefab: {fileID: 8158367451574732956, guid: c1bd7cde4305ccd47bc6e573fc848e3d,
@@ -8531,13 +8485,13 @@ MonoBehaviour:
   m_VerticalScrollbar: {fileID: 0}
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 4
+  m_ContentType: 5
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 1
+  m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 4
+  m_CharacterValidation: 5
   m_RegexValue: 
   m_GlobalPointSize: 32
   m_CharacterLimit: 0
@@ -10651,6 +10605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1993542492}
   - component: {fileID: 1993542493}
+  - component: {fileID: 1993542494}
   m_Layer: 5
   m_Name: NewScreen
   m_TagString: Untagged
@@ -10692,6 +10647,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpened: 1
   panel: {fileID: 1339030192}
+--- !u!114 &1993542494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993542491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205ab0855a4b5464cb3c70483aa79b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelButton: {fileID: 1290802114164534595, guid: a48c5dfcae49d204b9291c57ffd1f003,
+    type: 3}
+  contentPanel: {fileID: 1252182706}
+  songs:
+  - {fileID: 8300000, guid: d59a800df76856b46a7f42df7aff9b61, type: 3}
+  - {fileID: 8300000, guid: 48f6ba993bf8ac94b863337fee4eaea7, type: 3}
+  - {fileID: 8300000, guid: 3b3fbdb889593d2418b73cc33c870fb6, type: 3}
+  songPaths:
+  - Audio/Music/Prototype-Dance(bpm148)
+  - Audio/Music/Prototype-Rock(bpm106)
+  - Audio/Music/Prototype-Techno(bpm140)
+  panel: {fileID: 1339030192}
+  levelPanel: {fileID: 746956689}
+  okButton: {fileID: 1270468915}
 --- !u!1 &2013569952
 GameObject:
   m_ObjectHideFlags: 0

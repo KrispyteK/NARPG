@@ -20,10 +20,10 @@ public class EditorManager : MonoBehaviour {
     public EditorPrefab currentPrefab;
     public GameObject selected;
     public Level level;
-    public LevelInfo levelInfo;
     public Transform indicatorParent;
     public int beat;
     public Text beatText;
+    public LevelInfo levelInfo;
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -41,11 +41,10 @@ public class EditorManager : MonoBehaviour {
             name = "test"
         };
 
-        levelInfo.SetInfo();
-
         currentPrefab = editorPrefabs[0];
 
         timelineDrawer = FindObjectOfType<TimelineDrawer>();
+        levelInfo = FindObjectOfType<LevelInfo>();
     }
 
     void Update() {
