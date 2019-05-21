@@ -83,11 +83,40 @@ public class EditorManager : MonoBehaviour {
         beat = num;
 
         beatText.text = "Beat: " + beat;
+
+        SetVisible();
+    }
+
+    private IndicatorInfo[] GetOrderedIndicators () {
+        var infos = new List<IndicatorInfo>();
+
+        foreach (Transform child in indicatorParent) infos.Add(child.GetComponent<IndicatorInfo>());
+
+        var ordered = infos.OrderBy(x => x.beat).ToArray();
+
+        return ordered;
+    }
+
+    private void SetVisible () {
+        var ordered = GetOrderedIndicators();
+
+        for (int i = 0; i < ordered.Length; i++) {
+            ordered[i].gameObject.SetActive(Mathf.Abs(beat - ordered[i].beat) < 8);
+
+            var renderers = ordered[i].gameObject.GetComponentsInChildren<Renderer>();
+
+            foreach (var renderer in renderers) {
+                var col = renderer.material.color;
+
+                var alpha = (1f - Mathf.Abs(beat - ordered[i].beat) / 8f);
+
+                renderer.material.color = new Color(col.r, col.g, col.b, alpha);
+            }
+        }
     }
 
     public void OrderIndicators () {
-        var infos = FindObjectsOfType<IndicatorInfo>();
-        var ordered = infos.OrderBy(x => x.beat).ToArray();
+        var ordered = GetOrderedIndicators();
 
         for (int i = 0; i < ordered.Length; i++) {
             ordered[i].transform.SetSiblingIndex(i);
@@ -95,8 +124,7 @@ public class EditorManager : MonoBehaviour {
     }
 
     public List<SpawnInfo> GenerateSpawnInfoList () {
-        var infos = FindObjectsOfType<IndicatorInfo>();
-        var ordered = infos.OrderBy(x => x.beat).ToArray();
+        var ordered = GetOrderedIndicators();
         var list = new List<SpawnInfo>();
 
         for (int i = 0; i < ordered.Length; i++) {
