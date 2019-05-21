@@ -18,7 +18,20 @@ public class IndicatorEditor : MonoBehaviour {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+            var hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
+            RaycastHit2D hit = default;
+
+            var closestBeat = Mathf.Infinity;
+
+            foreach (var h in hits) {
+                var dist = Mathf.Abs(EditorManager.instance.beat - h.collider.gameObject.GetComponent<IndicatorInfo>().beat);
+
+                if (dist < closestBeat) {
+                    closestBeat = dist;
+
+                    hit = h;
+                }
+            }
 
             if (hit.collider != null) {
                 var target = hit.collider.gameObject;
