@@ -9,7 +9,21 @@ public class SongDropdown : MonoBehaviour {
     public Dropdown dropdown;
 
     private TimelineDrawer timelineDrawer;
+    public List<string> songPaths = new List<string>();
 
+#if UNITY_EDITOR
+    void OnValidate() {
+        songPaths.Clear();
+
+        foreach (var clip in songs) {
+            var path = UnityEditor.AssetDatabase.GetAssetPath(clip);
+            var regex = new System.Text.RegularExpressions.Regex(@"^(Assets/Resources/)|(.mp3|.wav)$");
+            path = regex.Replace(path, "");
+
+            songPaths.Add(path);
+        }
+    }
+#endif
 
     void Start () {
         dropdown.ClearOptions();
@@ -30,14 +44,7 @@ public class SongDropdown : MonoBehaviour {
     }
 
     public void OnChanged (int num) {
-        selectedSong = songs[num];
-
-#if UNITY_EDITOR
-        var path = UnityEditor.AssetDatabase.GetAssetPath(selectedSong);
-
-        var regex = new System.Text.RegularExpressions.Regex(@"^(Assets/Resources/)|(.mp3|.wav)$");
-
-        path = regex.Replace(path,"");
+        var path = songPaths[num];
 
         if (EditorManager.instance.level.song is SongStandard stdSong) {
             stdSong.audioClipFile = path;
@@ -46,7 +53,6 @@ public class SongDropdown : MonoBehaviour {
                 audioClipFile = path
             };
         }
-#endif
 
         timelineDrawer.RedrawTimeline();
     }
