@@ -32,13 +32,21 @@ public class SongDropdown : MonoBehaviour {
     public void OnChanged (int num) {
         selectedSong = songs[num];
 
+#if UNITY_EDITOR
+        var path = UnityEditor.AssetDatabase.GetAssetPath(selectedSong);
+
+        var regex = new System.Text.RegularExpressions.Regex(@"^(Assets/Resources/)|(.mp3|.wav)$");
+
+        path = regex.Replace(path,"");
+
         if (EditorManager.instance.level.song is SongStandard stdSong) {
-            stdSong.clip = selectedSong;
+            stdSong.audioClipFile = path;
         } else if (EditorManager.instance.level.song == null) {
             EditorManager.instance.level.song = new SongStandard {
-                clip = selectedSong
+                audioClipFile = path
             };
         }
+#endif
 
         timelineDrawer.RedrawTimeline();
     }
