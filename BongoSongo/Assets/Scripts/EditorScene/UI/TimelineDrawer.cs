@@ -7,16 +7,14 @@ public class TimelineDrawer : MonoBehaviour {
     public RectTransform image;
     public ScrollRect scrollRect;
     public int maxZoom = 50;
+    public float defaultScrollSensitivity;
 
     private Texture2D texture;
-    private float defaultScrollSensitivity;
     private int zoom = 0;
     private Vector2 defaultSize;
 
     void Start() {
         RedrawTimeline();
-
-        defaultScrollSensitivity = scrollRect.scrollSensitivity;
 
         defaultSize = (transform.parent as RectTransform).sizeDelta;
     }

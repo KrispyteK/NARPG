@@ -1888,6 +1888,7 @@ MonoBehaviour:
   image: {fileID: 375022937}
   scrollRect: {fileID: 1444564458}
   maxZoom: 50
+  defaultScrollSensitivity: 20
 --- !u!222 &375022940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4169,6 +4170,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48f6ba993bf8ac94b863337fee4eaea7, type: 3}
   - {fileID: 8300000, guid: c85fe62b9b83e714b8cb730d9e27ff83, type: 3}
   dropdown: {fileID: 2042170879}
+  songPaths:
+  - Audio/Music/Prototype-Dance(bpm148)
+  - Audio/Music/Prototype-Rock(bpm106)
+  - Audio/Music/Prototype-Techno(bpm140)
 --- !u!1 &985050112
 GameObject:
   m_ObjectHideFlags: 0
@@ -7044,7 +7049,7 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 2
-  m_Elasticity: 0.1
+  m_Elasticity: 0
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 20
