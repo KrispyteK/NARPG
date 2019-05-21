@@ -131,7 +131,8 @@ public class BeatMapWindow : EditorWindowInput {
 
                         spawnManager.spawnInfo.Insert(0, new SpawnInfo {
                             beat = beat,
-                            position = position
+                            x = position.x,
+                            y = position.y
                         });
 
                         selected = -1;
@@ -184,7 +185,10 @@ public class BeatMapWindow : EditorWindowInput {
 
         var position = (Event.current.mousePosition + new Vector2(Size, Size) / 2 + offset) / new Vector2(Screen.width, Screen.height);
 
-        spawnManager.spawnInfo[modifyingIndex].position = new Vector2(Mathf.Clamp01(position.x), Mathf.Clamp01(position.y));
+        var pos = new Vector2(Mathf.Clamp01(position.x), Mathf.Clamp01(position.y));
+
+        spawnManager.spawnInfo[modifyingIndex].x = pos.x;
+        spawnManager.spawnInfo[modifyingIndex].y = pos.y;
 
         Undo.RecordObject(spawnManager, "Move Beat");
     }
@@ -208,8 +212,8 @@ public class BeatMapWindow : EditorWindowInput {
             if (spawnInfoBeat < start || spawnInfoBeat > end) continue;
 
             var position = new Vector2(
-                    spawnInfo.position.x * Screen.width - Size / 2,
-                    spawnInfo.position.y * Screen.height - Size / 2
+                    spawnInfo.x * Screen.width - Size / 2,
+                    spawnInfo.y * Screen.height - Size / 2
                 );
 
             var rect = new Rect(position, new Vector2(Size, Size));
@@ -249,8 +253,8 @@ public class BeatMapWindow : EditorWindowInput {
             if (spawnInfoBeat < start || spawnInfoBeat > end) continue;
 
             var position = new Vector2(
-                    spawnInfo.position.x * Screen.width - Size / 2,
-                    spawnInfo.position.y * Screen.height - Size / 2
+                    spawnInfo.x * Screen.width - Size / 2,
+                    spawnInfo.y * Screen.height - Size / 2
                 );
 
             DrawQuad(new Rect(position, new Vector2(Size, Size)), new Color((i == selected ? 0 : 255), 255, 255, 1f - (Mathf.Abs(beat - spawnInfoBeat) / 6f)));
