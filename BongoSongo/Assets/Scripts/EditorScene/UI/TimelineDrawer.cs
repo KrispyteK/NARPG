@@ -14,8 +14,6 @@ public class TimelineDrawer : MonoBehaviour {
     private Vector2 defaultSize;
 
     void Start() {
-        RedrawTimeline();
-
         defaultSize = (transform.parent as RectTransform).sizeDelta;
     }
 
@@ -33,10 +31,8 @@ public class TimelineDrawer : MonoBehaviour {
         }
     }
 
-    public void RedrawTimeline() {
-        var clip = EditorManager.instance.level.song.GenerateClip();
-
-        texture = PaintWaveformSpectrum(clip, 10f, 512, 4096, Color.white);
+    public void RedrawTimeline(AudioClip audioClip) {
+        texture = PaintWaveformSpectrum(audioClip, 10f, 512, 4096, Color.white);
 
         image.GetComponent<RawImage>().texture = texture;
     }

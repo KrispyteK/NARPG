@@ -54,6 +54,6 @@ public class SongDropdown : MonoBehaviour {
             };
         }
 
-        timelineDrawer.RedrawTimeline();
+        EditorManager.instance.LoadSong();
     }
 }
