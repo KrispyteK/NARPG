@@ -2,19 +2,23 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using FullSerializer;
+using Newtonsoft.Json;
 
 [System.Serializable]
-public class Level {
-    public string name;
+public class Level : ScriptableObject {
+    //public string name;
     public string description;
     public float bpm;
-    public ISong song;
+    public Song song;
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
+
     public Level () {
         name = "unnamed";
         bpm = 128;
     }
+
     public override string ToString() {
         return $"Level \nname:{name}\ndescription:{description}\nbpm:{bpm}";
     }
@@ -23,27 +27,30 @@ public class Level {
         var fileName = Application.streamingAssetsPath;
         fileName = Path.Combine(fileName, $"{level.name}.level");
 
-        using (var stream = File.Open(fileName, FileMode.Create)) {
-            Debug.Log("Level saved to: " + fileName);
+        var json = JsonConvert.SerializeObject(level);
 
-            var bf = new BinaryFormatter();
+        Debug.Log(json);
 
-            bf.Serialize(stream, level);
+        using (StreamWriter outputFile = new StreamWriter(fileName)) {
+            foreach (char c in json) outputFile.Write(c);
         }
+
+        Debug.Log("Level saved to: " + fileName);
     }
 
     public static Level Load(string path) {
+        Debug.Log("Loading level from: " + path  + "...");
+
         Level deserialized;
 
-        using (var stream = File.Open(path, FileMode.Open)) {
-            Debug.Log("Loading level from: " + path);
+        using (StreamReader sr = new StreamReader(path)) {
+            // Read the stream to a string, and write the string to the console.
+            var json = sr.ReadToEnd();
 
-            var bf = new BinaryFormatter();
-
-            deserialized = (Level)bf.Deserialize(stream);
-
-            Debug.Log(deserialized);
+            deserialized = JsonConvert.DeserializeObject<Level>(json);
         }
+
+        Debug.Log("Level loaded succesfully!");
 
         return deserialized;
     }

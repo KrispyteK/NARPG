@@ -5,6 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface ISong {
-    AudioClip GenerateClip();
+[Serializable]
+public class Song {
+
+    public string clipString;
+
+    public virtual AudioClip GenerateClip() {
+        return Resources.Load<AudioClip>(clipString);
+    }
 }

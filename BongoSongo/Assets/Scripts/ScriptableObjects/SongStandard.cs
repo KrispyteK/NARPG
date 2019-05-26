@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SongStandard : ISong {
+public class SongStandard : Song {
     public string audioClipFile;
 
-    public AudioClip GenerateClip() {
+    public override AudioClip GenerateClip() {
         return Resources.Load<AudioClip>(audioClipFile);
     }
 }

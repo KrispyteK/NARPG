@@ -46,11 +46,11 @@ public class SongDropdown : MonoBehaviour {
     public void OnChanged (int num) {
         var path = songPaths[num];
 
-        if (EditorManager.instance.level.song is SongStandard stdSong) {
-            stdSong.audioClipFile = path;
+        if (EditorManager.instance.level.song is Song song) {
+            song.clipString = path;
         } else if (EditorManager.instance.level.song == null) {
-            EditorManager.instance.level.song = new SongStandard {
-                audioClipFile = path
+            EditorManager.instance.level.song = new Song {
+                clipString = path
             };
         }
 

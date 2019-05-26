@@ -176,6 +176,8 @@ public class EditorManager : MonoBehaviour {
 
         level = Level.Load(file);
 
+        print(level);
+
         levelInfo.SetInfo();
         LoadSong();
 
