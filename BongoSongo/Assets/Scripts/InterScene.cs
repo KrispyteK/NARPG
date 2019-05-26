@@ -19,8 +19,6 @@ public class InterScene : Singleton<InterScene> {
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         var spawnManager = FindObjectOfType<SpawnManager>();
 
-        print(spawnManager);
-
         if (spawnManager) {
             spawnManager.spawnInfo = level.spawnInfo;
         }

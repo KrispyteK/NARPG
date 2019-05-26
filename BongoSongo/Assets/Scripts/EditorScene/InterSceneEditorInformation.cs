@@ -20,6 +20,8 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
 
         if (m) {
             m.startBeat = beat;
+            m.doCountdown = false;
+            m.doOutline = false;
         }
 
         Destroy(gameObject);
