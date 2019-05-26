@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TimelineDrawer : MonoBehaviour {
+    public RectTransform timeIndicator;
     public RectTransform image;
     public ScrollRect scrollRect;
     public int maxZoom = 50;
@@ -16,8 +17,6 @@ public class TimelineDrawer : MonoBehaviour {
     void Start() {
         defaultSize = (transform.parent as RectTransform).sizeDelta;
     }
-
-
     void Update() {
         scrollRect.scrollSensitivity = Input.GetKey(KeyCode.LeftControl) ? 0 : defaultScrollSensitivity;
 
@@ -28,6 +27,10 @@ public class TimelineDrawer : MonoBehaviour {
 
             (transform as RectTransform).SetBottom(-zoom * 100);
             (transform as RectTransform).SetTop(-zoom * 100);
+        }
+
+        if (EditorManager.instance.beatsTotal != 0) {
+            timeIndicator.localPosition = new Vector3(0, (EditorManager.instance.beat / (float)EditorManager.instance.beatsTotal) * -(transform as RectTransform).rect.height, 0);
         }
     }
 
