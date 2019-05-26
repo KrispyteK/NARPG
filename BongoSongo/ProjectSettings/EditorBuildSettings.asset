@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TechnoScene.unity
     guid: a247b187c5cc7564b9520a9aa76683f8
+  - enabled: 1
+    path: Assets/Scenes/GameplayScene.unity
+    guid: 70e50197651b40a4a91356f832bd4e68
   m_configObjects: {}

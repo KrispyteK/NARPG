@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public enum Indicators {
     Button
@@ -198,5 +199,17 @@ public class EditorManager : MonoBehaviour {
         level = new Level();
 
         levelInfo.SetInfo();
+    }
+
+    public void PlayAtBeat () {
+        var interEditor = InterSceneEditorInformation.Instance;
+
+        interEditor.beat = beat;
+
+        var interScene = InterScene.Instance;
+
+        interScene.level = level;
+
+        SceneManager.LoadScene("GameplayScene");
     }
 }

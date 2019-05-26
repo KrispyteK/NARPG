@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Singleton<T> {
-    protected virtual bool shouldGenerateInstance => true;
+    protected virtual bool DontDestroyOnLoad => false;
     protected static T _instance;
 
     public static T Instance {
@@ -18,6 +18,14 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T> {
         }
     }
 
+    private void CheckForMultiple () {
+        var objs = FindObjectsOfType<T>();
+
+        if (objs.Length > 1) {
+            print($"Only one instance of type {this.GetType().Name} is allowed per scene.");
+        }
+    }
+
     public static T Initiate() {
         if (_instance != null) {
             return _instance;
@@ -27,7 +35,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T> {
         var singleton = gameObject.AddComponent<T>();
         singleton.OnInitiate();
 
-        DontDestroyOnLoad(gameObject);
+        if (singleton.DontDestroyOnLoad) DontDestroyOnLoad(gameObject);
 
         return singleton;
     }
