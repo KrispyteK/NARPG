@@ -134,8 +134,8 @@ public class EditorManager : MonoBehaviour {
 
             var pos = ordered[i].transform.position / Camera.main.orthographicSize;
 
-            spawnInfo.x = pos.x;
-            spawnInfo.y = pos.y;
+            spawnInfo.position.x = pos.x;
+            spawnInfo.position.y = pos.y;
 
             list.Add(spawnInfo);
         }
@@ -181,7 +181,7 @@ public class EditorManager : MonoBehaviour {
 
         foreach (var spawnInfo in level.spawnInfo) {
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
-            var position = new Vector2 (spawnInfo.x, spawnInfo.y) * Camera.main.orthographicSize;
+            var position = new Vector2 (spawnInfo.position.x, spawnInfo.position.y) * Camera.main.orthographicSize;
 
             var instance = Instantiate(prefab, position, Quaternion.identity, indicatorParent);
             instance.GetComponent<IndicatorInfo>().beat = spawnInfo.beat;
