@@ -231,7 +231,12 @@ public class EditorManager : MonoBehaviour {
         SceneManager.LoadScene("GameplayScene");
     }
 
+    private GUIStyle guiStyle = new GUIStyle();
+
     public void OnGUI() {
+        guiStyle.fontSize = 40;
+        guiStyle.normal.textColor = Color.white;
+
         if (selected) {
             var bounding = selected.GetComponentInChildren<Renderer>().bounds;
 
@@ -239,6 +244,17 @@ public class EditorManager : MonoBehaviour {
             var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
 
             GUI.DrawTexture(new Rect(center.x - extents.x/2, Camera.main.pixelHeight - center.y - extents.y / 2, extents.x, extents.y), selectedTexture);
+        }
+
+        var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
+
+        foreach (var indicatorInfo in indicatorInfos) {
+            var bounding = indicatorInfo.gameObject.GetComponentInChildren<Renderer>().bounds;
+
+            var center = Camera.main.WorldToScreenPoint(bounding.center);
+            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+
+            GUI.Label(new Rect(center.x + extents.x/2, Camera.main.pixelHeight - center.y + extents.y / 2, extents.x, extents.y), "" + indicatorInfo.beat, guiStyle);
         }
     }
 }
