@@ -5,4 +5,5 @@ using UnityEngine;
 public class IndicatorInfo : MonoBehaviour {
     public int beat;
     public Indicators indicator;
+    internal int spawnInfoIndex;
 }

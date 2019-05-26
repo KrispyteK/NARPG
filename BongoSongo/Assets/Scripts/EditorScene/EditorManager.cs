@@ -26,6 +26,7 @@ public class EditorManager : MonoBehaviour {
     public int beat;
     public Text beatText;
     public LevelInfo levelInfo;
+    public Texture selectedTexture;
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -54,6 +55,10 @@ public class EditorManager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.S)) {
                 Save();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Delete)) {
+            DeleteIndicator();
         }
     }
 
@@ -152,6 +157,16 @@ public class EditorManager : MonoBehaviour {
         OrderIndicators();
     }
 
+    public void DeleteIndicator () {
+        if (selected) {
+            var indicatorInfo = selected.GetComponent<IndicatorInfo>();
+
+            level.spawnInfo.RemoveAt(indicatorInfo.spawnInfoIndex);
+
+            Destroy(selected);
+        }
+    }
+
     public void SetName(TMPro.TMP_InputField inputField) {
         level.name = inputField.text;
     }
@@ -177,10 +192,10 @@ public class EditorManager : MonoBehaviour {
 
         level = Level.Load(file);
 
-        print(level);
-
         levelInfo.SetInfo();
         LoadSong();
+
+        var i = 0;
 
         foreach (var spawnInfo in level.spawnInfo) {
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
@@ -188,9 +203,12 @@ public class EditorManager : MonoBehaviour {
 
             var instance = Instantiate(prefab, position, Quaternion.identity, indicatorParent);
             instance.GetComponent<IndicatorInfo>().beat = spawnInfo.beat;
+            instance.GetComponent<IndicatorInfo>().spawnInfoIndex = spawnInfo.beat;
 
-            OrderIndicators();
+            i = 0;
         }
+
+        OrderIndicators();
     }
 
     public void New() {
@@ -211,5 +229,16 @@ public class EditorManager : MonoBehaviour {
         interScene.level = level;
 
         SceneManager.LoadScene("GameplayScene");
+    }
+
+    public void OnGUI() {
+        if (selected) {
+            var bounding = selected.GetComponentInChildren<Renderer>().bounds;
+
+            var center = Camera.main.WorldToScreenPoint(bounding.center);
+            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+
+            GUI.DrawTexture(new Rect(center.x - extents.x/2, Camera.main.pixelHeight - center.y - extents.y / 2, extents.x, extents.y), selectedTexture);
+        }
     }
 }

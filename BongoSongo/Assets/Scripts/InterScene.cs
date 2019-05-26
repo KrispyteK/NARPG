@@ -2,8 +2,6 @@
 using UnityEngine.SceneManagement;
 
 public class InterScene : Singleton<InterScene> {
-    //private static InterScene _instance;
-
     public Level level;
     public int score;
     public GamePlaySettings gamePlaySettings;
@@ -18,9 +16,11 @@ public class InterScene : Singleton<InterScene> {
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         var spawnManager = FindObjectOfType<SpawnManager>();
+        var soundManager = FindObjectOfType<SoundManager>();
 
         if (spawnManager) {
             spawnManager.spawnInfo = level.spawnInfo;
+            soundManager.beatTest.clip = level.song.GenerateClip();
         }
     }
 }
