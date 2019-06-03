@@ -48,7 +48,7 @@ public class DisplayLevels : MonoBehaviour {
 
         var files = new List<string>();
 
-        files.AddRange(Directory.GetFiles(Application.streamingAssetsPath, "*.level", SearchOption.AllDirectories));
+        files.AddRange(Directory.GetFiles(Application.persistentDataPath, "*.level", SearchOption.AllDirectories));
  
         foreach (var file in files) {
             levelFiles.Add(file);

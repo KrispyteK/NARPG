@@ -13,6 +13,10 @@ public class Level : ScriptableObject {
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
 
+    static Level () {
+        BetterStreamingAssets.Initialize();
+    }
+
     public Level () {
         name = "unnamed";
         bpm = 128;
@@ -23,7 +27,7 @@ public class Level : ScriptableObject {
     }
 
     public static void Save(Level level) {
-        var fileName = Application.streamingAssetsPath;
+        var fileName = Application.persistentDataPath;
         fileName = Path.Combine(fileName, $"{level.name}.level");
 
         var json = JsonConvert.SerializeObject(level);
@@ -38,29 +42,20 @@ public class Level : ScriptableObject {
         Debug.Log("Level saved to: " + fileName);
     }
 
-    public static Level Load(string path) {
-        Debug.Log("Loading level from: " + path  + "...");
-
+    public static Level Load(string file) {
         Level deserialized;
         string json;
 
-        //using (StreamReader sr = new StreamReader(path)) {
-        //    // Read the stream to a string, and write the string to the console.
-        //    var json = sr.ReadToEnd();
+        string path = Path.Combine(Application.persistentDataPath, file);
 
-        //    deserialized = JsonConvert.DeserializeObject<Level>(json);
-        //}
+        Debug.Log("Loading level from: " + path + "...");
 
-        if (Application.platform == RuntimePlatform.Android) {
-            WWW reader = new WWW(path);
-
-            while (!reader.isDone) { }
-
-            json = reader.text;
+        if (!File.Exists(path)) {
+            Debug.LogErrorFormat("Streaming asset not found: {0}", path);
+            return null;
         }
-        else {
-            json = File.ReadAllText(path);
-        }
+
+        json = File.ReadAllText(path);
 
         deserialized = JsonConvert.DeserializeObject<Level>(json);
 
