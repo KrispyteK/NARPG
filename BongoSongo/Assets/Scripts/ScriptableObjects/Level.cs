@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.Networking;
 
 [System.Serializable]
 public class Level : ScriptableObject {
@@ -33,6 +34,7 @@ public class Level : ScriptableObject {
             foreach (char c in json) outputFile.Write(c);
         }
 
+
         Debug.Log("Level saved to: " + fileName);
     }
 
@@ -40,13 +42,27 @@ public class Level : ScriptableObject {
         Debug.Log("Loading level from: " + path  + "...");
 
         Level deserialized;
+        string json;
 
-        using (StreamReader sr = new StreamReader(path)) {
-            // Read the stream to a string, and write the string to the console.
-            var json = sr.ReadToEnd();
+        //using (StreamReader sr = new StreamReader(path)) {
+        //    // Read the stream to a string, and write the string to the console.
+        //    var json = sr.ReadToEnd();
 
-            deserialized = JsonConvert.DeserializeObject<Level>(json);
+        //    deserialized = JsonConvert.DeserializeObject<Level>(json);
+        //}
+
+        if (Application.platform == RuntimePlatform.Android) {
+            WWW reader = new WWW(path);
+
+            while (!reader.isDone) { }
+
+            json = reader.text;
         }
+        else {
+            json = File.ReadAllText(path);
+        }
+
+        deserialized = JsonConvert.DeserializeObject<Level>(json);
 
         Debug.Log("Level loaded succesfully!");
 

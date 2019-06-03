@@ -10,6 +10,7 @@ public class ScrollRectSnap : MonoBehaviour {
     public float velocityShiftThresholdMax = 2000f;
     public float snapThreshold = 5f;
     public float force = 1f;
+    public float damping = 0.05f;
     public RectTransform panel;
     public RectTransform center;
     public RectTransform[] buttons;
@@ -24,6 +25,10 @@ public class ScrollRectSnap : MonoBehaviour {
     private bool goToClosest = true;
 
     void Start () {
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         distances = new float[buttons.Length];
 
         buttonDistance = (int)Mathf.Abs(
@@ -62,7 +67,7 @@ public class ScrollRectSnap : MonoBehaviour {
         float newX = position;
 
         if (Mathf.Abs(delta) > snapThreshold) {
-            scrollRect.velocity += new Vector2(delta * buttonDistance * Time.deltaTime * force,0);
+            scrollRect.velocity += new Vector2(delta * buttonDistance * Time.deltaTime * force,0) - scrollRect.velocity * damping * Time.deltaTime;
         } else {
             Vector2 newPosition = new Vector2(newX, panel.anchoredPosition.y);
 
