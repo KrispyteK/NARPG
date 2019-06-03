@@ -587,11 +587,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8567739538450140512, guid: a90ad58f4a2ce1e47b6ac8e14b5ea455,
-        type: 3}
-      propertyPath: level
-      value: dance
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a90ad58f4a2ce1e47b6ac8e14b5ea455, type: 3}
 --- !u!1 &453819509
@@ -2818,7 +2813,6 @@ MonoBehaviour:
   - {fileID: 905055182}
   - {fileID: 415957908}
   - {fileID: 294317561}
-  - {fileID: 0}
 --- !u!114 &1751741761
 MonoBehaviour:
   m_ObjectHideFlags: 0

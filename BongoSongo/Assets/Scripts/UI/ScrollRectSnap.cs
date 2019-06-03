@@ -14,6 +14,8 @@ public class ScrollRectSnap : MonoBehaviour {
     public RectTransform center;
     public RectTransform[] buttons;
 
+    public RectTransform Selected => buttons[minButtonNum];
+
     private float[] distances;
     private bool dragging;
     private int buttonDistance;
