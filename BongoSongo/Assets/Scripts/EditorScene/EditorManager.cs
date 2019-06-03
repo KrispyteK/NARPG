@@ -219,6 +219,14 @@ public class EditorManager : MonoBehaviour {
         levelInfo.SetInfo();
     }
 
+    public void Play () {
+        var interScene = InterScene.Instance;
+
+        interScene.level = level;
+
+        SceneManager.LoadScene("GameplayScene");
+    }
+
     public void PlayAtBeat () {
         var interEditor = InterSceneEditorInformation.Instance;
 
