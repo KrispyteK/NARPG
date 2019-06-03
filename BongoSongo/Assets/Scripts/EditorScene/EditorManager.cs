@@ -63,6 +63,8 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void LoadSong () {
+        if (!level) return;
+
         var clip = level.song.GenerateClip();
 
         timelineDrawer.RedrawTimeline(clip);
