@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TimelineDrawer : MonoBehaviour {
+public class TimelineDrawer : MonoBehaviour, IPointerClickHandler {
     public RectTransform timeIndicator;
     public RectTransform image;
     public ScrollRect scrollRect;
@@ -68,5 +69,16 @@ public class TimelineDrawer : MonoBehaviour {
         tex.Apply();
 
         return tex;
+    }
+
+    public void OnPointerClick(PointerEventData eventData) {
+
+        var rt = (transform as RectTransform);
+
+        var normalizedY = 1 - (eventData.position.y - rt.offsetMin.y) / rt.rect.height;
+
+        EditorManager.instance.SetBeat((int)Mathf.Round(normalizedY * (float)EditorManager.instance.beatsTotal));
+
+        // OnClick code goes here ...
     }
 }
