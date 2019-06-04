@@ -29,14 +29,20 @@ public class ScrollRectSnap : MonoBehaviour {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
 
+        SetButtons(buttons);
+
+        scrollRect = GetComponent<ScrollRect>();
+    }
+
+    public void SetButtons (RectTransform[] btns) {
+        buttons = btns;
+
         distances = new float[buttons.Length];
 
         buttonDistance = (int)Mathf.Abs(
             buttons[1].GetComponent<RectTransform>().anchoredPosition.x -
             buttons[0].GetComponent<RectTransform>().anchoredPosition.x
             );
-
-        scrollRect = GetComponent<ScrollRect>();
     }
 
     void Update () {
