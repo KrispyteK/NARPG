@@ -10,7 +10,7 @@ public class StartButton : MonoBehaviour {
 
     public void Play() {
         var interScene = InterScene.Instance;
-        var level = Level.Load(scrollRectSnap.Selected.GetComponent<SongOption>().level + ".level");
+        var level = Level.Load(scrollRectSnap.Selected.GetComponent<SongOption>().level + ".json");
 
         interScene.level = level;
 

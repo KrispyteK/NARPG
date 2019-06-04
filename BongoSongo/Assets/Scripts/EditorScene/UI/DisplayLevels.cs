@@ -46,16 +46,14 @@ public class DisplayLevels : MonoBehaviour {
         levelButtons.Clear();
         levelFiles.Clear();
 
-        var files = new List<string>();
+        var files = new List<string>(Directory.GetFiles(Level.Folder, "*.json", SearchOption.AllDirectories));
 
-        files.AddRange(Directory.GetFiles(Level.Folder, "*.level", SearchOption.AllDirectories));
- 
         foreach (var file in files) {
             levelFiles.Add(file);
 
             var button = Instantiate(levelButton, contentPanel);
 
-            button.GetComponentInChildren<Text>().text = Path.GetFileName(file).Replace(".level","");
+            button.GetComponentInChildren<Text>().text = Path.GetFileName(file).Replace(".json","");
 
             var buttonComponent = button.GetComponent<SelectableButton>();
 

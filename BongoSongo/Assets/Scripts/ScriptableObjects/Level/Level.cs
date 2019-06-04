@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
+using System.Text.RegularExpressions;
 
 [System.Serializable]
 public class Level : ScriptableObject {
@@ -13,21 +15,36 @@ public class Level : ScriptableObject {
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
 
-    public static string FolderEditor => Path.Combine(Application.dataPath, "Levels");
-    public static string FolderRelease => Application.persistentDataPath;
+    public static string FolderEditor => Path.Combine(Application.dataPath, "Resources/Levels/Standard");
+    public static string FolderRelease => Path.Combine(Application.persistentDataPath, "Levels");
 
-    public static string Folder =>
-#if UNITY_EDITOR
-        FolderEditor;
-#else
-        FolderRelease;
-#endif
+    public static string Folder => $"{Application.persistentDataPath}/Levels";
 
-    static Level () {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void OnBeforeSceneLoadRuntimeMethod() {
+        Debug.Log("Before scene loaded");
         BetterStreamingAssets.Initialize();
+
+        Debug.Log("Writing levels to device...");
+
+        var standardLevels = Resources.FindObjectsOfTypeAll<StandardLevels>().First();
+
+        if (!Directory.Exists(Folder)) Directory.CreateDirectory(Folder);
+
+        foreach (var levelFile in standardLevels.levels) {
+            string levelName = Regex.Replace(levelFile.name, "^StandardLevel", "");
+
+            string path = Path.Combine(Folder, $"{levelName}.json");
+
+            File.WriteAllText(path, levelFile.text);
+
+            Debug.Log("Level saved to: " + path);
+        }
+
+        Debug.Log("Writing levels complete!");
     }
 
-    public Level () {
+    public Level() {
         name = "unnamed";
         bpm = 128;
     }
@@ -38,42 +55,37 @@ public class Level : ScriptableObject {
 
     public static void Save(Level level) {
 
-        string rootPath = Folder;
+#if UNITY_EDITOR
+        string path = Path.Combine(Application.dataPath, "Resources", "Levels", $"{level.name}.json");
+#else
+        string path = Path.Combine(Folder, $"{level.name}.json");
+#endif
 
-        string path = Path.Combine(rootPath, $"{level.name}.level");
+        Debug.Log("Saving level to: " + path);
 
         var json = JsonConvert.SerializeObject(level);
-
-        Debug.Log(json);
 
         using (StreamWriter outputFile = new StreamWriter(path)) {
             foreach (char c in json) outputFile.Write(c);
         }
 
+#if UNITY_EDITOR
+        UnityEditor.AssetDatabase.Refresh();
+#endif
 
-        Debug.Log("Level saved to: " + path);
+        Debug.Log("Succesfully saved level!");
     }
 
+
+
     public static Level Load(string file) {
-        Level deserialized;
-        string json;
+        string filePath = Path.Combine(Folder, file);
 
-        string rootPath = Folder;
+        Debug.Log($"Loading level {filePath}");
 
-        string path = Path.Combine(rootPath, file);
+        string json = File.ReadAllText(filePath);
 
-        Debug.Log("Loading level from: " + path + "...");
-
-        if (!File.Exists(path)) {
-            Debug.LogErrorFormat("Streaming asset not found: {0}", path);
-            return null;
-        }
-
-        json = File.ReadAllText(path);
-
-        deserialized = JsonConvert.DeserializeObject<Level>(json);
-
-        Debug.Log("Level loaded succesfully!");
+        Level deserialized = JsonConvert.DeserializeObject<Level>(json);
 
         return deserialized;
     }

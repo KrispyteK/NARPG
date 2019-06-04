@@ -23,20 +23,21 @@ public class SongSelectContent : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-        var files = Directory.GetFiles(Level.Folder, "*.level", SearchOption.AllDirectories);
+        var files = Directory.GetFiles(Level.Folder, "*.json", SearchOption.AllDirectories);
         var buttons = new List<RectTransform>();
         var i = 0;
 
         foreach (var file in files) {
             var panel = Instantiate(songPanel, scrollPanel.transform);
-            var rt = panel.GetComponent<RectTransform>();
 
+            var rt = panel.GetComponent<RectTransform>();
             rt.localPosition = new Vector2(i * 1080, 0);
 
-            var levelName = Path.GetFileName(file).Replace(".level", "");
-            levelName = levelName.First().ToString().ToUpper() + levelName.Substring(1);
+            var rawLevelName = Path.GetFileName(file).Replace(".json", "");
+            var levelName = rawLevelName.First().ToString().ToUpper() + rawLevelName.Substring(1);
 
             panel.GetComponentInChildren<Text>().text = levelName;
+            panel.GetComponentInChildren<SongOption>().level = rawLevelName;
 
             buttons.Add(rt);
 
