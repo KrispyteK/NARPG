@@ -13,6 +13,16 @@ public class Level : ScriptableObject {
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
 
+    public static string FolderEditor => Path.Combine(Application.dataPath, "Levels");
+    public static string FolderRelease => Application.persistentDataPath;
+
+    public static string Folder =>
+#if UNITY_EDITOR
+        FolderEditor;
+#else
+        FolderRelease;
+#endif
+
     static Level () {
         BetterStreamingAssets.Initialize();
     }
@@ -27,26 +37,30 @@ public class Level : ScriptableObject {
     }
 
     public static void Save(Level level) {
-        var fileName = Application.persistentDataPath;
-        fileName = Path.Combine(fileName, $"{level.name}.level");
+
+        string rootPath = Folder;
+
+        string path = Path.Combine(rootPath, $"{level.name}.level");
 
         var json = JsonConvert.SerializeObject(level);
 
         Debug.Log(json);
 
-        using (StreamWriter outputFile = new StreamWriter(fileName)) {
+        using (StreamWriter outputFile = new StreamWriter(path)) {
             foreach (char c in json) outputFile.Write(c);
         }
 
 
-        Debug.Log("Level saved to: " + fileName);
+        Debug.Log("Level saved to: " + path);
     }
 
     public static Level Load(string file) {
         Level deserialized;
         string json;
 
-        string path = Path.Combine(Application.persistentDataPath, file);
+        string rootPath = Folder;
+
+        string path = Path.Combine(rootPath, file);
 
         Debug.Log("Loading level from: " + path + "...");
 
