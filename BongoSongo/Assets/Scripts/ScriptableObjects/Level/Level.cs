@@ -23,11 +23,7 @@ public class Level : ScriptableObject {
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod() {
-        Debug.Log("Before scene loaded");
-        BetterStreamingAssets.Initialize();
-
         Debug.Log("Writing levels to device...");
-
 
         var standardLevels = Resources.Load<StandardLevels>("Levels/StandardLevels");
 
@@ -87,11 +83,9 @@ public class Level : ScriptableObject {
 
         string json = File.ReadAllText(filePath);
 
-        Debug.Log($"File read succesful: {json}");
-
         Level deserialized = JsonConvert.DeserializeObject<Level>(json);
 
-        Debug.Log($"Deserialized level {deserialized}");
+        Debug.Log("Succesfully loaded level!");
 
         return deserialized;
     }
