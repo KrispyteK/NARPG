@@ -15,10 +15,11 @@ public class Level : ScriptableObject {
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
 
-    public static string FolderEditor => Path.Combine(Application.dataPath, "Resources/Levels/Standard");
-    public static string FolderRelease => Path.Combine(Application.persistentDataPath, "Levels");
-
-    public static string Folder => $"{Application.persistentDataPath}/Levels";
+    public static string Folder =>
+#if (DEBUG && !UNITY_EDITOR)
+        "file:///" +
+#endif
+        $"{Application.persistentDataPath}";
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod() {
@@ -27,7 +28,10 @@ public class Level : ScriptableObject {
 
         Debug.Log("Writing levels to device...");
 
-        var standardLevels = Resources.FindObjectsOfTypeAll<StandardLevels>().First();
+
+        var standardLevels = Resources.Load<StandardLevels>("Levels/StandardLevels");
+
+        Debug.Log(standardLevels);
 
         if (!Directory.Exists(Folder)) Directory.CreateDirectory(Folder);
 
@@ -76,8 +80,6 @@ public class Level : ScriptableObject {
         Debug.Log("Succesfully saved level!");
     }
 
-
-
     public static Level Load(string file) {
         string filePath = Path.Combine(Folder, file);
 
@@ -85,7 +87,11 @@ public class Level : ScriptableObject {
 
         string json = File.ReadAllText(filePath);
 
+        Debug.Log($"File read succesful: {json}");
+
         Level deserialized = JsonConvert.DeserializeObject<Level>(json);
+
+        Debug.Log($"Deserialized level {deserialized}");
 
         return deserialized;
     }
