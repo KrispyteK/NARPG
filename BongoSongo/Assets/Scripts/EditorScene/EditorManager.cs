@@ -109,6 +109,8 @@ public class EditorManager : MonoBehaviour {
     private void SetVisible () {
         var ordered = GetOrderedIndicators();
 
+        return;
+
         for (int i = 0; i < ordered.Length; i++) {
             ordered[i].gameObject.SetActive(Mathf.Abs(beat - ordered[i].beat) < 8);
 
@@ -138,7 +140,8 @@ public class EditorManager : MonoBehaviour {
 
         for (int i = 0; i < ordered.Length; i++) {
             var spawnInfo = new SpawnInfo {
-                beat = ordered[i].beat
+                beat = ordered[i].beat,
+                indicator = ordered[i].GetComponent<IndicatorInfo>().indicator
             };
 
             var pos = ordered[i].transform.position / Camera.main.orthographicSize;
@@ -229,13 +232,28 @@ public class EditorManager : MonoBehaviour {
 
         var i = 0;
 
-        foreach (var spawnInfo in level.spawnInfo) {
+        var handlePrefab = Resources.Load<GameObject>("Prefabs/SliderHandle");
+
+        foreach (var spawnInfo in level.spawnInfo) { 
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
             var position = new Vector2 (spawnInfo.position.x, spawnInfo.position.y) * Camera.main.orthographicSize;
 
             var instance = Instantiate(prefab, position, Quaternion.identity, indicatorParent);
             instance.GetComponent<IndicatorInfo>().beat = spawnInfo.beat;
             instance.GetComponent<IndicatorInfo>().spawnInfoIndex = spawnInfo.beat;
+
+            if (instance.CompareTag("SliderEditor")) {
+                var sliderHandles = instance.GetComponentInChildren<SliderHandles>();
+
+                foreach (Transform child in sliderHandles.handleTransform) Destroy(child.gameObject);
+
+                foreach (var point in spawnInfo.points) {
+                    var newHandle = Instantiate(handlePrefab, sliderHandles.handleTransform);
+
+                    newHandle.GetComponent<SliderHandleSelector>().slider = instance;
+                    newHandle.transform.position = new Vector2(point.x, point.y) * Camera.main.orthographicSize;
+                }
+            }
 
             i = 0;
         }

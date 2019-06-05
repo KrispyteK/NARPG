@@ -22,7 +22,7 @@ public class Level : ScriptableObject {
         $"{Application.persistentDataPath}";
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void OnBeforeSceneLoadRuntimeMethod() {
+    public static void OnBeforeSceneLoadRuntimeMethod() {
         Debug.Log("Writing levels to device...");
 
         var standardLevels = Resources.Load<StandardLevels>("Levels/StandardLevels");

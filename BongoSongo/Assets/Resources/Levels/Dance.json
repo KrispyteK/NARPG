@@ -1,1 +1,1 @@
-{"description":null,"bpm":128.0,"song":{"clipString":"Audio/Music/Prototype-Dance(bpm148)"},"spawnInfo":[],"name":"dance","hideFlags":0}
+{"description":null,"bpm":128.0,"song":{"clipString":"Audio/Music/Prototype-Dance(bpm148)"},"spawnInfo":[{"beat":0,"indicator":1,"position":{"x":0.0,"y":0.0},"points":[{"x":-0.306381166,"y":-0.575580239},{"x":0.234685212,"y":-0.3527189},{"x":0.3136579,"y":0.589464962},{"x":-0.101759695,"y":0.219015211}]}],"name":"dance","hideFlags":0}

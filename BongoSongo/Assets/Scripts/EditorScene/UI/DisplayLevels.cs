@@ -39,6 +39,8 @@ public class DisplayLevels : MonoBehaviour {
     }
 
     public void GenerateButtons () {
+        Level.OnBeforeSceneLoadRuntimeMethod();
+
         foreach (Transform child in contentPanel) {
             Destroy(child.gameObject);
         }

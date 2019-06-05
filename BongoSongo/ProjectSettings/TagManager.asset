@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MotionCaptureCamera
+  - SliderEditor
   layers:
   - Default
   - TransparentFX
