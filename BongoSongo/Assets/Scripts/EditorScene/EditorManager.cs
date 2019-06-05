@@ -182,12 +182,7 @@ public class EditorManager : MonoBehaviour {
                 level.spawnInfo.RemoveAt(indicatorInfo.spawnInfoIndex);
             }
 
-
-            if (selected is IndicatorSelector || selected == null) {
-                Destroy(selected);
-            } else {
-                selected.Delete();
-            }
+            selected.Delete();
         }
     }
 
