@@ -204,11 +204,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4854649539113424816, guid: ed38853ae08a68f46b68e07960e41385,
-        type: 3}
-      propertyPath: showMotionCapture
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8117226164515702200, guid: ed38853ae08a68f46b68e07960e41385,
         type: 3}
       propertyPath: m_Mesh
@@ -242,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1205971563
 MonoBehaviour:
   m_ObjectHideFlags: 0

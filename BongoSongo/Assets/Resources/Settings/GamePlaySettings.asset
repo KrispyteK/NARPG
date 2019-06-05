@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: GamePlaySettings
   m_EditorClassIdentifier: 
   indicatorScale: 0.13
+  sliderScore: 100
+  indicatorScoreOnTime: 100
+  indicatorScoreOnLate: 50
+  indicatorLateTime: 0.2
+  indicatorBeatLife: 2

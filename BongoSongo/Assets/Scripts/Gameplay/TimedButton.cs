@@ -68,7 +68,7 @@ public class TimedButton : MonoBehaviour {
 
         var hitTime = (time - spawnTime);
 
-        if (hitTime < 0.05f) {
+        if (hitTime < InterScene.Instance.gamePlaySettings.indicatorLateTime) {
             finalScore = InterScene.Instance.gamePlaySettings.indicatorScoreOnTime;
         }
         else {
