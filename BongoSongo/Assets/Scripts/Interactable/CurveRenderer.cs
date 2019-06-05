@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 [ExecuteInEditMode, RequireComponent(typeof(LineRenderer))]
 public class CurveRenderer : MonoBehaviour {
@@ -25,12 +27,75 @@ public class CurveRenderer : MonoBehaviour {
             ;
     }
 
+    private Vector3 ClosestPointOnLine(Vector3 vA, Vector3 vB, Vector3 vPoint) {
+        var vVector1 = vPoint - vA;
+        var vVector2 = (vB - vA).normalized;
+
+        var d = Vector3.Distance(vA, vB);
+        var t = Vector3.Dot(vVector2, vVector1);
+
+        var vVector3 = vVector2 * t;
+
+        var vClosestPoint = vA + vVector3;
+
+        return vClosestPoint;
+    }
+
+    public Vector3 NURBS(Vector3[] points, float t) {
+        //function vector nurbs(Array: array, Lerp) {
+        //    local Data = array()
+        //    local Depth = Array:count()
+
+
+        //    for (I = 1, Array:count()) {
+        //            Data:pushVector(Array[I, vector])
+        //    }
+
+        //    while (Depth) {
+        //        for (I = 1, Depth - 1) {
+        //            local Pos = mix(Data[I, vector], Data[I + 1, vector], Lerp)
+
+
+        //        Data[I, vector] = Pos
+        //        }
+
+        //        Depth--
+        //    }
+
+        //    return Data[1, vector]
+        //}
+
+
+        var pointList = new List<Vector3>(points);
+        var depth = points.Length;
+
+        while (depth > 0) {
+            for (int i = 0; i < depth - 1; i++) {
+                var pos = Vector3.Lerp(pointList[i], pointList[i + 1], t);
+
+                pointList[i] = pos;
+            }
+
+            depth--;
+        }
+
+        return pointList.First();
+    }
+
+    private Vector3 TripletNormal (Vector3 p0, Vector3 p1, Vector3 p2) {
+        var side1 = p1 - p0;
+        var side2 = p2 - p0;
+        var perp = Vector3.Cross(side1,side2);
+
+        return perp / perp.magnitude;
+    }
+
     private Vector3[] GenerateCurve (Vector3[] controlPoints) {
-        Vector3[] curve = new Vector3[(controlPoints.Length - 1) * 3 + 1];
+        var curve = new List<Vector3>();
 
         print("----");
 
-        curve[0] = controlPoints[0];
+        curve.Add(controlPoints[0]);
 
         for (int i = 1; i < controlPoints.Length - 1; i++) {
             Vector3 before = controlPoints[i - 1];
@@ -40,22 +105,25 @@ public class CurveRenderer : MonoBehaviour {
             Vector3 beforeDirection = current - before;
             Vector3 afterDirection = after - current;
 
-            Vector3 middleDirection = (beforeDirection + afterDirection).normalized;
+            Vector3 onLine = (before + after)/2f;
+            Vector3 onLineToCurrent = current - onLine;
+            Vector3 rotation = Quaternion.AngleAxis(90, TripletNormal(before,current,after)) * onLineToCurrent.normalized;
 
-            int curveIndex = i * 3;
-            print(curveIndex);
+            float dotbefore = Vector3.Dot(rotation, beforeDirection.normalized);
+            float dotafter = Vector3.Dot(rotation, afterDirection.normalized);
 
-            curve[curveIndex - 1] = current - middleDirection * beforeDirection.magnitude / 2;
-            curve[curveIndex] = current;
-            curve[curveIndex + 1] = current + middleDirection * afterDirection.magnitude / 2;
+            //curve.Add(current - rotation * beforeDirection.magnitude / 2 * dotbefore);
+            curve.Add(current);
+            curve.Add(current + rotation * afterDirection.magnitude / 2 * dotafter);
         }
 
-        curve[1] = controlPoints[0] + (curve[2] - controlPoints[0]) / 2f;
+        curve.Insert(0, controlPoints[0]);
+        curve.Insert(1, controlPoints[0] + (curve[1] - controlPoints[0]));
 
-        curve[curve.Length - 2] = controlPoints[controlPoints.Length - 1] + (curve[curve.Length - 3] - controlPoints[controlPoints.Length - 1]) / 2f;
-        curve[curve.Length - 1] = controlPoints[controlPoints.Length - 1];
+        curve.Add(controlPoints.Last());
+        curve.Insert(0, controlPoints[0]);
 
-        return curve;
+        return curve.ToArray();
     }
 
     void Update() {
@@ -81,25 +149,25 @@ public class CurveRenderer : MonoBehaviour {
 
         points = new Vector3[] { p0, p1, p2, p3 };
 
-        //for (int i = 0; i < numberOfPoints; i++) {
-        //    lineRenderer.SetPosition(i, SolveCubicCurve(p0, p1, p2, p3, i / (float)numberOfPoints));
+        for (int i = 0; i < numberOfPoints; i++) {
+            lineRenderer.SetPosition(i, NURBS(points, i / (float)numberOfPoints));
+        }
+
+        //var curve = GenerateCurve(points);
+
+        //for (int i = 0; i < curve.Length - 1; i++) {
+        //    Debug.DrawLine(curve[i], curve[i + 1], Color.HSVToRGB(i/ (float)curve.Length,1,1));
         //}
 
-        var curve = GenerateCurve(points);
+        //for (int i = 0; i < curve.Length; i += 4) {
+        //    for (int j = 0; j < 10; i++) {
+        //        var _p0 = curve[i];
+        //        var _p1 = curve[i + 1];
+        //        var _p2 = curve[i + 2];
+        //        var _p3 = curve[i + 3];
 
-        for (int i = 0; i < curve.Length - 2; i++) {
-            Debug.DrawLine(curve[i], curve[i + 1], Color.HSVToRGB(i/ (float)curve.Length,1,1));
-        }
-
-        for (int i = 0; i < curve.Length; i += 4) {
-            for (int j = 0; j < 10; i++) {
-                var _p0 = curve[i];
-                var _p1 = curve[i + 1];
-                var _p2 = curve[i + 2];
-                var _p3 = curve[i + 3];
-
-                lineRenderer.SetPosition(j, SolveCubicCurve(_p0, _p1, _p2, _p3, i / 10f));
-            }
-        }
+        //        lineRenderer.SetPosition(j, SolveCubicCurve(_p0, _p1, _p2, _p3, i / 10f));
+        //    }
+        //}
     }
 }
