@@ -161,8 +161,6 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void CreateNewIndicator () {
-        print(selected);
-
         if (selected is IndicatorSelector || selected == null) {
             var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
 
