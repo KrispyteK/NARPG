@@ -146,6 +146,17 @@ public class EditorManager : MonoBehaviour {
             spawnInfo.position.x = pos.x;
             spawnInfo.position.y = pos.y;
 
+            if (ordered[i].CompareTag("SliderEditor")) {
+                var sliderHandles = ordered[i].GetComponentInChildren<SliderHandles>();
+                var points = new List<SerializableVector2>();
+
+                foreach (Transform child in sliderHandles.handleTransform) {
+                    points.Add((Vector2)child.position / Camera.main.orthographicSize);
+                }
+
+                spawnInfo.points = points.ToArray();
+            }
+
             list.Add(spawnInfo);
         }
 
@@ -275,15 +286,15 @@ public class EditorManager : MonoBehaviour {
             GUI.DrawTexture(new Rect(center.x - extents.x/2, Camera.main.pixelHeight - center.y - extents.y / 2, extents.x, extents.y), selectedTexture);
         }
 
-        var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
+        //var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
 
-        foreach (var indicatorInfo in indicatorInfos) {
-            var bounding = indicatorInfo.gameObject.GetComponentInChildren<Renderer>().bounds;
+        //foreach (var indicatorInfo in indicatorInfos) {
+        //    var bounding = indicatorInfo.gameObject.GetComponentInChildren<Renderer>().bounds;
 
-            var center = Camera.main.WorldToScreenPoint(bounding.center);
-            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+        //    var center = Camera.main.WorldToScreenPoint(bounding.center);
+        //    var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
 
-            GUI.Label(new Rect(center.x + extents.x/2, Camera.main.pixelHeight - center.y + extents.y / 2, extents.x, extents.y), "" + indicatorInfo.beat, guiStyle);
-        }
+        //    GUI.Label(new Rect(center.x + extents.x/2, Camera.main.pixelHeight - center.y + extents.y / 2, extents.x, extents.y), "" + indicatorInfo.beat, guiStyle);
+        //}
     }
 }
