@@ -274,6 +274,8 @@ public class EditorManager : MonoBehaviour {
 
         interScene.level = level;
 
+        print(level);
+
         SceneManager.LoadScene("GameplayScene");
     }
 

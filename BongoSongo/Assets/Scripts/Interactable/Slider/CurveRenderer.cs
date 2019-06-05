@@ -22,7 +22,11 @@ public class CurveRenderer : MonoBehaviour {
     }
 
     void Update() {
-        if (!points.Any()) return;
+        if (points.Length == 0) {
+            lineRenderer.SetPositions(new [] {Vector3.zero});
+
+            return;
+        }
 
         if (numberOfPoints > 0) {
             lineRenderer.positionCount = numberOfPoints;

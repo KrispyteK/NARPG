@@ -219,6 +219,33 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4854649538328409404, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: spawnInfo.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854649538328409404, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: editorPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854649538328409404, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: editorPrefabs.Array.data[1].indicator
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854649538328409404, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: editorPrefabs.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 509272240567816216, guid: b90f4b414f6738d43a9eecb75be123da,
+        type: 3}
+    - target: {fileID: 4854649538328409404, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: editorPrefabs.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 2065161337850028485, guid: c28d0d7837dcd694ab47a297492d398c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed38853ae08a68f46b68e07960e41385, type: 3}
 --- !u!1 &1205971562

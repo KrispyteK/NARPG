@@ -12,7 +12,7 @@ public class InterScene : Singleton<InterScene> {
     static void OnBeforeSceneLoadRuntimeMethod() {
         Debug.Log("Creating interscene object...");
 
-        Initiate();
+        _instance = Initiate();
     }
 
     protected override void OnInitiate() {

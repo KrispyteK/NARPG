@@ -18,15 +18,17 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T> {
         }
     }
 
-    private void CheckForMultiple () {
+    private static void CheckForMultiple () {
         var objs = FindObjectsOfType<T>();
 
         if (objs.Length > 1) {
-            print($"Only one instance of type {this.GetType().Name} is allowed per scene.");
+            print($"Only one instance of type {typeof(T)} is allowed per scene.");
         }
     }
 
     public static T Initiate() {
+        CheckForMultiple();
+
         if (_instance != null) {
             return _instance;
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MotionCaptureCamera
   - SliderEditor
+  - Slider
   layers:
   - Default
   - TransparentFX
