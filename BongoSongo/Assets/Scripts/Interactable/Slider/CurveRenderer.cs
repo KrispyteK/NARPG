@@ -29,7 +29,7 @@ public class CurveRenderer : MonoBehaviour {
         }
 
         for (int i = 0; i < numberOfPoints; i++) {
-            lineRenderer.SetPosition(i, Curve.NURBS(points, i / (float)numberOfPoints));
+            lineRenderer.SetPosition(i, Curve.NURBS(points, i / ((float)numberOfPoints - 1)));
         }
     }
 }
