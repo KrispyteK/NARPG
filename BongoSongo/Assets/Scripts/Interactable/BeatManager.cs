@@ -59,6 +59,8 @@ public class BeatManager : MonoBehaviour {
             StartCoroutine(Countdown());
         }
         else {
+            outlineObject.SetActive(false);
+
             InvokeRepeating("BeatEvent", beatLength, beatLength);
         }
     }
@@ -87,11 +89,9 @@ public class BeatManager : MonoBehaviour {
         var canvas = GameObject.Find("UI");
         canvas.SetActive(false);
 
-        if (doOutline) {
-            yield return new WaitForSeconds(outlineTime);
+        if (doOutline) yield return new WaitForSeconds(outlineTime);
 
-            outlineObject.SetActive(false);
-        }
+        outlineObject.SetActive(false);
 
         var count = 3;
 

@@ -22,7 +22,6 @@ public class TimedButton : MonoBehaviour {
         interactTime = Time.realtimeSinceStartup + BeatManager.beatLength;
 
         ring.localScale = CameraTransform.Scale(Vector3.one * interactable.size * 2);
-        indicator.localScale = CameraTransform.Scale(Vector3.one * interactable.size);
     }
 
     void Update() {
