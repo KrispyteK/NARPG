@@ -11,7 +11,7 @@ public class IndicatorEditor : MonoBehaviour {
     void Update() {
         if (Input.GetMouseButtonDown(0)) {
             if (EventSystem.current.IsPointerOverGameObject()) {
-                EditorManager.instance.Unselect();
+                //EditorManager.instance.Unselect();
 
                 return;
             }
@@ -52,6 +52,12 @@ public class IndicatorEditor : MonoBehaviour {
         }
 
         if (EditorManager.instance.selected != null && Input.GetMouseButton(0)) {
+            if (EventSystem.current.IsPointerOverGameObject()) {
+                //EditorManager.instance.Unselect();
+
+                return;
+            }
+
             var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
 
             if (Input.GetKey(KeyCode.LeftControl)) {

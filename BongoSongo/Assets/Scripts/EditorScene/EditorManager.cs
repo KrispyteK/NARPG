@@ -161,20 +161,33 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void CreateNewIndicator () {
-        var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
+        print(selected);
 
-        instance.GetComponent<IndicatorInfo>().beat = beat;
+        if (selected is IndicatorSelector || selected == null) {
+            var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
 
-        OrderIndicators();
+            instance.GetComponent<IndicatorInfo>().beat = beat;
+
+            OrderIndicators();
+        } else {
+            selected.CreateNew();
+        }  
     }
 
     public void DeleteIndicator () {
         if (selected) {
             var indicatorInfo = selected.GetComponent<IndicatorInfo>();
 
-            level.spawnInfo.RemoveAt(indicatorInfo.spawnInfoIndex);
+            if (indicatorInfo) {
+                level.spawnInfo.RemoveAt(indicatorInfo.spawnInfoIndex);
+            }
 
-            Destroy(selected);
+
+            if (selected is IndicatorSelector || selected == null) {
+                Destroy(selected);
+            } else {
+                selected.Delete();
+            }
         }
     }
 

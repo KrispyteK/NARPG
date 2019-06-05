@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 8158367451574732957}
   - component: {fileID: 8158367451574732959}
   - component: {fileID: 8109495787424129678}
+  - component: {fileID: 6041502515922516208}
   m_Layer: 0
   m_Name: EditorIndicator
   m_TagString: Untagged
@@ -154,3 +155,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beat: 0
+  indicator: 0
+--- !u!114 &6041502515922516208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8158367451574732956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1cf4bf8fddaf644c863be1bec8296b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelectable: 1

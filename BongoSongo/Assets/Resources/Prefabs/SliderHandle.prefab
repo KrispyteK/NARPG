@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f974b1f4176fa44a5b0cd825e17029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelectable: 0
+  isSelectable: 1
   slider: {fileID: 0}
 --- !u!1 &7268525766080653654
 GameObject:

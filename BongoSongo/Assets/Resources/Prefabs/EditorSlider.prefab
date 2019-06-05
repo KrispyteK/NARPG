@@ -139,26 +139,26 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -1.2, y: -2.88, z: 5}
-  - {x: -1.0915, y: -2.5828502, z: 5}
-  - {x: -0.98300004, y: -2.2857, z: 5}
-  - {x: -0.87450004, y: -1.9885501, z: 5}
-  - {x: -0.76600003, y: -1.6914, z: 5}
-  - {x: -0.6575, y: -1.3942502, z: 5}
-  - {x: -0.549, y: -1.0971, z: 5}
-  - {x: -0.44050002, y: -0.7999501, z: 5}
-  - {x: -0.33200002, y: -0.50280005, z: 5}
-  - {x: -0.22350004, y: -0.20565015, z: 5}
-  - {x: -0.11500001, y: 0.091499925, z: 5}
-  - {x: -0.0064999796, y: 0.38865, z: 5}
-  - {x: 0.10200005, y: 0.6858001, z: 5}
-  - {x: 0.21049996, y: 0.9829498, z: 5}
-  - {x: 0.31899998, y: 1.2800999, z: 5}
-  - {x: 0.4275, y: 1.57725, z: 5}
-  - {x: 0.536, y: 1.8744, z: 5}
-  - {x: 0.6445001, y: 2.17155, z: 5}
-  - {x: 0.75299996, y: 2.4687, z: 5}
-  - {x: 0.8615, y: 2.7658498, z: 5}
+  - {x: -1.2, y: -5.94, z: 5}
+  - {x: -1.0915, y: -5.64285, z: 5}
+  - {x: -0.98300004, y: -5.3457003, z: 5}
+  - {x: -0.87450004, y: -5.04855, z: 5}
+  - {x: -0.76600003, y: -4.7514, z: 5}
+  - {x: -0.6575, y: -4.45425, z: 5}
+  - {x: -0.549, y: -4.1571, z: 5}
+  - {x: -0.44050002, y: -3.85995, z: 5}
+  - {x: -0.33200002, y: -3.5628, z: 5}
+  - {x: -0.22350004, y: -3.26565, z: 5}
+  - {x: -0.11500001, y: -2.9685001, z: 5}
+  - {x: -0.0064999796, y: -2.67135, z: 5}
+  - {x: 0.10200005, y: -2.3741999, z: 5}
+  - {x: 0.21049996, y: -2.0770502, z: 5}
+  - {x: 0.31899998, y: -1.7799001, z: 5}
+  - {x: 0.4275, y: -1.48275, z: 5}
+  - {x: 0.536, y: -1.1855999, z: 5}
+  - {x: 0.6445001, y: -0.88844985, z: 5}
+  - {x: 0.75299996, y: -0.59130013, z: 5}
+  - {x: 0.8615, y: -0.29415008, z: 5}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points:
-  - {x: -1.2, y: -2.88, z: 5}
-  - {x: 0.97, y: 3.063, z: 5}
+  - {x: -1.2, y: -5.94, z: 5}
+  - {x: 0.97, y: 0.003, z: 5}
   color: {r: 1, g: 1, b: 1, a: 1}
   width: 1
   numberOfPoints: 20
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbbb69a89f13e549889c9ff75cfec77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelectable: 0
+  isSelectable: 1
 --- !u!60 &1095338964341181612
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -319,11 +319,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.16925001, y: 0.20585012}
-      - {x: -3.3295395, y: -2.0902348}
-      - {x: -2.122416, y: -5.805378}
-      - {x: 1.7839167, y: -5.805378}
-      - {x: 2.9910395, y: -2.0902343}
+    - - {x: -1.3000001, y: -6.04}
+      - {x: -1.3000001, y: 0.103}
+      - {x: 1.07, y: 0.103}
+      - {x: 1.07, y: -6.04}
 --- !u!1001 &662044638925945310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -391,6 +390,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8930421081801460655, guid: 2a62bbff60188ba49a4f23d840a6e0e0,
+        type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 4210762140236688870}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a62bbff60188ba49a4f23d840a6e0e0, type: 3}
 --- !u!4 &1256221295941810965 stripped
@@ -466,6 +470,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8930421081801460655, guid: 2a62bbff60188ba49a4f23d840a6e0e0,
+        type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 4210762140236688870}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a62bbff60188ba49a4f23d840a6e0e0, type: 3}
 --- !u!4 &1539994905010087826 stripped
