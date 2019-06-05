@@ -9,7 +9,6 @@ public class SliderIndicator : MonoBehaviour {
     public Vector3[] points;
     public float t;
     public int direction = 1;
-    public int score = 100;
 
     private CurveRenderer curveRenderer;
     private Interactable interactable;
@@ -26,9 +25,9 @@ public class SliderIndicator : MonoBehaviour {
 
     void BeatEvent () {
         if (interactable.isInteractedWith) {
-            FloatingText.Create(indicator.position, $"+{score}", BeatManager.beatLength * 2f);
+            FloatingText.Create(indicator.position, $"+{InterScene.Instance.gamePlaySettings.sliderScore}", BeatManager.beatLength * 2f);
 
-            GameManager.instance.AddScore(score);
+            GameManager.instance.AddScore(InterScene.Instance.gamePlaySettings.sliderScore);
         }
     }
 

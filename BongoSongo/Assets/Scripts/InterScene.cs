@@ -8,6 +8,13 @@ public class InterScene : Singleton<InterScene> {
 
     protected override bool DontDestroyOnLoad => true;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void OnBeforeSceneLoadRuntimeMethod() {
+        Debug.Log("Creating interscene object...");
+
+        Initiate();
+    }
+
     protected override void OnInitiate() {
         gameObject.name = "InterScene";
         gamePlaySettings = Resources.Load<GamePlaySettings>("Settings/GamePlaySettings");

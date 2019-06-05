@@ -256,9 +256,9 @@ MonoBehaviour:
   spawner: {fileID: 0}
   outlineObject: {fileID: 1662161903196730468}
   startBeat: 0
-  doOutline: 1
+  doOutline: 0
   outlineTime: 5
-  doCountdown: 1
+  doCountdown: 0
   beat: 0
   i: 0
   bpm: 148
@@ -387,209 +387,515 @@ MonoBehaviour:
   hitThis: {fileID: 509272240567816216, guid: b90f4b414f6738d43a9eecb75be123da, type: 3}
   spawnInfo:
   - beat: 1
-    position: {x: 0.8193717, y: 0.4705882}
+    indicator: 0
+    position:
+      x: 0.8193717
+      y: 0.4705882
   - beat: 4
-    position: {x: 0.18586381, y: 0.46648428}
+    indicator: 0
+    position:
+      x: 0.18586381
+      y: 0.46648428
   - beat: 8
-    position: {x: 0.790576, y: 0.1815123}
+    indicator: 0
+    position:
+      x: 0.790576
+      y: 0.1815123
   - beat: 12
-    position: {x: 0.18848163, y: 0.17877637}
+    indicator: 0
+    position:
+      x: 0.18848163
+      y: 0.17877637
   - beat: 17
-    position: {x: 0.18848166, y: 0.120064646}
+    indicator: 0
+    position:
+      x: 0.18848166
+      y: 0.120064646
   - beat: 17
-    position: {x: 0.79052883, y: 0.120016836}
+    indicator: 0
+    position:
+      x: 0.79052883
+      y: 0.120016836
   - beat: 20
-    position: {x: 0.35340315, y: 0.20930237}
+    indicator: 0
+    position:
+      x: 0.35340315
+      y: 0.20930237
   - beat: 20
-    position: {x: 0.6649215, y: 0.20930237}
+    indicator: 0
+    position:
+      x: 0.6649215
+      y: 0.20930237
   - beat: 25
-    position: {x: 0.21044017, y: 0.37973177}
+    indicator: 0
+    position:
+      x: 0.21044017
+      y: 0.37973177
   - beat: 26
-    position: {x: 0.49476442, y: 0.38107342}
+    indicator: 0
+    position:
+      x: 0.49476442
+      y: 0.38107342
   - beat: 28
-    position: {x: 0.7641827, y: 0.38796628}
+    indicator: 0
+    position:
+      x: 0.7641827
+      y: 0.38796628
   - beat: 32
-    position: {x: 0.14136125, y: 0.5512996}
+    indicator: 0
+    position:
+      x: 0.14136125
+      y: 0.5512996
   - beat: 32
-    position: {x: 0.8115183, y: 0.55950755}
+    indicator: 0
+    position:
+      x: 0.8115183
+      y: 0.55950755
   - beat: 36
-    position: {x: 0.13355494, y: 0.4448981}
+    indicator: 0
+    position:
+      x: 0.13355494
+      y: 0.4448981
   - beat: 36
-    position: {x: 0.79833513, y: 0.44759127}
+    indicator: 0
+    position:
+      x: 0.79833513
+      y: 0.44759127
   - beat: 40
-    position: {x: 0.12836652, y: 0.32373908}
+    indicator: 0
+    position:
+      x: 0.12836652
+      y: 0.32373908
   - beat: 40
-    position: {x: 0.790576, y: 0.31970683}
+    indicator: 0
+    position:
+      x: 0.790576
+      y: 0.31970683
   - beat: 44
-    position: {x: 0.11518325, y: 0.1827957}
+    indicator: 0
+    position:
+      x: 0.11518325
+      y: 0.1827957
   - beat: 44
-    position: {x: 0.7748691, y: 0.19354838}
+    indicator: 0
+    position:
+      x: 0.7748691
+      y: 0.19354838
   - beat: 48
-    position: {x: 0.7931937, y: 0.57123655}
+    indicator: 0
+    position:
+      x: 0.7931937
+      y: 0.57123655
   - beat: 48
-    position: {x: 0.15445027, y: 0.57258064}
+    indicator: 0
+    position:
+      x: 0.15445027
+      y: 0.57258064
   - beat: 52
-    position: {x: 0.78272253, y: 0.43010753}
+    indicator: 0
+    position:
+      x: 0.78272253
+      y: 0.43010753
   - beat: 52
-    position: {x: 0.14659685, y: 0.42473122}
+    indicator: 0
+    position:
+      x: 0.14659685
+      y: 0.42473122
   - beat: 57
-    position: {x: 0.15183246, y: 0.42204303}
+    indicator: 0
+    position:
+      x: 0.15183246
+      y: 0.42204303
   - beat: 58
-    position: {x: 0.46596858, y: 0.4247312}
+    indicator: 0
+    position:
+      x: 0.46596858
+      y: 0.4247312
   - beat: 59
-    position: {x: 0.7617801, y: 0.42607528}
+    indicator: 0
+    position:
+      x: 0.7617801
+      y: 0.42607528
   - beat: 64
-    position: {x: 0.1619537, y: 0.6118785}
+    indicator: 0
+    position:
+      x: 0.1619537
+      y: 0.6118785
   - beat: 65
-    position: {x: 0.79177386, y: 0.6118785}
+    indicator: 0
+    position:
+      x: 0.79177386
+      y: 0.6118785
   - beat: 66
-    position: {x: 0.15424164, y: 0.41712707}
+    indicator: 0
+    position:
+      x: 0.15424164
+      y: 0.41712707
   - beat: 67
-    position: {x: 0.79177386, y: 0.41574588}
+    indicator: 0
+    position:
+      x: 0.79177386
+      y: 0.41574588
   - beat: 68
-    position: {x: 0.17480719, y: 0.1878453}
+    indicator: 0
+    position:
+      x: 0.17480719
+      y: 0.1878453
   - beat: 69
-    position: {x: 0.748072, y: 0.19060774}
+    indicator: 0
+    position:
+      x: 0.748072
+      y: 0.19060774
   - beat: 73
-    position: {x: 0.18251929, y: 0.6118785}
+    indicator: 0
+    position:
+      x: 0.18251929
+      y: 0.6118785
   - beat: 74
-    position: {x: 0.75835484, y: 0.61187845}
+    indicator: 0
+    position:
+      x: 0.75835484
+      y: 0.61187845
   - beat: 75
-    position: {x: 0.18251929, y: 0.3922652}
+    indicator: 0
+    position:
+      x: 0.18251929
+      y: 0.3922652
   - beat: 76
-    position: {x: 0.75321335, y: 0.39226523}
+    indicator: 0
+    position:
+      x: 0.75321335
+      y: 0.39226523
   - beat: 77
-    position: {x: 0.17223643, y: 0.18784529}
+    indicator: 0
+    position:
+      x: 0.17223643
+      y: 0.18784529
   - beat: 78
-    position: {x: 0.74807197, y: 0.19198895}
+    indicator: 0
+    position:
+      x: 0.74807197
+      y: 0.19198895
   - beat: 81
-    position: {x: 0.18766066, y: 0.6270718}
+    indicator: 0
+    position:
+      x: 0.18766066
+      y: 0.6270718
   - beat: 82
-    position: {x: 0.76606685, y: 0.6118785}
+    indicator: 0
+    position:
+      x: 0.76606685
+      y: 0.6118785
   - beat: 83
-    position: {x: 0.18251929, y: 0.3922652}
+    indicator: 0
+    position:
+      x: 0.18251929
+      y: 0.3922652
   - beat: 84
-    position: {x: 0.75064266, y: 0.39364645}
+    indicator: 0
+    position:
+      x: 0.75064266
+      y: 0.39364645
   - beat: 85
-    position: {x: 0.1722365, y: 0.18508287}
+    indicator: 0
+    position:
+      x: 0.1722365
+      y: 0.18508287
   - beat: 86
-    position: {x: 0.7583548, y: 0.19198895}
+    indicator: 0
+    position:
+      x: 0.7583548
+      y: 0.19198895
   - beat: 89
-    position: {x: 0.19023137, y: 0.60497236}
+    indicator: 0
+    position:
+      x: 0.19023137
+      y: 0.60497236
   - beat: 90
-    position: {x: 0.71722364, y: 0.60359114}
+    indicator: 0
+    position:
+      x: 0.71722364
+      y: 0.60359114
   - beat: 91
-    position: {x: 0.16966581, y: 0.39640883}
+    indicator: 0
+    position:
+      x: 0.16966581
+      y: 0.39640883
   - beat: 92
-    position: {x: 0.71208227, y: 0.4019337}
+    indicator: 0
+    position:
+      x: 0.71208227
+      y: 0.4019337
   - beat: 93
-    position: {x: 0.1773779, y: 0.20856354}
+    indicator: 0
+    position:
+      x: 0.1773779
+      y: 0.20856354
   - beat: 94
-    position: {x: 0.7069409, y: 0.20856354}
+    indicator: 0
+    position:
+      x: 0.7069409
+      y: 0.20856354
   - beat: 97
-    position: {x: 0.19280206, y: 0.5939227}
+    indicator: 0
+    position:
+      x: 0.19280206
+      y: 0.5939227
   - beat: 98
-    position: {x: 0.6966581, y: 0.5814917}
+    indicator: 0
+    position:
+      x: 0.6966581
+      y: 0.5814917
   - beat: 99
-    position: {x: 0.18251929, y: 0.39502764}
+    indicator: 0
+    position:
+      x: 0.18251929
+      y: 0.39502764
   - beat: 100
-    position: {x: 0.7095116, y: 0.39779004}
+    indicator: 0
+    position:
+      x: 0.7095116
+      y: 0.39779004
   - beat: 101
-    position: {x: 0.19023137, y: 0.17127071}
+    indicator: 0
+    position:
+      x: 0.19023137
+      y: 0.17127071
   - beat: 102
-    position: {x: 0.6940874, y: 0.17541435}
+    indicator: 0
+    position:
+      x: 0.6940874
+      y: 0.17541435
   - beat: 104
-    position: {x: 0.19023137, y: 0.22790053}
+    indicator: 0
+    position:
+      x: 0.19023137
+      y: 0.22790053
   - beat: 105
-    position: {x: 0.6966581, y: 0.2320442}
+    indicator: 0
+    position:
+      x: 0.6966581
+      y: 0.2320442
   - beat: 106
-    position: {x: 0.19794345, y: 0.39502767}
+    indicator: 0
+    position:
+      x: 0.19794345
+      y: 0.39502767
   - beat: 107
-    position: {x: 0.71208227, y: 0.39088398}
+    indicator: 0
+    position:
+      x: 0.71208227
+      y: 0.39088398
   - beat: 108
-    position: {x: 0.20565553, y: 0.60221}
+    indicator: 0
+    position:
+      x: 0.20565553
+      y: 0.60221
   - beat: 109
-    position: {x: 0.7300772, y: 0.59806633}
+    indicator: 0
+    position:
+      x: 0.7300772
+      y: 0.59806633
   - beat: 112
-    position: {x: 0.21336761, y: 0.6008287}
+    indicator: 0
+    position:
+      x: 0.21336761
+      y: 0.6008287
   - beat: 113
-    position: {x: 0.722365, y: 0.5966851}
+    indicator: 0
+    position:
+      x: 0.722365
+      y: 0.5966851
   - beat: 114
-    position: {x: 0.20822623, y: 0.3784532}
+    indicator: 0
+    position:
+      x: 0.20822623
+      y: 0.3784532
   - beat: 115
-    position: {x: 0.6940874, y: 0.37154695}
+    indicator: 0
+    position:
+      x: 0.6940874
+      y: 0.37154695
   - beat: 116
-    position: {x: 0.21079692, y: 0.18232045}
+    indicator: 0
+    position:
+      x: 0.21079692
+      y: 0.18232045
   - beat: 117
-    position: {x: 0.68123394, y: 0.18370166}
+    indicator: 0
+    position:
+      x: 0.68123394
+      y: 0.18370166
   - beat: 121
-    position: {x: 0.45244217, y: 0.18370166}
+    indicator: 0
+    position:
+      x: 0.45244217
+      y: 0.18370166
   - beat: 122
-    position: {x: 0.45501283, y: 0.32734805}
+    indicator: 0
+    position:
+      x: 0.45501283
+      y: 0.32734805
   - beat: 123
-    position: {x: 0.45758355, y: 0.45718235}
+    indicator: 0
+    position:
+      x: 0.45758355
+      y: 0.45718235
   - beat: 124
-    position: {x: 0.4601542, y: 0.5939227}
+    indicator: 0
+    position:
+      x: 0.4601542
+      y: 0.5939227
   - beat: 129
-    position: {x: 0.17480716, y: 0.59116024}
+    indicator: 0
+    position:
+      x: 0.17480716
+      y: 0.59116024
   - beat: 130
-    position: {x: 0.7095116, y: 0.59116024}
+    indicator: 0
+    position:
+      x: 0.7095116
+      y: 0.59116024
   - beat: 131
-    position: {x: 0.18766063, y: 0.38259667}
+    indicator: 0
+    position:
+      x: 0.18766063
+      y: 0.38259667
   - beat: 132
-    position: {x: 0.7017995, y: 0.3756906}
+    indicator: 0
+    position:
+      x: 0.7017995
+      y: 0.3756906
   - beat: 133
-    position: {x: 0.16452429, y: 0.160221}
+    indicator: 0
+    position:
+      x: 0.16452429
+      y: 0.160221
   - beat: 134
-    position: {x: 0.67609257, y: 0.16298339}
+    indicator: 0
+    position:
+      x: 0.67609257
+      y: 0.16298339
   - beat: 136
-    position: {x: 0.16709504, y: 0.22375691}
+    indicator: 0
+    position:
+      x: 0.16709504
+      y: 0.22375691
   - beat: 137
-    position: {x: 0.67866325, y: 0.2265194}
+    indicator: 0
+    position:
+      x: 0.67866325
+      y: 0.2265194
   - beat: 138
-    position: {x: 0.16709508, y: 0.3756906}
+    indicator: 0
+    position:
+      x: 0.16709508
+      y: 0.3756906
   - beat: 139
-    position: {x: 0.7043702, y: 0.38812158}
+    indicator: 0
+    position:
+      x: 0.7043702
+      y: 0.38812158
   - beat: 140
-    position: {x: 0.17223655, y: 0.5428177}
+    indicator: 0
+    position:
+      x: 0.17223655
+      y: 0.5428177
   - beat: 141
-    position: {x: 0.69922876, y: 0.53867406}
+    indicator: 0
+    position:
+      x: 0.69922876
+      y: 0.53867406
   - beat: 145
-    position: {x: 0.16709511, y: 0.53729284}
+    indicator: 0
+    position:
+      x: 0.16709511
+      y: 0.53729284
   - beat: 146
-    position: {x: 0.6966581, y: 0.53176796}
+    indicator: 0
+    position:
+      x: 0.6966581
+      y: 0.53176796
   - beat: 147
-    position: {x: 0.14910026, y: 0.31906077}
+    indicator: 0
+    position:
+      x: 0.14910026
+      y: 0.31906077
   - beat: 148
-    position: {x: 0.688946, y: 0.31491712}
+    indicator: 0
+    position:
+      x: 0.688946
+      y: 0.31491712
   - beat: 149
-    position: {x: 0.14910026, y: 0.14640884}
+    indicator: 0
+    position:
+      x: 0.14910026
+      y: 0.14640884
   - beat: 150
-    position: {x: 0.6863753, y: 0.14779006}
+    indicator: 0
+    position:
+      x: 0.6863753
+      y: 0.14779006
   - beat: 153
-    position: {x: 0.40616965, y: 0.14640884}
+    indicator: 0
+    position:
+      x: 0.40616965
+      y: 0.14640884
   - beat: 154
-    position: {x: 0.41645244, y: 0.27348065}
+    indicator: 0
+    position:
+      x: 0.41645244
+      y: 0.27348065
   - beat: 155
-    position: {x: 0.42159384, y: 0.36740333}
+    indicator: 0
+    position:
+      x: 0.42159384
+      y: 0.36740333
   - beat: 156
-    position: {x: 0.42673522, y: 0.49861878}
+    indicator: 0
+    position:
+      x: 0.42673522
+      y: 0.49861878
   - beat: 159
-    position: {x: 0.15681233, y: 0.13812153}
+    indicator: 0
+    position:
+      x: 0.15681233
+      y: 0.13812153
   - beat: 160
-    position: {x: 0.16709511, y: 0.2527624}
+    indicator: 0
+    position:
+      x: 0.16709511
+      y: 0.2527624
   - beat: 161
-    position: {x: 0.17480719, y: 0.38259667}
+    indicator: 0
+    position:
+      x: 0.17480719
+      y: 0.38259667
   - beat: 162
-    position: {x: 0.17737788, y: 0.5069061}
+    indicator: 0
+    position:
+      x: 0.17737788
+      y: 0.5069061
   - beat: 165
-    position: {x: 0.8149102, y: 0.14226519}
+    indicator: 0
+    position:
+      x: 0.8149102
+      y: 0.14226519
   - beat: 166
-    position: {x: 0.8174808, y: 0.25552487}
+    indicator: 0
+    position:
+      x: 0.8174808
+      y: 0.25552487
   - beat: 167
-    position: {x: 0.82262224, y: 0.3895028}
+    indicator: 0
+    position:
+      x: 0.82262224
+      y: 0.3895028
   - beat: 168
-    position: {x: 0.8226222, y: 0.51795584}
+    indicator: 0
+    position:
+      x: 0.8226222
+      y: 0.51795584
 --- !u!1 &4854649538490085615
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,8 +1270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981609385b52d0a409b82fca72f930c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 0.1
-  motionDelay: 0.05
+  threshold: 0.03
+  motionDelay: 0.1
   renderTexture: {fileID: 8400000, guid: 970f65eb013ea4f4dbefb4d816429f1c, type: 2}
   webcamTexture: {fileID: 0}
   texture: {fileID: 0}
