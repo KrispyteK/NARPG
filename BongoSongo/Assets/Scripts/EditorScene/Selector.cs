@@ -14,7 +14,7 @@ public class Selector : MonoBehaviour {
     }
 
     public virtual void CreateNew() {
-
+        EditorManager.instance.CreateNewEditor();
     }
 
     public virtual void Delete() {

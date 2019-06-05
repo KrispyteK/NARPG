@@ -160,16 +160,20 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
+    public void CreateNewEditor () {
+        var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
+
+        instance.GetComponent<IndicatorInfo>().beat = beat;
+
+        OrderIndicators();
+    }
+
     public void CreateNewIndicator () {
-        if (selected is IndicatorSelector || selected == null) {
-            var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
-
-            instance.GetComponent<IndicatorInfo>().beat = beat;
-
-            OrderIndicators();
-        } else {
+        if (selected) {
             selected.CreateNew();
-        }  
+        } else {
+            CreateNewEditor();
+        }
     }
 
     public void DeleteIndicator () {
