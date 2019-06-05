@@ -6,7 +6,8 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 
 public enum Indicators {
-    Button
+    Button,
+    Slider
 }
 
 [System.Serializable]
@@ -20,7 +21,7 @@ public class EditorManager : MonoBehaviour {
     public static EditorManager instance;
 
     public EditorPrefab currentPrefab;
-    public GameObject selected;
+    public Selector selected;
     public Level level;
     public Transform indicatorParent;
     public int beat;
