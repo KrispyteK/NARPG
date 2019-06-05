@@ -11,9 +11,7 @@ public class IndicatorEditor : MonoBehaviour {
     void Update() {
         if (Input.GetMouseButtonDown(0)) {
             if (EventSystem.current.IsPointerOverGameObject()) {
-                EditorManager.instance.selected.Unselect();
-
-                EditorManager.instance.selected = null;
+                EditorManager.instance.Unselect();
 
                 return;
             }
@@ -39,6 +37,8 @@ public class IndicatorEditor : MonoBehaviour {
             }
 
             if (hit.collider != null) {
+                EditorManager.instance.Unselect();
+
                 var target = hit.collider.gameObject;
 
                 EditorManager.instance.selected = target.GetComponent<Selector>();
@@ -47,9 +47,7 @@ public class IndicatorEditor : MonoBehaviour {
 
                 offset = target.transform.position - mousePos;
             } else if (EditorManager.instance.selected) {
-                EditorManager.instance.selected.Unselect();
-
-                EditorManager.instance.selected = null;
+                EditorManager.instance.Unselect();
             }
         }
 

@@ -152,6 +152,14 @@ public class EditorManager : MonoBehaviour {
         return list;
     }
 
+    public void Unselect () {
+        if (selected) {
+            selected.Unselect();
+
+            selected = null;
+        }
+    }
+
     public void CreateNewIndicator () {
         var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
 

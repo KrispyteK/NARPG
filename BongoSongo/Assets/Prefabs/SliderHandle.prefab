@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1756105386915889867}
-  - component: {fileID: 5723093604354114858}
   - component: {fileID: 7978336476628283814}
+  - component: {fileID: 8930421081801460655}
   m_Layer: 0
   m_Name: SliderHandle
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5723093604354114858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756105386915889860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21cc927f2c20c0447817e03729d204c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSelectable: 0
 --- !u!58 &7978336476628283814
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -62,6 +49,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &8930421081801460655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756105386915889860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f974b1f4176fa44a5b0cd825e17029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelectable: 0
+  slider: {fileID: 0}
 --- !u!1 &7268525766080653654
 GameObject:
   m_ObjectHideFlags: 0
