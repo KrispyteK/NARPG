@@ -24,7 +24,7 @@ public class SliderHandleSelector : Selector {
     }
 
     public override void CreateNew() {
-        var newHandle = Instantiate(handlePrefab, transform.parent);
+        var newHandle = Instantiate(handlePrefab, transform.position + Vector3.up * 1, Quaternion.identity, transform.parent);
 
         newHandle.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
         newHandle.GetComponent<SliderHandleSelector>().slider = slider;
