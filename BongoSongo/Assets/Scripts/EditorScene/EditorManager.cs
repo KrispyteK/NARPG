@@ -27,7 +27,7 @@ public class EditorManager : MonoBehaviour {
     public int beat;
     public Text beatText;
     public LevelInfo levelInfo;
-    public Texture selectedTexture;
+    public RectTransform selectedUI;
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -60,6 +60,19 @@ public class EditorManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Delete)) {
             DeleteIndicator();
+        }
+
+        if (selected) {
+            var bounding = selected.GetComponentInChildren<Renderer>().bounds;
+
+            var center = (Vector2)Camera.main.WorldToScreenPoint(bounding.center) - Camera.main.pixelRect.size/2;
+            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+
+            selectedUI.localPosition = center;
+            selectedUI.sizeDelta = extents;
+        } else {
+            selectedUI.localPosition = Vector2.zero;
+            selectedUI.sizeDelta = Camera.main.pixelRect.size * 2;
         }
     }
 
@@ -293,28 +306,28 @@ public class EditorManager : MonoBehaviour {
 
     private GUIStyle guiStyle = new GUIStyle();
 
-    public void OnGUI() {
-        guiStyle.fontSize = 40;
-        guiStyle.normal.textColor = Color.white;
+    //public void OnGUI() {
+    //    guiStyle.fontSize = 40;
+    //    guiStyle.normal.textColor = Color.white;
 
-        if (selected) {
-            var bounding = selected.GetComponentInChildren<Renderer>().bounds;
+    //    if (selected) {
+    //        var bounding = selected.GetComponentInChildren<Renderer>().bounds;
 
-            var center = Camera.main.WorldToScreenPoint(bounding.center);
-            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+    //        var center = Camera.main.WorldToScreenPoint(bounding.center);
+    //        var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
 
-            GUI.DrawTexture(new Rect(center.x - extents.x/2, Camera.main.pixelHeight - center.y - extents.y / 2, extents.x, extents.y), selectedTexture);
-        }
+    //        GUI.Box(new Rect(center.x - extents.x/2, Camera.main.pixelHeight - center.y - extents.y / 2, extents.x, extents.y), "Selected", selectedBoxStyle);
+    //    }
 
-        //var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
+    //    //var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
 
-        //foreach (var indicatorInfo in indicatorInfos) {
-        //    var bounding = indicatorInfo.gameObject.GetComponentInChildren<Renderer>().bounds;
+    //    //foreach (var indicatorInfo in indicatorInfos) {
+    //    //    var bounding = indicatorInfo.gameObject.GetComponentInChildren<Renderer>().bounds;
 
-        //    var center = Camera.main.WorldToScreenPoint(bounding.center);
-        //    var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+    //    //    var center = Camera.main.WorldToScreenPoint(bounding.center);
+    //    //    var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
 
-        //    GUI.Label(new Rect(center.x + extents.x/2, Camera.main.pixelHeight - center.y + extents.y / 2, extents.x, extents.y), "" + indicatorInfo.beat, guiStyle);
-        //}
-    }
+    //    //    GUI.Label(new Rect(center.x + extents.x/2, Camera.main.pixelHeight - center.y + extents.y / 2, extents.x, extents.y), "" + indicatorInfo.beat, guiStyle);
+    //    //}
+    //}
 }
