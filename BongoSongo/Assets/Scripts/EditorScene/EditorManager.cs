@@ -122,8 +122,6 @@ public class EditorManager : MonoBehaviour {
     private void SetVisible () {
         var ordered = GetOrderedIndicators();
 
-        return;
-
         for (int i = 0; i < ordered.Length; i++) {
             ordered[i].gameObject.SetActive(Mathf.Abs(beat - ordered[i].beat) < 8);
 
