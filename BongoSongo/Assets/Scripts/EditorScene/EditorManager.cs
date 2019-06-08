@@ -63,13 +63,18 @@ public class EditorManager : MonoBehaviour {
         }
 
         if (selected) {
-            var bounding = selected.GetComponentInChildren<Renderer>().bounds;
+            var renderers = selected.GetComponentsInChildren<Renderer>();
+            var bounding = new Bounds(renderers.First().bounds.center, Vector2.zero);
+
+            foreach (var renderer in renderers) {
+                bounding.Encapsulate(renderer.bounds);
+            }
 
             var center = (Vector2)Camera.main.WorldToScreenPoint(bounding.center) - Camera.main.pixelRect.size/2;
-            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight;
 
             selectedUI.localPosition = center;
-            selectedUI.sizeDelta = extents;
+            selectedUI.sizeDelta = (Vector2)extents + new Vector2(50f, 50f);
         } else {
             selectedUI.localPosition = Vector2.zero;
             selectedUI.sizeDelta = Camera.main.pixelRect.size * 2;
@@ -128,7 +133,7 @@ public class EditorManager : MonoBehaviour {
             var renderers = ordered[i].gameObject.GetComponentsInChildren<Renderer>();
 
             foreach (var renderer in renderers) {
-                var col = renderer.material.color;
+                 var col = renderer.material.color;
 
                 var alpha = (1f - Mathf.Abs(beat - ordered[i].beat) / 8f);
 
