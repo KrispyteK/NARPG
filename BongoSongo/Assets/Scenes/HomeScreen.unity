@@ -896,9 +896,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm: 128
-  scaleMin: 0.8
+  scaleMin: 0.95
   scaleMax: 1
-  angle: 5
+  angle: 2
   angleSpeed: 0.25
 --- !u!1 &1072542310
 GameObject:

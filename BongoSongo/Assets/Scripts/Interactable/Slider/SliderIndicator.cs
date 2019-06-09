@@ -42,6 +42,13 @@ public class SliderIndicator : MonoBehaviour {
             direction = 1;
         }
 
+        var pos = Curve.NURBS(points, t);
+
         indicator.position = Curve.NURBS(points, t);
+
+        var tangent = (pos - Curve.NURBS(points, t - 0.001f)).normalized;
+
+        float rot_z = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
+        indicator.rotation = Quaternion.Euler(0f, 0f, rot_z + 180 * (1-(direction + 1)/2));
     }
 }
