@@ -20,4 +20,8 @@ public class Selector : MonoBehaviour {
     public virtual void Delete() {
         Destroy(gameObject);
     }
+
+    public virtual void OnToolsActive(RectTransform toolsUI) {
+        
+    }
 }

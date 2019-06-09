@@ -18,25 +18,38 @@ public class IndicatorEditor : MonoBehaviour {
     bool canDrag;
     Selector lastSelected;
     IEnumerator openToolsCoroutine;
+    SelectorTools selectorTools;
 
     IEnumerator OpenTools () {
         yield return new WaitForSeconds(selectedToolsTime);
+
+        selectorTools.ResetTools();
 
         selectedToolsUI.gameObject.SetActive(true);
 
         selectedToolsUI.localPosition = (Vector2)Input.mousePosition - Camera.main.pixelRect.size /2;
 
         startedClickOnSelected = true;
+
+        if (EditorManager.instance.selected) {
+            EditorManager.instance.selected.OnToolsActive(selectedToolsUI);
+        }
     }
 
     void StopOpenTools () {
         if (openToolsCoroutine != null) StopCoroutine(openToolsCoroutine);
     }
 
+    void Start () {
+        selectorTools = selectedToolsUI.GetComponent<SelectorTools>();
+    }
+
     void Update() {
 
         if (Input.GetMouseButtonDown(0)) {
             if (EventSystem.current.IsPointerOverGameObject()) return;
+
+            selectedToolsUI.gameObject.SetActive(false);
 
             isDragging = false;
             canDrag = false;

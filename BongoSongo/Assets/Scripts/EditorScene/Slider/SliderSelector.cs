@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SliderSelector : Selector {
 
+    public GameObject beatLengthTool;
+
     private SliderHandles sliderHandles;
     private Collider2D collider2D;
 
@@ -27,5 +29,25 @@ public class SliderSelector : Selector {
         }
 
         collider2D.enabled = true;
+    }
+
+    public override void OnToolsActive(RectTransform toolsUI) {
+        var tool = Instantiate(beatLengthTool, toolsUI);
+
+        tool.transform.SetSiblingIndex(0);
+
+        toolsUI.GetComponent<SelectorTools>().extraTools.Add(tool);
+
+        tool.GetComponentInChildren<TMPro.TMP_InputField>().onEndEdit.AddListener(EnterValue);
+    }
+
+    void EnterValue (string input) {
+        try {
+            GetComponentInParent<IndicatorInfo>().beatLenght = int.Parse(input);
+
+            print("Set beat lenght to: " + GetComponentInParent<IndicatorInfo>().beatLenght);
+        } catch (System.Exception e) {
+
+        }
     }
 }
