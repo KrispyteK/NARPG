@@ -44,81 +44,72 @@ public class IndicatorEditor : MonoBehaviour {
 
     void Start () {
         selectorTools = selectedToolsUI.GetComponent<SelectorTools>();
+
+        Input.simulateMouseWithTouches = false;
     }
 
-    void Update() {
+    void OnDestroy () {
+        Input.simulateMouseWithTouches = true;
+    }
 
-        if (Input.GetMouseButtonDown(0)) {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
+    void StartTouch (Vector2 position) {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
 
-            selectedToolsUI.gameObject.SetActive(false);
+        isDragging = false;
+        canDrag = false;
+        startedClickOnSelected = false;
 
-            isDragging = false;
-            canDrag = false;
-            startedClickOnSelected = false;
+        if (EditorManager.instance.selected) {
+            openToolsCoroutine = OpenTools();
 
-            if (EditorManager.instance.selected) {
-                openToolsCoroutine = OpenTools();
-
-                StartCoroutine(openToolsCoroutine);
-            }
-
-            beginMousePos = Input.mousePosition;
-
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(beginMousePos);
-            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-
-            var hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
-            RaycastHit2D hit = hits.Any() ? hits.First() : default;
-
-            if (selectDepth >= hits.Length) selectDepth = 0;
-
-            if (!hits.Any()) return;
-
-            hit = hits[selectDepth];
-            var target = hit.collider.gameObject;
-            var selector = target.GetComponent<Selector>();
-
-            if (hit.collider != null) {
-                EditorManager.instance.Unselect();
-
-                selector.Select();
-
-                lastSelected = selector;
-
-                EditorManager.instance.selected = target.GetComponent<Selector>();
-
-                startedClickOnSelected = lastSelected == EditorManager.instance.selected;
-
-                selectDepth++;
-            }
+            StartCoroutine(openToolsCoroutine);
         }
 
-        if (EditorManager.instance.selected != null && Input.GetMouseButton(0)) {
-            Vector2 mousePos = Input.mousePosition;
+        beginMousePos = position;
 
-            if ((beginMousePos - mousePos).magnitude > pixelDragThreshold && !EventSystem.current.IsPointerOverGameObject() && !isDragging) {
-                offset = EditorManager.instance.selected.transform.position - Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(position);
+        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-                isDragging = true;
+        var hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
 
-                StopOpenTools();
-            }
+        if (selectDepth >= hits.Length) selectDepth = 0;
+
+        if (!hits.Any()) return;
+
+        var hit = hits[selectDepth];
+        var target = hit.collider.gameObject;
+        var selector = target.GetComponent<Selector>();
+
+        if (hit.collider != null) {
+            EditorManager.instance.Unselect();
+
+            selector.Select();
+
+            lastSelected = selector;
+
+            EditorManager.instance.selected = target.GetComponent<Selector>();
+
+            startedClickOnSelected = lastSelected == EditorManager.instance.selected;
+
+            selectDepth++;
         }
+    }
 
-        if (Input.GetMouseButtonUp(0)) {
+    void StationaryTouch (Vector2 position) {
+        if (!EditorManager.instance.selected) return;
+
+        if ((beginMousePos - position).magnitude > pixelDragThreshold && !EventSystem.current.IsPointerOverGameObject() && !isDragging) {
+            offset = EditorManager.instance.selected.transform.position - Camera.main.ScreenToWorldPoint(position);
+
+            isDragging = true;
+
             StopOpenTools();
-
-            if (EditorManager.instance.selected && !isDragging && !startedClickOnSelected) {
-                EditorManager.instance.Unselect();
-            }
-
-            isDragging = false;
-            canDrag = false;
         }
+    }
 
+    void Drag (Vector2 position) {
         if (isDragging) {
-            var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+            var targetPos = Camera.main.ScreenToWorldPoint(position) + offset;
 
             if (Input.GetKey(KeyCode.LeftControl)) {
                 var normalized = targetPos / Camera.main.orthographicSize;
@@ -129,6 +120,77 @@ public class IndicatorEditor : MonoBehaviour {
             }
 
             EditorManager.instance.selected.transform.position = targetPos;
+        }
+    }
+
+    void EndTouch () {
+        StopOpenTools();
+
+        if (EditorManager.instance.selected && !isDragging && !startedClickOnSelected) {
+            if (selectedToolsUI.gameObject.activeSelf) {
+                selectedToolsUI.gameObject.SetActive(false);
+            } else {
+                EditorManager.instance.Unselect();
+            }
+        }
+
+        isDragging = false;
+        canDrag = false;
+    }
+
+    void PhoneInput () {
+        if (Input.touchCount > 0) {
+            var touch = Input.GetTouch(0);
+
+            switch (touch.phase) {
+                case TouchPhase.Began:
+                    StartTouch(touch.position);
+
+                    break;
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
+                    StationaryTouch(touch.position);
+
+                    Drag(touch.position);
+
+                    break;
+                case TouchPhase.Ended:
+                    EndTouch();
+
+                    break;
+                case TouchPhase.Canceled:
+                    Debug.LogWarning("Canceled");
+
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    void MouseInput () {
+        if (Input.GetMouseButtonDown(0)) {
+            StartTouch(Input.mousePosition);
+        }
+
+        if (EditorManager.instance.selected != null && Input.GetMouseButton(0)) {
+            Vector2 mousePos = Input.mousePosition;
+
+            StationaryTouch(mousePos);
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            EndTouch();
+        }
+
+        Drag(Input.mousePosition);
+    }
+
+    void Update() {
+        if (Application.platform == RuntimePlatform.Android) {
+            PhoneInput();
+        } else {
+            MouseInput();
         }
     }
 }
