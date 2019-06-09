@@ -59,7 +59,7 @@ public class IndicatorEditor : MonoBehaviour {
         canDrag = false;
         startedClickOnSelected = false;
 
-        if (EditorManager.instance.selected) {
+        if (EditorManager.instance.selected && !selectedToolsUI.gameObject.activeSelf) {
             openToolsCoroutine = OpenTools();
 
             StartCoroutine(openToolsCoroutine);
