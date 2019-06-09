@@ -156,7 +156,8 @@ public class EditorManager : MonoBehaviour {
         for (int i = 0; i < ordered.Length; i++) {
             var spawnInfo = new SpawnInfo {
                 beat = ordered[i].beat,
-                indicator = ordered[i].GetComponent<IndicatorInfo>().indicator
+                indicator = ordered[i].indicator,
+                beatLength = ordered[i].beatLenght
             };
 
             var pos = ordered[i].transform.position / Camera.main.orthographicSize;
@@ -254,8 +255,11 @@ public class EditorManager : MonoBehaviour {
             var position = new Vector2 (spawnInfo.position.x, spawnInfo.position.y) * Camera.main.orthographicSize;
 
             var instance = Instantiate(prefab, position, Quaternion.identity, indicatorParent);
-            instance.GetComponent<IndicatorInfo>().beat = spawnInfo.beat;
-            instance.GetComponent<IndicatorInfo>().spawnInfoIndex = spawnInfo.beat;
+            var indicatorInfo = instance.GetComponent<IndicatorInfo>();
+
+            indicatorInfo.beat = spawnInfo.beat;
+            indicatorInfo.spawnInfoIndex = spawnInfo.beat;
+            indicatorInfo.beatLenght = spawnInfo.beatLength;
 
             if (instance.CompareTag("SliderEditor")) {
                 var sliderHandles = instance.GetComponentInChildren<SliderHandles>();
