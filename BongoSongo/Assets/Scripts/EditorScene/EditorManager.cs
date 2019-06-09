@@ -276,8 +276,11 @@ public class EditorManager : MonoBehaviour {
 
                 foreach (var point in spawnInfo.points) {
                     var newHandle = Instantiate(handlePrefab, sliderHandles.handleTransform);
+                    var sliderHandleSelector = newHandle.GetComponent<SliderHandleSelector>();
 
-                    newHandle.GetComponent<SliderHandleSelector>().slider = instance;
+                    sliderHandleSelector.slider = instance.transform.GetChild(0).gameObject;
+                    sliderHandleSelector.sliderHandles = sliderHandles;
+
                     newHandle.transform.position = new Vector2(point.x, point.y) * Camera.main.orthographicSize;
                 }
             }

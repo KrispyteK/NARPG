@@ -5,8 +5,8 @@ using UnityEngine;
 public class SliderHandleSelector : Selector {
 
     public GameObject slider;
+    public SliderHandles sliderHandles;
 
-    private SliderHandles sliderHandles;
     private GameObject handlePrefab;
 
     private void Start () {
@@ -27,7 +27,11 @@ public class SliderHandleSelector : Selector {
         var newHandle = Instantiate(handlePrefab, transform.position + Vector3.up * 1, Quaternion.identity, transform.parent);
 
         newHandle.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
-        newHandle.GetComponent<SliderHandleSelector>().slider = slider;
+
+        var selector = newHandle.GetComponent<SliderHandleSelector>();
+
+        selector.slider = slider;
+        selector.sliderHandles = sliderHandles;
     }
     public override void Delete() {
         if (sliderHandles.handleTransform.childCount <= 2) return;

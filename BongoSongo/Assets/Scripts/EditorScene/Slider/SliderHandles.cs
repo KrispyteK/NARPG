@@ -23,7 +23,7 @@ public class SliderHandles : MonoBehaviour {
         Vector2 max = Vector2.zero;
 
         foreach (Transform child in handleTransform) {
-            child.GetComponent<SliderHandleSelector>().slider = gameObject;
+            //child.GetComponent<SliderHandleSelector>().slider = gameObject;
 
             points.Add(child.position);
             points2D.Add(child.position);
