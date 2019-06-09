@@ -278,6 +278,8 @@ public class EditorManager : MonoBehaviour {
         }
 
         OrderIndicators();
+
+        SetVisible();
     }
 
     public void New() {

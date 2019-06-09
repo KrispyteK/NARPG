@@ -44,6 +44,10 @@ public class SliderSelector : Selector {
         inputField.text = "" + GetComponentInParent<IndicatorInfo>().beatLenght;
     }
 
+    public override void Delete() {
+        Destroy(transform.parent.gameObject);
+    }
+
     void EnterValue (string input) {
         try {
             GetComponentInParent<IndicatorInfo>().beatLenght = int.Parse(input);
