@@ -75,6 +75,8 @@ MonoBehaviour:
   beatScore: {fileID: 6431739556869953409, guid: d5fe229414e847f4ab06a09c6f99bead,
     type: 3}
   source: {fileID: 1342482096}
+  particleEffect: {fileID: 1485372658828952622, guid: bef2beae19b5c2f4a8e23930f1002379,
+    type: 3}
 --- !u!82 &1342482096
 AudioSource:
   m_ObjectHideFlags: 0
@@ -239,7 +241,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300008, guid: 8b01a03f06bc27649a9392ad791a33d7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c2fe56c3e834d24aa9eaaa4a554df3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -266,7 +268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &945690250604764505
 Transform:
   m_ObjectHideFlags: 0

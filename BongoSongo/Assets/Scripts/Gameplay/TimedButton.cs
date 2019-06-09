@@ -9,6 +9,7 @@ public class TimedButton : MonoBehaviour {
     public Transform ring;
     public GameObject beatScore;
     public AudioSource source;
+    public GameObject particleEffect;
 
     private Interactable interactable;
     private bool isKilled;
@@ -95,6 +96,8 @@ public class TimedButton : MonoBehaviour {
         var color = Color.Lerp(new Color(1, 0.5f, 0), Color.green, lerp);
 
         indicator.GetComponent<Renderer>().material.color = color * new Color(1, 1, 1, 0.8f);
+
+        Instantiate(particleEffect, transform.position, Quaternion.identity);
 
         while (i < 1f) {
             i += Time.deltaTime * 5f;
