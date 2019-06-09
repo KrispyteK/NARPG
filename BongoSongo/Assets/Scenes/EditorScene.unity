@@ -8503,6 +8503,7 @@ MonoBehaviour:
   beatText: {fileID: 531618859}
   levelInfo: {fileID: 0}
   selectedUI: {fileID: 616197402}
+  timelineDrawer: {fileID: 375022939}
   editorPrefabs:
   - indicator: 0
     prefab: {fileID: 8158367451574732956, guid: c1bd7cde4305ccd47bc6e573fc848e3d,

@@ -10,6 +10,12 @@ public class DebugConsole : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         Application.logMessageReceived += Application_logMessageReceived;
+
+        var otherConsole = FindObjectOfType<DebugConsole>();
+
+        if (otherConsole) {
+            Destroy(otherConsole.gameObject);
+        }
     }
 
     private List<LogMessage> logMessages = new List<LogMessage>();

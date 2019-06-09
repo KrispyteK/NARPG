@@ -27,13 +27,12 @@ public class EditorManager : MonoBehaviour {
     public Text beatText;
     public LevelInfo levelInfo;
     public RectTransform selectedUI;
+    public TimelineDrawer timelineDrawer;
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
     public float beatLength;
     public int beatsTotal;
-
-    private TimelineDrawer timelineDrawer;
 
     void Awake() {
         instance = this;
@@ -87,6 +86,8 @@ public class EditorManager : MonoBehaviour {
         }
 
         var clip = level.song.GenerateClip();
+
+        print(timelineDrawer);
 
         timelineDrawer.RedrawTimeline(clip);
 
