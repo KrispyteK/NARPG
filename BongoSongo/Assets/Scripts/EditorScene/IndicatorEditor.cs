@@ -27,7 +27,11 @@ public class IndicatorEditor : MonoBehaviour {
 
         selectedToolsUI.gameObject.SetActive(true);
 
-        selectedToolsUI.localPosition = (Vector2)Input.mousePosition - Camera.main.pixelRect.size /2;
+        var position = (Vector2)Input.mousePosition - Camera.main.pixelRect.size / 2;
+        position.x = Mathf.Min(position.x, Camera.main.pixelWidth/2 - selectedToolsUI.sizeDelta.x);
+        position.y = Mathf.Min(position.y, Camera.main.pixelHeight/2 - selectedToolsUI.sizeDelta.y);
+
+        selectedToolsUI.localPosition = position;
 
         startedClickOnSelected = true;
 
