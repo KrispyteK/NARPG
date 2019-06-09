@@ -11,10 +11,12 @@ public class DebugConsole : MonoBehaviour {
 
         Application.logMessageReceived += Application_logMessageReceived;
 
-        var otherConsole = FindObjectOfType<DebugConsole>();
+        var otherConsoles = FindObjectsOfType<DebugConsole>();
 
-        if (otherConsole) {
-            Destroy(otherConsole.gameObject);
+        if (otherConsoles.Length > 2) {
+            foreach (var console in otherConsoles) {
+                if (console != this) Destroy(console.gameObject);
+            }
         }
     }
 

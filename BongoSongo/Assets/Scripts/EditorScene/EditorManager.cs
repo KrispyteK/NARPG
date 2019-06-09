@@ -87,8 +87,6 @@ public class EditorManager : MonoBehaviour {
 
         var clip = level.song.GenerateClip();
 
-        print(timelineDrawer);
-
         timelineDrawer.RedrawTimeline(clip);
 
         beatLength = 60f / level.bpm;
