@@ -27,6 +27,8 @@ public class IndicatorEditor : MonoBehaviour {
 
         selectedToolsUI.gameObject.SetActive(true);
 
+        if (EditorManager.instance.selected) EditorManager.instance.selected.OnToolsActive(selectedToolsUI);
+
         var position = (Vector2)Input.mousePosition - Camera.main.pixelRect.size / 2;
         position.x = Mathf.Min(position.x, Camera.main.pixelWidth/2 - selectedToolsUI.sizeDelta.x);
         position.y = Mathf.Min(position.y, Camera.main.pixelHeight/2 - selectedToolsUI.sizeDelta.y);
@@ -34,10 +36,6 @@ public class IndicatorEditor : MonoBehaviour {
         selectedToolsUI.localPosition = position;
 
         startedClickOnSelected = true;
-
-        if (EditorManager.instance.selected) {
-            EditorManager.instance.selected.OnToolsActive(selectedToolsUI);
-        }
     }
 
     void StopOpenTools () {
