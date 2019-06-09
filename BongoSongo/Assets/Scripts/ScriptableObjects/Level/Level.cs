@@ -38,7 +38,7 @@ public class Level {
 
             File.WriteAllText(path, levelFile.text);
 
-            Debug.Log("Level saved to: " + path);
+            //Debug.Log("Level saved to: " + path);
         }
 
         Debug.Log("Writing levels complete!");

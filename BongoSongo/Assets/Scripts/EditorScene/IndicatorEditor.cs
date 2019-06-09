@@ -57,9 +57,11 @@ public class IndicatorEditor : MonoBehaviour {
             canDrag = false;
             startedClickOnSelected = false;
 
-            openToolsCoroutine = OpenTools();
+            if (EditorManager.instance.selected) {
+                openToolsCoroutine = OpenTools();
 
-            StartCoroutine(openToolsCoroutine);
+                StartCoroutine(openToolsCoroutine);
+            }
 
             beginMousePos = Input.mousePosition;
 
