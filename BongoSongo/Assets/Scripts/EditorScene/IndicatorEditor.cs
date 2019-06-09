@@ -45,7 +45,7 @@ public class IndicatorEditor : MonoBehaviour {
     void Start () {
         selectorTools = selectedToolsUI.GetComponent<SelectorTools>();
 
-        Input.simulateMouseWithTouches = false;
+        Input.simulateMouseWithTouches = true;
     }
 
     void OnDestroy () {
@@ -127,11 +127,7 @@ public class IndicatorEditor : MonoBehaviour {
         StopOpenTools();
 
         if (EditorManager.instance.selected && !isDragging && !startedClickOnSelected) {
-            if (selectedToolsUI.gameObject.activeSelf) {
-                selectedToolsUI.gameObject.SetActive(false);
-            } else {
-                EditorManager.instance.Unselect();
-            }
+            EditorManager.instance.Unselect();
         }
 
         isDragging = false;
@@ -169,6 +165,14 @@ public class IndicatorEditor : MonoBehaviour {
     }
 
     void MouseInput () {
+        if (selectedToolsUI.gameObject.activeSelf) {
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
+                selectedToolsUI.gameObject.SetActive(false);
+            }
+
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0)) {
             StartTouch(Input.mousePosition);
         }
@@ -187,10 +191,10 @@ public class IndicatorEditor : MonoBehaviour {
     }
 
     void Update() {
-        if (Application.platform == RuntimePlatform.Android) {
-            PhoneInput();
-        } else {
+        //if (Application.platform == RuntimePlatform.Android) {
+        //    PhoneInput();
+        //} else {
             MouseInput();
-        }
+        //}
     }
 }
