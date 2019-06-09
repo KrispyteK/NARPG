@@ -45,15 +45,15 @@ public class IndicatorEditor : MonoBehaviour {
     void Start () {
         selectorTools = selectedToolsUI.GetComponent<SelectorTools>();
 
-        Input.simulateMouseWithTouches = true;
+        Input.simulateMouseWithTouches = false;
     }
 
     void OnDestroy () {
         Input.simulateMouseWithTouches = true;
     }
 
-    void StartTouch (Vector2 position) {
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+    void StartTouch (Vector2 position, int id) {
+        if (EventSystem.current.IsPointerOverGameObject(id)) return;
 
         isDragging = false;
         canDrag = false;
@@ -95,7 +95,7 @@ public class IndicatorEditor : MonoBehaviour {
         }
     }
 
-    void StationaryTouch (Vector2 position) {
+    void StationaryTouch (Vector2 position, int id) {
         if (!EditorManager.instance.selected) return;
 
         if ((beginMousePos - position).magnitude > pixelDragThreshold && !EventSystem.current.IsPointerOverGameObject() && !isDragging) {
@@ -140,12 +140,21 @@ public class IndicatorEditor : MonoBehaviour {
 
             switch (touch.phase) {
                 case TouchPhase.Began:
-                    StartTouch(touch.position);
+
+                    if (selectedToolsUI.gameObject.activeSelf) {
+                        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) {
+                            return;
+                        } else {
+                            selectedToolsUI.gameObject.SetActive(false);
+                        }
+                    } else {
+                        StartTouch(touch.position, touch.fingerId);
+                    }
 
                     break;
                 case TouchPhase.Moved:
                 case TouchPhase.Stationary:
-                    StationaryTouch(touch.position);
+                    StationaryTouch(touch.position, touch.fingerId);
 
                     Drag(touch.position);
 
@@ -174,13 +183,13 @@ public class IndicatorEditor : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(0)) {
-            StartTouch(Input.mousePosition);
+            StartTouch(Input.mousePosition, -1);
         }
 
         if (EditorManager.instance.selected != null && Input.GetMouseButton(0)) {
             Vector2 mousePos = Input.mousePosition;
 
-            StationaryTouch(mousePos);
+            StationaryTouch(mousePos, -1);
         }
 
         if (Input.GetMouseButtonUp(0)) {
@@ -191,10 +200,11 @@ public class IndicatorEditor : MonoBehaviour {
     }
 
     void Update() {
-        //if (Application.platform == RuntimePlatform.Android) {
-        //    PhoneInput();
-        //} else {
+        if (Application.platform == RuntimePlatform.Android) {
+            PhoneInput();
+        }
+        else {
             MouseInput();
-        //}
+        }
     }
 }
