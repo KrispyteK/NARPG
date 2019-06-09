@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum Indicators {
     Button,
@@ -70,19 +69,22 @@ public class EditorManager : MonoBehaviour {
                 bounding.Encapsulate(renderer.bounds);
             }
 
-            var center = (Vector2)Camera.main.WorldToScreenPoint(bounding.center) - Camera.main.pixelRect.size/2;
+            var center = (Vector2)Camera.main.WorldToScreenPoint(bounding.center) - Camera.main.pixelRect.size / 2;
             var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight;
 
             selectedUI.localPosition = center;
             selectedUI.sizeDelta = (Vector2)extents + new Vector2(50f, 50f);
-        } else {
+        }
+        else {
             selectedUI.localPosition = Vector2.zero;
             selectedUI.sizeDelta = Camera.main.pixelRect.size * 2;
         }
     }
 
-    public void LoadSong () {
-        if (level == null) return;
+    public void LoadSong() {
+        if (level == null) {
+            return;
+        }
 
         var clip = level.song.GenerateClip();
 
@@ -93,19 +95,23 @@ public class EditorManager : MonoBehaviour {
         beatsTotal = (int)Mathf.Floor(clip.length / beatLength);
     }
 
-    public void IncreaseBeat () {
+    public void IncreaseBeat() {
         SetBeat(beat + 1);
 
-        if (beat >= beatsTotal - 1) SetBeat(0);
+        if (beat >= beatsTotal - 1) {
+            SetBeat(0);
+        }
     }
 
     public void DecreaseBeat() {
         SetBeat(beat - 1);
 
-        if (beat <= 0) SetBeat(beatsTotal - 1);
+        if (beat <= 0) {
+            SetBeat(beatsTotal - 1);
+        }
     }
 
-    public void SetBeat (int num) {
+    public void SetBeat(int num) {
         beat = num;
 
         beatText.text = "Beat: " + beat;
@@ -113,17 +119,19 @@ public class EditorManager : MonoBehaviour {
         SetVisible();
     }
 
-    private IndicatorInfo[] GetOrderedIndicators () {
+    private IndicatorInfo[] GetOrderedIndicators() {
         var infos = new List<IndicatorInfo>();
 
-        foreach (Transform child in indicatorParent) infos.Add(child.GetComponent<IndicatorInfo>());
+        foreach (Transform child in indicatorParent) {
+            infos.Add(child.GetComponent<IndicatorInfo>());
+        }
 
         var ordered = infos.OrderBy(x => x.beat).ToArray();
 
         return ordered;
     }
 
-    private void SetVisible () {
+    private void SetVisible() {
         var ordered = GetOrderedIndicators();
 
         for (int i = 0; i < ordered.Length; i++) {
@@ -132,7 +140,7 @@ public class EditorManager : MonoBehaviour {
             var renderers = ordered[i].gameObject.GetComponentsInChildren<Renderer>();
 
             foreach (var renderer in renderers) {
-                 var col = renderer.material.color;
+                var col = renderer.material.color;
 
                 var alpha = (1f - Mathf.Abs(beat - ordered[i].beat) / 8f);
 
@@ -141,7 +149,7 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
-    public void OrderIndicators () {
+    public void OrderIndicators() {
         var ordered = GetOrderedIndicators();
 
         for (int i = 0; i < ordered.Length; i++) {
@@ -149,7 +157,7 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
-    public List<SpawnInfo> GenerateSpawnInfoList () {
+    public List<SpawnInfo> GenerateSpawnInfoList() {
         var ordered = GetOrderedIndicators();
         var list = new List<SpawnInfo>();
 
@@ -182,7 +190,7 @@ public class EditorManager : MonoBehaviour {
         return list;
     }
 
-    public void Unselect () {
+    public void Unselect() {
         if (selected) {
             selected.Unselect();
 
@@ -190,7 +198,7 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
-    public void CreateNewEditor () {
+    public void CreateNewEditor() {
         var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
 
         instance.GetComponent<IndicatorInfo>().beat = beat;
@@ -198,15 +206,16 @@ public class EditorManager : MonoBehaviour {
         OrderIndicators();
     }
 
-    public void CreateNewIndicator () {
+    public void CreateNewIndicator() {
         if (selected) {
             selected.CreateNew();
-        } else {
+        }
+        else {
             CreateNewEditor();
         }
     }
 
-    public void DeleteIndicator () {
+    public void DeleteIndicator() {
         if (selected) {
             var indicatorInfo = selected.GetComponent<IndicatorInfo>();
 
@@ -228,7 +237,7 @@ public class EditorManager : MonoBehaviour {
         LoadSong();
     }
 
-    public void Save () {
+    public void Save() {
         var spawnInfoList = GenerateSpawnInfoList();
 
         level.spawnInfo = spawnInfoList;
@@ -236,7 +245,7 @@ public class EditorManager : MonoBehaviour {
         Level.Save(level);
     }
 
-    public void Load (string file) {
+    public void Load(string file) {
         foreach (Transform child in indicatorParent) {
             Destroy(child.gameObject);
         }
@@ -246,13 +255,11 @@ public class EditorManager : MonoBehaviour {
         levelInfo.SetInfo();
         LoadSong();
 
-        var i = 0;
-
         var handlePrefab = Resources.Load<GameObject>("Prefabs/SliderHandle");
 
-        foreach (var spawnInfo in level.spawnInfo) { 
+        foreach (var spawnInfo in level.spawnInfo) {
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
-            var position = new Vector2 (spawnInfo.position.x, spawnInfo.position.y) * Camera.main.orthographicSize;
+            var position = new Vector2(spawnInfo.position.x, spawnInfo.position.y) * Camera.main.orthographicSize;
 
             var instance = Instantiate(prefab, position, Quaternion.identity, indicatorParent);
             var indicatorInfo = instance.GetComponent<IndicatorInfo>();
@@ -264,7 +271,9 @@ public class EditorManager : MonoBehaviour {
             if (instance.CompareTag("SliderEditor")) {
                 var sliderHandles = instance.GetComponentInChildren<SliderHandles>();
 
-                foreach (Transform child in sliderHandles.handleTransform) Destroy(child.gameObject);
+                foreach (Transform child in sliderHandles.handleTransform) {
+                    Destroy(child.gameObject);
+                }
 
                 foreach (var point in spawnInfo.points) {
                     var newHandle = Instantiate(handlePrefab, sliderHandles.handleTransform);
@@ -273,8 +282,6 @@ public class EditorManager : MonoBehaviour {
                     newHandle.transform.position = new Vector2(point.x, point.y) * Camera.main.orthographicSize;
                 }
             }
-
-            i = 0;
         }
 
         OrderIndicators();
@@ -290,17 +297,15 @@ public class EditorManager : MonoBehaviour {
         levelInfo.SetInfo();
     }
 
-    public void Play () {
+    public void Play() {
         var interScene = InterScene.Instance;
 
         interScene.level = level;
 
-        print(level);
-
         SceneManager.LoadScene("GameplayScene");
     }
 
-    public void PlayAtBeat () {
+    public void PlayAtBeat() {
         var interEditor = InterSceneEditorInformation.Instance;
 
         interEditor.beat = beat;
@@ -312,7 +317,13 @@ public class EditorManager : MonoBehaviour {
         SceneManager.LoadScene("GameplayScene");
     }
 
-    private GUIStyle guiStyle = new GUIStyle();
+    public void ExitToMainMenu () {
+        Level.Save(level);
+
+        SceneManager.LoadScene("HomeScreen");
+    }
+
+    //private GUIStyle guiStyle = new GUIStyle();
 
     //public void OnGUI() {
     //    guiStyle.fontSize = 40;
