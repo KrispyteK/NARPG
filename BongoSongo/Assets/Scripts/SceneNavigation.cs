@@ -29,6 +29,10 @@ public class SceneNavigation : MonoBehaviour {
         Debug.Log("Quiting");
     }
 
+    public void OpenScene (string scene) {
+        SceneManager.LoadScene(scene);
+    }
+
     void Update () {
         if (Input.GetButtonDown("Cancel")) {
             var scene = SceneManager.GetActiveScene();
