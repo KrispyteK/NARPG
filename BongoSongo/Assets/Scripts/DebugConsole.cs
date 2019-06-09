@@ -26,6 +26,10 @@ public class DebugConsole : MonoBehaviour {
             stackTrace = stackTrace,
             type = type
         });
+
+        int count = Mathf.Min(logMessages.Count, 20);
+
+        logMessages = logMessages.GetRange(logMessages.Count - count, count);
     }
 
     void OnGUI () {
@@ -36,6 +40,7 @@ public class DebugConsole : MonoBehaviour {
             Color color;
 
             switch (msg.type) {
+                case LogType.Exception:
                 case LogType.Error:
                     color = Color.red;
                     break;
@@ -43,13 +48,19 @@ public class DebugConsole : MonoBehaviour {
                     color = Color.yellow;
                     break;
                 default:
-                    color = Color.green;
+                    color = Color.white;
                     break;
             }
 
             style.normal.textColor = color;
 
-            GUILayout.Box(msg.condition,style);
+            var message = msg.condition;
+
+            if (msg.type == LogType.Exception) {
+                message += "\n" + msg.stackTrace;
+            }
+
+            GUILayout.Box(message, style);
         }
 
         GUILayout.EndVertical();
