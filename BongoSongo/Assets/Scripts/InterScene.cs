@@ -27,7 +27,7 @@ public class InterScene : Singleton<InterScene> {
 
         if (spawnManager) {
             spawnManager.spawnInfo = level.spawnInfo;
-            soundManager.beatTest.clip = level.song.GenerateClip();
+            if (level.song != null) soundManager.beatTest.clip = level.song.GenerateClip();
         }
     }
 }
