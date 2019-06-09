@@ -46,7 +46,7 @@ public class SongDropdown : MonoBehaviour {
     public void OnChanged (int num) {
         var path = songPaths[num];
 
-        if (EditorManager.instance.level) {
+        if (EditorManager.instance.level != null) {
             if (EditorManager.instance.level.song is Song song) {
                 song.clipString = path;
             } else if (EditorManager.instance.level.song == null) {

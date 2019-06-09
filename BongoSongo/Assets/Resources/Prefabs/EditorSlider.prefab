@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beat: 0
+  beatLenght: 4
   indicator: 1
 --- !u!1 &4210762138621608442
 GameObject:

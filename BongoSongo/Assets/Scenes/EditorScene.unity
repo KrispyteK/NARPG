@@ -5793,7 +5793,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1063197237}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8361,7 +8361,13 @@ MonoBehaviour:
     prefab: {fileID: 0}
     preview: {fileID: 0}
   selected: {fileID: 0}
-  level: {fileID: 0}
+  level:
+    name: unnamed
+    description: 
+    bpm: 128
+    song:
+      clipString: 
+    spawnInfo: []
   indicatorParent: {fileID: 1093304217}
   beat: 0
   beatText: {fileID: 531618859}
@@ -8873,7 +8879,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1800060939}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

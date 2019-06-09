@@ -36,6 +36,8 @@ public class SpawnManager : MonoBehaviour {
             var slider = instance.GetComponentInChildren<SliderIndicator>();
             var points = new List<Vector3>();
 
+            slider.beats = spawn.beatLength;
+
             foreach (var point in spawn.points) {
                 //var newHandle = new GameObject();
 

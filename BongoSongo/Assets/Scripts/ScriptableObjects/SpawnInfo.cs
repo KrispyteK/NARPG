@@ -1,6 +1,7 @@
 ﻿[System.Serializable]
 public class SpawnInfo {
     public int beat;
+    public int beatLength;
 
     public Indicators indicator;
 

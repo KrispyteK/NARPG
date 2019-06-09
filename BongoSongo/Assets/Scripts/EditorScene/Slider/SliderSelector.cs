@@ -38,7 +38,10 @@ public class SliderSelector : Selector {
 
         toolsUI.GetComponent<SelectorTools>().extraTools.Add(tool);
 
-        tool.GetComponentInChildren<TMPro.TMP_InputField>().onEndEdit.AddListener(EnterValue);
+        var inputField = tool.GetComponentInChildren<TMPro.TMP_InputField>();
+
+        inputField.onEndEdit.AddListener(EnterValue);
+        inputField.text = "" + GetComponentInParent<IndicatorInfo>().beatLenght;
     }
 
     void EnterValue (string input) {

@@ -7,8 +7,8 @@ using UnityEngine.Networking;
 using System.Text.RegularExpressions;
 
 [System.Serializable]
-public class Level : ScriptableObject {
-    //public string name;
+public class Level {
+    public string name;
     public string description;
     public float bpm;
     public Song song;

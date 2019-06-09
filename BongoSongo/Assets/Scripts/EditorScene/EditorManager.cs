@@ -82,7 +82,7 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void LoadSong () {
-        if (!level) return;
+        if (level == null) return;
 
         var clip = level.song.GenerateClip();
 
