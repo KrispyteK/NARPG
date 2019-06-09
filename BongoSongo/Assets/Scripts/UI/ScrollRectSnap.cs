@@ -14,13 +14,15 @@ public class ScrollRectSnap : MonoBehaviour {
     public RectTransform panel;
     public RectTransform center;
     public RectTransform[] buttons;
+    public int index;
+    public int buttonDistance;
 
-    public RectTransform Selected => buttons[minButtonNum];
+    public float DistanceToNearest => (index * -buttonDistance) - panel.anchoredPosition.x;
+
+    public RectTransform Selected => buttons[index];
 
     private float[] distances;
     private bool dragging;
-    private int buttonDistance;
-    private int minButtonNum;
     private ScrollRect scrollRect;
     private bool goToClosest = true;
 
@@ -55,14 +57,14 @@ public class ScrollRectSnap : MonoBehaviour {
 
             for (int a = 0; a < buttons.Length; a++) {
                 if (minDistance == distances[a]) {
-                    minButtonNum = a;
+                    index = a;
                     break;
                 }
             }
         }
 
         if (!dragging) {
-            LerpToButton(minButtonNum);
+            LerpToButton(index);
         }
     }
 
@@ -93,11 +95,11 @@ public class ScrollRectSnap : MonoBehaviour {
         float velX = scrollRect.velocity.x;
 
         if (Mathf.Abs(scrollRect.velocity.x) > velocityShiftThresholdMax) {
-            minButtonNum = (int)Mathf.Clamp(minButtonNum - Mathf.Sign(velX) * buttons.Length, 0, buttons.Length - 1);
+            index = (int)Mathf.Clamp(index - Mathf.Sign(velX) * buttons.Length, 0, buttons.Length - 1);
 
             goToClosest = false;
         } else if (Mathf.Abs(scrollRect.velocity.x) > velocityShiftThreshold && Mathf.Abs(scrollRect.velocity.x) < velocityShiftThresholdMax) {
-            minButtonNum = (int)Mathf.Clamp(minButtonNum - Mathf.Sign(velX),0, buttons.Length - 1);
+            index = (int)Mathf.Clamp(index - Mathf.Sign(velX),0, buttons.Length - 1);
 
             goToClosest = false;
         }
