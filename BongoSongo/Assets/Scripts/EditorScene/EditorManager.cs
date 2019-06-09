@@ -105,7 +105,6 @@ public class EditorManager : MonoBehaviour {
         if (beat <= 0) SetBeat(beatsTotal - 1);
     }
 
-
     public void SetBeat (int num) {
         beat = num;
 
@@ -210,7 +209,7 @@ public class EditorManager : MonoBehaviour {
         if (selected) {
             var indicatorInfo = selected.GetComponent<IndicatorInfo>();
 
-            if (indicatorInfo) {
+            if (indicatorInfo && level.spawnInfo.Count > 0) {
                 level.spawnInfo.RemoveAt(indicatorInfo.spawnInfoIndex);
             }
 

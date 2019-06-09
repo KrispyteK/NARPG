@@ -6,15 +6,32 @@ using System.Linq;
 
 public class IndicatorEditor : MonoBehaviour {
 
+    public float selectedToolsTime = 1f;
     public int pixelDragThreshold = 2;
     public bool isDragging;
     public bool startedClickOnSelected;
+    public RectTransform selectedToolsUI;
 
     Vector3 offset;
     int selectDepth = 0;
     Vector2 beginMousePos;
     bool canDrag;
     Selector lastSelected;
+    IEnumerator openToolsCoroutine;
+
+    IEnumerator OpenTools () {
+        yield return new WaitForSeconds(selectedToolsTime);
+
+        selectedToolsUI.gameObject.SetActive(true);
+
+        selectedToolsUI.localPosition = (Vector2)Input.mousePosition - Camera.main.pixelRect.size /2;
+
+        startedClickOnSelected = true;
+    }
+
+    void StopOpenTools () {
+        if (openToolsCoroutine != null) StopCoroutine(openToolsCoroutine);
+    }
 
     void Update() {
 
@@ -23,12 +40,15 @@ public class IndicatorEditor : MonoBehaviour {
 
             isDragging = false;
             canDrag = false;
+            startedClickOnSelected = false;
+
+            openToolsCoroutine = OpenTools();
+
+            StartCoroutine(openToolsCoroutine);
 
             beginMousePos = Input.mousePosition;
 
-            startedClickOnSelected = false;
-
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(beginMousePos);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
             var hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
@@ -64,10 +84,14 @@ public class IndicatorEditor : MonoBehaviour {
                 offset = EditorManager.instance.selected.transform.position - Camera.main.ScreenToWorldPoint(mousePos);
 
                 isDragging = true;
+
+                StopOpenTools();
             }
         }
 
         if (Input.GetMouseButtonUp(0)) {
+            StopOpenTools();
+
             if (EditorManager.instance.selected && !isDragging && !startedClickOnSelected) {
                 EditorManager.instance.Unselect();
             }
