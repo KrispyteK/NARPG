@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 public class Level {
     public string name;
     public string description;
+    public string path;
     public float bpm;
     public Song song;
 
@@ -62,6 +63,8 @@ public class Level {
 #endif
 
         Debug.Log("Saving level to: " + path);
+
+        level.path = Path.Combine(Application.persistentDataPath, $"{level.name}.json");
 
         var json = JsonConvert.SerializeObject(level);
 
