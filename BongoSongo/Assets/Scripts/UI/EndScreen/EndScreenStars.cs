@@ -37,8 +37,6 @@ public class EndScreenStars : MonoBehaviour {
 
         float ratio = InterScene.Instance.score / (float)totalScorePossible;
 
-        print($"Total: {totalScorePossible} Ratio: {ratio}");
-
         for (int i = 0; i < stars.Length; i++) {
             var image = stars[i];
             var normalized = i / ((float)stars.Length + 1);

@@ -19,6 +19,7 @@ public class IndicatorEditor : MonoBehaviour {
     Selector lastSelected;
     IEnumerator openToolsCoroutine;
     SelectorTools selectorTools;
+    bool isSnapping;
 
     IEnumerator OpenTools () {
         yield return new WaitForSeconds(selectedToolsTime);
@@ -50,6 +51,10 @@ public class IndicatorEditor : MonoBehaviour {
 
     void OnDestroy () {
         Input.simulateMouseWithTouches = true;
+    }
+
+    public void ToggleSnap () {
+        isSnapping = !isSnapping;
     }
 
     void StartTouch (Vector2 position, int id) {
@@ -111,7 +116,7 @@ public class IndicatorEditor : MonoBehaviour {
         if (isDragging) {
             var targetPos = Camera.main.ScreenToWorldPoint(position) + offset;
 
-            if (Input.GetKey(KeyCode.LeftControl)) {
+            if (isSnapping) {
                 var normalized = targetPos / Camera.main.orthographicSize;
 
                 normalized = new Vector3(Mathf.Round(normalized.x * 10) / 10, Mathf.Round(normalized.y * 10) / 10, 0);
@@ -181,6 +186,8 @@ public class IndicatorEditor : MonoBehaviour {
 
             return;
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl)) ToggleSnap();
 
         if (Input.GetMouseButtonDown(0)) {
             StartTouch(Input.mousePosition, -1);
