@@ -6,13 +6,17 @@ public class InterScene : Singleton<InterScene> {
     public int score;
     public GamePlaySettings gamePlaySettings;
 
-    protected override bool DontDestroyOnLoad => true;
+    protected override bool DontDestroyLoad => true;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod() {
         Debug.Log("Creating interscene object...");
 
-        _instance = Initiate();
+        var interScene = InterScene.Instance;
+    }
+
+    private void Awake () {
+        DontDestroyOnLoad(gameObject);
     }
 
     protected override void OnInitiate() {

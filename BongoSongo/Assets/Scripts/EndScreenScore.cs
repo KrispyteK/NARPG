@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class EndScreenScore : MonoBehaviour {
     void Start() {
-        var interScene = FindObjectOfType<InterScene>();
-
-        if (interScene == null) return;
-
-        GetComponent<UnityEngine.UI.Text>().text = "" + interScene.score;
-
-        Destroy(interScene.gameObject);
+        GetComponent<UnityEngine.UI.Text>().text = "" + InterScene.Instance.score;
     }
 }

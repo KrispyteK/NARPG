@@ -33,6 +33,15 @@ public class SceneNavigation : MonoBehaviour {
         SceneManager.LoadScene(scene);
     }
 
+    public void Restart () {
+        //var interScene = InterScene.Instance;
+        //var level = Level.Load(scrollRectSnap.Selected.GetComponent<SongOption>().level + ".json");
+
+        //interScene.level = level;
+
+        SceneManager.LoadScene("GameplayScene");
+    }
+
     void Update () {
         if (Input.GetButtonDown("Cancel")) {
             var scene = SceneManager.GetActiveScene();

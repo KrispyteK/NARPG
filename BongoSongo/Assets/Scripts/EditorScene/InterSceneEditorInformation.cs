@@ -7,7 +7,7 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
 
     public int beat;
 
-    protected override bool DontDestroyOnLoad => true;
+    protected override bool DontDestroyLoad => true;
 
     protected override void OnInitiate() {
         gameObject.name = "InterSceneEditorInformation";
