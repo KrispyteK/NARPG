@@ -43,8 +43,6 @@ public class HighScores : MonoBehaviour {
     public static Dictionary<string,int> LoadScores() {
         string filePath = Path.Combine(Application.persistentDataPath,"highscores", "highscores.json");
 
-        print("Loading highscores");
-
         if (File.Exists(filePath)) {
             string json = File.ReadAllText(filePath);
 
@@ -54,8 +52,6 @@ public class HighScores : MonoBehaviour {
 
             return deserialized;
         } else {
-            print("No high scores yet!");
-
             return new Dictionary<string, int>();
         }
     }
