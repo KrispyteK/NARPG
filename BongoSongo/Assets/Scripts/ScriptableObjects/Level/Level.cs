@@ -30,8 +30,6 @@ public class Level {
 
         Debug.Log(standardLevels);
 
-        if (!Directory.Exists(Folder)) Directory.CreateDirectory(Folder);
-
         foreach (var levelFile in standardLevels.levels) {
             string path = Path.Combine(Folder, "Levels", $"{levelFile.name}.json");
 
@@ -80,6 +78,8 @@ public class Level {
         if (!standardLevels.levels.Contains(textAsset)) {
             standardLevels.levels.Add(textAsset);
         }
+
+        UnityEditor.EditorUtility.SetDirty(standardLevels);
 #endif
 
         Debug.Log("Succesfully saved level!");

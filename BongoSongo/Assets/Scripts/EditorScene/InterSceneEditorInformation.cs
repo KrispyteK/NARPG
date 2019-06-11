@@ -50,8 +50,6 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
         } else if (scene == SceneManager.GetSceneByName("EditorScene")) {
             var m = FindObjectOfType<EditorManager>();
 
-            print("Entered editor scene");
-
             m.LoadLevel(InterScene.Instance.level);
             m.SetBeat(beat);
 

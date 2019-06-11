@@ -23,6 +23,8 @@ public class StandardSongs : ScriptableObject {
 
             song.audioClipPath = path;
         }
+
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 #endif
 }
