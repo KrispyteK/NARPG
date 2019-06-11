@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "StandardLevels", menuName = "Levels/StandardLevels")]
 class StandardLevels : ScriptableObject {
-    public TextAsset[] levels;
+    public List<TextAsset> levels = new List<TextAsset>();
 }

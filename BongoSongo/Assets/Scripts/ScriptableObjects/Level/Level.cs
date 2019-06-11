@@ -33,13 +33,11 @@ public class Level {
         if (!Directory.Exists(Folder)) Directory.CreateDirectory(Folder);
 
         foreach (var levelFile in standardLevels.levels) {
-            string levelName = Regex.Replace(levelFile.name, "^StandardLevel", "");
-
-            string path = Path.Combine(Folder, $"{levelName}.json");
+            string path = Path.Combine(Folder, $"{levelFile.name}.json");
 
             File.WriteAllText(path, levelFile.text);
 
-            //Debug.Log("Level saved to: " + path);
+            Debug.Log("Level saved to: " + path);
         }
 
         Debug.Log("Writing levels complete!");
@@ -74,6 +72,14 @@ public class Level {
 
 #if UNITY_EDITOR
         UnityEditor.AssetDatabase.Refresh();
+
+        var textAsset = Resources.Load<TextAsset>($"Levels/{level.name}");
+
+        var standardLevels = Resources.Load<StandardLevels>("Levels/StandardLevels");
+
+        if (!standardLevels.levels.Contains(textAsset)) {
+            standardLevels.levels.Add(textAsset);
+        }
 #endif
 
         Debug.Log("Succesfully saved level!");
@@ -87,6 +93,8 @@ public class Level {
         string json = File.ReadAllText(filePath);
 
         Level deserialized = JsonConvert.DeserializeObject<Level>(json);
+
+        Debug.Log(file);
 
         Debug.Log("Succesfully loaded level!");
 
