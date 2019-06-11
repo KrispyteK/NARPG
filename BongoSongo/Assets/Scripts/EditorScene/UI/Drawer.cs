@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Drawer : MonoBehaviour {
 
+    public Sprite openSprite;
+    public Sprite closeSprite;
+
     public bool isOpened;
 
     public Vector2 closedMin;
@@ -25,6 +28,8 @@ public class Drawer : MonoBehaviour {
         if (isOpened) {
             DrawerManager.instance.CloseAllBut(this);
         }
+
+        button.GetComponent<Image>().sprite = !isOpened ? openSprite : closeSprite;
     }
 
     private void Start() {

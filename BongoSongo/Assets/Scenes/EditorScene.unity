@@ -702,6 +702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca655c4c6b44914597d5b7d8eb5a4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openSprite: {fileID: 21300000, guid: 29026ca095c9531468d361677d3a70d8, type: 3}
+  closeSprite: {fileID: 21300000, guid: 507e3f6d1a8b8bf4b8f883dea942427c, type: 3}
   isOpened: 0
   closedMin: {x: 1, y: 0}
   closedMax: {x: 1.3, y: 1}
@@ -1743,6 +1745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca655c4c6b44914597d5b7d8eb5a4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openSprite: {fileID: 21300000, guid: 29026ca095c9531468d361677d3a70d8, type: 3}
+  closeSprite: {fileID: 21300000, guid: 507e3f6d1a8b8bf4b8f883dea942427c, type: 3}
   isOpened: 0
   closedMin: {x: -0.3, y: 0}
   closedMax: {x: 0, y: 1}
@@ -5088,6 +5092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca655c4c6b44914597d5b7d8eb5a4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openSprite: {fileID: 21300000, guid: 29026ca095c9531468d361677d3a70d8, type: 3}
+  closeSprite: {fileID: 21300000, guid: 507e3f6d1a8b8bf4b8f883dea942427c, type: 3}
   isOpened: 0
   closedMin: {x: 0, y: 1}
   closedMax: {x: 1, y: 1.4}
