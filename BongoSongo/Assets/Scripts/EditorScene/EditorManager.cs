@@ -50,8 +50,6 @@ public class EditorManager : MonoBehaviour {
 
         timelineDrawer = FindObjectOfType<TimelineDrawer>();
         levelInfo = FindObjectOfType<LevelInfo>();
-
-
     }
 
     void Update() {
@@ -325,9 +323,10 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void PlayAtBeat() {
-        var interEditor = InterSceneEditorInformation.Instance;
+        var interEditor = FindObjectOfType<InterSceneEditorInformation>();
 
         interEditor.beat = beat;
+        interEditor.playAtBeat = true;
 
         var interScene = InterScene.Instance;
 

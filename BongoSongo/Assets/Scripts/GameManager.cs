@@ -24,7 +24,14 @@ public class GameManager : MonoBehaviour {
 
     void Update() {
         if (Input.GetButtonDown("Cancel")) {
-            End();
+            var interEditor = FindObjectOfType<InterSceneEditorInformation>();
+
+            if (interEditor) {
+                SceneManager.LoadScene("EditorScene");
+            }
+            else {
+                End();
+            }
         }
     }
 

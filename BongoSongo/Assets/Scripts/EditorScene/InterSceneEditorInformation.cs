@@ -5,9 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation> {
 
+
     public int beat;
+    public bool playAtBeat;
 
     protected override bool DontDestroyLoad => true;
+
+    void Start () {
+        var otherInterEditors = FindObjectsOfType<InterSceneEditorInformation>();
+
+        foreach (var interEditor in otherInterEditors) {
+            if (interEditor != this) {
+                DestroyImmediate(gameObject);
+                return;
+            }
+        }
+
+        _instance = this;
+
+        DontDestroyOnLoad(gameObject);
+
+        OnInitiate();
+    }
 
     protected override void OnInitiate() {
         gameObject.name = "InterSceneEditorInformation";
@@ -16,14 +35,18 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        var m = FindObjectOfType<BeatManager>();
+        if (scene == SceneManager.GetSceneByName("GamePlayScene")) {
+            if (playAtBeat) {
+                var m = FindObjectOfType<BeatManager>();
 
-        if (m) {
-            m.startBeat = beat;
-            m.doCountdown = false;
-            m.doOutline = false;
+                if (m) {
+                    m.startBeat = beat;
+                    m.doCountdown = false;
+                    m.doOutline = false;
+                }
+            }
+        } else if (scene == SceneManager.GetSceneByName("EditorScene")) {
+
         }
-
-        Destroy(gameObject);
     }
 }
