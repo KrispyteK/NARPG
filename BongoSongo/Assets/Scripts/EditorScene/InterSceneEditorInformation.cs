@@ -35,6 +35,8 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        print("Loaded scene: " + scene);
+
         if (scene == SceneManager.GetSceneByName("GamePlayScene")) {
             if (playAtBeat) {
                 var m = FindObjectOfType<BeatManager>();
@@ -48,8 +50,9 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
         } else if (scene == SceneManager.GetSceneByName("EditorScene")) {
             var m = FindObjectOfType<EditorManager>();
 
-            m.level = InterScene.Instance.level;
-            //m.LoadSong();    
+            print("Entered editor scene");
+
+            m.LoadLevel(InterScene.Instance.level);
             m.SetBeat(beat);
         }
     }

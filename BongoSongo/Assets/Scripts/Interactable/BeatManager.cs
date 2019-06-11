@@ -67,7 +67,7 @@ public class BeatManager : MonoBehaviour {
 
     void Update () {
         if (audioStarted && !soundManager.beatTest.isPlaying) {
-            GameManager.instance.End();
+            GameManager.instance.End("EndScreen");
         }
     }
 

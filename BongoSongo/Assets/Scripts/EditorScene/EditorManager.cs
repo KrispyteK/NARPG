@@ -42,14 +42,14 @@ public class EditorManager : MonoBehaviour {
     }
 
     void Start() {
-        level = new Level {
-            name = "test"
-        };
+        //level = new Level {
+        //    name = "test"
+        //};
 
         currentPrefab = editorPrefabs[0];
 
-        timelineDrawer = FindObjectOfType<TimelineDrawer>();
-        levelInfo = FindObjectOfType<LevelInfo>();
+        //timelineDrawer = FindObjectOfType<TimelineDrawer>();
+        //levelInfo = FindObjectOfType<LevelInfo>();
     }
 
     void Update() {
@@ -96,7 +96,12 @@ public class EditorManager : MonoBehaviour {
 
         beatsTotal = (int)Mathf.Floor(clip.length / beatLength);
 
-        SetBeat(1);
+        // SetBeat(1);
+        ClampBeat();
+    }
+
+    public void ClampBeat () {
+        SetBeat(Mathf.Clamp(beat,1, beatsTotal));
     }
 
     public void IncreaseBeat() {
@@ -258,18 +263,24 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void Load(string file) {
+        level = Level.Load(file);
+
+        LoadLevel(level);
+    }
+
+    public void LoadLevel (Level level) {
+        this.level = level;
+
         foreach (Transform child in indicatorParent) {
             Destroy(child.gameObject);
         }
-
-        level = Level.Load(file);
 
         levelInfo.SetInfo();
         LoadSong();
 
         var handlePrefab = Resources.Load<GameObject>("Prefabs/SliderHandle");
 
-        foreach (var spawnInfo in level.spawnInfo) {
+        foreach (var spawnInfo in this.level.spawnInfo) {
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
             var position = new Vector2(spawnInfo.position.x, spawnInfo.position.y) * Camera.main.orthographicSize;
 

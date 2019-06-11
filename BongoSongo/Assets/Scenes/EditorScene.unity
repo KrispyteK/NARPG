@@ -7845,6 +7845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beat: 0
+  playAtBeat: 0
 --- !u!4 &1293402032
 Transform:
   m_ObjectHideFlags: 0
@@ -8238,7 +8239,7 @@ MonoBehaviour:
   indicatorParent: {fileID: 1093304217}
   beat: 0
   beatText: {fileID: 531618859}
-  levelInfo: {fileID: 0}
+  levelInfo: {fileID: 837033298}
   selectedUI: {fileID: 616197402}
   timelineDrawer: {fileID: 375022939}
   bpmInput: {fileID: 1133228595}
