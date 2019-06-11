@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class HighScores : MonoBehaviour {
     
+    static string FilePath => Path.Combine(Application.persistentDataPath, "HighScores", "highscores.json");
+
     [System.Serializable]
     public struct HighScore {
         public string levelFile;
@@ -13,14 +15,6 @@ public class HighScores : MonoBehaviour {
     }
 
     public static int SaveNewHighScore(Level level, int score) {
-        string filePath = Path.Combine(Application.persistentDataPath,"highscores", "highscores.json");
-        string folder = Path.Combine(Application.persistentDataPath, "highscores");
-
-        if (!File.Exists(filePath)) {
-            DirectoryInfo di = Directory.CreateDirectory(folder);
-            Debug.Log($"The directory was created successfully at {Directory.GetCreationTime(folder)}.");
-        }
-
         var highScores = LoadScores();
 
         if (!highScores.ContainsKey(level.path)) {
@@ -31,7 +25,7 @@ public class HighScores : MonoBehaviour {
 
         var json = JsonConvert.SerializeObject(highScores);
 
-        using (var fileStream = File.Open(filePath, FileMode.OpenOrCreate)) {
+        using (var fileStream = File.Open(FilePath, FileMode.OpenOrCreate)) {
             using (StreamWriter sw = new StreamWriter(fileStream)) {
                 foreach (char c in json) sw.Write(c);
             }
@@ -41,10 +35,8 @@ public class HighScores : MonoBehaviour {
     }
 
     public static Dictionary<string,int> LoadScores() {
-        string filePath = Path.Combine(Application.persistentDataPath,"highscores", "highscores.json");
-
-        if (File.Exists(filePath)) {
-            string json = File.ReadAllText(filePath);
+        if (File.Exists(FilePath)) {
+            string json = File.ReadAllText(FilePath);
 
             var deserialized = JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
 
