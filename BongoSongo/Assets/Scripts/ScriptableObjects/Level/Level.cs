@@ -33,7 +33,7 @@ public class Level {
         if (!Directory.Exists(Folder)) Directory.CreateDirectory(Folder);
 
         foreach (var levelFile in standardLevels.levels) {
-            string path = Path.Combine(Folder, $"{levelFile.name}.json");
+            string path = Path.Combine(Folder, "Levels", $"{levelFile.name}.json");
 
             File.WriteAllText(path, levelFile.text);
 
@@ -62,7 +62,7 @@ public class Level {
 
         Debug.Log("Saving level to: " + path);
 
-        level.path = Path.Combine(Application.persistentDataPath, $"{level.name}.json");
+        level.path = Path.Combine(Application.persistentDataPath, "Levels", $"{level.name}.json");
 
         var json = JsonConvert.SerializeObject(level);
 
@@ -86,17 +86,11 @@ public class Level {
     }
 
     public static Level Load(string file) {
-        string filePath = Path.Combine(Folder, file);
-
-        Debug.Log($"Loading level {filePath}");
+        string filePath = Path.Combine(Folder, "Levels", file);
 
         string json = File.ReadAllText(filePath);
 
         Level deserialized = JsonConvert.DeserializeObject<Level>(json);
-
-        Debug.Log(file);
-
-        Debug.Log("Succesfully loaded level!");
 
         return deserialized;
     }
