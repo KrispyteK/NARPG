@@ -16,7 +16,7 @@ public class DisplaySongs : MonoBehaviour {
     private SelectableButton.SelectableButtonPool selectableButtonPool = new SelectableButton.SelectableButtonPool();
 
     private struct SongButton {
-        public AudioClip song;
+        public string song;
         public SelectableButton button;
     }
 
@@ -47,7 +47,7 @@ public class DisplaySongs : MonoBehaviour {
             if (songButton.button.IsSelected) {
                 EditorManager.instance.level = new Level {
                     song = new Song {
-                        clipString = songPaths[i]
+                        clipString = songButton.song
                     }
                 };
 
@@ -71,10 +71,12 @@ public class DisplaySongs : MonoBehaviour {
 
         songButtons.Clear();
 
-        foreach (var song in songs) {
+        var standardSongs = Resources.Load<StandardSongs>("Settings/StandardSongs");
+
+        foreach (var song in standardSongs.songs) {
             var button = Instantiate(levelButton, contentPanel);
 
-            button.GetComponentInChildren<Text>().text = song.name;
+            button.GetComponentInChildren<Text>().text = song.audioClip.name;
 
             var buttonComponent = button.GetComponent<SelectableButton>();
 
@@ -82,7 +84,7 @@ public class DisplaySongs : MonoBehaviour {
 
             songButtons.Add(new SongButton {
                 button = buttonComponent,
-                song = song
+                song = song.audioClipPath
             });
         }
     }
