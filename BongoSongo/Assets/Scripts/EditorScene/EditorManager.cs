@@ -292,7 +292,7 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void New() {
-        Level.Save(level);
+        Save();
 
         level = new Level();
 
@@ -300,6 +300,8 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void Play() {
+        Save();
+
         var interScene = InterScene.Instance;
 
         interScene.level = level;
