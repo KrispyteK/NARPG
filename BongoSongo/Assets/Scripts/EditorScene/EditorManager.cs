@@ -352,6 +352,8 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void ExitToMainMenu () {
+        Destroy(FindObjectOfType<InterSceneEditorInformation>().gameObject);
+
         Level.Save(level);
 
         SceneManager.LoadScene("HomeScreen");
