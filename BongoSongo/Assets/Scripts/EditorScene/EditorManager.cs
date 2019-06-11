@@ -315,6 +315,11 @@ public class EditorManager : MonoBehaviour {
     public void Play() {
         Save();
 
+        var interEditor = FindObjectOfType<InterSceneEditorInformation>();
+
+        interEditor.beat = beat;
+        interEditor.playAtBeat = false;
+
         var interScene = InterScene.Instance;
 
         interScene.level = level;

@@ -46,7 +46,11 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
                 }
             }
         } else if (scene == SceneManager.GetSceneByName("EditorScene")) {
+            var m = FindObjectOfType<EditorManager>();
 
+            m.level = InterScene.Instance.level;
+            //m.LoadSong();    
+            m.SetBeat(beat);
         }
     }
 }

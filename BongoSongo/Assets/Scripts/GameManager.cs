@@ -27,16 +27,16 @@ public class GameManager : MonoBehaviour {
             var interEditor = FindObjectOfType<InterSceneEditorInformation>();
 
             if (interEditor) {
-                SceneManager.LoadScene("EditorScene");
+                End("EditorScene");
             }
             else {
-                End();
+                End("EndScreen");
             }
         }
     }
 
-    public void End() {
-        SceneManager.LoadScene("EndScreen");
+    public void End(string scene) {
+        SceneManager.LoadScene(scene);
 
         WebcamMotionCapture.instance.webcamTexture.Stop();
     }
