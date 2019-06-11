@@ -9,6 +9,7 @@ public class CurveRenderer : MonoBehaviour {
     public Color color = Color.white;
     public float width = 0.2f;
     public int numberOfPoints = 20;
+    public float tolerance = 0.01f;
 
     LineRenderer lineRenderer;
 
@@ -22,18 +23,22 @@ public class CurveRenderer : MonoBehaviour {
     }
 
     void Update() {
+        int pointAmt = points.Length * numberOfPoints;
+
         if (points.Length == 0) {
             lineRenderer.SetPositions(new [] {Vector3.zero});
 
             return;
         }
 
-        if (numberOfPoints > 0) {
-            lineRenderer.positionCount = numberOfPoints;
+        if (pointAmt > 0) {
+            lineRenderer.positionCount = pointAmt;
         }
 
-        for (int i = 0; i < numberOfPoints; i++) {
-            lineRenderer.SetPosition(i, Curve.NURBS(points, i / ((float)numberOfPoints - 1)));
+        for (int i = 0; i < pointAmt; i++) {
+            lineRenderer.SetPosition(i, Curve.NURBS(points, i / ((float)pointAmt - 1)));
         }
+
+        lineRenderer.Simplify(tolerance);
     }
 }
