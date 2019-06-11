@@ -47,6 +47,8 @@ public class EditorManager : MonoBehaviour {
 
         timelineDrawer = FindObjectOfType<TimelineDrawer>();
         levelInfo = FindObjectOfType<LevelInfo>();
+
+
     }
 
     void Update() {
@@ -92,13 +94,15 @@ public class EditorManager : MonoBehaviour {
         beatLength = 60f / level.bpm;
 
         beatsTotal = (int)Mathf.Floor(clip.length / beatLength);
+
+        SetBeat(1);
     }
 
     public void IncreaseBeat() {
         SetBeat(beat + 1);
 
         if (beat >= beatsTotal - 1) {
-            SetBeat(0);
+            SetBeat(1);
         }
     }
 
