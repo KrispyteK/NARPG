@@ -28,6 +28,7 @@ public class EditorManager : MonoBehaviour {
     public LevelInfo levelInfo;
     public RectTransform selectedUI;
     public TimelineDrawer timelineDrawer;
+    public TMPro.TMP_InputField bpmInput;
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -242,6 +243,8 @@ public class EditorManager : MonoBehaviour {
 
     public void SetBPMInt(int value) {
         level.bpm = value;
+
+        bpmInput.text = "" + value;
 
         LoadSong();
     }
