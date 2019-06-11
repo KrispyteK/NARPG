@@ -16,7 +16,7 @@ public class DisplaySongs : MonoBehaviour {
     private SelectableButton.SelectableButtonPool selectableButtonPool = new SelectableButton.SelectableButtonPool();
 
     private struct SongButton {
-        public string song;
+        public StandardSongs.Song song;
         public SelectableButton button;
     }
 
@@ -47,12 +47,13 @@ public class DisplaySongs : MonoBehaviour {
             if (songButton.button.IsSelected) {
                 EditorManager.instance.level = new Level {
                     song = new Song {
-                        clipString = songButton.song
+                        clipString = songButton.song.audioClipPath
                     }
                 };
 
                 EditorManager.instance.LoadSong();
                 EditorManager.instance.levelInfo.SetInfo();
+                EditorManager.instance.SetBPMInt(songButton.song.bpm);
 
                 panel.SetActive(false);
                 levelPanel.SetActive(false);
@@ -84,7 +85,7 @@ public class DisplaySongs : MonoBehaviour {
 
             songButtons.Add(new SongButton {
                 button = buttonComponent,
-                song = song.audioClipPath
+                song = song
             });
         }
     }

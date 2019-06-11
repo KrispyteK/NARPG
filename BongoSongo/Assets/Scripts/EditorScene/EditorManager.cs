@@ -240,6 +240,12 @@ public class EditorManager : MonoBehaviour {
         LoadSong();
     }
 
+    public void SetBPMInt(int value) {
+        level.bpm = value;
+
+        LoadSong();
+    }
+
     public void Save() {
         var spawnInfoList = GenerateSpawnInfoList();
 
