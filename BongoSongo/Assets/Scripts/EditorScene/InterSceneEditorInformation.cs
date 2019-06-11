@@ -54,6 +54,12 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
 
             m.LoadLevel(InterScene.Instance.level);
             m.SetBeat(beat);
+
+            var windows = FindObjectsOfType<Window>();
+
+            foreach (var window in windows) {
+                window.panel.SetActive(false);
+            }
         }
     }
 }
