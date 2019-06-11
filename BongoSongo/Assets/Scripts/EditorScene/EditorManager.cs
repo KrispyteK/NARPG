@@ -29,6 +29,8 @@ public class EditorManager : MonoBehaviour {
     public RectTransform selectedUI;
     public TimelineDrawer timelineDrawer;
     public TMPro.TMP_InputField bpmInput;
+    public GUIStyle guiStyle;
+
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -340,30 +342,24 @@ public class EditorManager : MonoBehaviour {
         SceneManager.LoadScene("HomeScreen");
     }
 
-    //private GUIStyle guiStyle = new GUIStyle();
+    public void OnGUI() {
+        var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
 
-    //public void OnGUI() {
-    //    guiStyle.fontSize = 40;
-    //    guiStyle.normal.textColor = Color.white;
+        foreach (var indicatorInfo in indicatorInfos) {
+            var renderers = indicatorInfo.transform.root.GetComponentsInChildren<Renderer>();
+            var bounding = new Bounds(renderers.First().bounds.center, Vector2.zero);
 
-    //    if (selected) {
-    //        var bounding = selected.GetComponentInChildren<Renderer>().bounds;
+            foreach (var renderer in renderers) {
+                bounding.Encapsulate(renderer.bounds);
+            }
 
-    //        var center = Camera.main.WorldToScreenPoint(bounding.center);
-    //        var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
+            var center = (Vector2)Camera.main.WorldToScreenPoint(bounding.center);
+            center = new Vector2(center.x, Camera.main.pixelHeight - center.y);
 
-    //        GUI.Box(new Rect(center.x - extents.x/2, Camera.main.pixelHeight - center.y - extents.y / 2, extents.x, extents.y), "Selected", selectedBoxStyle);
-    //    }
+            var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight;
 
-    //    //var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
 
-    //    //foreach (var indicatorInfo in indicatorInfos) {
-    //    //    var bounding = indicatorInfo.gameObject.GetComponentInChildren<Renderer>().bounds;
-
-    //    //    var center = Camera.main.WorldToScreenPoint(bounding.center);
-    //    //    var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight * 1.25f;
-
-    //    //    GUI.Label(new Rect(center.x + extents.x/2, Camera.main.pixelHeight - center.y + extents.y / 2, extents.x, extents.y), "" + indicatorInfo.beat, guiStyle);
-    //    //}
-    //}
+            GUI.Label(new Rect(center - (Vector2)extents / 2, extents), "" + indicatorInfo.beat, guiStyle);
+        }
+    }
 }
