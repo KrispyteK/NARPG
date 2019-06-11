@@ -48,7 +48,7 @@ public class DisplayLevels : MonoBehaviour {
         levelButtons.Clear();
         levelFiles.Clear();
 
-        var files = new List<string>(Directory.GetFiles(Application.persistentDataPath, "*.json", SearchOption.AllDirectories));
+        var files = new List<string>(Directory.GetFiles(DataManagement.Levels, "*.json", SearchOption.AllDirectories));
 
         foreach (var file in files) {
             levelFiles.Add(file);

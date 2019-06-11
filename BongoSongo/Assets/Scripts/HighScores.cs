@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HighScores : MonoBehaviour {
     
-    static string FilePath => Path.Combine(Application.persistentDataPath, "HighScores", "highscores.json");
+    static string FilePath => Path.Combine(DataManagement.HighScores, "highscores.json");
 
     [System.Serializable]
     public struct HighScore {

@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandardFolders : MonoBehaviour {
+public class DataManagement : MonoBehaviour {
+
+    public static string Levels => Path.Combine(Application.persistentDataPath, "Levels");
+    public static string HighScores => Path.Combine(Application.persistentDataPath, "HighScores");
 
     static string[] standardFolders = new[] {
             "Levels",
