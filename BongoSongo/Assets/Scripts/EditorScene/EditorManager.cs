@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,6 +28,7 @@ public class EditorManager : MonoBehaviour {
     public Text beatText;
     public LevelInfo levelInfo;
     public RectTransform selectedUI;
+    public GameObject loadingScreen;
     public TimelineDrawer timelineDrawer;
     public TMPro.TMP_InputField bpmInput;
     public GUIStyle guiStyle;
@@ -308,9 +310,7 @@ public class EditorManager : MonoBehaviour {
         hasLevelLoaded = true;
     }
 
-    public void LoadLevel (Level level) {
-        this.level = level;
-
+    IEnumerator LoadLevelCoroutine (Level level) {
         foreach (Transform child in indicatorParent) {
             Destroy(child.gameObject);
         }
@@ -320,7 +320,7 @@ public class EditorManager : MonoBehaviour {
 
         var handlePrefab = Resources.Load<GameObject>("Prefabs/Editor/SliderHandle");
 
-        foreach (var spawnInfo in this.level.spawnInfo) {
+        foreach (var spawnInfo in level.spawnInfo) {
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
             var position = new Vector2(spawnInfo.position.x, spawnInfo.position.y) * Camera.main.orthographicSize;
 
@@ -353,6 +353,8 @@ public class EditorManager : MonoBehaviour {
                     newHandle.transform.position = new Vector2(point.x, point.y) * Camera.main.orthographicSize;
                 }
             }
+
+            yield return new WaitForEndOfFrame();
         }
 
         OrderIndicators();
@@ -360,6 +362,16 @@ public class EditorManager : MonoBehaviour {
         SetVisible();
 
         hasLevelLoaded = true;
+
+        loadingScreen.SetActive(false);
+    }
+
+    public void LoadLevel (Level level) {
+        loadingScreen.SetActive(true);
+
+        this.level = level;
+
+        StartCoroutine(LoadLevelCoroutine(level));
     }
 
     public void New() {
