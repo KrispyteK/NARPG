@@ -15,9 +15,11 @@ public class SpawnManager : MonoBehaviour {
     public List<SpawnInfo> spawnInfo;
 
     GameObject handlePrefab;
+    IndicatorSprites indicatorSprites;
 
     private void Start () {
         handlePrefab = Resources.Load<GameObject>("Prefabs/SliderHandle");
+        indicatorSprites = Resources.Load<IndicatorSprites>("Settings/IndicatorSprites");
     }
 
     public void Spawn(SpawnInfo spawn) {
@@ -31,6 +33,10 @@ public class SpawnManager : MonoBehaviour {
         var instance = Instantiate(prefab, position, Quaternion.identity);
         //instance.GetComponent<IndicatorInfo>().beat = spawn.beat;
         //instance.GetComponent<IndicatorInfo>().spawnInfoIndex = spawn.beat;
+
+        if (instance.CompareTag("Button") && spawn.spriteIndex > -1) {
+            instance.GetComponentInChildren<SpriteRenderer>().sprite = indicatorSprites.sprites[spawn.spriteIndex];
+        }
 
         if (instance.CompareTag("Slider")) {
             var slider = instance.GetComponentInChildren<SliderIndicator>();

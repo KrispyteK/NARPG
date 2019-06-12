@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7863505274964644763}
   - component: {fileID: 3146533523448688637}
+  - component: {fileID: 7493794510147654617}
   m_Layer: 0
-  m_Name: IndicatorTool 1
+  m_Name: IndicatorTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +58,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &7493794510147654617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939269622966935856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8742d602fe3fa4641b158e33dc02bc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8751980433723139822
 GameObject:
   m_ObjectHideFlags: 0

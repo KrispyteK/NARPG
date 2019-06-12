@@ -2,6 +2,7 @@
 public class SpawnInfo {
     public int beat;
     public int beatLength;
+    public int spriteIndex = -1;
 
     public Indicators indicator;
 

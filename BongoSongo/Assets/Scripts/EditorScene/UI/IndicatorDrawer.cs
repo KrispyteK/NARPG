@@ -12,6 +12,7 @@ public class IndicatorDrawer : MonoBehaviour {
         foreach (var indicator in EditorManager.instance.editorPrefabs) {
             var instance = Instantiate(indicatorToolPrefab, transform);
 
+            instance.GetComponentInChildren<IndicatorTool>().indicator = indicator.indicator;
             instance.GetComponentInChildren<Image>().sprite = indicator.preview;
             instance.GetComponentInChildren<Button>().onClick.AddListener(() => {
                 EditorManager.instance.currentPrefab = indicator;

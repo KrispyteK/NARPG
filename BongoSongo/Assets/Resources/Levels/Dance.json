@@ -10,16 +10,18 @@
     {
       "beat": 1,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
-        "x": -0.1794873,
-        "y": -0.09188032
+        "x": -0.155983075,
+        "y": -0.0961538553
       },
       "points": null
     },
     {
       "beat": 2,
       "beatLength": 0,
+      "spriteIndex": 2,
       "indicator": 0,
       "position": {
         "x": 0.18589741,
@@ -30,6 +32,7 @@
     {
       "beat": 3,
       "beatLength": 0,
+      "spriteIndex": 0,
       "indicator": 0,
       "position": {
         "x": -0.1666667,
@@ -40,6 +43,7 @@
     {
       "beat": 4,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
         "x": 0.136752158,
@@ -50,6 +54,7 @@
     {
       "beat": 5,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
         "x": -0.155982912,
@@ -60,6 +65,7 @@
     {
       "beat": 6,
       "beatLength": 0,
+      "spriteIndex": 1,
       "indicator": 0,
       "position": {
         "x": 0.130341887,
@@ -70,6 +76,7 @@
     {
       "beat": 7,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
         "x": -0.158119678,
@@ -80,6 +87,7 @@
     {
       "beat": 8,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
         "x": 0.160256386,
@@ -90,6 +98,7 @@
     {
       "beat": 9,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
         "x": -0.17521359,
@@ -100,6 +109,7 @@
     {
       "beat": 10,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
         "x": 0.1794872,
@@ -110,6 +120,7 @@
     {
       "beat": 11,
       "beatLength": 0,
+      "spriteIndex": -1,
       "indicator": 0,
       "position": {
         "x": -0.170940191,

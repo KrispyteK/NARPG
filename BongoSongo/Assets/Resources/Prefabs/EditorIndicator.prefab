@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6041502515922516208}
   m_Layer: 0
   m_Name: EditorIndicator
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,3 +170,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelectable: 1
+  colorChangeTool: {fileID: 1842520658043617598, guid: 9b2cbb56f6b80f04c81ab5e70b771a01,
+    type: 3}

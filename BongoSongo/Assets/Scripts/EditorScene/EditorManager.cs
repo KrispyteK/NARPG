@@ -100,6 +100,15 @@ public class EditorManager : MonoBehaviour {
         indicatorSpriteIndex = index;
 
         selected.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+        selected.GetComponent<IndicatorInfo>().spriteIndex = index;
+
+        var indicatorTools = FindObjectsOfType<IndicatorTool>();
+
+        foreach (var indicatorTool in indicatorTools) {
+            if (indicatorTool.indicator == Indicators.Button) {
+                indicatorTool.GetComponentInChildren<Image>().sprite = sprite;
+            }
+        }
     }
 
     public void LoadSong() {
@@ -193,7 +202,8 @@ public class EditorManager : MonoBehaviour {
             var spawnInfo = new SpawnInfo {
                 beat = ordered[i].beat,
                 indicator = ordered[i].indicator,
-                beatLength = ordered[i].beatLenght
+                beatLength = ordered[i].beatLenght,
+                spriteIndex = ordered[i].spriteIndex
             };
 
             var pos = ordered[i].transform.position / Camera.main.orthographicSize;
@@ -230,6 +240,10 @@ public class EditorManager : MonoBehaviour {
         var instance = Instantiate(currentPrefab.prefab, Vector3.zero, Quaternion.identity, indicatorParent);
 
         instance.GetComponent<IndicatorInfo>().beat = beat;
+
+        if (instance.GetComponent<IndicatorInfo>().indicator == Indicators.Button) {
+            instance.GetComponentInChildren<SpriteRenderer>().sprite = indicatorSprites.sprites[indicatorSpriteIndex];
+        }
 
         OrderIndicators();
     }
@@ -309,6 +323,11 @@ public class EditorManager : MonoBehaviour {
             indicatorInfo.beat = spawnInfo.beat;
             indicatorInfo.spawnInfoIndex = spawnInfo.beat;
             indicatorInfo.beatLenght = spawnInfo.beatLength;
+            indicatorInfo.spriteIndex = spawnInfo.spriteIndex;
+
+            if (instance.CompareTag("Button") && indicatorInfo.spriteIndex > -1) {
+                instance.GetComponentInChildren<SpriteRenderer>().sprite = indicatorSprites.sprites[indicatorInfo.spriteIndex];
+            }
 
             if (instance.CompareTag("SliderEditor")) {
                 var sliderHandles = instance.GetComponentInChildren<SliderHandles>();
