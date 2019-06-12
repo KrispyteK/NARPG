@@ -39,6 +39,7 @@ public class TimedButton : MonoBehaviour {
         // Destroy object if its too late.
         if (time - spawnTime > 1f) {
             Destroy(gameObject);
+            GameManager.instance.RemoveCombo();
         }
 
         // Set timing object scale
@@ -80,6 +81,7 @@ public class TimedButton : MonoBehaviour {
         beatScoreInstance.GetComponent<BeatScore>().Init(finalScore);
 
         GameManager.instance.AddScore(finalScore);
+        GameManager.instance.OnIndicatorHit();
 
         interactable.isActive = false;
         isKilled = true;

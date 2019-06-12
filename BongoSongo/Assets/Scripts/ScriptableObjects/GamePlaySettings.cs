@@ -13,6 +13,7 @@ public class GamePlaySettings : ScriptableObject {
     public int indicatorScoreOnLate = 50;
     public float indicatorLateTime = 0.2f;
     public int indicatorBeatLife = 2;
+    public int indicatorHitsNeededForCombo = 5;
 
 
 //#if UNITY_EDITOR

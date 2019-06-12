@@ -12,6 +12,7 @@ public class SliderIndicator : MonoBehaviour {
 
     private CurveRenderer curveRenderer;
     private Interactable interactable;
+    private int hits;
 
     void Start() {
         interactable = indicator.GetComponent<Interactable>();
@@ -28,6 +29,8 @@ public class SliderIndicator : MonoBehaviour {
             FloatingText.Create(indicator.position, $"+{InterScene.Instance.gamePlaySettings.sliderScore}", BeatManager.beatLength * 2f);
 
             GameManager.instance.AddScore(InterScene.Instance.gamePlaySettings.sliderScore);
+
+            hits++;
         }
     }
 
@@ -38,6 +41,8 @@ public class SliderIndicator : MonoBehaviour {
 
         if (t == 1) {
             direction = -1;
+
+            Kill();
         } else if (t == 0) {
             direction = 1;
         }
@@ -50,5 +55,13 @@ public class SliderIndicator : MonoBehaviour {
 
         float rot_z = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
         indicator.rotation = Quaternion.Euler(0f, 0f, rot_z + 180 * (1-(direction + 1)/2));
+    }
+
+    void Kill () {
+        Destroy(gameObject);
+
+        if (hits == beats) {
+            GameManager.instance.AddCombo();
+        }
     }
 }

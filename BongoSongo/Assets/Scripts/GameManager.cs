@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
     public int score;
+    public int combo = 1;
     public float buttonSize;
+
+    public Text comboText;
+
+    private int indicatorHits;
 
     void Awake() {
         if (instance == null) {
@@ -17,10 +23,36 @@ public class GameManager : MonoBehaviour {
     }
 
     public void AddScore(int add) {
-        score += add;
+        score += add * combo;
 
         InterScene.Instance.score = score;
     }
+
+    public void OnIndicatorHit () {
+        indicatorHits++;
+
+        if (indicatorHits == InterScene.Instance.gamePlaySettings.indicatorHitsNeededForCombo) {
+            indicatorHits = 0;
+            AddCombo();
+        }
+    }
+
+    public void AddCombo () {
+        combo++;
+
+        comboText.text = combo + "x";
+    }
+
+    public void RemoveCombo() {
+        indicatorHits = 0;
+
+        combo--;
+
+        combo = Mathf.Max(0, combo);
+
+        comboText.text = combo + "x";
+    }
+
 
     void Update() {
         if (Input.GetButtonDown("Cancel")) {
