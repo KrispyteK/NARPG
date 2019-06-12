@@ -28,7 +28,15 @@ public class SelectableButton : Button {
         base.OnSelect(eventData);
 
         if (pool != null) {
-            pool.selected = this;
+            if (pool.selected == null) {
+                pool.selected = this;
+            } else if (pool.selected != this && pool.selected != null) {
+                var previouslySelected = pool.selected;
+
+                pool.selected = this;
+
+                previouslySelected.OnDeselect(eventData);
+            }
         }
     }
 
@@ -37,7 +45,7 @@ public class SelectableButton : Button {
 
         if (pool != null) {
             if (pool.selected == this) {
-                pool.selected = null;
+                this.OnSelect(eventData);
             }
         }
     }
