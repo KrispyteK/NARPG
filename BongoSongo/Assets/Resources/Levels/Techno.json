@@ -3,6 +3,7 @@
   "description": null,
   "path": "C:/Users/User/AppData/LocalLow/DefaultCompany/BongoSongo\\Levels\\Techno.json",
   "bpm": 140.0,
+  "isStandard": true,
   "song": {
     "clipString": "Audio/Music/Prototype-Techno(bpm140)"
   },

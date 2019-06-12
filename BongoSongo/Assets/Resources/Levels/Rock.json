@@ -1,1 +1,11 @@
-{"description":null,"bpm":106.0,"song":{"clipString":"Audio/Music/Prototype-Rock(bpm106)"},"spawnInfo":[],"name":"rock","hideFlags":0}
+{
+  "name": "rock",
+  "description": null,
+  "path": "C:/Users/User/AppData/LocalLow/DefaultCompany/BongoSongo\\Levels\\rock.json",
+  "bpm": 106.0,
+  "isStandard": true,
+  "song": {
+    "clipString": "Audio/Music/Prototype-Rock(bpm106)"
+  },
+  "spawnInfo": []
+}

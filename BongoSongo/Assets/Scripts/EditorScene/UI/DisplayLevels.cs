@@ -51,6 +51,13 @@ public class DisplayLevels : MonoBehaviour {
         var files = new List<string>(Directory.GetFiles(DataManagement.Levels, "*.json", SearchOption.AllDirectories));
 
         foreach (var file in files) {
+
+#if !UNITY_EDITOR
+            var level = Level.LoadFromFullPath(file);
+
+            if (level.isStandard) continue;
+#endif
+
             levelFiles.Add(file);
 
             var button = Instantiate(levelButton, contentPanel);

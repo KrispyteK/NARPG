@@ -12,6 +12,7 @@ public class Level {
     public string description;
     public string path;
     public float bpm;
+    public bool isStandard;
     public Song song;
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
@@ -53,6 +54,8 @@ public class Level {
     public static void Save(Level level) {
 
 #if UNITY_EDITOR
+        level.isStandard = true;
+
         string path = Path.Combine(Application.dataPath, "Resources", "Levels", $"{level.name}.json");
 #else
         string path = Path.Combine(Folder, $"{level.name}.json");
@@ -85,6 +88,14 @@ public class Level {
         Debug.Log("Succesfully saved level!");
     }
 
+    public static Level LoadFromFullPath (string file) {
+        string json = File.ReadAllText(file);
+
+        Level deserialized = JsonConvert.DeserializeObject<Level>(json);
+
+        return deserialized;
+    }
+    
     public static Level Load(string file) {
         string filePath = Path.Combine(Folder, "Levels", file);
 

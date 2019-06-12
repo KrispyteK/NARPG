@@ -3,6 +3,7 @@
   "description": null,
   "path": "C:/Users/User/AppData/LocalLow/DefaultCompany/BongoSongo\\Levels\\Dance.json",
   "bpm": 128.0,
+  "isStandard": true,
   "song": {
     "clipString": "Audio/Music/Prototype-Dance(bpm148)"
   },
