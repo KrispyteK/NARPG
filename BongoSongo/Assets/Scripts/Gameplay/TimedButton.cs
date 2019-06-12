@@ -77,10 +77,11 @@ public class TimedButton : MonoBehaviour {
             finalScore = InterScene.Instance.gamePlaySettings.indicatorScoreOnLate;
         }
 
-        var beatScoreInstance = Instantiate(beatScore, transform.position, Quaternion.identity);
-        beatScoreInstance.GetComponent<BeatScore>().Init(finalScore);
+        var comboScore = GameManager.instance.AddScore(finalScore);
 
-        GameManager.instance.AddScore(finalScore);
+        var beatScoreInstance = Instantiate(beatScore, transform.position, Quaternion.identity);
+        beatScoreInstance.GetComponent<BeatScore>().Init(comboScore);
+
         GameManager.instance.OnIndicatorHit();
 
         interactable.isActive = false;

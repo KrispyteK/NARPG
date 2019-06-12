@@ -22,10 +22,14 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void AddScore(int add) {
+    public int AddScore(int add) {
+        var added = add * combo;
+
         score += add * combo;
 
         InterScene.Instance.score = score;
+
+        return added;
     }
 
     public void OnIndicatorHit () {
@@ -48,7 +52,7 @@ public class GameManager : MonoBehaviour {
 
         combo--;
 
-        combo = Mathf.Max(0, combo);
+        combo = Mathf.Max(1, combo);
 
         comboText.text = combo + "x";
     }
