@@ -61,7 +61,7 @@ public class BeatManager : MonoBehaviour {
         else {
             outlineObject.SetActive(false);
 
-            InvokeRepeating("BeatEvent", beatLength, beatLength);
+            InvokeRepeating("BeatEvent", 0f, beatLength);
         }
     }
 
