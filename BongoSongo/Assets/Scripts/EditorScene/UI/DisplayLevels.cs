@@ -15,12 +15,20 @@ public class DisplayLevels : MonoBehaviour {
 
     private List<SelectableButton> levelButtons = new List<SelectableButton>();
     private List<string> levelFiles = new List<string>();
-    private SelectableButton.SelectableButtonPool selectableButtonPool = new SelectableButton.SelectableButtonPool();
+    private SelectableButton.SelectableButtonPool selectableButtonPool;
 
     void Start() {
+        selectableButtonPool = new SelectableButton.SelectableButtonPool {
+            button = okButton
+        };
+
         GenerateButtons();
 
         okButton.onClick.AddListener(Ok);
+    }
+
+    void Update () {
+        okButton.interactable = selectableButtonPool.selected != null;
     }
 
     void Ok () {

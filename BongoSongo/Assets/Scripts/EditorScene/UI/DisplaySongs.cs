@@ -13,7 +13,7 @@ public class DisplaySongs : MonoBehaviour {
     public Button okButton;
 
     private List<SongButton> songButtons = new List<SongButton>();
-    private SelectableButton.SelectableButtonPool selectableButtonPool = new SelectableButton.SelectableButtonPool();
+    private SelectableButton.SelectableButtonPool selectableButtonPool;
 
     private struct SongButton {
         public StandardSongs.Song song;
@@ -35,9 +35,17 @@ public class DisplaySongs : MonoBehaviour {
 #endif
 
     void Start() {
+        selectableButtonPool = new SelectableButton.SelectableButtonPool {
+            button = okButton
+        };
+
         GenerateButtons();
 
         okButton.onClick.AddListener(Ok);
+    }
+
+    void Update() {
+        okButton.interactable = selectableButtonPool.selected != null;
     }
 
     void Ok () {

@@ -10,9 +10,11 @@ public class SelectableButton : Button {
 
     public class SelectableButtonPool {
         public SelectableButton selected;
+        public Button button;
     }
 
-    private SelectableButtonPool pool;
+    public SelectableButtonPool pool;
+
 
     public void AddToPool(SelectableButtonPool newPool) {
         pool = newPool;
@@ -27,6 +29,16 @@ public class SelectableButton : Button {
 
         if (pool != null) {
             pool.selected = this;
+        }
+    }
+
+    public override void OnDeselect(BaseEventData eventData) {
+        base.OnDeselect(eventData);
+
+        if (pool != null) {
+            if (pool.selected == this) {
+                pool.selected = null;
+            }
         }
     }
 }
