@@ -22,12 +22,14 @@ public class DisplayInterstitialAd : MonoBehaviour
     }
 
     public void ShowAd () {
+        print("Show interstitial");
+
         this.interstitial.Show();
     }
 
     public void RequestInterstitial() {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-8099181658913762/3701234494";
+        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #else
         string adUnitId = "unexpected_platform";
 #endif
