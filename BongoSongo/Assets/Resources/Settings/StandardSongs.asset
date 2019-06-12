@@ -13,12 +13,36 @@ MonoBehaviour:
   m_Name: StandardSongs
   m_EditorClassIdentifier: 
   songs:
-  - audioClip: {fileID: 8300000, guid: d59a800df76856b46a7f42df7aff9b61, type: 3}
-    bpm: 148
-    audioClipPath: Audio/Music/Prototype-Dance(bpm148)
-  - audioClip: {fileID: 8300000, guid: 48f6ba993bf8ac94b863337fee4eaea7, type: 3}
-    bpm: 106
-    audioClipPath: Audio/Music/Prototype-Rock(bpm106)
-  - audioClip: {fileID: 8300000, guid: c85fe62b9b83e714b8cb730d9e27ff83, type: 3}
+  - audioClip: {fileID: 8300000, guid: a093f835159482a42a4a05024c9e162f, type: 3}
+    bpm: 114
+    audioClipPath: Audio/Music/Ten Tracks/-Strings-114bpm
+  - audioClip: {fileID: 8300000, guid: 5831dffad0d7039459713696d4860ade, type: 3}
+    bpm: 124
+    audioClipPath: Audio/Music/Ten Tracks/1Wk4Tune-124bpm
+  - audioClip: {fileID: 8300000, guid: 23dfc9647256fa64f98ad428362b1526, type: 3}
+    bpm: 128
+    audioClipPath: Audio/Music/Ten Tracks/dynamodancer
+  - audioClip: {fileID: 8300000, guid: 3ea617ab9e7d64d4792f20c1a290c559, type: 3}
+    bpm: 112
+    audioClipPath: Audio/Music/Ten Tracks/ElectroBop-112bpm
+  - audioClip: {fileID: 8300000, guid: c345f59b8d329174fb0739e71d3951c8, type: 3}
+    bpm: 131
+    audioClipPath: Audio/Music/Ten Tracks/FiveBarTune-131bpm
+  - audioClip: {fileID: 8300000, guid: aa3616e11bb00b8458947bdad708f205, type: 3}
     bpm: 140
-    audioClipPath: Audio/Music/Prototype-Techno(bpm140)
+    audioClipPath: Audio/Music/Ten Tracks/Prototype-Techno(bpm140) -Yoran
+  - audioClip: {fileID: 8300000, guid: 2c4b1f07cd65a0f4880a2b763ca52cbc, type: 3}
+    bpm: 82
+    audioClipPath: Audio/Music/Ten Tracks/Reggae-82bpm
+  - audioClip: {fileID: 8300000, guid: 7ece6abe88a060249a1125917d6b5be1, type: 3}
+    bpm: 106
+    audioClipPath: Audio/Music/Ten Tracks/Rock-106bpm
+  - audioClip: {fileID: 8300000, guid: 97df39984a09f9946a6702ba34a803e6, type: 3}
+    bpm: 148
+    audioClipPath: Audio/Music/Ten Tracks/SuperDancer(bpm148)
+  - audioClip: {fileID: 8300000, guid: 99c5fb2b1d2c4c34f9721aa040b3dc54, type: 3}
+    bpm: 167
+    audioClipPath: Audio/Music/Ten Tracks/wk2Tune-167bpm
+  - audioClip: {fileID: 8300000, guid: 9db9c5663ef3a194aabd07e8dd30442a, type: 3}
+    bpm: 120
+    audioClipPath: Audio/Music/Ten Tracks/wk3Tune-120bpm
