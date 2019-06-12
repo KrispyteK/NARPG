@@ -36,9 +36,55 @@ public class TimelineDrawer : MonoBehaviour, IPointerClickHandler {
     }
 
     public void RedrawTimeline(AudioClip audioClip) {
-        texture = PaintWaveformSpectrum(audioClip, 10f, 512, 4096, Color.white);
+        //texture = PaintWaveformSpectrum(audioClip, 10f, 512, 4096, Color.white);
 
+        //image.GetComponent<RawImage>().texture = texture;
+
+    }
+
+    public IEnumerator RedrawTimelineCoroutine(AudioClip audioClip) {
+        var width = 512;
+        var height = 4096;
+
+        texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
         image.GetComponent<RawImage>().texture = texture;
+
+        yield return StartCoroutine(PaintWaveformSpectrumCoroutine(audioClip, 10f, width, height, Color.white, texture));
+    }
+
+    IEnumerator PaintWaveformSpectrumCoroutine (AudioClip audio, float saturation, int width, int height, Color col, Texture2D tex) {
+        float[] samples = new float[audio.samples];
+        float[] waveform = new float[height];
+        audio.GetData(samples, 0);
+        int packSize = (audio.samples / height) + 1;
+        int s = 0;
+        for (int i = 0; i < audio.samples; i += packSize) {
+            waveform[s] = Mathf.Abs(samples[i]);
+            s++;
+        }
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                tex.SetPixel(x, y, Color.black);
+            }
+        }
+
+        float time = Time.timeSinceLevelLoad;
+
+        for (int y = 0; y < waveform.Length; y++) {
+            for (int x = 0; x <= waveform[y] * ((float)width * .75f); x++) {
+                tex.SetPixel(x, (height / 2) + y, col);
+                tex.SetPixel(x, (height / 2) - y, col);
+            }
+
+            if (Time.timeSinceLevelLoad - time > 0.1f) {
+                time = Time.timeSinceLevelLoad;
+
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        tex.Apply();
     }
 
     public static Texture2D PaintWaveformSpectrum(AudioClip audio, float saturation, int width, int height, Color col) {

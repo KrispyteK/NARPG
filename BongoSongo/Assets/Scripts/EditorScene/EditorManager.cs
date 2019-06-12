@@ -118,14 +118,14 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
-    public void LoadSong() {
+    public Coroutine LoadSong() {
         if (level == null) {
-            return;
+            return null;
         }
 
         var clip = level.song.GenerateClip();
 
-        timelineDrawer.RedrawTimeline(clip);
+        var timelineCoroutine = StartCoroutine(timelineDrawer.RedrawTimelineCoroutine(clip));
 
         beatLength = 60f / level.bpm;
 
@@ -133,6 +133,8 @@ public class EditorManager : MonoBehaviour {
 
         // SetBeat(1);
         ClampBeat();
+
+        return timelineCoroutine;
     }
 
     public void ClampBeat () {
@@ -304,11 +306,12 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void Load(string file) {
-        level = Level.Load(file);
+        loadingScreen.SetActive(true);
 
-        LoadLevel(level);
-
-        hasLevelLoaded = true;
+        var t = Level.LoadAsync(file, level, (Level l) => {
+            level = l;
+            LoadLevel(level);
+            });
     }
 
     IEnumerator LoadLevelCoroutine (Level level) {
@@ -317,9 +320,12 @@ public class EditorManager : MonoBehaviour {
         }
 
         levelInfo.SetInfo();
-        LoadSong();
+
+        yield return LoadSong();
 
         var handlePrefab = Resources.Load<GameObject>("Prefabs/Editor/SliderHandle");
+
+        var time = Time.timeSinceLevelLoad;
 
         foreach (var spawnInfo in level.spawnInfo) {
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
@@ -355,7 +361,11 @@ public class EditorManager : MonoBehaviour {
                 }
             }
 
-            yield return new WaitForEndOfFrame();
+            if (Time.timeSinceLevelLoad - time > 0.1f) {
+                time = Time.timeSinceLevelLoad;
+
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         OrderIndicators();

@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 [System.Serializable]
 public class Level {
@@ -104,6 +105,16 @@ public class Level {
         Level deserialized = JsonConvert.DeserializeObject<Level>(json);
 
         return deserialized;
+    }
+
+    public static async Task LoadAsync(string file, Level deserialized, System.Action<Level> callback) {
+        string result;
+
+        using (StreamReader reader = File.OpenText(file)) {
+            result = await reader.ReadToEndAsync();
+        }
+
+        callback(JsonConvert.DeserializeObject<Level>(result));
     }
 
     public static void Delete (string file) {
