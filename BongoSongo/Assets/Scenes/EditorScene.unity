@@ -4741,6 +4741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpened: 1
+  closeButton: {fileID: 704518833}
   panel: {fileID: 746956689}
 --- !u!114 &765111996
 MonoBehaviour:
@@ -8691,6 +8692,7 @@ MonoBehaviour:
   beatLength: 0
   beatsTotal: 0
   indicatorSpriteIndex: 0
+  hasLevelLoaded: 0
   indicatorSprites: {fileID: 0}
   canvasCamera: {fileID: 338916580}
 --- !u!114 &1342900684
@@ -12266,6 +12268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpened: 0
+  closeButton: {fileID: 557065572}
   panel: {fileID: 1339030192}
 --- !u!114 &1993542494
 MonoBehaviour:
@@ -12819,7 +12822,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 9d95ee0af07ec3241879846838417dfa, type: 3}
     m_FontSize: 37
     m_FontStyle: 0
     m_BestFit: 0

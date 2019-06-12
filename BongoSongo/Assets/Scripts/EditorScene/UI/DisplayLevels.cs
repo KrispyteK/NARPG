@@ -72,7 +72,14 @@ public class DisplayLevels : MonoBehaviour {
             levelButtons.Add(buttonComponent);
         }
 
+        if (!EditorManager.instance.hasLevelLoaded) {
+            GetComponent<Window>().closeButton.interactable = false;
+        }
+
         if (levelFiles.Count == 0) {
+            GetComponent<Window>().closeButton.interactable = false;
+
+            newWindow.GetComponent<Window>().closeButton.interactable = false;
             newWindow.GetComponent<Window>().Open();
             FindObjectOfType<EditorTutorial>().NoLevels.SetActive(true);
         }

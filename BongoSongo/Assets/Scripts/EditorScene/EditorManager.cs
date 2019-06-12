@@ -37,6 +37,7 @@ public class EditorManager : MonoBehaviour {
     public float beatLength;
     public int beatsTotal;
     public int indicatorSpriteIndex;
+    public bool hasLevelLoaded = false;
 
     public IndicatorSprites indicatorSprites;
 
@@ -303,6 +304,8 @@ public class EditorManager : MonoBehaviour {
         level = Level.Load(file);
 
         LoadLevel(level);
+
+        hasLevelLoaded = true;
     }
 
     public void LoadLevel (Level level) {
@@ -355,6 +358,8 @@ public class EditorManager : MonoBehaviour {
         OrderIndicators();
 
         SetVisible();
+
+        hasLevelLoaded = true;
     }
 
     public void New() {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Window : MonoBehaviour {
 
     public bool isOpened;
-
+    public Button closeButton;
     public GameObject panel;
 
     public void Open () {

@@ -35,8 +35,6 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        print("Loaded scene: " + scene);
-
         if (scene == SceneManager.GetSceneByName("GamePlayScene")) {
             if (playAtBeat) {
                 var m = FindObjectOfType<BeatManager>();
