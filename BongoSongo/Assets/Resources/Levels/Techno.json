@@ -1,1 +1,44 @@
-{"description":null,"bpm":140.0,"song":{"clipString":"Audio/Music/Prototype-Techno(bpm140)"},"spawnInfo":[{"beat":0,"indicator":0,"position":{"x":-0.181818172,"y":0.2619046}},{"beat":1,"indicator":0,"position":{"x":-0.233766228,"y":-0.183982685}},{"beat":1,"indicator":0,"position":{"x":0.1515151,"y":0.0346320271}}],"name":"Techno","hideFlags":0}
+{
+  "name": "Techno",
+  "description": null,
+  "path": "C:/Users/User/AppData/LocalLow/DefaultCompany/BongoSongo\\Levels\\Techno.json",
+  "bpm": 140.0,
+  "song": {
+    "clipString": "Audio/Music/Prototype-Techno(bpm140)"
+  },
+  "spawnInfo": [
+    {
+      "beat": 0,
+      "beatLength": 0,
+      "spriteIndex": -1,
+      "indicator": 0,
+      "position": {
+        "x": -0.181818172,
+        "y": 0.2619046
+      },
+      "points": null
+    },
+    {
+      "beat": 1,
+      "beatLength": 0,
+      "spriteIndex": -1,
+      "indicator": 0,
+      "position": {
+        "x": -0.233766228,
+        "y": -0.183982685
+      },
+      "points": null
+    },
+    {
+      "beat": 1,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.1515151,
+        "y": 0.0346320271
+      },
+      "points": null
+    }
+  ]
+}
