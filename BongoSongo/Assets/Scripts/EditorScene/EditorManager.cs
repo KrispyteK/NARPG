@@ -363,7 +363,13 @@ public class EditorManager : MonoBehaviour {
         var indicatorInfos = FindObjectsOfType<IndicatorInfo>();
 
         foreach (var indicatorInfo in indicatorInfos) {
-            var renderers = indicatorInfo.transform.root.GetComponentsInChildren<Renderer>();
+            var root = indicatorInfo.transform;
+
+            while (root.parent != indicatorParent) {
+                root = root.parent;          
+            }
+
+            var renderers = root.GetComponentsInChildren<Renderer>();
             var bounding = new Bounds(renderers.First().bounds.center, Vector2.zero);
 
             foreach (var renderer in renderers) {
