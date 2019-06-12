@@ -11,6 +11,7 @@ public class DisplayLevels : MonoBehaviour {
     public GameObject levelButton;
     public Transform contentPanel;
     public Button okButton;
+    public Button deleteButton;
     public GameObject panel;
 
     private List<SelectableButton> levelButtons = new List<SelectableButton>();
@@ -27,8 +28,25 @@ public class DisplayLevels : MonoBehaviour {
         okButton.onClick.AddListener(Ok);
     }
 
+    public string GetLevelFileFromSelected () {
+        string file = "";
+        var i = 0;
+
+        foreach (var button in levelButtons) {
+            if (button.IsSelected) {
+                file = levelFiles[i];
+                break;
+            }
+
+            i++;
+        }
+
+        return file;
+    }
+
     void Update () {
         okButton.interactable = selectableButtonPool.selected != null;
+        deleteButton.interactable = selectableButtonPool.selected != null;
     }
 
     void Ok () {

@@ -105,4 +105,14 @@ public class Level {
 
         return deserialized;
     }
+
+    public static void Delete (string file) {
+        if (File.Exists(file)) {
+            var level = LoadFromFullPath(file);
+
+            if (!level.isStandard) {
+                File.Delete(file);
+            }
+        }
+    }
 }
