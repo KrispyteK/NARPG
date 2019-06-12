@@ -40,6 +40,8 @@ public class EditorManager : MonoBehaviour {
 
     public IndicatorSprites indicatorSprites;
 
+    public Camera canvasCamera;
+
     void Awake() {
         instance = this;
     }
@@ -48,6 +50,8 @@ public class EditorManager : MonoBehaviour {
         //level = new Level {
         //    name = "test"
         //};
+
+        canvasCamera.enabled = false;
 
         currentPrefab = editorPrefabs[0];
 
@@ -421,6 +425,10 @@ public class EditorManager : MonoBehaviour {
 
 
             GUI.Label(new Rect(center - (Vector2)extents / 2, extents), "" + indicatorInfo.beat, guiStyle);
+        }
+
+        if (Event.current.type == EventType.Repaint) {
+            canvasCamera.Render(); // this will render the new UI
         }
     }
 }
