@@ -7,6 +7,24 @@ public class DisplayInterstitialAd : MonoBehaviour
 {
     private InterstitialAd interstitial;
 
+    void Start () {
+        //AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        //AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
+        //AndroidJavaObject contentResolver = currentActivity.Call<AndroidJavaObject>("getContentResolver");
+        //AndroidJavaClass secure = new AndroidJavaClass("android.provider.Settings$Secure");
+        //string android_id = secure.CallStatic<string>("getString", contentResolver, "android_id");
+
+        //print("Android id: " + android_id);
+
+        print(SystemInfo.deviceUniqueIdentifier);
+
+        RequestInterstitial();
+    }
+
+    public void ShowAd () {
+        this.interstitial.Show();
+    }
+
     public void RequestInterstitial() {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
@@ -17,7 +35,7 @@ public class DisplayInterstitialAd : MonoBehaviour
         // Initialize an InterstitialAd.
         this.interstitial = new InterstitialAd(adUnitId);
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder().AddTestDevice("c0e104c291e4c24a").Build();
         // Load the interstitial with the request.
         this.interstitial.LoadAd(request);
     }
