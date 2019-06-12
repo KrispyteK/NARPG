@@ -8,8 +8,22 @@ public class IndicatorSpritesWindow : MonoBehaviour {
     public GameObject spriteSelector;
     public RectTransform panel;
 
+    private GameObject selectorToolsObject;
+
+    void Update () {
+        if (!selectorToolsObject.activeSelf) {
+            Destroy(gameObject);
+        }
+    }
 
     void Start() {
+        selectorToolsObject = FindObjectOfType<SelectorTools>().gameObject;
+
+        var otherWindows = FindObjectsOfType<IndicatorSpritesWindow>();
+
+        foreach (var otherWindow in otherWindows) {
+            if (otherWindow != this) Destroy(otherWindow.gameObject); 
+        }
 
         var indicatorSprites = Resources.Load<IndicatorSprites>("Settings/IndicatorSprites");
 

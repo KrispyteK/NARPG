@@ -10,7 +10,7 @@
     {
       "beat": 1,
       "beatLength": 0,
-      "spriteIndex": -1,
+      "spriteIndex": 0,
       "indicator": 0,
       "position": {
         "x": -0.155983075,
@@ -24,8 +24,8 @@
       "spriteIndex": 2,
       "indicator": 0,
       "position": {
-        "x": 0.18589741,
-        "y": -0.0790599
+        "x": 0.147435933,
+        "y": -0.09401715
       },
       "points": null
     },
@@ -46,8 +46,8 @@
       "spriteIndex": -1,
       "indicator": 0,
       "position": {
-        "x": 0.136752158,
-        "y": 0.3012823
+        "x": 0.147435874,
+        "y": 0.3183763
       },
       "points": null
     },
@@ -76,7 +76,7 @@
     {
       "beat": 7,
       "beatLength": 0,
-      "spriteIndex": -1,
+      "spriteIndex": 1,
       "indicator": 0,
       "position": {
         "x": -0.158119678,
