@@ -62,7 +62,7 @@ public class Level {
 
         level.path = Path.Combine(Application.persistentDataPath, "Levels", $"{level.name}.json");
 
-        var json = JsonConvert.SerializeObject(level);
+        var json = JsonConvert.SerializeObject(level, Formatting.Indented);
 
         using (StreamWriter outputFile = new StreamWriter(path)) {
             foreach (char c in json) outputFile.Write(c);
