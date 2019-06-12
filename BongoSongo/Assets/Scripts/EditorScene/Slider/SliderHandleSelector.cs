@@ -12,7 +12,7 @@ public class SliderHandleSelector : Selector {
     private void Start () {
         sliderHandles = slider.GetComponent<SliderHandles>();
 
-        handlePrefab = Resources.Load<GameObject>("Prefabs/SliderHandle");
+        handlePrefab = Resources.Load<GameObject>("Prefabs/Editor/SliderHandle");
     }
 
     public override void Select() {

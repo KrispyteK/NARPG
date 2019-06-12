@@ -1,0 +1,45 @@
+{
+  "name": "unnamed",
+  "description": null,
+  "path": "C:/Users/User/AppData/LocalLow/DefaultCompany/BongoSongo\\Levels\\unnamed.json",
+  "bpm": 131.0,
+  "isStandard": true,
+  "song": {
+    "clipString": "Audio/Music/Ten Tracks/FiveBarTune-131bpm"
+  },
+  "spawnInfo": [
+    {
+      "beat": 1,
+      "beatLength": 0,
+      "spriteIndex": -1,
+      "indicator": 0,
+      "position": {
+        "x": -0.210683748,
+        "y": -0.360256433
+      },
+      "points": null
+    },
+    {
+      "beat": 2,
+      "beatLength": 0,
+      "spriteIndex": 1,
+      "indicator": 0,
+      "position": {
+        "x": 0.192307681,
+        "y": -0.1752137
+      },
+      "points": null
+    },
+    {
+      "beat": 3,
+      "beatLength": 0,
+      "spriteIndex": 3,
+      "indicator": 0,
+      "position": {
+        "x": -0.179487154,
+        "y": 0.162393242
+      },
+      "points": null
+    }
+  ]
+}

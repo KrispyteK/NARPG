@@ -8,5 +8,7 @@ public class DeleteLevel : MonoBehaviour {
 
     public void Delete () {
         Level.Delete(displayLevels.GetLevelFileFromSelected());
+
+        displayLevels.GenerateButtons();
     }
 }

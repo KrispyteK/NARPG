@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour {
     IndicatorSprites indicatorSprites;
 
     private void Start () {
-        handlePrefab = Resources.Load<GameObject>("Prefabs/SliderHandle");
+        handlePrefab = Resources.Load<GameObject>("Prefabs/Editor/SliderHandle");
         indicatorSprites = Resources.Load<IndicatorSprites>("Settings/IndicatorSprites");
     }
 

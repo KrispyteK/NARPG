@@ -318,7 +318,7 @@ public class EditorManager : MonoBehaviour {
         levelInfo.SetInfo();
         LoadSong();
 
-        var handlePrefab = Resources.Load<GameObject>("Prefabs/SliderHandle");
+        var handlePrefab = Resources.Load<GameObject>("Prefabs/Editor/SliderHandle");
 
         foreach (var spawnInfo in this.level.spawnInfo) {
             var prefab = editorPrefabs.Find(x => x.indicator == spawnInfo.indicator).prefab;
