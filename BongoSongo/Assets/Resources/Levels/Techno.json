@@ -20,6 +20,17 @@
       "points": null
     },
     {
+      "beat": 0,
+      "beatLength": 0,
+      "spriteIndex": -1,
+      "indicator": 0,
+      "position": {
+        "x": -0.0170940533,
+        "y": -0.273504257
+      },
+      "points": null
+    },
+    {
       "beat": 1,
       "beatLength": 0,
       "spriteIndex": -1,

@@ -249,6 +249,7 @@ public class EditorManager : MonoBehaviour {
         instance.GetComponent<IndicatorInfo>().beat = beat;
 
         if (instance.GetComponent<IndicatorInfo>().indicator == Indicators.Button) {
+            instance.GetComponent<IndicatorInfo>().spriteIndex = indicatorSpriteIndex;
             instance.GetComponentInChildren<SpriteRenderer>().sprite = indicatorSprites.sprites[indicatorSpriteIndex];
         }
 
