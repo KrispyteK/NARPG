@@ -7,6 +7,7 @@ using System.Linq;
 
 public class DisplayLevels : MonoBehaviour {
 
+    public GameObject newWindow;
     public GameObject levelButton;
     public Transform contentPanel;
     public Button okButton;
@@ -69,6 +70,10 @@ public class DisplayLevels : MonoBehaviour {
             buttonComponent.AddToPool(selectableButtonPool);
 
             levelButtons.Add(buttonComponent);
+        }
+
+        if (levelFiles.Count == 0) {
+            newWindow.GetComponent<Window>().Open();
         }
     }
 }
