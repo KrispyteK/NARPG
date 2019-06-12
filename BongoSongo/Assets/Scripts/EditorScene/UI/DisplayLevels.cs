@@ -72,9 +72,9 @@ public class DisplayLevels : MonoBehaviour {
             levelButtons.Add(buttonComponent);
         }
 
-        //if (levelFiles.Count == 0) {
+        if (levelFiles.Count == 0) {
             newWindow.GetComponent<Window>().Open();
             FindObjectOfType<EditorTutorial>().NoLevels.SetActive(true);
-        //}
+        }
     }
 }
