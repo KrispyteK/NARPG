@@ -388,9 +388,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 746956689}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 765111995}
+        m_MethodName: Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3095,9 +3095,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1339030192}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1993542493}
+        m_MethodName: Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3871,9 +3871,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 746956689}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 765111995}
+        m_MethodName: Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4508,6 +4508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56da41bad12a25f48b13e8f0783274fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newWindow: {fileID: 1993542491}
   levelButton: {fileID: 1290802114164534595, guid: a48c5dfcae49d204b9291c57ffd1f003,
     type: 3}
   contentPanel: {fileID: 1232667868}
@@ -7585,6 +7586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56da41bad12a25f48b13e8f0783274fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newWindow: {fileID: 0}
   levelButton: {fileID: 1290802114164534595, guid: a48c5dfcae49d204b9291c57ffd1f003,
     type: 3}
   contentPanel: {fileID: 1252182706}
@@ -8994,9 +8996,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1339030192}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1993542493}
+        m_MethodName: Open
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9005,9 +9007,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 746956689}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 765111995}
+        m_MethodName: Open
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
