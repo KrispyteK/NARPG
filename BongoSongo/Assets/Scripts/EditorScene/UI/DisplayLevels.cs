@@ -72,9 +72,7 @@ public class DisplayLevels : MonoBehaviour {
             levelButtons.Add(buttonComponent);
         }
 
-        if (!EditorManager.instance.hasLevelLoaded) {
-            GetComponent<Window>().closeButton.interactable = false;
-        }
+        GetComponent<Window>().closeButton.interactable = EditorManager.instance.hasLevelLoaded;
 
         if (levelFiles.Count == 0) {
             GetComponent<Window>().closeButton.interactable = false;
