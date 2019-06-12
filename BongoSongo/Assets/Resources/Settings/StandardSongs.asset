@@ -15,7 +15,10 @@ MonoBehaviour:
   songs:
   - audioClip: {fileID: 8300000, guid: d59a800df76856b46a7f42df7aff9b61, type: 3}
     bpm: 148
+    audioClipPath: Audio/Music/Prototype-Dance(bpm148)
   - audioClip: {fileID: 8300000, guid: 48f6ba993bf8ac94b863337fee4eaea7, type: 3}
     bpm: 106
+    audioClipPath: Audio/Music/Prototype-Rock(bpm106)
   - audioClip: {fileID: 8300000, guid: c85fe62b9b83e714b8cb730d9e27ff83, type: 3}
     bpm: 140
+    audioClipPath: Audio/Music/Prototype-Techno(bpm140)

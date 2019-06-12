@@ -30,12 +30,15 @@ public class EditorManager : MonoBehaviour {
     public TimelineDrawer timelineDrawer;
     public TMPro.TMP_InputField bpmInput;
     public GUIStyle guiStyle;
-
+    
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
     public float beatLength;
     public int beatsTotal;
+    public int indicatorSpriteIndex;
+
+    public IndicatorSprites indicatorSprites;
 
     void Awake() {
         instance = this;
@@ -47,6 +50,8 @@ public class EditorManager : MonoBehaviour {
         //};
 
         currentPrefab = editorPrefabs[0];
+
+        indicatorSprites = Resources.Load<IndicatorSprites>("Settings/IndicatorSprites");
 
         //timelineDrawer = FindObjectOfType<TimelineDrawer>();
         //levelInfo = FindObjectOfType<LevelInfo>();
@@ -81,6 +86,20 @@ public class EditorManager : MonoBehaviour {
             selectedUI.localPosition = Vector2.zero;
             selectedUI.sizeDelta = Camera.main.pixelRect.size * 2;
         }
+    }
+
+    public void SetIndicatorSpriteIndex (int index) {
+        var sprite = indicatorSprites.sprites[index];
+
+        var temp = editorPrefabs[0];
+
+        temp.preview = sprite;
+
+        editorPrefabs[0] = temp;
+
+        indicatorSpriteIndex = index;
+
+        selected.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
     }
 
     public void LoadSong() {
