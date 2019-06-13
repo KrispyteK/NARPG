@@ -14755,6 +14755,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Console
       objectReference: {fileID: 0}
+    - target: {fileID: 1289542456763609013, guid: 249379687e5a25041b411a46c11ee6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1289542456763609003, guid: 249379687e5a25041b411a46c11ee6c9,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -33,7 +33,7 @@ public class Level {
         Debug.Log(standardLevels);
 
         foreach (var levelFile in standardLevels.levels) {
-            string path = Path.Combine(Folder, "Levels", $"{levelFile.name}.json");
+            string path = Path.Combine(DataManagement.StandardLevels, $"{levelFile.name}.json");
 
             File.WriteAllText(path, levelFile.text);
 
@@ -59,12 +59,12 @@ public class Level {
 
         string path = Path.Combine(Application.dataPath, "Resources", "Levels", $"{level.name}.json");
 #else
-        string path = Path.Combine(Folder, $"{level.name}.json");
+        string path = Path.Combine(DataManagement.Levels, $"{level.name}.json");
 #endif
 
         Debug.Log("Saving level to: " + path);
 
-        level.path = Path.Combine(Application.persistentDataPath, "Levels", $"{level.name}.json");
+        level.path = Path.Combine(DataManagement.Levels, $"{level.name}.json");
 
         var json = JsonConvert.SerializeObject(level, Formatting.Indented);
 
@@ -121,9 +121,9 @@ public class Level {
         if (File.Exists(file)) {
             var level = LoadFromFullPath(file);
 
-            if (!level.isStandard) {
+            //if (!level.isStandard) {
                 File.Delete(file);
-            }
+            //}
         }
     }
 }

@@ -23,7 +23,10 @@ public class SongSelectContent : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-        var files = Directory.GetFiles(DataManagement.Levels, "*.json", SearchOption.AllDirectories);
+        var files = new List<string>(Directory.GetFiles(DataManagement.StandardLevels, "*.json", SearchOption.AllDirectories));
+
+        files.AddRange(Directory.GetFiles(DataManagement.Levels, "*.json", SearchOption.AllDirectories));
+
         var buttons = new List<RectTransform>();
         var i = 0;
 

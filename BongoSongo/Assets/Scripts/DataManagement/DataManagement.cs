@@ -7,10 +7,12 @@ public class DataManagement : MonoBehaviour {
 
     public static string Levels => Path.Combine(Application.persistentDataPath, "Levels");
     public static string HighScores => Path.Combine(Application.persistentDataPath, "HighScores");
+    public static string StandardLevels => Path.Combine(Application.persistentDataPath, "StandardLevels");
 
     static string[] standardFolders = new[] {
             "Levels",
-            "HighScores"
+            "HighScores",
+            "StandardLevels"
         };
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
