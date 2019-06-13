@@ -46,6 +46,8 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
                 }
             }
         } else if (scene == SceneManager.GetSceneByName("EditorScene")) {
+            if (InterScene.Instance.level == null) return; 
+
             var m = FindObjectOfType<EditorManager>();
 
             m.LoadLevel(InterScene.Instance.level);

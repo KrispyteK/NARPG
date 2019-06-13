@@ -50,18 +50,11 @@ public class EditorManager : MonoBehaviour {
     }
 
     void Start() {
-        //level = new Level {
-        //    name = "test"
-        //};
-
         canvasCamera.enabled = false;
 
         currentPrefab = editorPrefabs[0];
 
         indicatorSprites = Resources.Load<IndicatorSprites>("Settings/IndicatorSprites");
-
-        //timelineDrawer = FindObjectOfType<TimelineDrawer>();
-        //levelInfo = FindObjectOfType<LevelInfo>();
     }
 
     void Update() {
