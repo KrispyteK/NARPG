@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
 {
 
 	public AudioSource beatTest;
-	public AudioSource hitBall;
-  
+	public AudioSource hit;
+    public AudioSource comboGain;
+    public AudioSource comboFail;
+
 }

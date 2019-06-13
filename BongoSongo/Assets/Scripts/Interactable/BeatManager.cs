@@ -118,7 +118,7 @@ public class BeatManager : MonoBehaviour {
         while (beat == spawner.spawnInfo[i].beat) {
             // Use test sound to ensure spawning matches music track
             if (spawnSoundOn) {
-                soundManager.hitBall.Play();
+                soundManager.comboFail.Play();
             }
 
             spawner.Spawn(spawner.spawnInfo[i]);

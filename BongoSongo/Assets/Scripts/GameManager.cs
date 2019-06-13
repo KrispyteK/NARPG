@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public Text comboText;
 
     private int indicatorHits;
+    private SoundManager soundManager;
 
     void Awake() {
         if (instance == null) {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour {
         else {
             Debug.LogError("Too many game managers in the scene!");
         }
+
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     public int AddScore(int add) {
@@ -45,6 +48,8 @@ public class GameManager : MonoBehaviour {
         combo++;
 
         comboText.text = combo + "x";
+
+        soundManager.comboGain.Play();
     }
 
     public void RemoveCombo() {
@@ -55,6 +60,8 @@ public class GameManager : MonoBehaviour {
         combo = Mathf.Max(1, combo);
 
         comboText.text = combo + "x";
+
+        soundManager.comboFail.Play();
     }
 
 
