@@ -28,10 +28,14 @@ public class InterScene : Singleton<InterScene> {
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         var spawnManager = FindObjectOfType<SpawnManager>();
         var soundManager = FindObjectOfType<SoundManager>();
+        var beatManager = FindObjectOfType<BeatManager>();
 
         if (spawnManager) {
+            beatManager.bpm = level.bpm;
             spawnManager.spawnInfo = level.spawnInfo;
             if (level.song != null) soundManager.beatTest.clip = level.song.GenerateClip();
+
+            beatManager.Initialise();
         }
     }
 }

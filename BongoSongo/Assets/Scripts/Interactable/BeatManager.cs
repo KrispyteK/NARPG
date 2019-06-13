@@ -25,8 +25,6 @@ public class BeatManager : MonoBehaviour {
     private int CurrentBeat => beat;
 
     void Awake() {
-        beatLength = (60 / bpm);
-
         soundManager = FindObjectOfType<SoundManager>();
         spawner = FindObjectOfType<SpawnManager>();
 
@@ -38,7 +36,9 @@ public class BeatManager : MonoBehaviour {
         }
     }
 
-    void Start() {
+    public void Initialise() {
+        beatLength = (60 / bpm);
+
         StartAt(startBeat);
     }
 

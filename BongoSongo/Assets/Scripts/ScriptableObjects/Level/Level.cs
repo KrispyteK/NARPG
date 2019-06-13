@@ -30,8 +30,6 @@ public class Level {
 
         var standardLevels = Resources.Load<StandardLevels>("Levels/StandardLevels");
 
-        Debug.Log(standardLevels);
-
         var filesAvailable = Directory.GetFiles(DataManagement.StandardLevels, "*.json", SearchOption.AllDirectories);
 
         foreach (var file in filesAvailable) {
@@ -42,8 +40,6 @@ public class Level {
             string path = Path.Combine(DataManagement.StandardLevels, $"{levelFile.name}.json");
 
             File.WriteAllText(path, levelFile.text);
-
-            Debug.Log("Level saved to: " + path);
         }
 
         Debug.Log("Writing levels complete!");
