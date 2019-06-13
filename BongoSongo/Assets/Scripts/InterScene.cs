@@ -26,6 +26,8 @@ public class InterScene : Singleton<InterScene> {
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (scene == SceneManager.GetSceneByName("GamePlayScene")) score = 0;
+
         var spawnManager = FindObjectOfType<SpawnManager>();
         var soundManager = FindObjectOfType<SoundManager>();
         var beatManager = FindObjectOfType<BeatManager>();
