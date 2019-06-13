@@ -52,6 +52,7 @@ public class SongSelectContent : MonoBehaviour {
 
             panel.GetComponentInChildren<Text>().text = levelName;
             panel.GetComponentInChildren<SongOption>().level = file;
+            panel.GetComponentInChildren<SongOption>().standardLevelImage.gameObject.SetActive(!file.StartsWith(DataManagement.StandardLevels));
 
             buttons.Add(rt);
 
