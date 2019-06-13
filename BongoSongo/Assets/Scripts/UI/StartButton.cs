@@ -7,13 +7,18 @@ using UnityEngine.SceneManagement;
 public class StartButton : MonoBehaviour {
 
     public ScrollRectSnap scrollRectSnap;
+    public RectTransform editorPanel;
 
     public void Play() {
-        var interScene = InterScene.Instance;
-        var level = Level.Load(scrollRectSnap.Selected.GetComponent<SongOption>().level + ".json");
+        if (scrollRectSnap.Selected == editorPanel) {
+            SceneManager.LoadScene("EditorScene");
+        } else { 
+            var interScene = InterScene.Instance;
+            var level = Level.LoadFromFullPath(scrollRectSnap.Selected.GetComponent<SongOption>().level);
 
-        interScene.level = level;
+            interScene.level = level;
 
-        SceneManager.LoadScene("GameplayScene");
+            SceneManager.LoadScene("GameplayScene");
+        }
     }
 }

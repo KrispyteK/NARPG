@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SongSelectContent : MonoBehaviour {
 
+    public GameObject editorPanel;
     public GameObject songPanel;
     public GameObject scrollPanel;
 
@@ -30,6 +31,16 @@ public class SongSelectContent : MonoBehaviour {
         var buttons = new List<RectTransform>();
         var i = 0;
 
+        var panelEditor = Instantiate(editorPanel, scrollPanel.transform);
+        var rtpe = panelEditor.GetComponent<RectTransform>();
+        rtpe.localPosition = new Vector2(i * 1080, 0);
+
+        FindObjectOfType<StartButton>().editorPanel = rtpe;
+
+        buttons.Add(rtpe);
+
+        i++;
+
         foreach (var file in files) {
             var panel = Instantiate(songPanel, scrollPanel.transform);
 
@@ -40,7 +51,7 @@ public class SongSelectContent : MonoBehaviour {
             var levelName = rawLevelName.First().ToString().ToUpper() + rawLevelName.Substring(1);
 
             panel.GetComponentInChildren<Text>().text = levelName;
-            panel.GetComponentInChildren<SongOption>().level = rawLevelName;
+            panel.GetComponentInChildren<SongOption>().level = file;
 
             buttons.Add(rt);
 
@@ -48,5 +59,7 @@ public class SongSelectContent : MonoBehaviour {
         }
 
         scrollRectSnap.SetButtons(buttons.ToArray());
+
+        scrollRectSnap.GoToIndex(1);
     }
 }

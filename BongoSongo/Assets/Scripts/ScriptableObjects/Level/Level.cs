@@ -60,13 +60,16 @@ public class Level {
         level.isStandard = true;
 
         string path = Path.Combine(Application.dataPath, "Resources", "Levels", $"{level.name}.json");
+
+        level.path = Path.Combine(DataManagement.StandardLevels, $"{level.name}.json");
+
 #else
         string path = Path.Combine(DataManagement.Levels, $"{level.name}.json");
+
+        level.path = Path.Combine(DataManagement.Levels, $"{level.name}.json");
 #endif
 
         Debug.Log("Saving level to: " + path);
-
-        level.path = Path.Combine(DataManagement.Levels, $"{level.name}.json");
 
         var json = JsonConvert.SerializeObject(level, Formatting.Indented);
 

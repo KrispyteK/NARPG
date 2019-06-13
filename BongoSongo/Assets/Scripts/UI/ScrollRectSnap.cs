@@ -27,13 +27,14 @@ public class ScrollRectSnap : MonoBehaviour {
     private bool goToClosest = true;
 
     void Start () {
-
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
-
         SetButtons(buttons);
 
         scrollRect = GetComponent<ScrollRect>();
+    }
+
+    public void GoToIndex(int i) {
+        goToClosest = false;
+        index = i;
     }
 
     public void SetButtons (RectTransform[] btns) {
