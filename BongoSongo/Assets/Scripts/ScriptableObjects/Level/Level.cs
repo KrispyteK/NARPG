@@ -32,6 +32,12 @@ public class Level {
 
         Debug.Log(standardLevels);
 
+        var filesAvailable = Directory.GetFiles(DataManagement.StandardLevels, "*.json", SearchOption.AllDirectories);
+
+        foreach (var file in filesAvailable) {
+            File.Delete(file);
+        }
+
         foreach (var levelFile in standardLevels.levels) {
             string path = Path.Combine(DataManagement.StandardLevels, $"{levelFile.name}.json");
 
