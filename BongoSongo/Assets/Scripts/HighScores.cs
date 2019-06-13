@@ -23,7 +23,7 @@ public class HighScores : MonoBehaviour {
             highScores[level.path] = score;
         }
 
-        var json = JsonConvert.SerializeObject(highScores);
+        var json = JsonConvert.SerializeObject(highScores, Formatting.Indented);
 
         using (var fileStream = File.Open(FilePath, FileMode.OpenOrCreate)) {
             using (StreamWriter sw = new StreamWriter(fileStream)) {
