@@ -292,7 +292,7 @@ public class EditorManager : MonoBehaviour {
             CreateNewEditor();
         }
 
-        RegisterLevelHistory();
+        //RegisterLevelHistory();
     }
 
     public void DeleteIndicator() {
