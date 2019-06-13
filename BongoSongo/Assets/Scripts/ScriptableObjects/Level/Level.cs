@@ -139,4 +139,8 @@ public class Level {
             //}
         }
     }
+
+    public Level Copy () {
+        return (Level)this.MemberwiseClone();
+    }
 }

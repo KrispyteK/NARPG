@@ -32,7 +32,7 @@ public class EditorManager : MonoBehaviour {
     public TimelineDrawer timelineDrawer;
     public TMPro.TMP_InputField bpmInput;
     public GUIStyle guiStyle;
-    
+  
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -44,6 +44,9 @@ public class EditorManager : MonoBehaviour {
     public IndicatorSprites indicatorSprites;
 
     public Camera canvasCamera;
+
+    public List<Level> levelHistory = new List<Level>();
+    public int undoDepth = 0;
 
     void Awake() {
         instance = this;
@@ -108,6 +111,36 @@ public class EditorManager : MonoBehaviour {
             if (indicatorTool.indicator == Indicators.Button) {
                 indicatorTool.GetComponentInChildren<Image>().sprite = sprite;
             }
+        }
+    }
+
+    public void RegisterLevelHistory () {
+        var copy = level.Copy();
+
+        var spawnInfoList = GenerateSpawnInfoList();
+
+        copy.spawnInfo = spawnInfoList;
+
+        if (undoDepth > 0) {
+            levelHistory.RemoveRange(levelHistory.Count - 1 - undoDepth, undoDepth);
+
+            undoDepth = 0;
+        }
+
+        levelHistory.Add(copy);
+    }
+
+    public void Undo () {
+        undoDepth++;
+
+        LoadLevel(levelHistory[levelHistory.Count - 1 - undoDepth]);
+    }
+
+    public void Redo() {
+        if (undoDepth > 0) {
+            undoDepth--;
+
+            LoadLevel(levelHistory[levelHistory.Count - 1 - undoDepth]);
         }
     }
 
@@ -258,6 +291,8 @@ public class EditorManager : MonoBehaviour {
         else {
             CreateNewEditor();
         }
+
+        RegisterLevelHistory();
     }
 
     public void DeleteIndicator() {
@@ -299,6 +334,8 @@ public class EditorManager : MonoBehaviour {
     }
 
     public void Load(string file) {
+        levelHistory.Clear();
+
         loadingScreen.SetActive(true);
 
         var t = Level.LoadAsync(file, level, (Level l) => {
