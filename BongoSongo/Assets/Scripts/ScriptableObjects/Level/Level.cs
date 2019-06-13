@@ -18,6 +18,8 @@ public class Level {
 
     public List<SpawnInfo> spawnInfo = new List<SpawnInfo>();
 
+    private static bool wroteLevelsToDevice = false;
+
     public static string Folder =>
 #if (DEBUG && !UNITY_EDITOR)
         "file:///" +
@@ -26,6 +28,10 @@ public class Level {
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void OnBeforeSceneLoadRuntimeMethod() {
+#if !UNITY_EDITOR
+        if (wroteLevelsToDevice) return;
+#endif
+
         Debug.Log("Writing levels to device...");
 
         var standardLevels = Resources.Load<StandardLevels>("Levels/StandardLevels");
@@ -41,6 +47,8 @@ public class Level {
 
             File.WriteAllText(path, levelFile.text);
         }
+
+        wroteLevelsToDevice = true;
 
         Debug.Log("Writing levels complete!");
     }
