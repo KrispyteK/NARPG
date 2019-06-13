@@ -55,13 +55,15 @@ public class GameManager : MonoBehaviour {
     public void RemoveCombo() {
         indicatorHits = 0;
 
-        combo--;
+        if (combo > 1) {
+            combo--;
 
-        combo = Mathf.Max(1, combo);
+            combo = Mathf.Max(1, combo);
 
-        comboText.text = combo + "x";
+            comboText.text = combo + "x";
 
-        soundManager.comboFail.Play();
+            soundManager.comboFail.Play();
+        }
     }
 
 

@@ -15,6 +15,12 @@ public class LogoMovement : MonoBehaviour {
 
     void Start() {
         rectTransform = GetComponent<RectTransform>();
+
+        var beatManager = FindObjectOfType<BeatManager>();
+
+        if (beatManager) {
+            bpm = beatManager.bpm;
+        }
     }
 
     void Update() {
