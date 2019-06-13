@@ -251,6 +251,21 @@ PrefabInstance:
       propertyPath: threshold
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 4854649539113424816, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: showMotionCapture
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854649537805764239, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: doCountdown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854649537805764239, guid: ed38853ae08a68f46b68e07960e41385,
+        type: 3}
+      propertyPath: doOutline
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4854649537953359978, guid: ed38853ae08a68f46b68e07960e41385,
         type: 3}
       propertyPath: comboText
