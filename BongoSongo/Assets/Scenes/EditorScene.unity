@@ -5153,7 +5153,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2042024563}
   m_HandleRect: {fileID: 2042024562}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6266,7 +6266,6 @@ GameObject:
   m_Component:
   - component: {fileID: 952121726}
   - component: {fileID: 952121727}
-  - component: {fileID: 952121728}
   m_Layer: 5
   m_Name: Song
   m_TagString: Untagged
@@ -6319,28 +6318,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
---- !u!114 &952121728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 952121725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0b28b3ff1233146b859a78dd5c6b46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedSong: {fileID: 0}
-  songs:
-  - {fileID: 8300000, guid: d59a800df76856b46a7f42df7aff9b61, type: 3}
-  - {fileID: 8300000, guid: 48f6ba993bf8ac94b863337fee4eaea7, type: 3}
-  - {fileID: 8300000, guid: c85fe62b9b83e714b8cb730d9e27ff83, type: 3}
-  dropdown: {fileID: 2042170879}
-  songPaths:
-  - Audio/Music/Prototype-Dance(bpm148)
-  - Audio/Music/Prototype-Rock(bpm106)
-  - Audio/Music/Prototype-Techno(bpm140)
 --- !u!1 &974172351
 GameObject:
   m_ObjectHideFlags: 0
@@ -9092,7 +9069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000020969193}
+  m_AnchoredPosition: {x: 0, y: -0.0001430395}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1232667869

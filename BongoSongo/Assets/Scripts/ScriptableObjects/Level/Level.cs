@@ -45,7 +45,13 @@ public class Level {
         foreach (var levelFile in standardLevels.levels) {
             string path = Path.Combine(DataManagement.StandardLevels, $"{levelFile.name}.json");
 
-            File.WriteAllText(path, levelFile.text);
+            Level level = JsonConvert.DeserializeObject<Level>(levelFile.text);
+
+            level.path = path;
+
+            string serialized = JsonConvert.SerializeObject(level, Formatting.Indented);
+
+            File.WriteAllText(path, serialized);
         }
 
         wroteLevelsToDevice = true;
@@ -68,9 +74,6 @@ public class Level {
         level.isStandard = true;
 
         string path = Path.Combine(Application.dataPath, "Resources", "Levels", $"{level.name}.json");
-
-        level.path = Path.Combine(DataManagement.StandardLevels, $"{level.name}.json");
-
 #else
         string path = Path.Combine(DataManagement.Levels, $"{level.name}.json");
 
