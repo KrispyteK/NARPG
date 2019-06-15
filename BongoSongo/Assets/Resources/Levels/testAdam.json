@@ -1,0 +1,364 @@
+{
+  "name": "testAdam",
+  "description": null,
+  "path": "C:/Users/Adam/AppData/LocalLow/DefaultCompany/BongoSongo\\StandardLevels\\testAdam.json",
+  "bpm": 224.0,
+  "isStandard": true,
+  "song": {
+    "clipString": "Audio/Music/Ten Tracks/ElectroBop-112bpm"
+  },
+  "spawnInfo": [
+    {
+      "beat": 9,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 13,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.13525185,
+        "y": 0.6820144
+      },
+      "points": null
+    },
+    {
+      "beat": 14,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.117985547,
+        "y": 0.5179856
+      },
+      "points": null
+    },
+    {
+      "beat": 17,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.351079136,
+        "y": -0.238848731
+      },
+      "points": null
+    },
+    {
+      "beat": 17,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 21,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.005755347,
+        "y": -0.28201437
+      },
+      "points": null
+    },
+    {
+      "beat": 25,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.03453237,
+        "y": -0.0316547155
+      },
+      "points": null
+    },
+    {
+      "beat": 25,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 29,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.0143884746,
+        "y": -0.267625868
+      },
+      "points": null
+    },
+    {
+      "beat": 33,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 33,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 37,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.0115108,
+        "y": -0.293525159
+      },
+      "points": null
+    },
+    {
+      "beat": 41,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": -0.0172662139
+      },
+      "points": null
+    },
+    {
+      "beat": 41,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 45,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.0230216011,
+        "y": -0.3021583
+      },
+      "points": null
+    },
+    {
+      "beat": 49,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 49,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 53,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.03453233,
+        "y": -0.299280584
+      },
+      "points": null
+    },
+    {
+      "beat": 57,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 57,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 65,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 73,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 81,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 89,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 97,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 105,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 113,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 121,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 129,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 137,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 145,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 153,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    }
+  ]
+}

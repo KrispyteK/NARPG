@@ -1,0 +1,166 @@
+{
+  "name": "hi",
+  "description": null,
+  "path": "C:/Users/Adam/AppData/LocalLow/DefaultCompany/BongoSongo\\Levels\\hi.json",
+  "bpm": 167.0,
+  "isStandard": true,
+  "song": {
+    "clipString": "Audio/Music/Ten Tracks/wk2Tune-167bpm"
+  },
+  "spawnInfo": [
+    {
+      "beat": 1,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "points": null
+    },
+    {
+      "beat": 5,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.2705036,
+        "y": -0.07194245
+      },
+      "points": null
+    },
+    {
+      "beat": 9,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.10071943,
+        "y": -0.0316546559
+      },
+      "points": null
+    },
+    {
+      "beat": 13,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.310791343,
+        "y": -0.0920863152
+      },
+      "points": null
+    },
+    {
+      "beat": 17,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.08920866,
+        "y": -0.31942448
+      },
+      "points": null
+    },
+    {
+      "beat": 21,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.218705028,
+        "y": -0.2503597
+      },
+      "points": null
+    },
+    {
+      "beat": 25,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.267625928,
+        "y": -0.008633077
+      },
+      "points": null
+    },
+    {
+      "beat": 29,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.08920859,
+        "y": -0.18417269
+      },
+      "points": null
+    },
+    {
+      "beat": 33,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.1381295,
+        "y": -0.258992821
+      },
+      "points": null
+    },
+    {
+      "beat": 37,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.305035979,
+        "y": -0.126618683
+      },
+      "points": null
+    },
+    {
+      "beat": 41,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.05755397,
+        "y": -0.310791433
+      },
+      "points": null
+    },
+    {
+      "beat": 45,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.126618713,
+        "y": -0.296402931
+      },
+      "points": null
+    },
+    {
+      "beat": 49,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": 0.3021583,
+        "y": -0.103597105
+      },
+      "points": null
+    },
+    {
+      "beat": 53,
+      "beatLength": 0,
+      "spriteIndex": 0,
+      "indicator": 0,
+      "position": {
+        "x": -0.126618743,
+        "y": -0.276259
+      },
+      "points": null
+    }
+  ]
+}
