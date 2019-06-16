@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SliderIndicator : MonoBehaviour {
 
+    public GameObject beatScore;
     public Transform indicator;
     public int beats;
     public Vector3[] points;
@@ -26,9 +27,12 @@ public class SliderIndicator : MonoBehaviour {
 
     void BeatEvent () {
         if (interactable.isInteractedWith) {
-            FloatingText.Create(indicator.position, $"+{InterScene.Instance.gamePlaySettings.sliderScore}", BeatManager.beatLength * 2f);
+            var score = InterScene.Instance.gamePlaySettings.sliderScore;
 
-            GameManager.instance.AddScore(InterScene.Instance.gamePlaySettings.sliderScore);
+            var comboScore = GameManager.instance.AddScore(score);
+
+            var beatScoreInstance = Instantiate(beatScore, transform.position, Quaternion.identity);
+            beatScoreInstance.GetComponent<BeatScore>().Init(comboScore);
 
             hits++;
         }

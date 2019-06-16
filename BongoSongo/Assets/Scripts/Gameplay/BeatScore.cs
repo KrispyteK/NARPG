@@ -9,7 +9,7 @@ public class BeatScore : MonoBehaviour {
 
     public void Init (int score) {
         textMesh = GetComponentInChildren<TextMeshPro>();
-        textMesh.text = $"+{score}!";
+        textMesh.text = $"+{score}";
 
         StartCoroutine(Move());
     }

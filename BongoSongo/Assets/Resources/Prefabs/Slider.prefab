@@ -200,6 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c408b2161a146642a249ad30d1ef554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beatScore: {fileID: 6431739556869953409, guid: d5fe229414e847f4ab06a09c6f99bead,
+    type: 3}
   indicator: {fileID: 1997805121903536592}
   beats: 4
   points:
