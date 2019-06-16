@@ -86,8 +86,11 @@ public class BeatManager : MonoBehaviour {
     }
 
     private IEnumerator Countdown () {
-        var canvas = GameObject.Find("UI");
-        canvas.SetActive(false);
+        var canvas = GameObject.Find("Canvas");
+        
+        foreach (Transform child in canvas.transform) child.gameObject.SetActive(false);
+
+        outlineObject.SetActive(true);
 
         if (doOutline) yield return new WaitForSeconds(outlineTime);
 
@@ -103,7 +106,9 @@ public class BeatManager : MonoBehaviour {
             count--;
         }
 
-        canvas.SetActive(true);
+        foreach (Transform child in canvas.transform) child.gameObject.SetActive(true);
+
+        outlineObject.SetActive(false);
 
         InvokeRepeating("BeatEvent", beatLength, beatLength);
     }
