@@ -1,54 +1,11 @@
 {
   "name": "unnamed",
   "description": null,
-  "path": "C:/Users/Adam/AppData/LocalLow/DefaultCompany/BongoSongo\\StandardLevels\\unnamed.json",
-  "bpm": 212.0,
+  "path": null,
+  "bpm": 248.0,
   "isStandard": true,
   "song": {
-    "clipString": "Audio/Music/Prototype-Dance(bpm148)"
+    "clipString": "Audio/Music/Ten Tracks/1Wk4Tune-124bpm"
   },
-  "spawnInfo": [
-    {
-      "beat": 3,
-      "beatLength": 0,
-      "spriteIndex": 0,
-      "indicator": 0,
-      "position": {
-        "x": -0.4,
-        "y": 0.8
-      },
-      "points": null
-    },
-    {
-      "beat": 5,
-      "beatLength": 0,
-      "spriteIndex": 3,
-      "indicator": 0,
-      "position": {
-        "x": 0.4,
-        "y": 0.8
-      },
-      "points": null
-    },
-    {
-      "beat": 7,
-      "beatLength": 6,
-      "spriteIndex": -1,
-      "indicator": 1,
-      "position": {
-        "x": 0.0,
-        "y": 0.0
-      },
-      "points": [
-        {
-          "x": -0.4,
-          "y": -0.4
-        },
-        {
-          "x": 0.3,
-          "y": 0.6
-        }
-      ]
-    }
-  ]
+  "spawnInfo": []
 }
