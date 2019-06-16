@@ -1,0 +1,11 @@
+{
+  "name": "HeatWaveIsland",
+  "description": null,
+  "path": "C:/Users/Adam/AppData/LocalLow/DefaultCompany/BongoSongo\\StandardLevels\\HeatWaveIsland.json",
+  "bpm": 82.0,
+  "isStandard": true,
+  "song": {
+    "clipString": "Audio/Music/Ten Tracks/Reggae-82bpm"
+  },
+  "spawnInfo": []
+}
