@@ -31,8 +31,16 @@ public class InterScene : Singleton<InterScene> {
         var spawnManager = FindObjectOfType<SpawnManager>();
         var soundManager = FindObjectOfType<SoundManager>();
         var beatManager = FindObjectOfType<BeatManager>();
+        var interSceneEditorInformation = FindObjectOfType<InterSceneEditorInformation>();
 
         if (spawnManager) {
+            if (interSceneEditorInformation) {
+                if (interSceneEditorInformation.playAtBeat) {
+                    beatManager.startBeat = interSceneEditorInformation.beat;
+                    beatManager.doOutline = false;
+                }
+            }
+
             beatManager.bpm = level.bpm;
             spawnManager.spawnInfo = level.spawnInfo;
             if (level.song != null) soundManager.beatTest.clip = level.song.GenerateClip();

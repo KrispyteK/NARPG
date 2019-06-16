@@ -36,15 +36,15 @@ public class InterSceneEditorInformation : Singleton<InterSceneEditorInformation
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene == SceneManager.GetSceneByName("GamePlayScene")) {
-            if (playAtBeat) {
-                var m = FindObjectOfType<BeatManager>();
+            //if (playAtBeat) {
+            //    var m = FindObjectOfType<BeatManager>();
 
-                if (m) {
-                    m.startBeat = beat;
-                    m.doCountdown = false;
-                    m.doOutline = false;
-                }
-            }
+            //    if (m) {
+            //        m.startBeat = beat;
+            //        m.doCountdown = false;
+            //        m.doOutline = false;
+            //    }
+            //}
         } else if (scene == SceneManager.GetSceneByName("EditorScene")) {
             if (InterScene.Instance.level == null) return; 
 
