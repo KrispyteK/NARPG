@@ -23,7 +23,7 @@ public class SongScrollArrows : MonoBehaviour {
     void Update() {
         //var alpha = Mathf.Clamp01(1 - Mathf.Abs(scrollRect.velocity.x / 100));
 
-        var alpha = (scrollRectSnap.buttonDistance - Mathf.Abs(scrollRectSnap.DistanceToNearest) * 3) / scrollRectSnap.buttonDistance;
+        var alpha = (scrollRectSnap.buttonDistance - Mathf.Abs(scrollRectSnap.DistanceToNearest) * 10) / scrollRectSnap.buttonDistance;
 
         smoothedAlphaLeft += (Mathf.Clamp01(alpha * (scrollRectSnap.index > 0 ? 1 : 0)) - smoothedAlphaLeft) * Time.deltaTime * 10f;
         smoothedAlphaRight += (Mathf.Clamp01(alpha * (scrollRectSnap.index < scrollRectSnap.buttons.Length - 1 ? 1 : 0)) - smoothedAlphaRight) * Time.deltaTime * 10f;
