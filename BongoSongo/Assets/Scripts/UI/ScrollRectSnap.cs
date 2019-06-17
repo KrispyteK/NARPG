@@ -8,6 +8,7 @@ public class ScrollRectSnap : MonoBehaviour {
 
     public float velocityShiftThreshold = 1000f;
     public float velocityShiftThresholdMax = 2000f;
+    public float moveThreshold = 150;
     public float snapThreshold = 5f;
     public float force = 1f;
     public float damping = 0.05f;
@@ -25,6 +26,7 @@ public class ScrollRectSnap : MonoBehaviour {
     private bool dragging;
     private ScrollRect scrollRect;
     private bool goToClosest = true;
+    private Vector2 startDrag;
 
     void Start () {
         SetButtons(buttons);
@@ -88,21 +90,41 @@ public class ScrollRectSnap : MonoBehaviour {
     public void StartDrag () {
         dragging = true;
         goToClosest = true;
+
+        startDrag = panel.anchoredPosition;
     }
 
     public void EndDrag () {
         dragging = false;
 
+        var delta = panel.anchoredPosition - startDrag;
         float velX = scrollRect.velocity.x;
 
-        if (Mathf.Abs(scrollRect.velocity.x) > velocityShiftThresholdMax) {
-            index = (int)Mathf.Clamp(index - Mathf.Sign(velX) * buttons.Length, 0, buttons.Length - 1);
+        if (Mathf.Abs(delta.x) > moveThreshold) {
 
-            goToClosest = false;
-        } else if (Mathf.Abs(scrollRect.velocity.x) > velocityShiftThreshold && Mathf.Abs(scrollRect.velocity.x) < velocityShiftThresholdMax) {
-            index = (int)Mathf.Clamp(index - Mathf.Sign(velX),0, buttons.Length - 1);
+            index = (int)Mathf.Clamp(index - Mathf.Sign(delta.x), 0, buttons.Length - 1);
+
+            print(index);
 
             goToClosest = false;
         }
+
+        // else if (Mathf.Abs(scrollRect.velocity.x) > velocityShiftThreshold && Mathf.Abs(scrollRect.velocity.x) < velocityShiftThresholdMax) {
+        //    index = (int)Mathf.Clamp(index - Mathf.Sign(velX),0, buttons.Length - 1);
+
+        //    goToClosest = false;
+        //}
+
+        //float velX = scrollRect.velocity.x;
+
+        //if (Mathf.Abs(scrollRect.velocity.x) > velocityShiftThresholdMax) {
+        //    index = (int)Mathf.Clamp(index - Mathf.Sign(velX) * buttons.Length, 0, buttons.Length - 1);
+
+        //    goToClosest = false;
+        //} else if (Mathf.Abs(scrollRect.velocity.x) > velocityShiftThreshold && Mathf.Abs(scrollRect.velocity.x) < velocityShiftThresholdMax) {
+        //    index = (int)Mathf.Clamp(index - Mathf.Sign(velX),0, buttons.Length - 1);
+
+        //    goToClosest = false;
+        //}
     }
 }
