@@ -1,0 +1,11 @@
+{
+  "name": "DynamoDisco",
+  "description": null,
+  "path": null,
+  "bpm": 296.0,
+  "isStandard": true,
+  "song": {
+    "clipString": "Audio/Music/Ten Tracks/SuperDancer(bpm148)"
+  },
+  "spawnInfo": []
+}
