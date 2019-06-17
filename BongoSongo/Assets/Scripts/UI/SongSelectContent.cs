@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class SongSelectContent : MonoBehaviour {
 
+    public Sprite editorSprite;
     public GameObject editorPanel;
     public GameObject songPanel;
     public GameObject scrollPanel;
@@ -48,6 +49,7 @@ public class SongSelectContent : MonoBehaviour {
         var i = 0;
 
         var panelEditor = Instantiate(editorPanel, scrollPanel.transform);
+        panelEditor.GetComponent<Image>().sprite = editorSprite;
         var rtpe = panelEditor.GetComponent<RectTransform>();
         rtpe.localPosition = new Vector2(i * 1080, 0);
 
