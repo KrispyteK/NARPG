@@ -37,12 +37,12 @@ MonoBehaviour:
   - audioClip: {fileID: 8300000, guid: 7ece6abe88a060249a1125917d6b5be1, type: 3}
     bpm: 106
     audioClipPath: Audio/Music/Ten Tracks/Rock-106bpm
-  - audioClip: {fileID: 8300000, guid: 97df39984a09f9946a6702ba34a803e6, type: 3}
-    bpm: 148
-    audioClipPath: Audio/Music/Ten Tracks/SuperDancer(bpm148)
   - audioClip: {fileID: 8300000, guid: 99c5fb2b1d2c4c34f9721aa040b3dc54, type: 3}
     bpm: 167
     audioClipPath: Audio/Music/Ten Tracks/wk2Tune-167bpm
   - audioClip: {fileID: 8300000, guid: 9db9c5663ef3a194aabd07e8dd30442a, type: 3}
     bpm: 120
     audioClipPath: Audio/Music/Ten Tracks/wk3Tune-120bpm
+  - audioClip: {fileID: 8300000, guid: aedad44d8420a0a40be5c94d66758f10, type: 3}
+    bpm: 148
+    audioClipPath: Audio/Music/Ten Tracks/DynamoDisco(repaired)-148bpm
