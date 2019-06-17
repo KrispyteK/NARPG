@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songs:
   - audioClip: {fileID: 8300000, guid: a093f835159482a42a4a05024c9e162f, type: 3}
-    icon: {fileID: 21300000, guid: ffff8c81e8b9c864da8a7352052d8098, type: 3}
+    icon: {fileID: 21300000, guid: 74eadf8beb200af4f9f244502cc82e40, type: 3}
     bpm: 114
     audioClipPath: Audio/Music/Ten Tracks/-Strings-114bpm
     iconPath: 
   - audioClip: {fileID: 8300000, guid: 5831dffad0d7039459713696d4860ade, type: 3}
-    icon: {fileID: 21300000, guid: 07976baa58c8f0843833fd305d9bf9e8, type: 3}
+    icon: {fileID: 21300000, guid: 0a63f32f3e2d1c9418394e1eafefe547, type: 3}
     bpm: 124
     audioClipPath: Audio/Music/Ten Tracks/1Wk4Tune-124bpm
     iconPath: 
@@ -34,37 +34,37 @@ MonoBehaviour:
     audioClipPath: Audio/Music/Ten Tracks/ElectroBop-112bpm
     iconPath: 
   - audioClip: {fileID: 8300000, guid: c345f59b8d329174fb0739e71d3951c8, type: 3}
-    icon: {fileID: 21300000, guid: ffff8c81e8b9c864da8a7352052d8098, type: 3}
+    icon: {fileID: 21300000, guid: cdc4f98003a9c60449a2f754d894e87c, type: 3}
     bpm: 131
     audioClipPath: Audio/Music/Ten Tracks/FiveBarTune-131bpm
     iconPath: 
   - audioClip: {fileID: 8300000, guid: aa3616e11bb00b8458947bdad708f205, type: 3}
-    icon: {fileID: 21300000, guid: 07976baa58c8f0843833fd305d9bf9e8, type: 3}
+    icon: {fileID: 21300000, guid: 5f07956250072ce42937473fffc47360, type: 3}
     bpm: 140
     audioClipPath: Audio/Music/Ten Tracks/Prototype-Techno(bpm140) -Yoran
     iconPath: 
   - audioClip: {fileID: 8300000, guid: 2c4b1f07cd65a0f4880a2b763ca52cbc, type: 3}
-    icon: {fileID: 21300000, guid: 07976baa58c8f0843833fd305d9bf9e8, type: 3}
+    icon: {fileID: 21300000, guid: 4fc2015e3c9cccc4082b4f5421664b51, type: 3}
     bpm: 82
     audioClipPath: Audio/Music/Ten Tracks/Reggae-82bpm
     iconPath: 
   - audioClip: {fileID: 8300000, guid: 7ece6abe88a060249a1125917d6b5be1, type: 3}
-    icon: {fileID: 21300000, guid: ffff8c81e8b9c864da8a7352052d8098, type: 3}
+    icon: {fileID: 21300000, guid: ae9578a15c3f8aa4f95d7b848172dff1, type: 3}
     bpm: 106
     audioClipPath: Audio/Music/Ten Tracks/Rock-106bpm
     iconPath: 
   - audioClip: {fileID: 8300000, guid: 99c5fb2b1d2c4c34f9721aa040b3dc54, type: 3}
-    icon: {fileID: 21300000, guid: ffff8c81e8b9c864da8a7352052d8098, type: 3}
+    icon: {fileID: 21300000, guid: 99690f98bfec22b46942ef8c63d643ba, type: 3}
     bpm: 167
     audioClipPath: Audio/Music/Ten Tracks/wk2Tune-167bpm
     iconPath: 
   - audioClip: {fileID: 8300000, guid: 9db9c5663ef3a194aabd07e8dd30442a, type: 3}
-    icon: {fileID: 21300000, guid: 07976baa58c8f0843833fd305d9bf9e8, type: 3}
+    icon: {fileID: 21300000, guid: 2bafbdd9a4ef6214bad8dfc592ccf1a9, type: 3}
     bpm: 120
     audioClipPath: Audio/Music/Ten Tracks/wk3Tune-120bpm
     iconPath: 
   - audioClip: {fileID: 8300000, guid: aedad44d8420a0a40be5c94d66758f10, type: 3}
-    icon: {fileID: 21300000, guid: 99690f98bfec22b46942ef8c63d643ba, type: 3}
+    icon: {fileID: 21300000, guid: ffff8c81e8b9c864da8a7352052d8098, type: 3}
     bpm: 148
     audioClipPath: Audio/Music/Ten Tracks/DynamoDisco(repaired)-148bpm
     iconPath: 
