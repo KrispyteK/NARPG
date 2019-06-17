@@ -23,6 +23,18 @@ public class SongSelectContent : MonoBehaviour {
         GenerateButtons();
     }
 
+    private string SplitCamelCase (string input) {
+        return Regex.Replace(
+                    Regex.Replace(
+                        name,
+                        @"(\P{Ll})(\P{Ll}\p{Ll})",
+                        "$1 $2"
+                    ),
+                    @"(\p{Ll})(\P{Ll})",
+                    "$1 $2"
+                );
+    }
+
     public void GenerateButtons() {
         foreach (Transform child in scrollPanel.transform) {
             Destroy(child.gameObject);
@@ -55,18 +67,8 @@ public class SongSelectContent : MonoBehaviour {
             var rt = panel.GetComponent<RectTransform>();
             rt.localPosition = new Vector2(i * 1080, 0);
 
-            string splitString = Regex.Replace(
-                    Regex.Replace(
-                        name,
-                        @"(\P{Ll})(\P{Ll}\p{Ll})",
-                        "$1 $2"
-                    ),
-                    @"(\p{Ll})(\P{Ll})",
-                    "$1 $2"
-                );
-
             panel.GetComponent<Image>().sprite = iconSprite;
-            panel.GetComponentInChildren<Text>().text = splitString;
+            panel.GetComponentInChildren<Text>().text = SplitCamelCase(name);
             panel.GetComponentInChildren<SongOption>().level = file;
             panel.GetComponentInChildren<SongOption>().standardLevelImage.gameObject.SetActive(!file.StartsWith(DataManagement.StandardLevels));
 
