@@ -34,6 +34,8 @@ public class Level {
 
         Debug.Log("Writing levels to device...");
 
+        DataManagement.CheckDirectories();
+
         var standardLevels = Resources.Load<StandardLevels>("Levels/StandardLevels");
 
         var filesAvailable = Directory.GetFiles(DataManagement.StandardLevels, "*.json", SearchOption.AllDirectories);

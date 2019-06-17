@@ -16,7 +16,7 @@ public class DataManagement : MonoBehaviour {
         };
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void OnBeforeSceneLoadRuntimeMethod() {
+    static void CreateStandardDirectories() {
         foreach (var folder in standardFolders) {
             var path = Path.Combine(Application.persistentDataPath, folder);
 
@@ -25,5 +25,9 @@ public class DataManagement : MonoBehaviour {
                 Debug.Log($"{folder} folder was created successfully at {Directory.GetCreationTime(path)}.");
             }
         }
+    }
+
+    public static void CheckDirectories () {
+        CreateStandardDirectories();
     }
 }
