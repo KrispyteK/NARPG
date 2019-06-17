@@ -104,8 +104,6 @@ public class ScrollRectSnap : MonoBehaviour {
 
             index = (int)Mathf.Clamp(index - Mathf.Sign(delta.x), 0, buttons.Length - 1);
 
-            print(index);
-
             goToClosest = false;
         }
 
