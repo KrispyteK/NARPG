@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,7 +51,17 @@ public class SongSelectContent : MonoBehaviour {
             var rawLevelName = Path.GetFileName(file).Replace(".json", "");
             var levelName = rawLevelName.First().ToString().ToUpper() + rawLevelName.Substring(1);
 
-            panel.GetComponentInChildren<Text>().text = levelName;
+            string splitString = Regex.Replace(
+                    Regex.Replace(
+                        levelName,
+                        @"(\P{Ll})(\P{Ll}\p{Ll})",
+                        "$1 $2"
+                    ),
+                    @"(\p{Ll})(\P{Ll})",
+                    "$1 $2"
+                );
+
+            panel.GetComponentInChildren<Text>().text = splitString;
             panel.GetComponentInChildren<SongOption>().level = file;
             panel.GetComponentInChildren<SongOption>().standardLevelImage.gameObject.SetActive(!file.StartsWith(DataManagement.StandardLevels));
 
