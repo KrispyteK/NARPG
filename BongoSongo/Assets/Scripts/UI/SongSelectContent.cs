@@ -26,7 +26,7 @@ public class SongSelectContent : MonoBehaviour {
     private string SplitCamelCase (string input) {
         return Regex.Replace(
                     Regex.Replace(
-                        name,
+                        input,
                         @"(\P{Ll})(\P{Ll}\p{Ll})",
                         "$1 $2"
                     ),
@@ -41,8 +41,8 @@ public class SongSelectContent : MonoBehaviour {
         }
 
         var files = new List<string>(Directory.GetFiles(DataManagement.StandardLevels, "*.json", SearchOption.AllDirectories));
-
         files.AddRange(Directory.GetFiles(DataManagement.Levels, "*.json", SearchOption.AllDirectories));
+        files = files.OrderByDescending(f => Path.GetFileName(f)).Reverse().ToList();
 
         var buttons = new List<RectTransform>();
         var i = 0;

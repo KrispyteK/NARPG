@@ -81,6 +81,8 @@ public class DisplayLevels : MonoBehaviour {
         files.AddRange(Directory.GetFiles(DataManagement.StandardLevels, "*.json", SearchOption.AllDirectories));
 #endif
 
+        files = files.OrderByDescending(f => Path.GetFileName(f)).Reverse().ToList();
+
         foreach (var file in files) {
             levelFiles.Add(file);
 
