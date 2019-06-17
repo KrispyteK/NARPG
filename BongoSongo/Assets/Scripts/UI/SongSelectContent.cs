@@ -13,9 +13,12 @@ public class SongSelectContent : MonoBehaviour {
     public GameObject scrollPanel;
 
     private ScrollRectSnap scrollRectSnap;
+    private StandardSongs standardSongs;
 
     void Start() {
         scrollRectSnap = GetComponent<ScrollRectSnap>();
+
+        standardSongs = Resources.Load<StandardSongs>("Settings/StandardSongs");
 
         GenerateButtons();
     }
@@ -43,17 +46,18 @@ public class SongSelectContent : MonoBehaviour {
         i++;
 
         foreach (var file in files) {
-            var panel = Instantiate(songPanel, scrollPanel.transform);
+            var level = Level.LoadFromFullPath(file);
+            var name = level.name;
+            var iconSprite = standardSongs.songs.ToList().Find(x => x.audioClipPath == level.song.clipString).icon;
 
+            var panel = Instantiate(songPanel, scrollPanel.transform);
+  
             var rt = panel.GetComponent<RectTransform>();
             rt.localPosition = new Vector2(i * 1080, 0);
 
-            var rawLevelName = Path.GetFileName(file).Replace(".json", "");
-            var levelName = rawLevelName.First().ToString().ToUpper() + rawLevelName.Substring(1);
-
             string splitString = Regex.Replace(
                     Regex.Replace(
-                        levelName,
+                        name,
                         @"(\P{Ll})(\P{Ll}\p{Ll})",
                         "$1 $2"
                     ),
@@ -61,6 +65,7 @@ public class SongSelectContent : MonoBehaviour {
                     "$1 $2"
                 );
 
+            panel.GetComponent<Image>().sprite = iconSprite;
             panel.GetComponentInChildren<Text>().text = splitString;
             panel.GetComponentInChildren<SongOption>().level = file;
             panel.GetComponentInChildren<SongOption>().standardLevelImage.gameObject.SetActive(!file.StartsWith(DataManagement.StandardLevels));

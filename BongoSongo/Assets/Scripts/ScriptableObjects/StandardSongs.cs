@@ -10,18 +10,27 @@ public class StandardSongs : ScriptableObject {
     [System.Serializable]
     public class Song {
         public AudioClip audioClip;
+        public Sprite icon;
         public int bpm;
-        public string audioClipPath;
+
+        [HideInInspector] public string audioClipPath;
+        [HideInInspector] public string iconPath;
     }
 
 #if UNITY_EDITOR
     void OnValidate() {
         foreach (var song in songs) {
-            var path = UnityEditor.AssetDatabase.GetAssetPath(song.audioClip);
+            var audioPath = UnityEditor.AssetDatabase.GetAssetPath(song.audioClip);
             var regex = new System.Text.RegularExpressions.Regex(@"^(Assets/Resources/)|(.mp3|.wav)$");
-            path = regex.Replace(path, "");
+            audioPath = regex.Replace(audioPath, "");
 
-            song.audioClipPath = path;
+            song.audioClipPath = audioPath;
+
+            //var iconPath = UnityEditor.AssetDatabase.GetAssetPath(song.icon);
+            //regex = new System.Text.RegularExpressions.Regex(@"^(Assets/Resources/)|(.png)$");
+            //iconPath = regex.Replace(audioPath, "");
+
+            //song.iconPath = audioPath;
         }
 
         UnityEditor.EditorUtility.SetDirty(this);
