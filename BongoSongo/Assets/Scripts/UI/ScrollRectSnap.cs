@@ -17,6 +17,7 @@ public class ScrollRectSnap : MonoBehaviour {
     public RectTransform[] buttons;
     public int index;
     public int buttonDistance;
+    public bool canScroll = true;
 
     public float DistanceToNearest => (index * -buttonDistance) - panel.anchoredPosition.x;
 
@@ -51,6 +52,8 @@ public class ScrollRectSnap : MonoBehaviour {
     }
 
     void Update () {
+        if (!canScroll) return;
+
         if (goToClosest) {
             for (int i = 0; i < buttons.Length; i++) {
                 distances[i] = Mathf.Abs(center.transform.position.x - buttons[i].transform.position.x);

@@ -12,9 +12,11 @@ public class SongSelectContent : MonoBehaviour {
     public GameObject editorPanel;
     public GameObject songPanel;
     public GameObject scrollPanel;
+    public GameObject loadingUI;
 
     private ScrollRectSnap scrollRectSnap;
     private StandardSongs standardSongs;
+    private List<RectTransform> buttons = new List<RectTransform>();
 
     void Start() {
         scrollRectSnap = GetComponent<ScrollRectSnap>();
@@ -24,7 +26,7 @@ public class SongSelectContent : MonoBehaviour {
         GenerateButtons();
     }
 
-    private string SplitCamelCase (string input) {
+    private string SplitCamelCase(string input) {
         return Regex.Replace(
                     Regex.Replace(
                         input,
@@ -37,6 +39,8 @@ public class SongSelectContent : MonoBehaviour {
     }
 
     public void GenerateButtons() {
+        scrollRectSnap.canScroll = false;
+
         foreach (Transform child in scrollPanel.transform) {
             Destroy(child.gameObject);
         }
@@ -45,42 +49,58 @@ public class SongSelectContent : MonoBehaviour {
         files.AddRange(Directory.GetFiles(DataManagement.Levels, "*.json", SearchOption.AllDirectories));
         files = files.OrderByDescending(f => Path.GetFileName(f)).Reverse().ToList();
 
-        var buttons = new List<RectTransform>();
-        var i = 0;
-
         var panelEditor = Instantiate(editorPanel, scrollPanel.transform);
         panelEditor.GetComponent<Image>().sprite = editorSprite;
+
         var rtpe = panelEditor.GetComponent<RectTransform>();
-        rtpe.localPosition = new Vector2(i * 1080, 0);
+        rtpe.localPosition = new Vector2(0 * 1080, 0);
 
         FindObjectOfType<StartButton>().editorPanel = rtpe;
 
         buttons.Add(rtpe);
 
-        i++;
+        StartCoroutine(LevelLoadRoutine(files));
+    }
 
-        foreach (var file in files) {
-            var level = Level.LoadFromFullPath(file);
-            var name = level.name;
-            var iconSprite = standardSongs.songs.ToList().Find(x => x.audioClipPath == level.song.clipString).icon;
+    private GameObject CreateLevelButton(Level level, string file, int i) {
+        var name = level.name;
+        var iconSprite = standardSongs.songs.ToList().Find(x => x.audioClipPath == level.song.clipString).icon;
 
-            var panel = Instantiate(songPanel, scrollPanel.transform);
-  
-            var rt = panel.GetComponent<RectTransform>();
-            rt.localPosition = new Vector2(i * 1080, 0);
+        var panel = Instantiate(songPanel, scrollPanel.transform);
 
-            panel.GetComponent<Image>().sprite = iconSprite;
-            panel.GetComponentInChildren<Text>().text = SplitCamelCase(name);
-            panel.GetComponentInChildren<SongOption>().level = file;
-            panel.GetComponentInChildren<SongOption>().standardLevelImage.gameObject.SetActive(!file.StartsWith(DataManagement.StandardLevels));
+        var rt = panel.GetComponent<RectTransform>();
+        rt.localPosition = new Vector2(i * 1080, 0);
 
-            buttons.Add(rt);
+        panel.GetComponent<Image>().sprite = iconSprite;
+        panel.GetComponentInChildren<Text>().text = SplitCamelCase(name);
+        panel.GetComponentInChildren<SongOption>().level = file;
+        panel.GetComponentInChildren<SongOption>().standardLevelImage.gameObject.SetActive(!file.StartsWith(DataManagement.StandardLevels));
 
-            i++;
+        return panel;
+    }
+
+    private IEnumerator LevelLoadRoutine(List<string> files) {
+        int loaded = 0;
+        int loadCount = files.Count;
+
+        while (loaded < files.Count) {
+            Level level = Level.LoadFromFullPath(files[loaded]);
+
+            GameObject panel = CreateLevelButton(level, files[loaded], loaded + 1);
+
+            buttons.Add(panel.GetComponent<RectTransform>());
+
+            loaded++;
+
+            yield return null;
         }
 
         scrollRectSnap.SetButtons(buttons.ToArray());
 
         scrollRectSnap.GoToIndex(1);
+
+        scrollRectSnap.canScroll = true;
+
+        loadingUI.SetActive(false);
     }
 }
