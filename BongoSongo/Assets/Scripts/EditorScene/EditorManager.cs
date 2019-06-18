@@ -32,7 +32,7 @@ public class EditorManager : MonoBehaviour {
     public TimelineDrawer timelineDrawer;
     public TMPro.TMP_InputField bpmInput;
     public GUIStyle guiStyle;
-
+    public CanvasScaler canvasScaler;
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -84,11 +84,13 @@ public class EditorManager : MonoBehaviour {
                 }
             }
 
+            var scale = canvasScaler.referenceResolution.x / Camera.main.pixelWidth;
+
             var center = (Vector2)Camera.main.WorldToScreenPoint(bounding.center) - Camera.main.pixelRect.size / 2;
             var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight;
 
-            selectedUI.localPosition = center;
-            selectedUI.sizeDelta = (Vector2)extents + (Vector2.one * Camera.main.pixelWidth / 20f);
+            selectedUI.localPosition = center * scale;
+            selectedUI.sizeDelta = ((Vector2)extents + (Vector2.one * Camera.main.pixelWidth / 20f)) * scale;
         }
         else {
             selectedUI.localPosition = Vector2.zero;
