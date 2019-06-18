@@ -78,8 +78,6 @@ public class SongSelectContent : MonoBehaviour {
     }
 
     private IEnumerator LevelLoadRoutine(List<string> files) {
-        yield return new WaitForSeconds(0.5f);
-
         int loaded = 0;
         int loadCount = files.Count;
 
