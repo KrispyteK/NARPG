@@ -246,8 +246,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 2800000, guid: e6221ed4e27f78342bebaf53e12db6ed, type: 3}
-  AndroidKeystoreName: E:/GitHub/BongoSongo/BongoSongo/user.keystore
-  AndroidKeyaliasName: release
+  AndroidKeystoreName: D:/GitHub/BongoSongo/BongoSongo/user.keystore
+  AndroidKeyaliasName: 
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1
   AndroidIsGame: 1

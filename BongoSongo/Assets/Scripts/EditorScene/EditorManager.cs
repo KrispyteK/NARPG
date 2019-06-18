@@ -32,7 +32,7 @@ public class EditorManager : MonoBehaviour {
     public TimelineDrawer timelineDrawer;
     public TMPro.TMP_InputField bpmInput;
     public GUIStyle guiStyle;
-  
+
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -73,17 +73,22 @@ public class EditorManager : MonoBehaviour {
 
         if (selected) {
             var renderers = selected.GetComponentsInChildren<Renderer>();
-            var bounding = new Bounds(renderers.First().bounds.center, Vector2.zero);
+            Bounds bounding = default;
 
             foreach (var renderer in renderers) {
-                bounding.Encapsulate(renderer.bounds);
+                if (bounding == default) {
+                    bounding = renderers.First().bounds;
+                }
+                else {
+                    bounding.Encapsulate(renderer.bounds);
+                }
             }
 
             var center = (Vector2)Camera.main.WorldToScreenPoint(bounding.center) - Camera.main.pixelRect.size / 2;
             var extents = bounding.extents / Camera.main.orthographicSize * Camera.main.pixelHeight;
 
             selectedUI.localPosition = center;
-            selectedUI.sizeDelta = (Vector2)extents + new Vector2(50f, 50f);
+            selectedUI.sizeDelta = (Vector2)extents + (Vector2.one * Camera.main.pixelWidth / 20f);
         }
         else {
             selectedUI.localPosition = Vector2.zero;
@@ -91,7 +96,7 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
-    public void SetIndicatorSpriteIndex (int index) {
+    public void SetIndicatorSpriteIndex(int index) {
         var sprite = indicatorSprites.sprites[index];
 
         var temp = editorPrefabs[0];
@@ -114,7 +119,7 @@ public class EditorManager : MonoBehaviour {
         }
     }
 
-    public void RegisterLevelHistory () {
+    public void RegisterLevelHistory() {
         var copy = level.Copy();
 
         var spawnInfoList = GenerateSpawnInfoList();
@@ -130,7 +135,7 @@ public class EditorManager : MonoBehaviour {
         levelHistory.Add(copy);
     }
 
-    public void Undo () {
+    public void Undo() {
         undoDepth++;
 
         LoadLevel(levelHistory[levelHistory.Count - 1 - undoDepth]);
@@ -163,8 +168,8 @@ public class EditorManager : MonoBehaviour {
         return timelineCoroutine;
     }
 
-    public void ClampBeat () {
-        SetBeat(Mathf.Clamp(beat,1, beatsTotal));
+    public void ClampBeat() {
+        SetBeat(Mathf.Clamp(beat, 1, beatsTotal));
     }
 
     public void IncreaseBeat() {
@@ -341,10 +346,10 @@ public class EditorManager : MonoBehaviour {
         var t = Level.LoadAsync(file, level, (Level l) => {
             level = l;
             LoadLevel(level);
-            });
+        });
     }
 
-    IEnumerator LoadLevelCoroutine (Level level) {
+    IEnumerator LoadLevelCoroutine(Level level) {
         foreach (Transform child in indicatorParent) {
             Destroy(child.gameObject);
         }
@@ -407,7 +412,7 @@ public class EditorManager : MonoBehaviour {
         loadingScreen.SetActive(false);
     }
 
-    public void LoadLevel (Level level) {
+    public void LoadLevel(Level level) {
         loadingScreen.SetActive(true);
 
         this.level = level;
@@ -451,7 +456,7 @@ public class EditorManager : MonoBehaviour {
         SceneManager.LoadScene("GameplayScene");
     }
 
-    public void ExitToMainMenu () {
+    public void ExitToMainMenu() {
         Destroy(FindObjectOfType<InterSceneEditorInformation>().gameObject);
 
         Level.Save(level);
@@ -466,7 +471,7 @@ public class EditorManager : MonoBehaviour {
             var root = indicatorInfo.transform;
 
             while (root.parent != indicatorParent) {
-                root = root.parent;          
+                root = root.parent;
             }
 
             var renderers = root.GetComponentsInChildren<Renderer>();

@@ -31,7 +31,7 @@ public class SliderIndicator : MonoBehaviour {
 
             var comboScore = GameManager.instance.AddScore(score);
 
-            var beatScoreInstance = Instantiate(beatScore, transform.position, Quaternion.identity);
+            var beatScoreInstance = Instantiate(beatScore, indicator.position, Quaternion.identity);
             beatScoreInstance.GetComponent<BeatScore>().Init(comboScore);
 
             hits++;
