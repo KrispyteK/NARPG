@@ -5155,7 +5155,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2042024562}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6955,7 +6955,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 396644653}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7279,8 +7279,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1650383309}
   m_HandleRect: {fileID: 1650383308}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.9999999
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10038,6 +10038,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  canvasScaler: {fileID: 24603536}
   editorPrefabs:
   - indicator: 0
     prefab: {fileID: 8158367451574732956, guid: c1bd7cde4305ccd47bc6e573fc848e3d,
