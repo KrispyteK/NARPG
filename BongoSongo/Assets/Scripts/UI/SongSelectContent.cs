@@ -13,15 +13,13 @@ public class SongSelectContent : MonoBehaviour {
     public GameObject songPanel;
     public GameObject scrollPanel;
     public GameObject loadingUI;
+    public StandardSongs standardSongs;
 
     private ScrollRectSnap scrollRectSnap;
-    private StandardSongs standardSongs;
     private List<RectTransform> buttons = new List<RectTransform>();
 
     void Start() {
         scrollRectSnap = GetComponent<ScrollRectSnap>();
-
-        standardSongs = Resources.Load<StandardSongs>("Settings/StandardSongs");
 
         GenerateButtons();
     }
@@ -80,7 +78,7 @@ public class SongSelectContent : MonoBehaviour {
     }
 
     private IEnumerator LevelLoadRoutine(List<string> files) {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.5f);
 
         int loaded = 0;
         int loadCount = files.Count;
