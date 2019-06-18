@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 484973169}
+  time: 0.125
 --- !u!224 &415957908 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2762283423867979373, guid: a90ad58f4a2ce1e47b6ac8e14b5ea455,

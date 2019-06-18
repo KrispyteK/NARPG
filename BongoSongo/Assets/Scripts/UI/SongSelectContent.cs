@@ -80,6 +80,8 @@ public class SongSelectContent : MonoBehaviour {
     }
 
     private IEnumerator LevelLoadRoutine(List<string> files) {
+        yield return new WaitForEndOfFrame();
+
         int loaded = 0;
         int loadCount = files.Count;
 
@@ -92,7 +94,7 @@ public class SongSelectContent : MonoBehaviour {
 
             loaded++;
 
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
 
         scrollRectSnap.SetButtons(buttons.ToArray());
