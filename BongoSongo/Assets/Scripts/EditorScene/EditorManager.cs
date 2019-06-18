@@ -33,6 +33,7 @@ public class EditorManager : MonoBehaviour {
     public TMPro.TMP_InputField bpmInput;
     public GUIStyle guiStyle;
     public CanvasScaler canvasScaler;
+    public IndicatorSprites indicatorSprites;
 
     public List<EditorPrefab> editorPrefabs = new List<EditorPrefab>();
 
@@ -40,8 +41,6 @@ public class EditorManager : MonoBehaviour {
     public int beatsTotal;
     public int indicatorSpriteIndex;
     public bool hasLevelLoaded = false;
-
-    public IndicatorSprites indicatorSprites;
 
     public Camera canvasCamera;
 
@@ -56,8 +55,6 @@ public class EditorManager : MonoBehaviour {
         canvasCamera.enabled = false;
 
         currentPrefab = editorPrefabs[0];
-
-        indicatorSprites = Resources.Load<IndicatorSprites>("Settings/IndicatorSprites");
     }
 
     void Update() {
